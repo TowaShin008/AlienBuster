@@ -11,6 +11,9 @@ public class FPSController : MonoBehaviour
     const int accelMaxCount = 2;
     int accelCount = accelMaxCount;
 
+    const int accelMaxTime = 120;
+    int accelTime = accelMaxTime;
+
     const int accelRechargeMaxCount = 180;
     int accelRechargeCount = accelRechargeMaxCount;
 
@@ -31,7 +34,7 @@ public class FPSController : MonoBehaviour
     int chargeCount = 0;
 
     const float shakingNormalSpeed = 10.0f;
-    const float shakingMaxSpeed = 10.0f;
+    const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
     [SerializeField]
@@ -44,7 +47,7 @@ public class FPSController : MonoBehaviour
     private GameObject firingPoint;
     [SerializeField]
     private GameObject bullet;
-    private float bulletSpeed = 30.0f;
+    private float bulletSpeed = 60.0f;
     const int shotDelayMaxTime = 10;
     private int shotDelayTime = shotDelayMaxTime;
 
@@ -134,35 +137,47 @@ public class FPSController : MonoBehaviour
 	{
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            Vector3 velocity = new Vector3(0, 0, 0);
+            var velocity = new Vector3(0, 0, 0);
             //プレイヤー移動処理
             if (Input.GetKey(KeyCode.W))
             {
-                velocity = gameObject.transform.rotation * new Vector3(0, 0, speed);
-                gameObject.transform.position += velocity * Time.deltaTime;
+                velocity += gameObject.transform.rotation * new Vector3(0, 0, speed);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                velocity = gameObject.transform.rotation * new Vector3(-speed, 0, 0);
-                gameObject.transform.position += velocity * Time.deltaTime;
+                velocity += gameObject.transform.rotation * new Vector3(-speed, 0, 0);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                velocity = gameObject.transform.rotation * new Vector3(0, 0, -speed);
-                gameObject.transform.position += velocity * Time.deltaTime;
+                velocity += gameObject.transform.rotation * new Vector3(0, 0, -speed);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
-                gameObject.transform.position += velocity * Time.deltaTime;
+                velocity += gameObject.transform.rotation * new Vector3(speed, 0, 0);
             }
-            //加速処理
-            AccelProcessing(velocity);
+            gameObject.transform.position += velocity * Time.deltaTime;
 
-            //呼吸演出処理
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {//加速処理
+                AccelProcessing(velocity);
+            }
+
             if (Input.GetMouseButton(1) == false)
+			{//呼吸演出処理
                 BreathProcessing();
+            }
+
+            rigidbody.drag = 1;
         }
+
+        if (accelTime == 0)
+        {
+            rigidbody.drag = 50;
+        }
+        else
+		{
+            accelTime--;
+		}
     }
     /// <summary>
     /// 角度制限関数の作成
@@ -207,13 +222,9 @@ public class FPSController : MonoBehaviour
         float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
         cameraRot *= Quaternion.Euler(-yRot, 0, 0);
 
-        //Updateの中で作成した関数を呼ぶ
-        cameraRot = ClampRotation(cameraRot);
-
-        cam.transform.localRotation = cameraRot;
-
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
+
         transform.localRotation = characterRot;
 
         //Updateの中で作成した関数を呼ぶ
@@ -226,22 +237,20 @@ public class FPSController : MonoBehaviour
     /// </summary>
     public void AccelProcessing(Vector3 arg_velocity)
 	{
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            if (chargeCount < 30)
-            {//加速処理
-                if (accelCount > 0)
-                {
-                    accelCount--;
-                    rigidbody.AddForce(arg_velocity * 100.0f);
-                    Debug.Log(accelCount);
-                }
+        if (chargeCount < 30)
+        {//加速処理
+            if (accelCount > 0)
+            {
+                accelTime = accelMaxTime;
+                accelCount--;
+                rigidbody.AddForce(arg_velocity * 400.0f);
+                Debug.Log(accelCount);
             }
-            //プレイヤーの初期化
-            speed = normalSpeed;
-            shakingSpeed = shakingNormalSpeed;
-            chargeCount = 0;
         }
+        //プレイヤーの初期化
+        speed = normalSpeed;
+        shakingSpeed = shakingNormalSpeed;
+        chargeCount = 0;
     }
     /// <summary>
     /// スプリント処理
@@ -315,7 +324,7 @@ public class FPSController : MonoBehaviour
         if (accelCount < accelMaxCount)
 		{
             accelRechargeCount--;
-
+            //リチャージカウントがゼロかどうか
             bool isAccelRechargeCountEmpty = accelRechargeCount <= 0;
 
             if (isAccelRechargeCountEmpty)
