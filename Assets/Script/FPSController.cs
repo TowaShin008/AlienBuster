@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+    //プレイヤー移動速度
     const float normalSpeed = 5.0f;
     const float sprintSpeed = 15.0f;
     float speed = normalSpeed;
 
-    const int accelMaxCount = 2;
-    int accelCount = accelMaxCount;
+    //ステップ時の摩擦がなくなる猶予時間
+    const int stepMaxTime = 120;
+    int stepTime = stepMaxTime;
 
-    const int accelMaxTime = 120;
-    int accelTime = accelMaxTime;
+    //LSHIFTの入力時間を格納する変数
+    int chargeCount = 0;
 
-    const int accelRechargeMaxCount = 180;
-    int accelRechargeCount = accelRechargeMaxCount;
+    //プレイヤーのスタミナ
+    const int maxStamina = 300;
+    int stamina = maxStamina;
 
+    //カメラ関連変数
     public GameObject cam;
     Quaternion cameraRot, characterRot;
 
@@ -27,12 +31,7 @@ public class FPSController : MonoBehaviour
 
     bool deadFlag;
 
-    //変数の宣言(角度の制限用)
-    float minX;
-    float maxX;
-
-    int chargeCount = 0;
-
+    //銃の揺れ演出の変数
     const float shakingNormalSpeed = 10.0f;
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
@@ -45,11 +44,6 @@ public class FPSController : MonoBehaviour
     private GameObject holdGunPosition;
     [SerializeField]
     private GameObject firingPoint;
-    //[SerializeField]
-    //private GameObject bullet;
-    //private float bulletSpeed = 60.0f;
-    //const int shotDelayMaxTime = 10;
-    //private int shotDelayTime = shotDelayMaxTime;
 
     // Start is called before the first frame update
     void Start()
@@ -58,10 +52,6 @@ public class FPSController : MonoBehaviour
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
         deadFlag = false;
-        const float normalMaxX = 90.0f;
-        const float normalMinX = -90.0f;
-        minX = normalMinX;
-        maxX = normalMaxX;
         rigidbody = GetComponent<Rigidbody>();
         //カーソルの表示
         Cursor.visible = false;
@@ -76,55 +66,38 @@ public class FPSController : MonoBehaviour
         //カメラの移動処理
         MoveCameraProcessing();
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
 		{//ジャンプ処理
             JumpProcessing();
 		}
 
-        if(Input.GetKey(KeyCode.LeftShift))
-		{
-            chargeCount++;
-            if(chargeCount>=30)
-            {//スプリント処理
-                SprintProcessing();
-            }
-        }
-
         //加速ゲージのリチャージ処理
-        AccelRechargeProcessing();
-
-        //カーソルの非表示
-        if (Input.GetKeyDown(KeyCode.Escape))
-		{
-            Cursor.visible = true;
-		}
+        StaminaRechargeProcessing();
 
         if(Input.GetMouseButton(1))
 		{//銃を構える処理
             HoldGun();
 		}
         else if (Input.GetMouseButton(0))
-        {//弾の発射処理
+        {//弾の発射処理(腰うち)
             gunModel.transform.position = normalGunPosition.transform.position;
-            //if(shotDelayTime>0)
-            //{
-            //    shotDelayTime--;
-            //}
-            //else
-            //{
-            //    //弾の発射処理
-            //    Shot();
-            //    shotDelayTime = shotDelayMaxTime;
-            //}
 
             gunModel.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+		}
+		else
+		{//マウス入力がない場合は、銃を構えない。
+			gunModel.transform.position = normalGunPosition.transform.position;
+		}
+		//移動処理
+		MoveProcessing();
+
+        //カーソルの非表示
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
         }
-        //else
-        //{
-        //    gunModel.transform.position = normalGunPosition.transform.position;
-        //}
-        //移動処理
-        MoveProcessing();
+
+        Debug.Log(stamina);
     }
     /// <summary>
     /// 移動処理
@@ -153,9 +126,18 @@ public class FPSController : MonoBehaviour
             }
             gameObject.transform.position += velocity * Time.deltaTime;
 
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                chargeCount++;
+                //スプリント処理
+                SprintProcessing();
+            }
+
             if (Input.GetKeyUp(KeyCode.LeftShift))
-            {//加速処理
-                AccelProcessing(velocity);
+            {
+                //ステップ処理
+                StepProcessing(velocity);
             }
 
             if (Input.GetMouseButton(1) == false)
@@ -165,14 +147,14 @@ public class FPSController : MonoBehaviour
 
             rigidbody.drag = 1;
         }
-
-        if (accelTime == 0)
+        //ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+        if (stepTime == 0)
         {
             rigidbody.drag = 50;
         }
         else
 		{
-            accelTime--;
+            stepTime--;
 		}
     }
     /// <summary>
@@ -191,7 +173,7 @@ public class FPSController : MonoBehaviour
 
         float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
 
-        angleX = Mathf.Clamp(angleX, minX, maxX);
+        angleX = Mathf.Clamp(angleX, -90.0f, 90.0f);
 
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
@@ -214,7 +196,7 @@ public class FPSController : MonoBehaviour
         //Y軸視点移動
         float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
         cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-        //X軸視点
+        //X軸視点移動
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
@@ -226,18 +208,17 @@ public class FPSController : MonoBehaviour
         cam.transform.localRotation = cameraRot;
     }
     /// <summary>
-    /// 加速処理
+    /// ステップ処理
     /// </summary>
-    public void AccelProcessing(Vector3 arg_velocity)
+    public void StepProcessing(Vector3 arg_velocity)
 	{
         if (chargeCount < 30)
-        {//加速処理
-            if (accelCount > 0)
+        {//ステップ処理
+            if (stamina >= 100)
             {
-                accelTime = accelMaxTime;
-                accelCount--;
+                stepTime = stepMaxTime;
+                stamina -= 100;
                 rigidbody.AddForce(arg_velocity * 400.0f);
-                Debug.Log(accelCount);
             }
         }
         //プレイヤーの初期化
@@ -250,8 +231,12 @@ public class FPSController : MonoBehaviour
     /// </summary>
     public void SprintProcessing()
 	{
-        speed = sprintSpeed;
-        shakingSpeed = shakingMaxSpeed;
+        if (chargeCount >= 30 && stamina > 0)
+        {//スプリント処理
+            stamina -= 2;
+            speed = sprintSpeed;
+            shakingSpeed = shakingMaxSpeed;
+        }
 	}
     /// <summary>
     /// ジャンプ処理
@@ -267,12 +252,13 @@ public class FPSController : MonoBehaviour
 	{
         //マウスのY軸ポジションの取得
         float yRot = gunModel.transform.localRotation.eulerAngles.x;
+        //三角関数を使い銃を縦に揺らす
         yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
         gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
     }
     /// <summary>
-    /// 銃を構える処理
+    /// 銃を構える処理と発射処理
     /// </summary>
     private void HoldGun()
 	{
@@ -283,23 +269,13 @@ public class FPSController : MonoBehaviour
         }
     }
     /// <summary>
-    /// 加速ゲージのリチャージ処理
+    /// スタミナのリチャージ処理
     /// </summary>
-    private void AccelRechargeProcessing()
+    private void StaminaRechargeProcessing()
 	{
-        if (accelCount < accelMaxCount)
+        if (stamina < maxStamina)
 		{
-            accelRechargeCount--;
-            //リチャージカウントがゼロかどうか
-            bool isAccelRechargeCountEmpty = accelRechargeCount <= 0;
-
-            if (isAccelRechargeCountEmpty)
-			{
-                accelCount++;
-                accelRechargeCount = accelRechargeMaxCount;
-
-                Debug.Log(accelCount);
-            }
+            stamina++;
 		}
 	}
 }
