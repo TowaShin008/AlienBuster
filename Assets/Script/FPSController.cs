@@ -45,13 +45,11 @@ public class FPSController : MonoBehaviour
     private GameObject holdGunPosition;
     [SerializeField]
     private GameObject firingPoint;
-    [SerializeField]
-    private GameObject bullet;
-    private float bulletSpeed = 60.0f;
-    const int shotDelayMaxTime = 10;
-    private int shotDelayTime = shotDelayMaxTime;
-
-    private bool landingFlag;
+    //[SerializeField]
+    //private GameObject bullet;
+    //private float bulletSpeed = 60.0f;
+    //const int shotDelayMaxTime = 10;
+    //private int shotDelayTime = shotDelayMaxTime;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +67,6 @@ public class FPSController : MonoBehaviour
         Cursor.visible = false;
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
-        landingFlag = true;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
     }
 
@@ -81,10 +78,7 @@ public class FPSController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
 		{//ジャンプ処理
-            //if(landingFlag)
-			{
-                JumpProcessing();
-            }
+            JumpProcessing();
 		}
 
         if(Input.GetKey(KeyCode.LeftShift))
@@ -112,21 +106,23 @@ public class FPSController : MonoBehaviour
         else if (Input.GetMouseButton(0))
         {//弾の発射処理
             gunModel.transform.position = normalGunPosition.transform.position;
-            if(shotDelayTime>0)
-			{
-                shotDelayTime--;
-			}
-            else
-			{
-                //弾の発射処理
-                Shot();
-                shotDelayTime = shotDelayMaxTime;
-            }
+            //if(shotDelayTime>0)
+            //{
+            //    shotDelayTime--;
+            //}
+            //else
+            //{
+            //    //弾の発射処理
+            //    Shot();
+            //    shotDelayTime = shotDelayMaxTime;
+            //}
+
+            gunModel.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
         }
-        else
-        {
-            gunModel.transform.position = normalGunPosition.transform.position;
-        }
+        //else
+        //{
+        //    gunModel.transform.position = normalGunPosition.transform.position;
+        //}
         //移動処理
         MoveProcessing();
     }
@@ -183,7 +179,7 @@ public class FPSController : MonoBehaviour
     /// 角度制限関数の作成
     /// </summary>
     /// <param name="q"></param>
-    /// <returns></returns>
+    /// <returns>クォータニオン</returns>
     public Quaternion ClampRotation(Quaternion q)
     {
         //q = x,y,z,w (x,y,zはベクトル（量と向き）：wはスカラー（座標とは無関係の量）)
@@ -209,19 +205,16 @@ public class FPSController : MonoBehaviour
             Debug.Log("Hit");
             deadFlag = true;
         }
-        else if (collision.gameObject.name == "field")
-        {
-            landingFlag = true;
-		}
     }
     /// <summary>
     /// カメラの移動処理
     /// </summary>
     private void MoveCameraProcessing()
 	{
+        //Y軸視点移動
         float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
         cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-
+        //X軸視点
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
@@ -279,24 +272,6 @@ public class FPSController : MonoBehaviour
         gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
     }
     /// <summary>
-    /// 弾の発射処理
-    /// </summary>
-    private void Shot()
-	{
-        // 弾を発射する場所を取得
-        var bulletPosition = firingPoint.transform.position;
-        // 上で取得した場所に、"bullet"のPrefabを出現させる
-        GameObject newBall = Instantiate(bullet, bulletPosition, cam.transform.rotation);
-        // 出現させたボールのforward(z軸方向)
-        var direction = newBall.transform.forward;
-        // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-        newBall.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-        // 出現させたボールの名前を"bullet"に変更
-        newBall.name = bullet.name;
-        // 出現させたボールを0.8秒後に消す
-        Destroy(newBall, 0.8f);
-    }
-    /// <summary>
     /// 銃を構える処理
     /// </summary>
     private void HoldGun()
@@ -304,16 +279,7 @@ public class FPSController : MonoBehaviour
         gunModel.transform.position = holdGunPosition.transform.position;
         if (Input.GetMouseButton(0))
         {//弾の発射処理
-            if (shotDelayTime > 0)
-            {
-                shotDelayTime--;
-            }
-            else
-            {
-                //弾の発射処理
-                Shot();
-                shotDelayTime = shotDelayMaxTime;
-            }
+            gunModel.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
         }
     }
     /// <summary>
