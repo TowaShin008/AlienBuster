@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject normalGun;
+    [SerializeField]
+    private GameObject normalGunPosition;
+    [SerializeField]
+    private GameObject holdGunPosition;
+    [SerializeField]
+    private GameObject firingPoint;
+
     //プレイヤー移動速度
     const float normalSpeed = 5.0f;
     const float sprintSpeed = 15.0f;
     float speed = normalSpeed;
 
-    //ステップ時の摩擦がなくなる猶予時間
+    //ステップ時の摩擦が強くなるまでの猶予時間
     const int stepMaxTime = 120;
     int stepTime = stepMaxTime;
 
@@ -29,21 +38,15 @@ public class FPSController : MonoBehaviour
     //XY方向の視点感度
     public float Xsensityvity, Ysensityvity;
 
+    //残機
+    int remain;
+    int hp;
     bool deadFlag;
 
     //銃の揺れ演出の変数
     const float shakingNormalSpeed = 10.0f;
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
-
-    [SerializeField]
-    private GameObject gunModel;
-    [SerializeField]
-    private GameObject normalGunPosition;
-    [SerializeField]
-    private GameObject holdGunPosition;
-    [SerializeField]
-    private GameObject firingPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +61,8 @@ public class FPSController : MonoBehaviour
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
+        remain = 3;
+        hp = 3;
     }
 
     // Update is called once per frame
@@ -80,20 +85,19 @@ public class FPSController : MonoBehaviour
 		}
         else if (Input.GetMouseButton(0))
         {//弾の発射処理(腰うち)
-            gunModel.transform.position = normalGunPosition.transform.position;
+            normalGun.transform.position = normalGunPosition.transform.position;
 
-            gunModel.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
 		}
 		else
 		{//マウス入力がない場合は、銃を構えない。
-			gunModel.transform.position = normalGunPosition.transform.position;
+			normalGun.transform.position = normalGunPosition.transform.position;
 		}
 		//移動処理
 		MoveProcessing();
 
-        //カーソルの非表示
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
+        {//カーソルの非表示
             Cursor.visible = true;
         }
 
@@ -135,8 +139,7 @@ public class FPSController : MonoBehaviour
             }
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                //ステップ処理
+            {//ステップ処理
                 StepProcessing(velocity);
             }
 
@@ -147,9 +150,8 @@ public class FPSController : MonoBehaviour
 
             rigidbody.drag = 1;
         }
-        //ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
         if (stepTime == 0)
-        {
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 50;
         }
         else
@@ -160,7 +162,7 @@ public class FPSController : MonoBehaviour
     /// <summary>
     /// 角度制限関数の作成
     /// </summary>
-    /// <param name="q"></param>
+    /// <param name="q">対象となるもののクォータニオン</param>
     /// <returns>クォータニオン</returns>
     public Quaternion ClampRotation(Quaternion q)
     {
@@ -185,7 +187,7 @@ public class FPSController : MonoBehaviour
         if (collision.gameObject.name == "Enemy")
         {
             Debug.Log("Hit");
-            deadFlag = true;
+            Damage();
         }
     }
     /// <summary>
@@ -251,21 +253,21 @@ public class FPSController : MonoBehaviour
     private void BreathProcessing()
 	{
         //マウスのY軸ポジションの取得
-        float yRot = gunModel.transform.localRotation.eulerAngles.x;
+        float yRot = normalGun.transform.localRotation.eulerAngles.x;
         //三角関数を使い銃を縦に揺らす
         yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
-        gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
+        normalGun.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
     }
     /// <summary>
     /// 銃を構える処理と発射処理
     /// </summary>
     private void HoldGun()
 	{
-        gunModel.transform.position = holdGunPosition.transform.position;
+        normalGun.transform.position = holdGunPosition.transform.position;
         if (Input.GetMouseButton(0))
         {//弾の発射処理
-            gunModel.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
         }
     }
     /// <summary>
@@ -278,4 +280,29 @@ public class FPSController : MonoBehaviour
             stamina++;
 		}
 	}
+    /// <summary>
+    /// ダメージ処理
+    /// </summary>
+    public void Damage()
+	{
+        hp--;
+        if (hp < 1)
+		{
+            if (hp == 0)
+			{//残機を減らす
+                DecrimentRemain();
+			}
+		}
+	}
+    /// <summary>
+    /// 残機の減少
+    /// </summary>
+    public void DecrimentRemain()
+	{
+        remain--;
+        if (remain == 0)
+        {
+            deadFlag = true;
+        }
+    }
 }
