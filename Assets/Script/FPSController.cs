@@ -12,6 +12,11 @@ public class FPSController : MonoBehaviour
     private GameObject holdGunPosition;
     [SerializeField]
     private GameObject firingPoint;
+    [SerializeField]
+    private PhysicMaterial slip;
+    [SerializeField]
+    private PhysicMaterial nonSlip;
+    private BoxCollider collider;
 
     //プレイヤー移動速度
     const float normalSpeed = 5.0f;
@@ -51,6 +56,7 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //フレームレートの固定
         Application.targetFrameRate = 60;
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
@@ -61,6 +67,7 @@ public class FPSController : MonoBehaviour
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
+        //残機
         remain = 3;
         hp = 3;
     }
@@ -128,7 +135,7 @@ public class FPSController : MonoBehaviour
             {
                 velocity += gameObject.transform.rotation * new Vector3(speed, 0, 0);
             }
-            gameObject.transform.position += velocity * Time.deltaTime;
+            this.transform.position += velocity * Time.deltaTime;
 
 
             if (Input.GetKey(KeyCode.LeftShift))
@@ -148,11 +155,13 @@ public class FPSController : MonoBehaviour
                 BreathProcessing();
             }
 
-            rigidbody.drag = 1;
+            //rigidbody.drag = 1;
+            collider.material = slip;
         }
         if (stepTime == 0)
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
-            rigidbody.drag = 50;
+            //rigidbody.drag = 50;
+            collider.material = nonSlip;
         }
         else
 		{
@@ -220,7 +229,7 @@ public class FPSController : MonoBehaviour
             {
                 stepTime = stepMaxTime;
                 stamina -= 100;
-                rigidbody.AddForce(arg_velocity * 400.0f);
+                rigidbody.AddForce(arg_velocity * 5.0f, ForceMode.Impulse);
             }
         }
         //プレイヤーの初期化
@@ -245,7 +254,7 @@ public class FPSController : MonoBehaviour
     /// </summary>
     public void JumpProcessing()
 	{
-        rigidbody.AddForce(new Vector3(0.0f, 3.0f, 0.0f));
+        rigidbody.AddForce(new Vector3(0.0f, 10.0f, 0.0f));
 	}
     /// <summary>
     /// 呼吸演出
