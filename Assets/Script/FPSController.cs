@@ -81,10 +81,7 @@ public class FPSController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space))
 		{//ジャンプ処理
-            //if(landingFlag)
-			{
-                JumpProcessing();
-            }
+            JumpProcessing();
 		}
 
         if(Input.GetKey(KeyCode.LeftShift))
@@ -183,7 +180,7 @@ public class FPSController : MonoBehaviour
     /// 角度制限関数の作成
     /// </summary>
     /// <param name="q"></param>
-    /// <returns></returns>
+    /// <returns>クォータニオン</returns>
     public Quaternion ClampRotation(Quaternion q)
     {
         //q = x,y,z,w (x,y,zはベクトル（量と向き）：wはスカラー（座標とは無関係の量）)
@@ -209,19 +206,16 @@ public class FPSController : MonoBehaviour
             Debug.Log("Hit");
             deadFlag = true;
         }
-        else if (collision.gameObject.name == "field")
-        {
-            landingFlag = true;
-		}
     }
     /// <summary>
     /// カメラの移動処理
     /// </summary>
     private void MoveCameraProcessing()
 	{
+        //Y軸視点移動
         float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
         cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-
+        //X軸視点
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
