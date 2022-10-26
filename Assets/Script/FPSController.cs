@@ -62,6 +62,7 @@ public class FPSController : MonoBehaviour
         characterRot = transform.localRotation;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
+        collider = GetComponent<BoxCollider>();
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
