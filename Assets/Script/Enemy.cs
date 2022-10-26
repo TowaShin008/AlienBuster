@@ -24,11 +24,7 @@ public class Enemy : MonoBehaviour
     const int shotDelayMaxTime = 30;
     private int shotDelayTime = shotDelayMaxTime;
 
-<<<<<<< HEAD
     [SerializeField] private float bulletDestroyTime = 0.8f;
-=======
-    [SerializeField] private float bulletDstroyTime = 0.8f;
->>>>>>> origin/Hirazakura
 
     //爆発エフェクト
     [SerializeField] GameObject explosion;
@@ -95,10 +91,7 @@ public class Enemy : MonoBehaviour
         // 出現させたボールの名前を"bullet"に変更
         newBall.name = bullet.name;
         // 出現させたボールを0.8秒後に消す
-<<<<<<< HEAD
+
         Destroy(newBall, bulletDestroyTime);
-=======
-        Destroy(newBall, bulletDstroyTime);
->>>>>>> origin/Hirazakura
     }
 }
