@@ -24,7 +24,13 @@ public class Enemy : MonoBehaviour
     const int shotDelayMaxTime = 30;
     private int shotDelayTime = shotDelayMaxTime;
 
-    [SerializeField] private float bulletDstroyTime = 0.8f;
+    [SerializeField] private float bulletDestroyTime = 0.8f;
+
+    [SerializeField] private float stepSpeed = 50.0f;
+    const int stepMaxTime = 30;
+    private int stepTime = stepMaxTime;
+    const int stepDelayMaxTime = 60;
+    private int stepDelayTime = stepDelayMaxTime;
 
     //爆発エフェクト
     [SerializeField] GameObject explosion;
@@ -41,6 +47,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         //弾の発射処理
         gunModel.transform.position = gunPosition.transform.position;
         if (shotDelayTime > 0)
@@ -57,6 +64,30 @@ public class Enemy : MonoBehaviour
         transform.LookAt(playerObject.transform);
         transform.position += transform.forward * speed;
 
+        //ステップ処理
+        if (stepTime > 0)
+        {
+            stepTime--;
+            transform.RotateAround(playerObject.transform.position, Vector3.up, stepSpeed * Time.deltaTime);
+            stepDelayTime = stepDelayMaxTime;           
+        }
+        else
+        {
+            if (stepDelayTime > 0)
+            {
+                stepDelayTime--;
+            }
+            else
+            {
+                stepTime = stepMaxTime;
+                if(Random.value <= 0.5f)
+                {
+                    stepSpeed *= -1;
+                }
+            }
+        }
+
+
         if (hp <= 0)
         {
             deadFlag = true;
@@ -72,6 +103,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Bullet") { return; }
+        rigidbody.drag = 50;
         hp--;
     }
 
@@ -91,6 +123,7 @@ public class Enemy : MonoBehaviour
         // 出現させたボールの名前を"bullet"に変更
         newBall.name = bullet.name;
         // 出現させたボールを0.8秒後に消す
-        Destroy(newBall, bulletDstroyTime);
+        Destroy(newBall, bulletDestroyTime);
     }
+    
 }
