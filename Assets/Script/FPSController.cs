@@ -16,6 +16,7 @@ public class FPSController : MonoBehaviour
     private PhysicMaterial slip;
     [SerializeField]
     private PhysicMaterial nonSlip;
+
     private BoxCollider collider;
 
     //プレイヤー移動速度
@@ -76,7 +77,7 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //カメラの移動処理
+        //視点移動処理
         MoveCameraProcessing();
 
         if (Input.GetKey(KeyCode.Space))
@@ -84,23 +85,22 @@ public class FPSController : MonoBehaviour
             JumpProcessing();
 		}
 
-        //加速ゲージのリチャージ処理
+        //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
-        if(Input.GetMouseButton(1))
+		if (Input.GetMouseButton(1))
 		{//銃を構える処理
-            HoldGun();
+			HoldGun();
 		}
-        else if (Input.GetMouseButton(0))
-        {//弾の発射処理(腰うち)
-            normalGun.transform.position = normalGunPosition.transform.position;
-
-            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+		else if (Input.GetMouseButton(0))
+		{//弾の発射処理(腰うち)
+			HipShot();
 		}
 		else
 		{//マウス入力がない場合は、銃を構えない。
 			normalGun.transform.position = normalGunPosition.transform.position;
 		}
+
 		//移動処理
 		MoveProcessing();
 
@@ -119,7 +119,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             var velocity = new Vector3(0, 0, 0);
-            //プレイヤー移動処理
+            //移動処理
             if (Input.GetKey(KeyCode.W))
             {
                 velocity += gameObject.transform.rotation * new Vector3(0, 0, speed);
@@ -151,17 +151,15 @@ public class FPSController : MonoBehaviour
                 StepProcessing(velocity);
             }
 
-            if (Input.GetMouseButton(1) == false)
+			if (Input.GetMouseButton(1) == false)
 			{//呼吸演出処理
-                BreathProcessing();
-            }
+				BreathProcessing();
+			}
 
-            //rigidbody.drag = 1;
-            collider.material = slip;
+			collider.material = slip;
         }
         if (stepTime == 0)
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
-            //rigidbody.drag = 50;
             collider.material = nonSlip;
         }
         else
@@ -268,6 +266,15 @@ public class FPSController : MonoBehaviour
         yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
         normalGun.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
+    }
+    /// <summary>
+    /// 腰だめうち
+    /// </summary>
+    private void HipShot()
+	{
+        normalGun.transform.position = normalGunPosition.transform.position;
+
+        this.GetComponent<Launcher>().Shot(firingPoint.transform.position, cam.transform.rotation);
     }
     /// <summary>
     /// 銃を構える処理と発射処理
