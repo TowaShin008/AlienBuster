@@ -74,7 +74,6 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag != "Bullet") { return; }
         hp--;
     }
-
     /// <summary>
     /// ’e‚Ì”­Ëˆ—
     /// </summary>

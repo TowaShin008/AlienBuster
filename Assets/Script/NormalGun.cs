@@ -9,7 +9,7 @@ public class NormalGun : MonoBehaviour
     //private float bulletSpeed = 60.0f;
     private float bulletSpeed = 30.0f;
     //const int shotDelayMaxTime = 10;
-    const int shotDelayMaxTime = 100;
+    const int shotDelayMaxTime = 5;
     private int shotDelayTime = shotDelayMaxTime;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,9 @@ public class NormalGun : MonoBehaviour
     void Update()
     {
         if (shotDelayTime > 0)
-        shotDelayTime--;
+		{
+            shotDelayTime--;
+        }
     }
     /// <summary>
     /// ’e‚Ì”­ŽËˆ—

@@ -11,54 +11,45 @@ public class SniperScript : MonoBehaviour
 
     public float speed = 0.1f;
 
-    public Transform defaultPos;
+    [SerializeField]
+    private GameObject normalGunPosition;
+    [SerializeField]
+    private GameObject holdGunPosition;
+    //public Transform defaultPos;
     public Transform aimPos;
-    public Transform defaultShotPos;
+    public Transform firingPoint;
 
     public List<MeshRenderer> sniperMesh;
 
     public Image sniperEdge;
     public Image sniperGaugeEdge;
     public Image sniperGauge;
-
+    Vector3 defScale;
 
     private float bulletSpeed = 60.0f;
     void Start()
     {
-        
+        Color32 color = sniperGauge.color;
+        Color32 color2 = sniperGaugeEdge.color;
+        color.a = 0;
+        color2.a = 0;
+        sniperGauge.color = color;
+        sniperGaugeEdge.color = color2;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            transform.position = Vector3.MoveTowards(transform.position, aimPos.position, speed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, aimPos.rotation, speed);
-            sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(1.0f, 1.0f), speed + 5.0f);
-            if (sniperEdge.transform.localScale.x == 1.0f)
-            {
-                for(int i = 0; i < sniperMesh.Count; i++)
-                {
-                    sniperMesh[i].material.color = new Color32(255, 255, 255, 0);
-                }
-
-                Color32 color = sniperGauge.color;
-                Color32 color2 = sniperGaugeEdge.color;
-                color.a = 180;
-                color2.a = 180;
-                sniperGauge.color = color;
-                sniperGaugeEdge.color = color2;
-
-
-            }
+        if (Input.GetMouseButton(1))
+        {//銃を構える処理
+            HoldGun();
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, defaultPos.position, speed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
-            sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
+			transform.position = normalGunPosition.transform.position;
+			//transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
+			sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
             for (int i = 0; i < sniperMesh.Count; i++)
             {
                 sniperMesh[i].material.color = new Color32(255, 255, 255, 255);
@@ -74,17 +65,44 @@ public class SniperScript : MonoBehaviour
 
 
         //ゲージ
-        Vector3 defScale = sniperGauge.transform.localScale;
-        if (defScale.y <= 0.25f) defScale.y += 0.005f;
+        defScale = sniperGauge.transform.localScale;
+        if (defScale.y <= 0.25f)
+        {
+            defScale.y += 0.005f;
+        }
+        sniperGauge.transform.localScale = defScale;
+    }
 
+    public void HoldGun()
+	{
+        transform.position = holdGunPosition.transform.position;
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, aimPos.rotation, speed);
+        sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(1.0f, 1.0f), speed + 5.0f);
+        if (sniperEdge.transform.localScale.x == 1.0f)
+        {
+            for (int i = 0; i < sniperMesh.Count; i++)
+            {
+                sniperMesh[i].material.color = new Color32(255, 255, 255, 0);
+            }
 
+            Color32 color = sniperGauge.color;
+            Color32 color2 = sniperGaugeEdge.color;
+            color.a = 180;
+            color2.a = 180;
+            sniperGauge.color = color;
+            sniperGaugeEdge.color = color2;
+        }
+    }
+
+    public void Shot()
+	{
         if (defScale.y >= 0.25f)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetMouseButtonDown(0))
             {
                 //弾の発射処理
                 // 弾を発射する場所を取得
-                var bulletPosition = defaultShotPos.position;
+                var bulletPosition = firingPoint.position;
                 // 上で取得した場所に、"bullet"のPrefabを出現させる
                 GameObject sBullet = Instantiate(bullet, bulletPosition, Camera.main.transform.rotation);
                 // 出現させたボールのforward(z軸方向)
@@ -95,12 +113,10 @@ public class SniperScript : MonoBehaviour
                 sBullet.name = "SniperBullet";
                 // 出現させたボールを0.8秒後に消す
                 Destroy(sBullet, 0.8f);
-                
-
 
                 defScale.y = 0;
+                sniperGauge.transform.localScale = defScale;
             }
         }
-        sniperGauge.transform.localScale = defScale;
     }
 }

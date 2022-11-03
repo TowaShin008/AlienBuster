@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
-    //[SerializeField]
-    //private GameObject gunModel;
-    //[SerializeField]
-    //private GameObject normalGunPosition;
-    //[SerializeField]
-    //private GameObject holdGunPosition;
-    //[SerializeField]
-    //private GameObject firingPoint;
     [SerializeField]
     private GameObject grenade;
     private float bulletSpeed = 30.0f;
@@ -36,66 +28,19 @@ public class Launcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ////移動処理
-        //MoveProcessing();
-        //shotDelayTime--;
-        //if (Input.GetMouseButton(1))
-        //{//銃を構える処理
-        //    HoldGun();
-        //}
-        //else if (Input.GetMouseButton(0))
-        //{//弾の発射処理
-        //    gunModel.transform.position = normalGunPosition.transform.position;
-        //    if (shotDelayTime > 0)
-        //    {
-
-        //    }
-        //    else
-        //    {
-        //        //弾の発射処理
-        //        Shot();
-        //        shotDelayTime = shotDelayMaxTime;
-        //    }
-        //}
-        //else
-        //{
-        //    gunModel.transform.position = normalGunPosition.transform.position;
-        //}
-    }
-
-    //private void MoveProcessing()
-    //{
-    //    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-    //    {
-
-    //        if (Input.GetMouseButton(1) == false)
-    //        {//呼吸演出処理
-    //            BreathProcessing();
-    //        }
-    //    }
-    //}
-
-    /// <summary>
-    /// 呼吸演出
-    /// </summary>
-    //private void BreathProcessing()
-    //{
-    //    //マウスのY軸ポジションの取得
-    //    float yRot = gunModel.transform.localRotation.eulerAngles.x;
-    //    yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
-
-    //    gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
-    //}
-    /// <summary>
-    /// 弾の発射処理
-    /// </summary>
-    public void Shot(Vector3 arg_firingPoint, Quaternion arg_cameraRotation)
-    {
         if (shotDelayTime > 0)
         {
             shotDelayTime--;
         }
-        else
+    }
+    /// <summary>
+    /// 弾の発射処理
+    /// </summary>
+    /// <param name="arg_firingPoint">銃のポジション</param>
+    /// <param name="arg_cameraRotation">カメラの回転量</param>
+    public void Shot(Vector3 arg_firingPoint, Quaternion arg_cameraRotation)
+    {
+        if (shotDelayTime <= 0)
         {
             //弾の発射処理
             // 弾を発射する場所を取得
@@ -117,25 +62,8 @@ public class Launcher : MonoBehaviour
         }
     }
     /// <summary>
-    /// 銃を構える処理
+    /// 爆破演出
     /// </summary>
-    //private void HoldGun()
-    //{
-    //    gunModel.transform.position = holdGunPosition.transform.position;
-    //    if (Input.GetMouseButton(0))
-    //    {//弾の発射処理
-    //        if (shotDelayTime > 0)
-    //        {
-    //            shotDelayTime--;
-    //        }
-    //        else
-    //        {
-    //            //弾の発射処理
-    //            Shot();
-    //            shotDelayTime = shotDelayMaxTime;
-    //        }
-    //    }
-    //}
     void Explode()
     {
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("Enemy"); //「Enemy」タグのついたオブジェクトを全て検索して配列にいれる
