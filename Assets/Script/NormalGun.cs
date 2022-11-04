@@ -6,8 +6,10 @@ public class NormalGun : MonoBehaviour
 {
     [SerializeField]
     private GameObject bullet;
-    private float bulletSpeed = 60.0f;
-    const int shotDelayMaxTime = 10;
+    //private float bulletSpeed = 60.0f;
+    private float bulletSpeed = 30.0f;
+    //const int shotDelayMaxTime = 10;
+    const int shotDelayMaxTime = 5;
     private int shotDelayTime = shotDelayMaxTime;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,10 @@ public class NormalGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (shotDelayTime > 0)
+		{
+            shotDelayTime--;
+        }
     }
     /// <summary>
     /// ’e‚Ì”­Ëˆ—
@@ -27,11 +32,7 @@ public class NormalGun : MonoBehaviour
     /// <param name="arg_cameraRotation">ƒJƒƒ‰‚Ì‰ñ“]—Ê</param>
     public void Shot(Vector3 arg_firingPoint, Quaternion arg_cameraRotation)
 	{
-        if (shotDelayTime > 0)
-        {
-            shotDelayTime--;
-        }
-        else
+        if (shotDelayTime <= 0)
         {
             //’e‚Ì”­Ëˆ—
             // ’e‚ğ”­Ë‚·‚éêŠ‚ğæ“¾
