@@ -29,11 +29,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float stepSpeed = 50.0f;
     const int stepMaxTime = 30;
     private int stepTime = stepMaxTime;
-    const int stepDelayMaxTime = 60;
+    const int stepDelayMaxTime = 120;
     private int stepDelayTime = stepDelayMaxTime;
 
     //爆発エフェクト
-    [SerializeField] GameObject explosion;
+    [SerializeField] private GameObject explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
 
         if (deadFlag)
         {
-            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0)); // ★追加
+            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(newExplosion, 1.0f);
             Destroy(gameObject);
         }
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag != "Bullet") { return; }
         rigidbody.drag = 50;
-        hp--;
+        hp--;        
     }
 
     /// <summary>
