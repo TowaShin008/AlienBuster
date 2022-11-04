@@ -6,12 +6,13 @@ public class NormalGun : MonoBehaviour
 {
     [SerializeField]
     private GameObject bullet;
-    //private float bulletSpeed = 60.0f;
     private float bulletSpeed = 30.0f;
-    //const int shotDelayMaxTime = 10;
     const int shotDelayMaxTime = 5;
     private int shotDelayTime = shotDelayMaxTime;
-    // Start is called before the first frame update
+    [SerializeField]
+    private GameObject firingPoint;
+
+
     void Start()
     {
         
@@ -30,13 +31,13 @@ public class NormalGun : MonoBehaviour
     /// </summary>
     /// <param name="arg_firingPoint">銃のポジション</param>
     /// <param name="arg_cameraRotation">カメラの回転量</param>
-    public void Shot(Vector3 arg_firingPoint, Quaternion arg_cameraRotation)
+    public void Shot(Quaternion arg_cameraRotation)
 	{
         if (shotDelayTime <= 0)
         {
             //弾の発射処理
             // 弾を発射する場所を取得
-            var bulletPosition = arg_firingPoint;
+            var bulletPosition = firingPoint.transform.position;
             // 上で取得した場所に、"bullet"のPrefabを出現させる
             GameObject newBall = Instantiate(bullet, bulletPosition, arg_cameraRotation);
             // 出現させたボールのforward(z軸方向)

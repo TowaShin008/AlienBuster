@@ -71,8 +71,17 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Bullet") { return; }
-        hp--;
+        string gameObjectName = collision.gameObject.tag;
+        if (gameObjectName != "Bullet"&& gameObjectName != "Grenade") { return; }
+
+        if(gameObjectName == "Bullet")
+		{
+            hp--;
+        }
+        else if(gameObjectName == "Grenade")
+		{
+            hp -= 10;
+		}
     }
     /// <summary>
     /// íeÇÃî≠éÀèàóù

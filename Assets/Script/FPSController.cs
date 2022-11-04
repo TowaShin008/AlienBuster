@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FPSController : MonoBehaviour
 {
+    //通常銃
     [SerializeField]
     private GameObject normalGun;
+    //グレネートランチャー
+    [SerializeField]
+    private GameObject GrenadeLauncher;
+    //スナイパーライフル
     [SerializeField]
     private GameObject sniperRifle;
     [SerializeField]
     private GameObject normalGunPosition;
-    //[SerializeField]
-    //private GameObject sniperRifle;
     [SerializeField]
     private GameObject holdGunPosition;
-    [SerializeField]
-    private GameObject firingPoint;
     [SerializeField]
     private PhysicMaterial slip;
     [SerializeField]
@@ -60,6 +62,10 @@ public class FPSController : MonoBehaviour
 
     int gunType = 1;
 
+    public Image sniperEdge;
+    public Image sniperGaugeEdge;
+    public Image sniperGauge;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +85,10 @@ public class FPSController : MonoBehaviour
         remain = 3;
         hp = 3;
         sniperRifle.SetActive(false);
+
+        sniperEdge.enabled = false;
+        sniperGaugeEdge.enabled = false;
+        sniperGauge.enabled = false;
     }
 
     // Update is called once per frame
@@ -106,6 +116,7 @@ public class FPSController : MonoBehaviour
 		else
 		{//マウス入力がない場合は、銃を構えない。
 			normalGun.transform.position = normalGunPosition.transform.position;
+            GrenadeLauncher.transform.position = normalGunPosition.transform.position;
             //sniperRifle.transform.position = normalGunPosition.transform.position;
         }
 
@@ -120,12 +131,14 @@ public class FPSController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F1))
 		{
             normalGun.SetActive(true);
+            GrenadeLauncher.SetActive(false);
             sniperRifle.SetActive(false);
             gunType = 1;
 		}
         else if(Input.GetKeyDown(KeyCode.F2))
 		{
-            normalGun.SetActive(true);
+            normalGun.SetActive(false);
+            GrenadeLauncher.SetActive(true);
             sniperRifle.SetActive(false);
             gunType = 2;
 		}
@@ -133,6 +146,7 @@ public class FPSController : MonoBehaviour
         {
             gunType = 3;
             normalGun.SetActive(false);
+            GrenadeLauncher.SetActive(false);
             sniperRifle.SetActive(true);
         }
 
@@ -312,6 +326,7 @@ public class FPSController : MonoBehaviour
     private void HoldGun()
 	{
         normalGun.transform.position = holdGunPosition.transform.position;
+        GrenadeLauncher.transform.position = holdGunPosition.transform.position;
         //sniperRifle.transform.position = holdGunPosition.transform.position;
 
         if (Input.GetMouseButton(0))
@@ -361,15 +376,15 @@ public class FPSController : MonoBehaviour
 	{
         if (gunType == 1)
         {
-            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+            normalGun.GetComponent<NormalGun>().Shot(cam.transform.rotation);
         }
         else if (gunType == 2)
         {
-            this.GetComponent<Launcher>().Shot(firingPoint.transform.position, cam.transform.rotation);
+            GrenadeLauncher.GetComponent<GrenadeLauncher>().Shot(cam.transform.rotation);
         }
         else if (gunType == 3)
 		{
-            sniperRifle.GetComponent<SniperScript>().Shot();
+            sniperRifle.GetComponent<SniperScript>().Shot(cam.transform.rotation);
         }
     }
     /// <summary>
@@ -380,4 +395,13 @@ public class FPSController : MonoBehaviour
 	{
 
 	}
+
+    public int GetMaxStamina()
+    {
+        return maxStamina;
+    }
+    public int GetStamina()
+    {
+        return stamina;
+    }
 }
