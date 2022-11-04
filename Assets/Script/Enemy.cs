@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
         {
             stepTime--;
             transform.RotateAround(playerObject.transform.position, Vector3.up, stepSpeed * Time.deltaTime);
-            stepDelayTime = stepDelayMaxTime;           
+            stepDelayTime = stepDelayMaxTime;
         }
         else
         {
@@ -95,7 +95,8 @@ public class Enemy : MonoBehaviour
 
         if (deadFlag)
         {
-            Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0)); // Åöí«â¡
+            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0)); // Åöí«â¡
+            Destroy(newExplosion, 1.0f);
             Destroy(gameObject);
         }
     }
