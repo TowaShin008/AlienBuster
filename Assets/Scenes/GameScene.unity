@@ -696,15 +696,15 @@ PrefabInstance:
       objectReference: {fileID: 2113986859}
     - target: {fileID: 757212144634259233, guid: ca19a709df05c90478c480c1ac137794, type: 3}
       propertyPath: explosionSize.x
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757212144634259233, guid: ca19a709df05c90478c480c1ac137794, type: 3}
       propertyPath: explosionSize.y
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757212144634259233, guid: ca19a709df05c90478c480c1ac137794, type: 3}
       propertyPath: explosionSize.z
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 757212144634259234, guid: ca19a709df05c90478c480c1ac137794, type: 3}
       propertyPath: m_Constraints

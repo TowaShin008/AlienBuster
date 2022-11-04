@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     //爆発エフェクト
     [SerializeField] private GameObject explosion;
+    [SerializeField] private Vector3 explosionSize = new Vector3(1.0f,1.0f,1.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +97,7 @@ public class Enemy : MonoBehaviour
         if (deadFlag)
         {
             GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            newExplosion.transform.localScale = explosionSize;
             Destroy(newExplosion, 1.0f);
             Destroy(gameObject);
         }
