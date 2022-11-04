@@ -58,6 +58,16 @@ public class FPSController : MonoBehaviour
     float randomDiffusion = 10;
     [SerializeField]
     int bulletCount = 10;
+
+    //空薬莢用の変数
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private Transform bulletExitPosition;
+    [SerializeField]
+    private float exitSpeed=0.1f;
+    [SerializeField]
+    private float exitRotate = 360.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +132,7 @@ public class FPSController : MonoBehaviour
 			{
                 //弾の発射処理
                 Shot();
+                ExitBullet();
                 shotDelayTime = shotDelayMaxTime;
             }
         }
@@ -277,6 +288,19 @@ public class FPSController : MonoBehaviour
 
         gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
     }
+
+    /// <summary>
+    /// 空薬莢の演出
+    /// </summary>
+    private void ExitBullet()
+    {
+        var bulletInstance = Instantiate<GameObject>(bulletPrefab, bulletExitPosition.position, cam.transform.rotation);
+        var bulletRigit = bulletInstance.GetComponent<Rigidbody>();
+        bulletRigit.AddForce(bulletExitPosition.forward * exitSpeed);
+        bulletRigit.AddTorque(Random.insideUnitSphere * exitRotate);
+        Destroy(bulletInstance, 3f);
+    }
+
     /// <summary>
     /// 弾の発射処理
     /// </summary>
@@ -295,14 +319,21 @@ public class FPSController : MonoBehaviour
 
             // 出現させたボールのforward(z軸方向)
             var direction = new Vector3(randomX,randomY,randomZ);
+            Rigidbody newbulletRb = newBall.GetComponent<Rigidbody>();
             // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-            newBall.GetComponent<Rigidbody>().AddForce(direction , ForceMode.Impulse);
-            newBall.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
+            newbulletRb.AddForce(direction , ForceMode.Impulse);
+            newbulletRb.AddForce(newBall.transform.forward * bulletSpeed, ForceMode.Impulse);
             // 出現させたボールの名前を"bullet"に変更
             newBall.name = bullet.name;
             // 出現させたボールを0.8秒後に消す
             Destroy(newBall, 0.8f);
         }
+        /*var bulletPosition = firingPoint.transform.position;
+        GameObject newBall = Instantiate(bullet, bulletPosition, cam.transform.rotation);
+        var direction = newBall.transform.forward;
+        newBall.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
+        newBall.name = bullet.name;
+        Destroy(newBall, 0.8f);*/
     }
     /// <summary>
     /// 銃を構える処理

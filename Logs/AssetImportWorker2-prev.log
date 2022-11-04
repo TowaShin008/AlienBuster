@@ -2003,3 +2003,9 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1634.291759 seconds.
+  path: Assets/Script/FPSController.cs
+  artifactKey: Guid(f77137b79e648f74cac9534c61f2a04b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Script/FPSController.cs using Guid(f77137b79e648f74cac9534c61f2a04b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '617b02e00589f992463b8ee9ede47fbc') in 0.015506 seconds 
