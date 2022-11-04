@@ -7,7 +7,11 @@ public class FPSController : MonoBehaviour
     [SerializeField]
     private GameObject normalGun;
     [SerializeField]
+    private GameObject sniperRifle;
+    [SerializeField]
     private GameObject normalGunPosition;
+    //[SerializeField]
+    //private GameObject sniperRifle;
     [SerializeField]
     private GameObject holdGunPosition;
     [SerializeField]
@@ -16,6 +20,7 @@ public class FPSController : MonoBehaviour
     private PhysicMaterial slip;
     [SerializeField]
     private PhysicMaterial nonSlip;
+
     private BoxCollider collider;
 
     //プレイヤー移動速度
@@ -53,6 +58,8 @@ public class FPSController : MonoBehaviour
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
+    int gunType = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +69,7 @@ public class FPSController : MonoBehaviour
         characterRot = transform.localRotation;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
+        collider = GetComponent<BoxCollider>();
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
@@ -70,12 +78,13 @@ public class FPSController : MonoBehaviour
         //残機
         remain = 3;
         hp = 3;
+        sniperRifle.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //カメラの移動処理
+        //視点移動処理
         MoveCameraProcessing();
 
         if (Input.GetKey(KeyCode.Space))
@@ -83,29 +92,50 @@ public class FPSController : MonoBehaviour
             JumpProcessing();
 		}
 
-        //加速ゲージのリチャージ処理
+        //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
-        if(Input.GetMouseButton(1))
-		{//銃を構える処理
-            HoldGun();
-		}
-        else if (Input.GetMouseButton(0))
-        {//弾の発射処理(腰うち)
-            normalGun.transform.position = normalGunPosition.transform.position;
+        if (Input.GetKey(KeyCode.P)) stamina=100;
 
-            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+		if (Input.GetMouseButton(1))
+		{//銃を構える処理
+			HoldGun();
+		}
+		else if (Input.GetMouseButton(0))
+		{//弾の発射処理(腰うち)
+			HipShot();
 		}
 		else
 		{//マウス入力がない場合は、銃を構えない。
 			normalGun.transform.position = normalGunPosition.transform.position;
-		}
+            //sniperRifle.transform.position = normalGunPosition.transform.position;
+        }
+
 		//移動処理
 		MoveProcessing();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {//カーソルの非表示
             Cursor.visible = true;
+        }
+
+        if(Input.GetKeyDown(KeyCode.F1))
+		{
+            normalGun.SetActive(true);
+            sniperRifle.SetActive(false);
+            gunType = 1;
+		}
+        else if(Input.GetKeyDown(KeyCode.F2))
+		{
+            normalGun.SetActive(true);
+            sniperRifle.SetActive(false);
+            gunType = 2;
+		}
+        else if (Input.GetKeyDown(KeyCode.F3))
+        {
+            gunType = 3;
+            normalGun.SetActive(false);
+            sniperRifle.SetActive(true);
         }
 
         Debug.Log(stamina);
@@ -118,7 +148,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             var velocity = new Vector3(0, 0, 0);
-            //プレイヤー移動処理
+            //移動処理
             if (Input.GetKey(KeyCode.W))
             {
                 velocity += gameObject.transform.rotation * new Vector3(0, 0, speed);
@@ -150,17 +180,15 @@ public class FPSController : MonoBehaviour
                 StepProcessing(velocity);
             }
 
-            if (Input.GetMouseButton(1) == false)
+			if (Input.GetMouseButton(1) == false)
 			{//呼吸演出処理
-                BreathProcessing();
-            }
+				BreathProcessing();
+			}
 
-            //rigidbody.drag = 1;
-            collider.material = slip;
+			collider.material = slip;
         }
         if (stepTime == 0)
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
-            //rigidbody.drag = 50;
             collider.material = nonSlip;
         }
         else
@@ -267,6 +295,18 @@ public class FPSController : MonoBehaviour
         yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
         normalGun.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
+        //sniperRifle.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
+    }
+    /// <summary>
+    /// 腰だめうち
+    /// </summary>
+    private void HipShot()
+	{
+        normalGun.transform.position = normalGunPosition.transform.position;
+        //sniperRifle.transform.position = normalGunPosition.transform.position;
+
+        //弾の発射処理
+        Shot();
     }
     /// <summary>
     /// 銃を構える処理と発射処理
@@ -274,9 +314,11 @@ public class FPSController : MonoBehaviour
     private void HoldGun()
 	{
         normalGun.transform.position = holdGunPosition.transform.position;
+        //sniperRifle.transform.position = holdGunPosition.transform.position;
+
         if (Input.GetMouseButton(0))
         {//弾の発射処理
-            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+            Shot();
         }
     }
     /// <summary>
@@ -313,5 +355,40 @@ public class FPSController : MonoBehaviour
         {
             deadFlag = true;
         }
+    }
+    /// <summary>
+    /// プレイヤーの射撃処理
+    /// </summary>
+    private void Shot()
+	{
+        if (gunType == 1)
+        {
+            normalGun.GetComponent<NormalGun>().Shot(firingPoint.transform.position, cam.transform.rotation);
+        }
+        else if (gunType == 2)
+        {
+            this.GetComponent<Launcher>().Shot(firingPoint.transform.position, cam.transform.rotation);
+        }
+        else if (gunType == 3)
+		{
+            sniperRifle.GetComponent<SniperScript>().Shot();
+        }
+    }
+    /// <summary>
+    /// 銃番号のセット
+    /// </summary>
+    /// <param name="arg_gunType">銃番号</param>
+    public void SetGunType(int arg_gunType)
+	{
+
+	}
+
+    public int GetMaxStamina()
+    {
+        return maxStamina;
+    }
+    public int GetStamina()
+    {
+        return stamina;
     }
 }
