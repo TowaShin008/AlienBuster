@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
     private GameObject[] enemyBox;
     public GameObject wave_object = null;
     public int nowWave = 1;
-    bool nextWaveChack = false;
+    bool nextWaveCheck = false;
     int saveWave = 0;
 
     void Start()
@@ -21,18 +21,18 @@ public class WaveManager : MonoBehaviour
         //何かのトリガーで次のウェーブへ
         if (enemyBox.Length <= 0)
         {
-            nextWaveChack = true;
+            nextWaveCheck = true;
         }
         else
         {
             saveWave = nowWave;
         }
-        if (nextWaveChack)
+        if (nextWaveCheck)
         {
             if (nowWave == saveWave)
             {
                 nowWave++;
-                nextWaveChack = false;
+                nextWaveCheck = false;
             }
         }
 

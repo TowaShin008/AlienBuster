@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class EmptyBullet : MonoBehaviour
 {
+    //ãÛñÚ‰∞ÇÃîÚÇÒÇ≈Ç¢Ç≠ââèo
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,13 +16,5 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            Destroy(gameObject);
-        }
     }
 }

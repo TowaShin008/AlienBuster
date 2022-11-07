@@ -9,7 +9,7 @@ public class GrenadeLauncher : MonoBehaviour
     private float bulletSpeed = 30.0f;
     //‘å‘Ì10•b‚É1”­
     const int shotDelayMaxTime = 100;
-    private int shotDelayTime = shotDelayMaxTime;
+    private int shotDelayTime = 0;
 
     [SerializeField]
     private GameObject firingPoint;

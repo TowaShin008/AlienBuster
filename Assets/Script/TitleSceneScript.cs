@@ -13,9 +13,9 @@ public class TitleSceneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            FadeManager.Instance.LoadScene("GameScene", 0.5f);
-        }
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    FadeManager.Instance.LoadScene("GameScene", 0.5f);
+        //}
     }
 }

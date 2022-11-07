@@ -8,7 +8,7 @@ public class NormalGun : MonoBehaviour
     private GameObject bullet;
     private float bulletSpeed = 30.0f;
     const int shotDelayMaxTime = 5;
-    private int shotDelayTime = shotDelayMaxTime;
+    private int shotDelayTime = 0;
     [SerializeField]
     private GameObject firingPoint;
 

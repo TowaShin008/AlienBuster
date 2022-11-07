@@ -112,12 +112,19 @@ public class FadeManager : MonoBehaviour
 		{
 			//色と透明度を更新して白テクスチャを描画 .
 			this.fadeColor.a = this.fadeAlpha;
-			GUI.color = this.fadeColor;
-			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
+			//GUI.color = this.fadeColor;
+			//GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
 		}
-		if (Input.GetMouseButtonDown(0)&& SceneManager.GetActiveScene().name == "TitleScene")
+		if (Input.GetMouseButtonDown(0))
 		{
-			LoadScene("GameScene", 1.0f);
+			if (SceneManager.GetActiveScene().name == "TitleScene")
+			{
+				LoadScene("GameScene", 1.0f);
+			}
+			else if (SceneManager.GetActiveScene().name == "EndScene")
+			{
+				LoadScene("TitleScene", 1.0f);
+			}
 		}
 	}
 
