@@ -828,9 +828,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
     - target: {fileID: 757212144634259233, guid: ca19a709df05c90478c480c1ac137794, type: 3}
+      propertyPath: stepSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 757212144634259233, guid: ca19a709df05c90478c480c1ac137794, type: 3}
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 2113986859}
+    - target: {fileID: 757212144634259234, guid: ca19a709df05c90478c480c1ac137794, type: 3}
+      propertyPath: m_Drag
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 757212144634259234, guid: ca19a709df05c90478c480c1ac137794, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 757212144634259235, guid: ca19a709df05c90478c480c1ac137794, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1332,6 +1344,10 @@ PrefabInstance:
     - target: {fileID: 964239591397891660, guid: 00d8f04e2d5a14746900a1ff5c6490c8, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964239591397891660, guid: 00d8f04e2d5a14746900a1ff5c6490c8, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 4043410356986854638, guid: 00d8f04e2d5a14746900a1ff5c6490c8, type: 3}
       propertyPath: m_RootOrder

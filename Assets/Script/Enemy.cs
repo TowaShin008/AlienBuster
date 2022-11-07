@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         stopFlag = false;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.drag = 50;
+        rigidbody.drag = 10;
     }
 
     // Update is called once per frame
