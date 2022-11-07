@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 10;
+        playerObject = GameObject.Find("Player");
     }
 
     // Update is called once per frame
