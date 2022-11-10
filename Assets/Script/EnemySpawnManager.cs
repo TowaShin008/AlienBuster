@@ -11,6 +11,8 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] float spawnNextTime = 10.0f;
     //‚±‚ÌêŠ‚©‚çoŒ»‚·‚é“G‚Ì”
     [SerializeField] int maxEnemyCount = 5;
+    //‚±‚ÌêŠ‚©‚çoŒ»‚·‚é“G‚Ì”
+    [SerializeField] GameObject spawnPoint;
     //oŒ»‚³‚¹‚½‘”
     private int enemyCount;
     //Ÿ‚Ì“G‚ğoŒ»‚³‚¹‚é‚Ü‚Å‚Ì‘Ò‚¿ŠÔ
@@ -52,7 +54,7 @@ public class EnemySpawnManager : MonoBehaviour
         //“G‚ÌŒü‚«‚ğƒ‰ƒ“ƒ_ƒ€‚ÉŒˆ’è
         var randomRotationY = Random.value * 360f;
 
-        GameObject.Instantiate(enemys[randomValue], transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
+        GameObject.Instantiate(enemys[randomValue], spawnPoint.transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
 
         enemyCount++;
         elapsedTime = 0.0f;
