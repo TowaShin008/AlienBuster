@@ -55,7 +55,8 @@ public class FPSController : MonoBehaviour
 
     //残機
     int remain;
-    int hp;
+    const int maxHP = 3;
+    int hp = maxHP;
     bool deadFlag;
 
     //銃の揺れ演出の変数
@@ -86,7 +87,7 @@ public class FPSController : MonoBehaviour
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
         //残機
         remain = 1;
-        hp = 3;
+        hp = maxHP;
         normalGun.SetActive(true);
         grenadeLauncher.SetActive(false);
         sniperRifle.SetActive(false);
@@ -495,5 +496,14 @@ public class FPSController : MonoBehaviour
     public int GetStamina()
     {
         return stamina;
+    }
+
+    public int GetHP()
+	{
+        return hp;
+	}
+    public int GetMaxHP()
+    {
+        return maxHP;
     }
 }

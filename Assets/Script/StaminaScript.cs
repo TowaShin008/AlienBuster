@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class StaminaScript : MonoBehaviour
 {
     public bool useType2 = false;
-
+    public float shitY1=0;
+    public float shitY2 =0;
 
     private GameObject gaugeObject;
     private GameObject staminaObject;
@@ -35,7 +36,7 @@ public class StaminaScript : MonoBehaviour
             //gaugeImage.sprite = gaugetexImage;
 
             RectTransform gtrans2 = staminaObject.GetComponent("RectTransform") as RectTransform;
-            Vector3 pos = new Vector3(trans.position.x, trans.position.y - 50.0f, trans.position.z);
+            Vector3 pos = new Vector3(trans.position.x, trans.position.y - shitY1, trans.position.z);
             mask.position = pos;
             mask.localScale = trans.localScale;
 
@@ -58,7 +59,7 @@ public class StaminaScript : MonoBehaviour
             gaugeImage.sprite = gaugetype2.sprite;
 
             RectTransform gtrans2 = staminaObject.GetComponent("RectTransform") as RectTransform;
-            Vector3 pos = new Vector3(trans.position.x, trans.position.y - 85.0f, trans.position.z);
+            Vector3 pos = new Vector3(trans.position.x, trans.position.y - shitY2, trans.position.z);
             mask.position = pos;
             mask.localScale = trans.localScale;
 
