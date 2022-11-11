@@ -10,6 +10,8 @@ public class WaveManager : MonoBehaviour
     bool nextWaveCheck = false;
     int saveWave = 0;
 
+    public bool waveChangeFlag = false;
+
     void Start()
     {
         
@@ -18,15 +20,27 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
+        ////何かのトリガーで次のウェーブへ
+        //if (enemyBox.Length <= 0)
+        //{
+        //    nextWaveCheck = true;
+        //}
+        //else
+        //{
+        //    saveWave = nowWave;
+        //}
+
         //何かのトリガーで次のウェーブへ
-        if (enemyBox.Length <= 0)
+        if (waveChangeFlag == true && enemyBox.Length <= 0)
         {
+            waveChangeFlag = false;
             nextWaveCheck = true;
         }
         else
         {
             saveWave = nowWave;
         }
+
         if (nextWaveCheck)
         {
             if (nowWave == saveWave)
@@ -38,5 +52,11 @@ public class WaveManager : MonoBehaviour
 
         Text wave_text = wave_object.GetComponent<Text>();
         wave_text.text = "Wave : " + nowWave;
+    }
+
+    //wave変更用関数
+    public void WaveChangeFlagOn()
+    {
+        waveChangeFlag = true;
     }
 }
