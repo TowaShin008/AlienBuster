@@ -16,7 +16,7 @@ public class Launcher : MonoBehaviour
     private GameObject grenade;
     [SerializeField]
     private GameObject Explosion;
-    private float bulletSpeed = 750.0f;
+    private float bulletSpeed = 30.0f;
     //大体10秒に1発
     const int shotDelayMaxTime = 100;
     private int shotDelayTime = shotDelayMaxTime;
@@ -96,15 +96,16 @@ public class Launcher : MonoBehaviour
         // 弾を発射する場所を取得
         var bulletPosition = firingPoint.transform.position;
         // 上で取得した場所に、"grenade"のPrefabを出現させる
-        GameObject newBall = Instantiate(grenade, bulletPosition, cam.transform.rotation);
+        GameObject newBall = Instantiate(grenade, bulletPosition, firingPoint.transform.rotation); //cam.transform.rotation);//  
         // 出現させたボールのforward(z軸方向)
         var direction = newBall.transform.forward;
-        // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-        newBall.GetComponent<Rigidbody>().AddForce(Vector3.Lerp(direction, transform.up, 0.1f) * bulletSpeed, ForceMode.Impulse);    
+        newBall.transform.rotation = Quaternion.Euler(firingPoint.transform.rotation.x + 90, 0, 0);
+        // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加えるLerpのfloatの増やすと放物線になる
+        newBall.GetComponent<Rigidbody>().AddForce(Vector3.Lerp(direction, transform.up, 0.1f) * bulletSpeed, ForceMode.VelocityChange);    
         // 出現させたボールの名前を"grenade"に変更
         newBall.name = grenade.name;       
         // 出現させたボールを2秒後に消す
-        Destroy(newBall, 2.5f);
+        Destroy(newBall, 5.0f);
     }
     /// <summary>
     /// 銃を構える処理
