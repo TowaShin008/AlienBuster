@@ -69,6 +69,10 @@ public class FPSController : MonoBehaviour
     [SerializeField]
     private float exitRotate = 360.0f;
     // Start is called before the first frame update
+
+    public AudioClip gunSound;
+    AudioSource audioSource;
+    
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -86,6 +90,8 @@ public class FPSController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         landingFlag = true;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
+        //音のコンポーネント取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -130,6 +136,8 @@ public class FPSController : MonoBehaviour
 			}
             else
 			{
+                //銃の音
+                audioSource.PlayOneShot(gunSound);
                 //弾の発射処理
                 Shot();
                 ExitBullet();
