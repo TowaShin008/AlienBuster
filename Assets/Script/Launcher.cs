@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject gunModel;
-    [SerializeField]
-    private GameObject normalGunPosition;
-    [SerializeField]
-    private GameObject holdGunPosition;
-    [SerializeField]
-    private GameObject firingPoint;
-    [SerializeField]
-    private GameObject grenade;
-    [SerializeField]
-   // private GameObject Explosion;
-    private float bulletSpeed = 30.0f;
+    [SerializeField] private GameObject gunModel;
+    [SerializeField] private GameObject normalGunPosition;
+    [SerializeField] private GameObject holdGunPosition;
+    [SerializeField] private GameObject firingPoint;
+    [SerializeField] private GameObject grenade;
+    [SerializeField] private float bulletSpeed = 30.0f;
     //大体10秒に1発
-    const int shotDelayMaxTime = 100;
-    private int shotDelayTime = shotDelayMaxTime;
+    [SerializeField] private int shotDelayMaxTime = 100;   
+    [SerializeField] private float DestroyTime = 2.0f; 
+    private int shotDelayTime ;
 
     public GameObject cam;
     Quaternion cameraRot, characterRot;
@@ -32,7 +26,7 @@ public class Launcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        shotDelayTime = shotDelayMaxTime;
     }
 
     // Update is called once per frame
@@ -101,11 +95,11 @@ public class Launcher : MonoBehaviour
         var direction = newBall.transform.forward;
         //newBall.transform.rotation = Quaternion.AngleAxis(90, Vector3.forward) * newBall.transform.rotation;
         // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加えるLerpのfloatの増やすと放物線になる
-        newBall.GetComponent<Rigidbody>().AddForce(Vector3.Lerp(direction, transform.up, 0.1f) * bulletSpeed, ForceMode.VelocityChange);    
+        newBall.GetComponent<Rigidbody>().AddForce(Vector3.Lerp(direction, transform.up, 0.0f) * bulletSpeed, ForceMode.VelocityChange);    
         // 出現させたボールの名前を"grenade"に変更
         newBall.name = grenade.name;       
         // 出現させたボールを2秒後に消す
-        Destroy(newBall, 2.0f);
+        Destroy(newBall, DestroyTime);
     }
     /// <summary>
     /// 銃を構える処理

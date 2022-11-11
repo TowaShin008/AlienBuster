@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6157167212072656383}
   - component: {fileID: 369763693330234202}
   - component: {fileID: 5721043619015942782}
+  - component: {fileID: 611867245288143749}
   m_Layer: 0
   m_Name: LauncherBullet
   m_TagString: Untagged
@@ -114,3 +115,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &611867245288143749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119787515121665675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ac3800084676647b7e0a630a8c2925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 100000, guid: f881607407b15cc46b24d6bda799037a, type: 3}
+  DestroyTime: 2
+  PowertoBlowAway: 30
+  DetectionRange: 30
+  RangeNotDetected: 5
+  ExplosionScale: {x: 0.2, y: 0.2, z: 0.2}
