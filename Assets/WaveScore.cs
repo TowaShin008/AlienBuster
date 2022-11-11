@@ -7,10 +7,17 @@ public class WaveScore : MonoBehaviour
 {
     // Start is called before the first frame update
     int waveScore;
+    [SerializeField]
+    SimpleUITransition[] transitions;
+
     public GameObject wave_object = null;
     void Start()
     {
         waveScore = WaveManager.GetWave();
+        foreach(var trans in transitions)
+        {
+            trans.Show();
+        }
     }
 
     // Update is called once per frame
