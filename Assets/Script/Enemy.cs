@@ -71,10 +71,18 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Bullet") { return; }
-        hp--;
-    }
+        string gameObjectName = collision.gameObject.tag;
+        if (gameObjectName != "Bullet"&& gameObjectName != "Grenade" && gameObjectName == "EnemyBullet") { return; }
 
+        if(gameObjectName == "Bullet")
+		{
+            hp--;
+        }
+        else if(gameObjectName == "Grenade")
+		{
+            hp -= 10;
+		}
+    }
     /// <summary>
     /// 弾の発射処理
     /// </summary>
@@ -91,6 +99,7 @@ public class Enemy : MonoBehaviour
         // 出現させたボールの名前を"bullet"に変更
         newBall.name = bullet.name;
         // 出現させたボールを0.8秒後に消す
+
         Destroy(newBall, bulletDestroyTime);
     }
 }
