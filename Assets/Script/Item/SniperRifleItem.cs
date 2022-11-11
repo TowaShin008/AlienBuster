@@ -24,6 +24,15 @@ public class SniperRifleItem : MonoBehaviour
         else
         {
             sniperRifle.SetActive(true);
+
+            float yRot = 0.0f;
+
+            yRot += 2.0f;
+            if (yRot > 360.0f)
+            {
+                yRot = 0.0f;
+            }
+            sniperRifle.transform.rotation *= Quaternion.Euler(0, yRot, 0);
         }
     }
 

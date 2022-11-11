@@ -37,6 +37,15 @@ public class EnemySpawnManager : MonoBehaviour
         //　経過時間を足す
         elapsedTime += Time.deltaTime;
 
+        float xRot = 0.0f;
+
+        xRot += 0.1f;
+        if (xRot > 360.0f)
+		{
+            xRot = 0.0f;
+		}
+        this.transform.rotation *= Quaternion.Euler(0, xRot, 0);
+
         //　経過時間が経ったら
         if (elapsedTime > spawnNextTime)
         {
