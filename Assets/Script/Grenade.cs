@@ -39,7 +39,7 @@ public class Grenade : MonoBehaviour
             if (cube.GetComponent<Rigidbody>()) // Rigidbodyがあれば、グレネードを中心とした爆発の力を加える
             {
                 cube.GetComponent<Rigidbody>().drag = 0;
-                cube.GetComponent<Rigidbody>().AddExplosionForce(30f, this.transform.position, 30f, 5f, ForceMode.Impulse);
+                cube.GetComponent<Rigidbody>().AddExplosionForce(30f,/*吹き飛ばす強さ*/ this.transform.position, 30f/*検知範囲*/, 5f/*対象から検知しない範囲*/, ForceMode.Impulse);
             }
         }
     }
