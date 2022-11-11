@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class SniperScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public GameObject bullet;
 
     public float speed = 0.1f;
@@ -16,8 +14,9 @@ public class SniperScript : MonoBehaviour
     [SerializeField]
     private GameObject holdGunPosition;
     //public Transform defaultPos;
-    public Transform aimPos;
-    public Transform firingPoint;
+    //public Transform aimPos;
+    [SerializeField]
+    private GameObject firingPoint;
 
     public List<MeshRenderer> sniperMesh;
 
@@ -29,18 +28,12 @@ public class SniperScript : MonoBehaviour
     private float bulletSpeed = 60.0f;
     void Start()
     {
-        Color32 color = sniperGauge.color;
-        Color32 color2 = sniperGaugeEdge.color;
-        color.a = 0;
-        color2.a = 0;
-        sniperGauge.color = color;
-        sniperGaugeEdge.color = color2;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetMouseButton(1))
         {//銃を構える処理
             HoldGun();
@@ -63,7 +56,6 @@ public class SniperScript : MonoBehaviour
             sniperGaugeEdge.color = color2;
         }
 
-
         //ゲージ
         defScale = sniperGauge.transform.localScale;
         if (defScale.y <= 0.25f)
@@ -75,6 +67,9 @@ public class SniperScript : MonoBehaviour
 
     public void HoldGun()
 	{
+        sniperEdge.enabled = true;
+        sniperGaugeEdge.enabled = true;
+        sniperGauge.enabled = true;
         transform.position = holdGunPosition.transform.position;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, aimPos.rotation, speed);
         sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(1.0f, 1.0f), speed + 5.0f);
@@ -94,17 +89,16 @@ public class SniperScript : MonoBehaviour
         }
     }
 
-    public void Shot()
+    public void Shot(Quaternion arg_cameraRotation)
 	{
         if (defScale.y >= 0.25f)
         {
             if (Input.GetMouseButtonDown(0))
-            {
-                //弾の発射処理
+            {//弾の発射処理
                 // 弾を発射する場所を取得
-                var bulletPosition = firingPoint.position;
+                var bulletPosition = firingPoint.transform.position;
                 // 上で取得した場所に、"bullet"のPrefabを出現させる
-                GameObject sBullet = Instantiate(bullet, bulletPosition, Camera.main.transform.rotation);
+                GameObject sBullet = Instantiate(bullet, bulletPosition, arg_cameraRotation);
                 // 出現させたボールのforward(z軸方向)
                 var direction = sBullet.transform.forward;
                 // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える

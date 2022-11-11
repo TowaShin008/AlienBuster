@@ -4,35 +4,35 @@ using UnityEngine;
 using UnityEngine.UI;
 public class WaveManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private GameObject[] enemyBox;
+    public GameObject wave_object = null;
+    public int nowWave = 1;
+    bool nextWaveCheck = false;
+    int saveWave = 0;
+
     void Start()
     {
         
     }
-    private GameObject[] enemyBox;
-    public GameObject wave_object = null;
-    public int nowWave = 0;
-    bool nextWaveChack = false;
-    int saveWave = 0;
-    // Update is called once per frame
+
     void Update()
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
         //何かのトリガーで次のウェーブへ
         if (enemyBox.Length <= 0)
         {
-            nextWaveChack = true;
+            nextWaveCheck = true;
         }
         else
         {
             saveWave = nowWave;
         }
-        if (nextWaveChack)
+        if (nextWaveCheck)
         {
             if (nowWave == saveWave)
             {
                 nowWave++;
-                nextWaveChack = false;
+                nextWaveCheck = false;
             }
         }
 

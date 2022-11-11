@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-
+    //爆発エフェクト
+    [SerializeField] GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +17,17 @@ public class Grenade : MonoBehaviour
     {
         
     }
-   
+
+	private void OnDestroy()
+	{
+        Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0)); // ★追加
+    }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.gameObject.tag != "Enemy") { return; }
+
+        Destroy(this);
+    }
+
 }

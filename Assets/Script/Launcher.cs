@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
+    //[SerializeField]
+    //private GameObject gunModel;
+    //[SerializeField]
+    //private GameObject normalGunPosition;
+    //[SerializeField]
+    //private GameObject holdGunPosition;
+    //[SerializeField]
+    //private GameObject firingPoint;
     [SerializeField]
     private GameObject grenade;
+
     private float bulletSpeed = 30.0f;
-    //‘å‘Ì10•b‚É1”­
+    //ï¿½ï¿½ï¿½10ï¿½bï¿½ï¿½1ï¿½ï¿½
     const int shotDelayMaxTime = 100;
     private int shotDelayTime = shotDelayMaxTime;
 
@@ -28,51 +37,115 @@ public class Launcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ////ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
+        //MoveProcessing();
+        //shotDelayTime--;
+        //if (Input.GetMouseButton(1))
+        //{//ï¿½eï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½éˆï¿½ï¿½
+        //    HoldGun();
+        //}
+        //else if (Input.GetMouseButton(0))
+        //{//ï¿½eï¿½Ì”ï¿½ï¿½Ëï¿½ï¿½ï¿½
+        //    gunModel.transform.position = normalGunPosition.transform.position;
+        //    if (shotDelayTime > 0)
+        //    {
+
+        //    }
+        //    else
+        //    {
+        //        //ï¿½eï¿½Ì”ï¿½ï¿½Ëï¿½ï¿½ï¿½
+        //        Shot();
+        //        shotDelayTime = shotDelayMaxTime;
+        //    }
+        //}
+        //else
+        //{
+        //    gunModel.transform.position = normalGunPosition.transform.position;
+        //}
+    }
+
+    //private void MoveProcessing()
+    //{
+    //    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+    //    {
+
+    //        if (Input.GetMouseButton(1) == false)
+    //        {//ï¿½Ä‹zï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½
+    //            BreathProcessing();
+    //        }
+    //    }
+    //}
+
+    /// <summary>
+    /// ï¿½Ä‹zï¿½ï¿½ï¿½o
+    /// </summary>
+    //private void BreathProcessing()
+    //{
+    //    //ï¿½}ï¿½Eï¿½Xï¿½ï¿½Yï¿½ï¿½ï¿½|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ìæ“¾
+    //    float yRot = gunModel.transform.localRotation.eulerAngles.x;
+    //    yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
+
+    //    gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
+    //}
+    /// <summary>
+    /// ï¿½eï¿½Ì”ï¿½ï¿½Ëï¿½ï¿½ï¿½
+    /// </summary>
+    public void Shot(Vector3 arg_firingPoint, Quaternion arg_cameraRotation)
+    {
         if (shotDelayTime > 0)
         {
             shotDelayTime--;
         }
-    }
-    /// <summary>
-    /// ’e‚Ì”­Ëˆ—
-    /// </summary>
-    /// <param name="arg_firingPoint">e‚Ìƒ|ƒWƒVƒ‡ƒ“</param>
-    /// <param name="arg_cameraRotation">ƒJƒƒ‰‚Ì‰ñ“]—Ê</param>
-    public void Shot(Vector3 arg_firingPoint, Quaternion arg_cameraRotation)
-    {
-        if (shotDelayTime <= 0)
+        else
         {
-            //’e‚Ì”­Ëˆ—
-            // ’e‚ğ”­Ë‚·‚éêŠ‚ğæ“¾
+            //ï¿½eï¿½Ì”ï¿½ï¿½Ëï¿½ï¿½ï¿½
+            // ï¿½eï¿½ğ”­Ë‚ï¿½ï¿½ï¿½êŠï¿½ï¿½ï¿½æ“¾
             var bulletPosition = arg_firingPoint;
-            // ã‚Åæ“¾‚µ‚½êŠ‚ÉA"grenade"‚ÌPrefab‚ğoŒ»‚³‚¹‚é
+            // ï¿½ï¿½Åæ“¾ï¿½ï¿½ï¿½ï¿½ï¿½êŠï¿½ÉA"grenade"ï¿½ï¿½Prefabï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             GameObject newBall = Instantiate(grenade, bulletPosition, arg_cameraRotation);
-            // oŒ»‚³‚¹‚½ƒ{[ƒ‹‚Ìforward(z²•ûŒü)
+            // ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½[ï¿½ï¿½ï¿½ï¿½forward(zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
             var direction = newBall.transform.forward;
-            // ’e‚Ì”­Ë•ûŒü‚ÉnewBall‚Ìz•ûŒü(ƒ[ƒJƒ‹À•W)‚ğ“ü‚êA’eƒIƒuƒWƒFƒNƒg‚Ìrigidbody‚ÉÕŒ‚—Í‚ğ‰Á‚¦‚é
+            // ï¿½eï¿½Ì”ï¿½ï¿½Ë•ï¿½ï¿½ï¿½ï¿½ï¿½newBallï¿½ï¿½zï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½W)ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½eï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½rigidbodyï¿½ÉÕŒï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             newBall.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-            Invoke("Explode", 3.0f); // ƒOƒŒƒl[ƒh‚ğ”­Ë‚µ‚Ä‚©‚ç1.5•bŒã‚É”š”­‚³‚¹‚é
-                                     // oŒ»‚³‚¹‚½ƒ{[ƒ‹‚Ì–¼‘O‚ğ"bullet"‚É•ÏX
+            Invoke("Explode", 2.0f); // ï¿½Oï¿½ï¿½ï¿½lï¿½[ï¿½hï¿½ğ”­Ë‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½1.5ï¿½bï¿½ï¿½É”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                                     // ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½[ï¿½ï¿½ï¿½Ì–ï¿½ï¿½Oï¿½ï¿½"bullet"ï¿½É•ÏX
             newBall.name = grenade.name;
 
-            // oŒ»‚³‚¹‚½ƒ{[ƒ‹‚ğ2•bŒã‚ÉÁ‚·
-            Destroy(newBall, 2.9f);
+            // ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½[ï¿½ï¿½ï¿½ï¿½2ï¿½bï¿½ï¿½Éï¿½ï¿½ï¿½
+            Destroy(newBall, 1.5f);
 
             shotDelayTime = shotDelayMaxTime;
         }
     }
     /// <summary>
-    /// ”š”j‰‰o
+    /// ï¿½eï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½éˆï¿½ï¿½
     /// </summary>
+    //private void HoldGun()
+    //{
+    //    gunModel.transform.position = holdGunPosition.transform.position;
+    //    if (Input.GetMouseButton(0))
+    //    {//ï¿½eï¿½Ì”ï¿½ï¿½Ëï¿½ï¿½ï¿½
+    //        if (shotDelayTime > 0)
+    //        {
+    //            shotDelayTime--;
+    //        }
+    //        else
+    //        {
+    //            //ï¿½eï¿½Ì”ï¿½ï¿½Ëï¿½ï¿½ï¿½
+    //            Shot();
+    //            shotDelayTime = shotDelayMaxTime;
+    //        }
+    //    }
+    //}
     void Explode()
     {
-        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Enemy"); //uEnemyvƒ^ƒO‚Ì‚Â‚¢‚½ƒIƒuƒWƒFƒNƒg‚ğ‘S‚ÄŒŸõ‚µ‚Ä”z—ñ‚É‚¢‚ê‚é
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Enemy"); //ï¿½uEnemyï¿½vï¿½^ï¿½Oï¿½Ì‚Â‚ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Sï¿½ÄŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä”zï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½
 
-        if (cubes.Length == 0) return; // uEnemyvƒ^ƒO‚ª‚Â‚¢‚½ƒIƒuƒWƒFƒNƒg‚ª‚È‚¯‚ê‚Î‰½‚à‚µ‚È‚¢B
+        if (cubes.Length == 0) return; // ï¿½uEnemyï¿½vï¿½^ï¿½Oï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½Î‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½B
 
-        foreach (GameObject cube in cubes) // ”z—ñ‚É“ü‚ê‚½ˆê‚Â‚Ğ‚Æ‚Â‚ÌƒIƒuƒWƒFƒNƒg
+        foreach (GameObject cube in cubes) // ï¿½zï¿½ï¿½É“ï¿½ï¿½ê‚½ï¿½ï¿½Â‚Ğ‚Æ‚Â‚ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½g
         {
-            if (cube.GetComponent<Rigidbody>()) // Rigidbody‚ª‚ ‚ê‚ÎAƒOƒŒƒl[ƒh‚ğ’†S‚Æ‚µ‚½”š”­‚Ì—Í‚ğ‰Á‚¦‚é
+            if (cube.GetComponent<Rigidbody>()) // Rigidbodyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎAï¿½Oï¿½ï¿½ï¿½lï¿½[ï¿½hï¿½ğ’†Sï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì—Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             {
                 cube.GetComponent<Rigidbody>().AddExplosionForce(100f, transform.position, 30f, 5f, ForceMode.Impulse);
             }
