@@ -928,6 +928,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 224529426718124108, guid: 455e513b902d5a145806a856ec6eaffe, type: 3}
+      propertyPath: m_TagString
+      value: EnemyBullet
+      objectReference: {fileID: 0}
     - target: {fileID: 8397322077438853317, guid: 455e513b902d5a145806a856ec6eaffe, type: 3}
       propertyPath: m_RootOrder
       value: 9
