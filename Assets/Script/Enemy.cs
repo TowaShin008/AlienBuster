@@ -64,7 +64,8 @@ public class Enemy : MonoBehaviour
 
         if (deadFlag)
         {
-            Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0)); // Åöí«â¡
+            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(newExplosion, 1.0f);
             Destroy(gameObject);
         }
     }
