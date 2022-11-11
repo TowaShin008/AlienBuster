@@ -80,6 +80,7 @@ public class FPSController : MonoBehaviour
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
+        collider.material = nonSlip;
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック

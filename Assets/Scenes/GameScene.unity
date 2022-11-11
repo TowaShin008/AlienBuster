@@ -585,11 +585,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 362330754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1e83418d5415d4ba16142db8bec952, type: 3}
+  m_Script: {fileID: 11500000, guid: d689aa0b33fd767438c00c00ee0d0530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wave_object: {fileID: 395252179}
-  nowWave: 1
+  waveChangeFlag: 0
 --- !u!1 &395252179
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1107,6 +1107,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1581934075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6074480665320166824, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+  m_PrefabInstance: {fileID: 6831621523079967509}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1669555094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1372,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6665426776421690590, guid: 2cb1ce800c3b13047847f23cb0735580, type: 3}
   m_PrefabInstance: {fileID: 1916943541}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1878957184
+--- !u!4 &1878957185 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6326302908158424676, guid: 2cb1ce800c3b13047847f23cb0735580, type: 3}
+  m_PrefabInstance: {fileID: 1916943541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1878957186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1380,15 +1390,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemys:
-  - {fileID: 757212145639958205}
-  spawnNextTime: 5
-  maxEnemyCount: 5
+  - {fileID: 1581934075}
+  spawnNextTime:
+  - 10
+  - 5
+  - 5
+  - 4
+  - 2
+  maxEnemyCount: 05000000080000000a0000000c0000000f000000
   spawnPoint: {fileID: 1105353571}
---- !u!4 &1878957185 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6326302908158424676, guid: 2cb1ce800c3b13047847f23cb0735580, type: 3}
-  m_PrefabInstance: {fileID: 1916943541}
-  m_PrefabAsset: {fileID: 0}
+  waveManager: {fileID: 362330757}
 --- !u!1001 &1916943541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1661,18 +1672,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6495265381181574630, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
   m_PrefabInstance: {fileID: 6495265379872976077}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2113986866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113986859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac554b5044ac86b448503f12e8a7a4c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &543450652974547544 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7695353325420440276, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
@@ -1681,11 +1680,6 @@ Transform:
 --- !u!4 &757212145639958203 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6074480665320166830, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
-  m_PrefabInstance: {fileID: 6831621523079967509}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &757212145639958205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6074480665320166824, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
   m_PrefabInstance: {fileID: 6831621523079967509}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &919132148704794850 stripped
@@ -1825,6 +1819,10 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 2113986859}
+    - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: bulletDestroyTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166830, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: m_RootOrder
       value: 0
