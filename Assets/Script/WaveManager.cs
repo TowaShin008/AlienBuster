@@ -14,7 +14,13 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        //フレームレートの固定
+        Application.targetFrameRate = 60;
 
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.LinuxPlayer)
+        {
+            Screen.SetResolution(1920, 1080, false);
+        }
     }
  
 
