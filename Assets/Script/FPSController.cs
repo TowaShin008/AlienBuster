@@ -73,8 +73,6 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //フレームレートの固定
-        Application.targetFrameRate = 60;
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
         deadFlag = false;
