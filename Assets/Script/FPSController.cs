@@ -84,6 +84,7 @@ public class FPSController : MonoBehaviour
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
+
         //残機
         remain = 1;
         hp = maxHP;
