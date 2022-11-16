@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Script/Launcher.cs.meta
-guid: 65c408c7c509675469d27adc63f8992c
-========
+<<<<<<<< HEAD:Assets/EaseValue.cs.meta
 guid: 327d5a5e605898f48a1314524002e1b2
->>>>>>>> Yoshimine:Assets/EaseValue.cs.meta
+========
+guid: 8ade6fc846da0984db38231b4218f349
+>>>>>>>> origin/Hirazakura:Assets/Script/Launcher.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
