@@ -73,18 +73,18 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //フレームレートの固定
-        Application.targetFrameRate = 60;
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
+        collider.material = nonSlip;
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
+
         //残機
         remain = 1;
         hp = maxHP;
@@ -136,39 +136,6 @@ public class FPSController : MonoBehaviour
             Cursor.visible = true;
         }
 
-        if(Input.GetKeyDown(KeyCode.F1))
-		{
-            normalGun.SetActive(true);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(false);
-            gunType = 1;
-		}
-        else if(Input.GetKeyDown(KeyCode.F2))
-		{
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(true);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(false);
-            gunType = 2;
-		}
-        else if (Input.GetKeyDown(KeyCode.F3))
-        {
-            gunType = 3;
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(true);
-            shotGun.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            gunType = 4;
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(true);
-        }
-
         Debug.Log(stamina);
     }
     /// <summary>
@@ -176,9 +143,9 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void MoveProcessing()
 	{
+        var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            var velocity = new Vector3(0, 0, 0);
             //移動処理
             if (Input.GetKey(KeyCode.W))
             {
@@ -306,7 +273,10 @@ public class FPSController : MonoBehaviour
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
-        transform.localRotation = characterRot;
+        if (deadFlag == false)
+		{
+            transform.localRotation = characterRot;
+        }
 
         //Updateの中で作成した関数を呼ぶ
         cameraRot = ClampRotation(cameraRot);

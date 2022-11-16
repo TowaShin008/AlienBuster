@@ -81,14 +81,14 @@ public class StaminaScript : MonoBehaviour
 
         if (!useType2)
         {
-            float onestamina = 100.0f / (float)maxStamina;
-            float transStamina = 100.0f - (onestamina * (float)stamina);
+            float onestamina = (100.0f * 3.0f) / (float)maxStamina;
+            float transStamina = (100.0f * 3.0f) - (onestamina * (float)stamina);
             staminaMask.padding = new Vector4(0, 0, 0, transStamina);
         }
         else
         {
-            float onestamina = 180.0f / (float)maxStamina;
-            float transStamina = 180.0f - (onestamina * (float)stamina);
+            float onestamina = (180.0f * 5.27f) / (float)maxStamina;
+            float transStamina = (180.0f * 5.27f) - (onestamina * (float)stamina);
             staminaMask.padding = new Vector4(0, 0, transStamina, 0);
         }
 
