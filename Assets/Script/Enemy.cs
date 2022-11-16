@@ -26,8 +26,15 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float bulletDestroyTime = 0.8f;
 
+    [SerializeField] private float stepSpeed = 50.0f;
+    const int stepMaxTime = 30;
+    private int stepTime = stepMaxTime;
+    const int stepDelayMaxTime = 120;
+    private int stepDelayTime = stepDelayMaxTime;
+
     //爆発エフェクト
     [SerializeField] GameObject explosion;
+    [SerializeField] private Vector3 explosionSize = new Vector3(1.0f, 1.0f, 1.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +64,29 @@ public class Enemy : MonoBehaviour
         transform.LookAt(playerObject.transform);
         transform.position += transform.forward * speed;
 
+        //ステップ処理
+        if (stepTime > 0)
+        {
+            stepTime--;
+            transform.RotateAround(playerObject.transform.position, Vector3.up, stepSpeed * Time.deltaTime);
+            stepDelayTime = stepDelayMaxTime;
+        }
+        else
+        {
+            if (stepDelayTime > 0)
+            {
+                stepDelayTime--;
+            }
+            else
+            {
+                stepTime = stepMaxTime;
+                if (Random.value <= 0.5f)
+                {
+                    stepSpeed *= -1;
+                }
+            }
+        }
+
         if (hp <= 0)
         {
             deadFlag = true;
@@ -65,6 +95,7 @@ public class Enemy : MonoBehaviour
         if (deadFlag)
         {
             GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            newExplosion.transform.localScale = explosionSize;
             Destroy(newExplosion, 1.0f);
             Destroy(gameObject);
         }
@@ -73,16 +104,16 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet"&& gameObjectName != "Grenade" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != "Bullet" && gameObjectName != "Grenade" && gameObjectName == "EnemyBullet") { return; }
 
-        if(gameObjectName == "Bullet")
-		{
+        if (gameObjectName == "Bullet")
+        {
             hp--;
         }
-        else if(gameObjectName == "Grenade")
-		{
+        else if (gameObjectName == "Grenade")
+        {
             hp -= 10;
-		}
+        }
     }
     /// <summary>
     /// 弾の発射処理
@@ -100,7 +131,6 @@ public class Enemy : MonoBehaviour
         // 出現させたボールの名前を"bullet"に変更
         newBall.name = bullet.name;
         // 出現させたボールを0.8秒後に消す
-
         Destroy(newBall, bulletDestroyTime);
     }
 }

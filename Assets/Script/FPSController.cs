@@ -135,39 +135,6 @@ public class FPSController : MonoBehaviour
             Cursor.visible = true;
         }
 
-        if(Input.GetKeyDown(KeyCode.F1))
-		{
-            normalGun.SetActive(true);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(false);
-            gunType = 1;
-		}
-        else if(Input.GetKeyDown(KeyCode.F2))
-		{
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(true);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(false);
-            gunType = 2;
-		}
-        else if (Input.GetKeyDown(KeyCode.F3))
-        {
-            gunType = 3;
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(true);
-            shotGun.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            gunType = 4;
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(true);
-        }
-
         Debug.Log(stamina);
     }
     /// <summary>
@@ -175,9 +142,9 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void MoveProcessing()
 	{
+        var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            var velocity = new Vector3(0, 0, 0);
             //à⁄ìÆèàóù
             if (Input.GetKey(KeyCode.W))
             {
@@ -305,7 +272,10 @@ public class FPSController : MonoBehaviour
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
-        transform.localRotation = characterRot;
+        if (deadFlag == false)
+		{
+            transform.localRotation = characterRot;
+        }
 
         //UpdateÇÃíÜÇ≈çÏê¨ÇµÇΩä÷êîÇåƒÇ‘
         cameraRot = ClampRotation(cameraRot);

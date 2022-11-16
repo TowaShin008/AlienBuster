@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d9af83071b6d546b90d5bc22e09708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useType2: 0
+  useType2: 1
   shitY1: 150
   shitY2: 265
 --- !u!1001 &986531968
@@ -1860,7 +1860,15 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 6495265380238387206, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6495265380418073637, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6495265380606645382, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
