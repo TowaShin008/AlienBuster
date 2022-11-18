@@ -24,6 +24,15 @@ public class GrenadeLauncherItem : MonoBehaviour
         else
         {
             grenadeLauncher.SetActive(true);
+
+            float xRot = 0.0f;
+
+            xRot += 2.0f;
+            if (xRot > 360.0f)
+            {
+                xRot = 0.0f;
+            }
+            grenadeLauncher.transform.rotation *= Quaternion.Euler(xRot, 0, 0);
         }
     }
 

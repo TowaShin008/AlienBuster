@@ -12,10 +12,14 @@ public class NormalGun : MonoBehaviour
     [SerializeField]
     private GameObject firingPoint;
 
+    //効果音
+    public AudioClip gunSound;
+    AudioSource audioSource;
 
     void Start()
     {
-        
+        //音のコンポーネント取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,8 @@ public class NormalGun : MonoBehaviour
 	{
         if (shotDelayTime <= 0)
         {
+            //銃の音
+            audioSource.PlayOneShot(gunSound);
             //弾の発射処理
             // 弾を発射する場所を取得
             var bulletPosition = firingPoint.transform.position;
