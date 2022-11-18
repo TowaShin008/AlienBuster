@@ -17,14 +17,11 @@ public class FPSController : MonoBehaviour
     //ショットガン
     [SerializeField]
     private GameObject shotGun;
+
     [SerializeField]
     private GameObject normalGunPosition;
     [SerializeField]
     private GameObject holdGunPosition;
-    [SerializeField]
-    private PhysicMaterial slip;
-    [SerializeField]
-    private PhysicMaterial nonSlip;
 
     private BoxCollider collider;
 
@@ -65,7 +62,7 @@ public class FPSController : MonoBehaviour
     float shakingSpeed = shakingNormalSpeed;
 
     int gunType = 1;
-
+    //スナイパーライフルのUI
     public Image sniperEdge;
     public Image sniperGaugeEdge;
     public Image sniperGauge;
@@ -78,7 +75,6 @@ public class FPSController : MonoBehaviour
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
-        collider.material = nonSlip;
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
@@ -92,7 +88,7 @@ public class FPSController : MonoBehaviour
         grenadeLauncher.SetActive(false);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
-
+        //スナイパーライフルのUI
         sniperEdge.enabled = false;
         sniperGaugeEdge.enabled = false;
         sniperGauge.enabled = false;
@@ -182,16 +178,10 @@ public class FPSController : MonoBehaviour
 			{//呼吸演出処理
 				BreathProcessing();
 			}
-
-			collider.material = slip;
         }
-        if (stepTime == 0)
-        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
-			collider.material = nonSlip;
-		}
-		else
-		{
-			stepTime--;
+        if (stepTime > 0)
+        {//ステップをしていないか、ステップ猶予時間でなければ抗力を強くする
+            rigidbody.drag = 0;
 		}
     }
     /// <summary>
@@ -259,6 +249,11 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(true);
                 gunType = 4;
             }
+        }
+
+        if (stepTime == 0 && collision.gameObject.CompareTag("Field"))
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+            rigidbody.drag = 100;
         }
     }
     /// <summary>
