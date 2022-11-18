@@ -15,8 +15,14 @@ public class Launcher : MonoBehaviour
     [SerializeField] private float DestroyTime = 2.0f; 
     private int shotDelayTime ;
 
+    Quaternion recoil;
+    Quaternion recoilback;
+
     public GameObject cam;
-    Quaternion cameraRot, characterRot;
+    Quaternion cameraRot;
+
+    private Vector3 defaultPos;
+    [SerializeField] float Recoil;
 
     const float shakingNormalSpeed = 10.0f;
     const float shakingMaxSpeed = 15.0f;
@@ -27,6 +33,8 @@ public class Launcher : MonoBehaviour
     void Start()
     {
         shotDelayTime = shotDelayMaxTime;
+        recoil = Quaternion.AngleAxis(-10.0f, new Vector3(0.0f, 0.0f, 1.0f));
+        recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
     }
 
     // Update is called once per frame
@@ -44,18 +52,21 @@ public class Launcher : MonoBehaviour
             gunModel.transform.position = normalGunPosition.transform.position;
             if (shotDelayTime > 0)
             {
-
+              
             }
             else
             {
                 //弾の発射処理
                 Shot();
                 shotDelayTime = shotDelayMaxTime;
+               // gunModel.transform.localRotation = gunModel.transform.localRotation * recoilback;//関数呼び出しで使える？
+
             }
         }
         else
         {
             gunModel.transform.position = normalGunPosition.transform.position;
+           
         }
     }
 
@@ -100,13 +111,16 @@ public class Launcher : MonoBehaviour
         newBall.name = grenade.name;       
         // 出現させたボールを2秒後に消す
         Destroy(newBall, DestroyTime);
+        //リコイルの表現（銃のみ）
+        gunModel.transform.localRotation = gunModel.transform.localRotation * recoil;
     }
-    /// <summary>
-    /// 銃を構える処理
-    /// </summary>
-    private void HoldGun()
+/// <summary>
+/// 銃を構える処理
+/// </summary>
+private void HoldGun()
     {
         gunModel.transform.position = holdGunPosition.transform.position;
+
         if (Input.GetMouseButton(0))
         {//弾の発射処理
             if (shotDelayTime > 0)
@@ -121,5 +135,4 @@ public class Launcher : MonoBehaviour
             }
         }
     }
-
 }

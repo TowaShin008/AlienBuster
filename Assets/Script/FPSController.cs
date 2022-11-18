@@ -37,20 +37,6 @@ public class FPSController : MonoBehaviour
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
-    //[SerializeField]
-    //private GameObject gunModel;
-    //[SerializeField]
-    //private GameObject normalGunPosition;
-    //[SerializeField]
-    //private GameObject holdGunPosition;
-    //[SerializeField]
-    //private GameObject firingPoint;
-    //[SerializeField]
-    //private GameObject bullet;
-    //private float bulletSpeed = 60.0f;
-    //const int shotDelayMaxTime = 10;
-    //private int shotDelayTime = shotDelayMaxTime;
-
     private bool landingFlag;
 
     // Start is called before the first frame update
@@ -102,28 +88,7 @@ public class FPSController : MonoBehaviour
             Cursor.visible = true;
 		}
 
-        //if (Input.GetMouseButton(1))
-        //{//銃を構える処理
-        //    HoldGun();
-        //}
-        //else if (Input.GetMouseButton(0))
-        //{//弾の発射処理
-        //    gunModel.transform.position = normalGunPosition.transform.position;
-        //    if (shotDelayTime > 0)
-        //    {
-        //        shotDelayTime--;
-        //    }
-        //    else
-        //    {
-        //        //弾の発射処理
-        //        Shot();
-        //        shotDelayTime = shotDelayMaxTime;
-        //    }
-        //}
-        //else
-        //{
-        //    gunModel.transform.position = normalGunPosition.transform.position;
-        //}
+        
         //移動処理
         MoveProcessing();
     }
@@ -261,55 +226,7 @@ public class FPSController : MonoBehaviour
 	{
         rigidbody.AddForce(new Vector3(0.0f, 3.0f, 0.0f));
 	}
-    /// <summary>
-    /// 呼吸演出
-    /// </summary>
-    //private void BreathProcessing()
-    //{
-    //    //マウスのY軸ポジションの取得
-    //    float yRot = gunModel.transform.localRotation.eulerAngles.x;
-    //    yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
-    //    gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
-    //}
-    ///// <summary>
-    ///// 弾の発射処理
-    ///// </summary>
-    //private void Shot()
-    //{
-    //    // 弾を発射する場所を取得
-    //    var bulletPosition = firingPoint.transform.position;
-    //    // 上で取得した場所に、"bullet"のPrefabを出現させる
-    //    GameObject newBall = Instantiate(bullet, bulletPosition, cam.transform.rotation);
-    //    // 出現させたボールのforward(z軸方向)
-    //    var direction = newBall.transform.forward;
-    //    // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-    //    newBall.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-    //    // 出現させたボールの名前を"bullet"に変更
-    //    newBall.name = bullet.name;
-    //    // 出現させたボールを0.8秒後に消す
-    //    Destroy(newBall, 0.8f);
-    //}
-    ///// <summary>
-    ///// 銃を構える処理
-    ///// </summary>
-    //private void HoldGun()
-    //{
-    //    gunModel.transform.position = holdGunPosition.transform.position;
-    //    if (Input.GetMouseButton(0))
-    //    {//弾の発射処理
-    //        if (shotDelayTime > 0)
-    //        {
-    //            shotDelayTime--;
-    //        }
-    //        else
-    //        {
-    //            //弾の発射処理
-    //            Shot();
-    //            shotDelayTime = shotDelayMaxTime;
-    //        }
-    //    }
-    //}
     /// <summary>
     /// 加速ゲージのリチャージ処理
     /// </summary>
