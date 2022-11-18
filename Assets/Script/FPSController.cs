@@ -225,7 +225,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 gunType = 1;
             }
-            else if (collision.gameObject.name == "GrenadeLauncherItem")
+            else if (collision.gameObject.name == "RocketLauncherItem")
             {
                 normalGun.SetActive(false);
                 grenadeLauncher.SetActive(true);
@@ -314,6 +314,7 @@ public class FPSController : MonoBehaviour
     /// </summary>
     public void JumpProcessing()
 	{
+        rigidbody.drag = 0;
         rigidbody.AddForce(new Vector3(0.0f, 10.0f, 0.0f));
 	}
     /// <summary>
@@ -405,6 +406,7 @@ public class FPSController : MonoBehaviour
         if (remain <= 0)
         {
             deadFlag = true;
+            rigidbody.drag = 0;
             FadeManager.Instance.LoadScene("EndScene", 0.5f);
         }
     }
@@ -419,7 +421,7 @@ public class FPSController : MonoBehaviour
         }
         else if (gunType == 2)
         {
-            grenadeLauncher.GetComponent<GrenadeLauncher>().Shot(cam.transform.rotation);
+            grenadeLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation);
         }
         else if (gunType == 3)
         {
