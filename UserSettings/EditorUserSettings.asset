@@ -9,6 +9,7 @@ EditorUserSettings:
       value: 5706570250045a59550d587149745a4415164a7d7e2977362b7b4b6ae6b9676b
       flags: 0
     RecentlyUsedSceneGuid-1:
+<<<<<<< HEAD
       value: 0150575304050f5e085c5a7a42720d4441161b737e7827312b7b4837b0b1616a
       flags: 0
     RecentlyUsedSceneGuid-2:
@@ -16,10 +17,28 @@ EditorUserSettings:
       flags: 0
     RecentlyUsedSceneGuid-3:
       value: 500805555c040a035a595e2114760d44154e4f287b2c76662f7e1932b4e5646a
+=======
+      value: 52550053500d5e5a0e0c557141210d444016192b78782431797f4535e0b5363d
+      flags: 0
+    RecentlyUsedSceneGuid-2:
+      value: 5754005e53000a02590d082746735b44434e4979297c20347d784a67e3b2306e
+>>>>>>> origin/yamaguchi
+      flags: 0
+    RecentlyUsedSceneGuid-3:
+      value: 055404045c075b59080a0e771373094445151d2f292c22607a281866b1b8673b
       flags: 0
     RecentlyUsedSceneGuid-4:
+      value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
+      flags: 0
+<<<<<<< HEAD
+=======
+    RecentlyUsedSceneGuid-5:
+      value: 500805555c040a035a595e2114760d44154e4f287b2c76662f7e1932b4e5646a
+      flags: 0
+    RecentlyUsedSceneGuid-6:
       value: 02050c5253060f0b0b56587549260e44434e4f737e7b70602c7d1c65e1b83160
       flags: 0
+>>>>>>> origin/yamaguchi
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0
