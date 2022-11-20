@@ -14,10 +14,15 @@ public class RocketLauncher : MonoBehaviour
     [SerializeField]
     private GameObject firingPoint;
 
+    //ロケットランチャーの反動演出
+    Quaternion recoil;
+    Quaternion recoilback;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        recoil = Quaternion.AngleAxis(-10.0f, new Vector3(0.0f, 0.0f, 1.0f));
+        recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
     }
 
     // Update is called once per frame

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.10036396, g: 0.08729609, b: 0.17954928, a: 1}
+  m_IndirectSpecularColor: {r: 0.121235274, g: 0.10965318, b: 0.21248159, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2467,6 +2467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RocketLauncherFiringPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8635889465919813032, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: grenade
+      value: 
+      objectReference: {fileID: 5119787515121665675, guid: bdbadbf858f53d74cab67883852cd52f, type: 3}
     m_RemovedComponents:
     - {fileID: 6495265380238387200, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
