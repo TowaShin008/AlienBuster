@@ -111,13 +111,13 @@ public class StepEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "Grenade" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName == "EnemyBullet") { return; }
 
         if (gameObjectName == "Bullet")
         {
             hp--;
         }
-        else if (gameObjectName == "Grenade")
+        else if (gameObjectName == "RocketBumb")
         {
             hp -= 10;
         }

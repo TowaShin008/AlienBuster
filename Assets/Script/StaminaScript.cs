@@ -95,6 +95,6 @@ public class StaminaScript : MonoBehaviour
         }
 
 
-        Debug.Log(stamina);
+        //Debug.Log(stamina);
     }
 }

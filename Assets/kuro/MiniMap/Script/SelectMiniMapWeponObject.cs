@@ -17,21 +17,21 @@ public class SelectMiniMapWeponObject : MonoBehaviour
         {
             case MMMODEL.model:
                 GameObject.Find("MMNormalGun_Model").SetActive(true);
-                GameObject.Find("MMGrenadeLauncher_Model").SetActive(true);
+                GameObject.Find("MMRocketLauncher_Model").SetActive(true);
                 GameObject.Find("MMSniperRifle_Model").SetActive(true);
                 GameObject.Find("MMShotGun_Model").SetActive(true);
                 GameObject.Find("MMNormalGun_Box").SetActive(false);
-                GameObject.Find("MMGrenadeLauncher_Box").SetActive(false);
+                GameObject.Find("MMRocketLauncher_Box").SetActive(false);
                 GameObject.Find("MMSniperRifle_Box").SetActive(false);
                 GameObject.Find("MMShotGun_Box").SetActive(false);
                 break;
             case MMMODEL.box:
                 GameObject.Find("MMNormalGun_Model").SetActive(false);
-                GameObject.Find("MMGrenadeLauncher_Model").SetActive(false);
+                GameObject.Find("MMRocketLauncher_Model").SetActive(false);
                 GameObject.Find("MMSniperRifle_Model").SetActive(false);
                 GameObject.Find("MMShotGun_Model").SetActive(false);
                 GameObject.Find("MMNormalGun_Box").SetActive(true);
-                GameObject.Find("MMGrenadeLauncher_Box").SetActive(true);
+                GameObject.Find("MMRocketLauncher_Box").SetActive(true);
                 GameObject.Find("MMSniperRifle_Box").SetActive(true);
                 GameObject.Find("MMShotGun_Box").SetActive(true);
                 break;
