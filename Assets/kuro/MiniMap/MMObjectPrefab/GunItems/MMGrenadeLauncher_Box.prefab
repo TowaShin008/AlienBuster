@@ -8,12 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<<< HEAD:Assets/kuro/MiniMap/MMObjectPrefab/GunItems/MMGrenadeLauncher_Box.prefab
   - component: {fileID: 4487926025443070007}
   - component: {fileID: 4487926025443070009}
   - component: {fileID: 4487926025443070006}
   m_Layer: 3
   m_Name: MMGrenadeLauncher_Box
   m_TagString: Untagged
+========
+  - component: {fileID: 4043410356986854638}
+  - component: {fileID: 8746516877588524636}
+  - component: {fileID: 500066172466199284}
+  - component: {fileID: 4136901751689797318}
+  - component: {fileID: 1614495507017417214}
+  m_Layer: 0
+  m_Name: SniperBullet
+  m_TagString: Bullet
+>>>>>>>> origin/kuronote:Assets/Resources/kuro/SniperBullet.prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
