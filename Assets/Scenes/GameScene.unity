@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09314107, g: 0.08057887, b: 0.16863406, a: 1}
+  m_IndirectSpecularColor: {r: 0.09398117, g: 0.08144035, b: 0.16988584, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1059,6 +1059,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 989590779}
     m_Modifications:
+    - target: {fileID: 23566027506217441, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 531153169854434043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Name
+      value: RocketLauncherModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 531153169854434043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870558478728384577, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086493660501193768, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1342825758672310553, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Name
       value: RocketLauncherItem
@@ -1127,8 +1147,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2981631082252657133, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188414528681818478, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515387188237353257, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7227779372520732828, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7569418662802700573, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031310017791375032, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053294173400259766, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
