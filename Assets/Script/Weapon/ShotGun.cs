@@ -24,9 +24,16 @@ public class ShotGun : MonoBehaviour
     private float exitSpeed = 0.1f;
     [SerializeField]
     private float exitRotate = 360.0f;
+
+    //効果音
+    public AudioClip shotSound;
+    AudioSource audioSource;
+    public AudioClip bulletSound;
+
     void Start()
     {
-        
+        //音のコンポーネント取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +49,9 @@ public class ShotGun : MonoBehaviour
 	{
         if (shotDelayTime <= 0)
 		{
+            //銃の音
+            audioSource.PlayOneShot(shotSound);
+            audioSource.PlayOneShot(bulletSound);
             var bulletInstance = Instantiate(bullet, bulletExitPosition.position, arg_cameraRotation);
             var bulletRigit = bulletInstance.GetComponent<Rigidbody>();
             bulletRigit.AddForce(bulletExitPosition.forward * exitSpeed);

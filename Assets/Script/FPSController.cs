@@ -250,16 +250,19 @@ public class FPSController : MonoBehaviour
                 gunType = 4;
             }
         }
+    }
 
+	private void OnCollisionStay(Collision collision)
+	{
         if (stepTime == 0 && collision.gameObject.CompareTag("Field"))
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 100;
         }
     }
-    /// <summary>
-    /// カメラの移動処理
-    /// </summary>
-    private void MoveCameraProcessing()
+	/// <summary>
+	/// カメラの移動処理
+	/// </summary>
+	private void MoveCameraProcessing()
 	{
         //Y軸視点移動
         float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
