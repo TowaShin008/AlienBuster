@@ -24,7 +24,16 @@ public class NormalGunItem : MonoBehaviour
 		else
 		{
             normalGun.SetActive(true);
-		}
+
+            float yRot = 0.0f;
+
+            yRot += 2.0f;
+            if (yRot > 360.0f)
+            {
+                yRot = 0.0f;
+            }
+            normalGun.transform.rotation *= Quaternion.Euler(0, yRot, 0);
+        }
     }
 
 	private void OnCollisionEnter(Collision collision)

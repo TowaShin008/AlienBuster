@@ -17,14 +17,11 @@ public class FPSController : MonoBehaviour
     //ショットガン
     [SerializeField]
     private GameObject shotGun;
+
     [SerializeField]
     private GameObject normalGunPosition;
     [SerializeField]
     private GameObject holdGunPosition;
-    [SerializeField]
-    private PhysicMaterial slip;
-    [SerializeField]
-    private PhysicMaterial nonSlip;
 
     private BoxCollider collider;
 
@@ -65,7 +62,7 @@ public class FPSController : MonoBehaviour
     float shakingSpeed = shakingNormalSpeed;
 
     int gunType = 1;
-
+    //スナイパーライフルのUI
     public Image sniperEdge;
     public Image sniperGaugeEdge;
     public Image sniperGauge;
@@ -73,8 +70,6 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //フレームレートの固定
-        Application.targetFrameRate = 60;
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
         deadFlag = false;
@@ -85,6 +80,7 @@ public class FPSController : MonoBehaviour
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
         Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
+
         //残機
         remain = 1;
         hp = maxHP;
@@ -92,7 +88,7 @@ public class FPSController : MonoBehaviour
         grenadeLauncher.SetActive(false);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
-
+        //スナイパーライフルのUI
         sniperEdge.enabled = false;
         sniperGaugeEdge.enabled = false;
         sniperGauge.enabled = false;
@@ -136,39 +132,6 @@ public class FPSController : MonoBehaviour
             Cursor.visible = true;
         }
 
-        if(Input.GetKeyDown(KeyCode.F1))
-		{
-            normalGun.SetActive(true);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(false);
-            gunType = 1;
-		}
-        else if(Input.GetKeyDown(KeyCode.F2))
-		{
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(true);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(false);
-            gunType = 2;
-		}
-        else if (Input.GetKeyDown(KeyCode.F3))
-        {
-            gunType = 3;
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(true);
-            shotGun.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            gunType = 4;
-            normalGun.SetActive(false);
-            grenadeLauncher.SetActive(false);
-            sniperRifle.SetActive(false);
-            shotGun.SetActive(true);
-        }
-
         Debug.Log(stamina);
     }
     /// <summary>
@@ -176,9 +139,9 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void MoveProcessing()
 	{
+        var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            var velocity = new Vector3(0, 0, 0);
             //移動処理
             if (Input.GetKey(KeyCode.W))
             {
@@ -215,16 +178,10 @@ public class FPSController : MonoBehaviour
 			{//呼吸演出処理
 				BreathProcessing();
 			}
-
-			collider.material = slip;
         }
-        if (stepTime == 0)
-        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
-			collider.material = nonSlip;
-		}
-		else
-		{
-			stepTime--;
+        if (stepTime > 0)
+        {//ステップをしていないか、ステップ猶予時間でなければ抗力を強くする
+            rigidbody.drag = 0;
 		}
     }
     /// <summary>
@@ -268,7 +225,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 gunType = 1;
             }
-            else if (collision.gameObject.name == "GrenadeLauncherItem")
+            else if (collision.gameObject.name == "RocketLauncherItem")
             {
                 normalGun.SetActive(false);
                 grenadeLauncher.SetActive(true);
@@ -293,6 +250,11 @@ public class FPSController : MonoBehaviour
                 gunType = 4;
             }
         }
+
+        if (stepTime == 0 && collision.gameObject.CompareTag("Field"))
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+            rigidbody.drag = 100;
+        }
     }
     /// <summary>
     /// カメラの移動処理
@@ -306,7 +268,10 @@ public class FPSController : MonoBehaviour
         float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
-        transform.localRotation = characterRot;
+        if (deadFlag == false)
+		{
+            transform.localRotation = characterRot;
+        }
 
         //Updateの中で作成した関数を呼ぶ
         cameraRot = ClampRotation(cameraRot);
@@ -349,6 +314,7 @@ public class FPSController : MonoBehaviour
     /// </summary>
     public void JumpProcessing()
 	{
+        rigidbody.drag = 0;
         rigidbody.AddForce(new Vector3(0.0f, 10.0f, 0.0f));
 	}
     /// <summary>
@@ -440,6 +406,7 @@ public class FPSController : MonoBehaviour
         if (remain <= 0)
         {
             deadFlag = true;
+            rigidbody.drag = 0;
             FadeManager.Instance.LoadScene("EndScene", 0.5f);
         }
     }
@@ -454,7 +421,7 @@ public class FPSController : MonoBehaviour
         }
         else if (gunType == 2)
         {
-            grenadeLauncher.GetComponent<GrenadeLauncher>().Shot(cam.transform.rotation);
+            grenadeLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation);
         }
         else if (gunType == 3)
         {

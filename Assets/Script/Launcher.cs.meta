@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/EaseValue.cs.meta
+guid: 5576d35a03b7570408d8724b795b17a1
+========
 guid: 8ade6fc846da0984db38231b4218f349
+>>>>>>>> origin/Hirazakura:Assets/Script/Launcher.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
