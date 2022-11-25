@@ -214,5 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemys:
   - {fileID: 0}
-  spawnNextTime: 10
-  maxEnemyCount: 5
+  spawnNextTime: []
+  maxEnemyCount: 
+  spawnPoint: {fileID: 0}
+  waveManager: {fileID: 0}

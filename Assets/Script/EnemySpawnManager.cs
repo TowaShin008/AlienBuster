@@ -27,7 +27,14 @@ public class EnemySpawnManager : MonoBehaviour
     //現在のwaveをwaveManegerから取得
     [SerializeField] WaveManager waveManager;
     //現在のwaveを保存するための変数
-    int nowWave; 
+    int nowWave;
+
+    [SerializeField] GameObject barrier;
+    //バリア発生しているか
+    bool barrierFlag;
+    //敵がすべて出てからバリアが発生するまでの時間
+    [SerializeField] int barrierCreateMaxTime = 60;
+    private int barrierCreateTime;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +61,9 @@ public class EnemySpawnManager : MonoBehaviour
         {
             nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
         }
+
+        barrierFlag = true;
+        barrierCreateTime = barrierCreateMaxTime;
     }
    
 
@@ -87,10 +97,33 @@ public class EnemySpawnManager : MonoBehaviour
             enemyCount = 0;
         }
 
+        if (barrierFlag == true)
+        {
+            barrier.SetActive(true);
+        }
+        else
+        {
+            barrier.SetActive(false);
+        }
+
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
             waveManager.WaveChangeFlagOn();
+
+            if (barrierFlag == false)
+            {
+                if (barrierCreateTime > 0)
+                {
+                    barrierCreateTime--;
+                }
+                else
+                {
+                    barrierCreateTime = barrierCreateMaxTime;
+                    barrierFlag = true;
+                }
+            }               
+         
             return;
         }
         //　経過時間を足す
@@ -101,6 +134,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             elapsedTime = 0.0f;
 
+            barrierFlag = false;
             SpawnEnemy();
         }
        
