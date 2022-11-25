@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-
     //出現させる敵のオブジェクト
     [SerializeField] GameObject[] enemys;
     //waveごとの次に敵が出現するまでの時間
