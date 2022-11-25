@@ -953,26 +953,6 @@ PrefabInstance:
       propertyPath: enemys.Array.data[2]
       value: 
       objectReference: {fileID: 6074480666451648586}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: maxEnemyCount.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: maxEnemyCount.Array.data[1]
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: maxEnemyCount.Array.data[2]
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: maxEnemyCount.Array.data[3]
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: maxEnemyCount.Array.data[4]
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 7249754901405583773, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Name
       value: ufo2
