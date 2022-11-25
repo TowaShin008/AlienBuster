@@ -31,6 +31,20 @@ public class EnemySpawnManager : MonoBehaviour
 
     bool moveFlag = false;
 
+    [SerializeField] GameObject barrier;
+    //バリア発生しているか
+    bool barrierFlag;
+    //敵がすべて出てからバリアが発生するまでの時間
+    [SerializeField] int barrierCreateMaxTime = 60;
+    private int barrierCreateTime;
+
+    [SerializeField] private int hp = 30;
+    private bool deadFlag;
+
+    //爆発エフェクト
+    [SerializeField] GameObject explosion;
+    [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +70,11 @@ public class EnemySpawnManager : MonoBehaviour
         {
             nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
         }
+
+        barrierFlag = true;
+        barrierCreateTime = barrierCreateMaxTime;
+
+        deadFlag = false;
 
         moveFlag = false;
     }
@@ -87,14 +106,57 @@ public class EnemySpawnManager : MonoBehaviour
                 nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
             }
 
+            barrierFlag = true;
+            barrierCreateTime = barrierCreateMaxTime;
+
+            deadFlag = false;
+
             enemyCount = 0;
         }
 
+        if (hp <= 0)
+        {
+            deadFlag = true;
+        }
+
+        if (deadFlag)
+        {
+            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            newExplosion.transform.localScale = explosionSize;
+            Destroy(newExplosion, 1.0f);
+            Destroy(gameObject);
+        }
+
+
+        if (barrierFlag == true)
+        {
+            barrier.SetActive(true);
+        }
+        else
+        {
+            barrier.SetActive(false);
+        }
+
+       
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
 			waveManager.WaveChangeFlagOn();
 			moveFlag = false;
+
+            if (barrierFlag == false)
+            {
+                if (barrierCreateTime > 0)
+                {
+                    barrierCreateTime--;
+                }
+                else
+                {
+                    barrierCreateTime = barrierCreateMaxTime;
+                    barrierFlag = true;
+                }
+            }
+
             return;
         }
 
@@ -125,6 +187,11 @@ public class EnemySpawnManager : MonoBehaviour
         enemyCount++;
         enemyAllCount++;
         elapsedTime = 0.0f;
+    }
+
+    public void Damage(int damegeValue)
+    {
+        hp -= damegeValue;
     }
 
     public void SetMoveFlag(bool arg_moveFlag)
