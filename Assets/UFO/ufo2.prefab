@@ -175,7 +175,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8059082684151698215}
-  - component: {fileID: 7520207075874469065}
   - component: {fileID: 720504410}
   m_Layer: 0
   m_Name: ufo2
@@ -206,19 +205,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7520207075874469065
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7249754901405583773}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.9, y: 1, z: 3.9}
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &720504410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +232,9 @@ MonoBehaviour:
   waveManager: {fileID: 0}
   barrier: {fileID: 7520207075416178929}
   barrierCreateMaxTime: 60
+  hp: 5
+  explosion: {fileID: 0}
+  explosionSize: {x: 1, y: 1, z: 1}
 --- !u!1 &7520207075118015177
 GameObject:
   m_ObjectHideFlags: 0

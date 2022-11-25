@@ -36,6 +36,13 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] int barrierCreateMaxTime = 60;
     private int barrierCreateTime;
 
+    [SerializeField] private int hp = 30;
+    private bool deadFlag;
+
+    //爆発エフェクト
+    [SerializeField] GameObject explosion;
+    [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,8 +71,10 @@ public class EnemySpawnManager : MonoBehaviour
 
         barrierFlag = true;
         barrierCreateTime = barrierCreateMaxTime;
+
+        deadFlag = false;
     }
-   
+
 
     // Update is called once per frame
     void Update()
@@ -137,7 +146,19 @@ public class EnemySpawnManager : MonoBehaviour
             barrierFlag = false;
             SpawnEnemy();
         }
-       
+
+        if (hp <= 0)
+        {
+            deadFlag = true;
+        }
+
+        if (deadFlag)
+        {
+            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            newExplosion.transform.localScale = explosionSize;
+            Destroy(newExplosion, 1.0f);
+            Destroy(gameObject);
+        }
     }
 
     //　敵出現
@@ -153,5 +174,10 @@ public class EnemySpawnManager : MonoBehaviour
         enemyCount++;
         enemyAllCount++;
         elapsedTime = 0.0f;
+    }
+
+    public void Damage(int damegeValue)
+    {
+        hp -= damegeValue;
     }
 }
