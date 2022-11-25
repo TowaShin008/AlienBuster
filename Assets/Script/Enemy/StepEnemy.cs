@@ -16,8 +16,7 @@ public class StepEnemy : MonoBehaviour
 
     [SerializeField] private float speed = 0.1f;
 
-    [SerializeField] private GameObject gunModel;
-    [SerializeField] private GameObject gunPosition;
+    [SerializeField] private GameObject gun;
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 60.0f;
@@ -49,7 +48,7 @@ public class StepEnemy : MonoBehaviour
     void Update()
     {
         //弾の発射処理
-        gunModel.transform.position = gunPosition.transform.position;
+        gun.transform.position = gun.transform.position;
         if (shotDelayTime > 0)
         {
             shotDelayTime--;
@@ -130,7 +129,7 @@ public class StepEnemy : MonoBehaviour
         // 弾を発射する場所を取得
         var bulletPosition = firingPoint.transform.position;
         // 上で取得した場所に、"bullet"のPrefabを出現させる     
-        GameObject newBall = Instantiate(bullet, bulletPosition, gunModel.transform.rotation);
+        GameObject newBall = Instantiate(bullet, bulletPosition, gun.transform.rotation);
         // 出現させたボールのforward(z軸方向)
         var direction = newBall.transform.forward;
         // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える

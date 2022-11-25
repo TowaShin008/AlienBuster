@@ -29,19 +29,7 @@ public class EnemySpawnManager : MonoBehaviour
     //現在のwaveを保存するための変数
     int nowWave;
 
-    [SerializeField] GameObject barrier;
-    //バリア発生しているか
-    bool barrierFlag;
-    //敵がすべて出てからバリアが発生するまでの時間
-    [SerializeField] int barrierCreateMaxTime = 60;
-    private int barrierCreateTime;
-
-    [SerializeField] private int hp = 30;
-    private bool deadFlag;
-
-    //爆発エフェクト
-    [SerializeField] GameObject explosion;
-    [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
+    bool moveFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -69,17 +57,13 @@ public class EnemySpawnManager : MonoBehaviour
             nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
         }
 
-        barrierFlag = true;
-        barrierCreateTime = barrierCreateMaxTime;
-
-        deadFlag = false;
+        moveFlag = false;
     }
-
+   
 
     // Update is called once per frame
     void Update()
     {
-
         //wave変更時の処理
         if (nowWave != WaveManager.nowWave)
         {
@@ -106,58 +90,25 @@ public class EnemySpawnManager : MonoBehaviour
             enemyCount = 0;
         }
 
-        if (barrierFlag == true)
-        {
-            barrier.SetActive(true);
-        }
-        else
-        {
-            barrier.SetActive(false);
-        }
-
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
-            waveManager.WaveChangeFlagOn();
-
-            if (barrierFlag == false)
-            {
-                if (barrierCreateTime > 0)
-                {
-                    barrierCreateTime--;
-                }
-                else
-                {
-                    barrierCreateTime = barrierCreateMaxTime;
-                    barrierFlag = true;
-                }
-            }               
-         
+			waveManager.WaveChangeFlagOn();
+			moveFlag = false;
             return;
         }
-        //　経過時間を足す
-        elapsedTime += Time.deltaTime;
+
+        if(moveFlag)
+        {//　経過時間を足す
+            elapsedTime += Time.deltaTime;
+        }
 
         //　経過時間が経ったら
         if (elapsedTime > nowSpawnNextTime)
         {
             elapsedTime = 0.0f;
 
-            barrierFlag = false;
             SpawnEnemy();
-        }
-
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-
-        if (deadFlag)
-        {
-            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            newExplosion.transform.localScale = explosionSize;
-            Destroy(newExplosion, 1.0f);
-            Destroy(gameObject);
         }
     }
 
@@ -176,8 +127,8 @@ public class EnemySpawnManager : MonoBehaviour
         elapsedTime = 0.0f;
     }
 
-    public void Damage(int damegeValue)
-    {
-        hp -= damegeValue;
-    }
+    public void SetMoveFlag(bool arg_moveFlag)
+	{
+        moveFlag = arg_moveFlag;
+	}
 }
