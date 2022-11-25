@@ -27,7 +27,9 @@ public class EnemySpawnManager : MonoBehaviour
     //現在のwaveをwaveManegerから取得
     [SerializeField] WaveManager waveManager;
     //現在のwaveを保存するための変数
-    int nowWave; 
+    int nowWave;
+
+    bool moveFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -54,13 +56,14 @@ public class EnemySpawnManager : MonoBehaviour
         {
             nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
         }
+
+        moveFlag = false;
     }
    
 
     // Update is called once per frame
     void Update()
     {
-
         //wave変更時の処理
         if (nowWave != WaveManager.nowWave)
         {
@@ -90,11 +93,15 @@ public class EnemySpawnManager : MonoBehaviour
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
-            waveManager.WaveChangeFlagOn();
+			waveManager.WaveChangeFlagOn();
+			moveFlag = false;
             return;
         }
-        //　経過時間を足す
-        elapsedTime += Time.deltaTime;
+
+        if(moveFlag)
+        {//　経過時間を足す
+            elapsedTime += Time.deltaTime;
+        }
 
         //　経過時間が経ったら
         if (elapsedTime > nowSpawnNextTime)
@@ -103,7 +110,6 @@ public class EnemySpawnManager : MonoBehaviour
 
             SpawnEnemy();
         }
-       
     }
 
     //　敵出現
@@ -120,4 +126,9 @@ public class EnemySpawnManager : MonoBehaviour
         enemyAllCount++;
         elapsedTime = 0.0f;
     }
+
+    public void SetMoveFlag(bool arg_moveFlag)
+	{
+        moveFlag = arg_moveFlag;
+	}
 }

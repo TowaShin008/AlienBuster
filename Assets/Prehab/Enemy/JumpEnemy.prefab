@@ -289,8 +289,8 @@ Transform:
   m_GameObject: {fileID: 8900845156285053423}
   m_LocalRotation: {x: -0, y: -0.98551613, z: -0, w: 0.16958168}
   m_LocalPosition: {x: 13, y: 14.8, z: 43.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8900845155338656251}
   - {fileID: 7962838647201329361}
@@ -375,8 +375,7 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   hp: 5
   speed: 0.1
-  gunModel: {fileID: 8900845155338656252}
-  gunPosition: {fileID: 8900845155338656252}
+  gun: {fileID: 8900845155338656252}
   firingPoint: {fileID: 8900845155962804919}
   bullet: {fileID: 224529426718124108, guid: 455e513b902d5a145806a856ec6eaffe, type: 3}
   bulletSpeed: 30

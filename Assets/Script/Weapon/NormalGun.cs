@@ -6,7 +6,7 @@ public class NormalGun : MonoBehaviour
 {
     [SerializeField]
     private GameObject bullet;
-    private float bulletSpeed = 30.0f;
+    public float bulletSpeed = 30.0f;
     const int shotDelayMaxTime = 5;
     private int shotDelayTime = 0;
     [SerializeField]
