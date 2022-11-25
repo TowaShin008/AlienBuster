@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5189515628363593900}
   - component: {fileID: 4236318642791158383}
   - component: {fileID: 1960085031354623402}
+  - component: {fileID: 1845276100}
   m_Layer: 0
   m_Name: UFO_body
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1845276100
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709790548752920251}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8683626548517001181, guid: 95d49f889d6b4f040aa3899b02701c65, type: 3}
 --- !u!1 &2350422603213256544
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +109,9 @@ GameObject:
   - component: {fileID: 6867661236036323515}
   - component: {fileID: 4731743462706468341}
   - component: {fileID: 3313217915705008546}
+  - component: {fileID: 2146220269}
+  - component: {fileID: 2146220270}
+  - component: {fileID: 2146220268}
   m_Layer: 0
   m_Name: UFO_week
   m_TagString: Untagged
@@ -166,6 +184,46 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2146220269
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350422603213256544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7404372547226736154, guid: 95d49f889d6b4f040aa3899b02701c65, type: 3}
+--- !u!65 &2146220270
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350422603213256544}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3927193, y: 1.1257542, z: 3.2915413}
+  m_Center: {x: 0.041240312, y: 1.787123, z: -0.019830704}
+--- !u!114 &2146220268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2350422603213256544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89048eb15efcdd84a84e043607e1dcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawner: {fileID: 720504410}
 --- !u!1 &7249754901405583773
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,9 +290,9 @@ MonoBehaviour:
   waveManager: {fileID: 0}
   barrier: {fileID: 7520207075416178929}
   barrierCreateMaxTime: 60
-  hp: 5
-  explosion: {fileID: 0}
-  explosionSize: {x: 1, y: 1, z: 1}
+  hp: 60
+  explosion: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
+  explosionSize: {x: 10, y: 10, z: 10}
 --- !u!1 &7520207075118015177
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +432,7 @@ GameObject:
   - component: {fileID: 1694906272825817800}
   - component: {fileID: 7471171718096606793}
   - component: {fileID: 6627941755185454031}
+  - component: {fileID: 478528257}
   m_Layer: 0
   m_Name: UFO_cockpit
   m_TagString: Untagged
@@ -446,6 +505,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &478528257
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594630976989583841}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8269849218835344742, guid: 95d49f889d6b4f040aa3899b02701c65, type: 3}
 --- !u!1 &8887073120262557554
 GameObject:
   m_ObjectHideFlags: 0
