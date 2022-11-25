@@ -14,7 +14,7 @@ public class Enemy_Jump: MonoBehaviour
 
     [SerializeField] private int hp = 5;
 
-    [SerializeField] private float speed = 0.05f;
+    //[SerializeField] private float speed = 0.05f;
 
     [SerializeField] private GameObject gunModel;
     [SerializeField] private GameObject gunPosition;
@@ -77,9 +77,7 @@ public class Enemy_Jump: MonoBehaviour
         }
 
         transform.LookAt(playerObject.transform);
-        transform.position += transform.forward * speed;
-
-        //onTheGroundFlog = CheckGroundStatus();
+        
         // ジャンプの開始判定
         if (onTheGroundFlog == true && jumpDelayTime <= 0)
         {
