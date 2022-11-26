@@ -61,7 +61,7 @@ public class RocketLauncher : MonoBehaviour
             // 出現させたボールの名前を"bullet"に変更
             newBall.name = rocketBomb.name;
             // 出現させたボールを2秒後に消す
-            Destroy(newBall, 1.5f);
+            //Destroy(newBall, 1.5f);
 
             shotDelayTime = shotDelayMaxTime;
         }
