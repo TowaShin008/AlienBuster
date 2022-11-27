@@ -48,6 +48,8 @@ public class JumpEnemy : MonoBehaviour
 
     int randomValue = 0;
 
+    public GameObject ufo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +110,7 @@ public class JumpEnemy : MonoBehaviour
         if (hp <= 0)
         {
             deadFlag = true;
+            ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
         }
 
         if (deadFlag)

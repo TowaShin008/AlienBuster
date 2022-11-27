@@ -35,6 +35,8 @@ public class StepEnemy : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] private Vector3 explosionSize = new Vector3(1.0f, 1.0f, 1.0f);
 
+    public GameObject ufo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +71,7 @@ public class StepEnemy : MonoBehaviour
         if (hp <= 0)
         {
             deadFlag = true;
+            ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
         }
 
         if (deadFlag)

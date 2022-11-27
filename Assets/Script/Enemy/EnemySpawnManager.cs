@@ -23,12 +23,17 @@ public class EnemySpawnManager : MonoBehaviour
     //次の敵を出現させるまでの待ち時間
     private float elapsedTime;
 
-    //現在のwaveをwaveManegerから取得
-    [SerializeField] WaveManager waveManager;
     //現在のwaveを保存するための変数
     int nowWave;
 
     bool moveFlag = false;
+
+    [SerializeField] GameObject barrier;
+    //バリア発生しているか
+    bool barrierFlag;
+    //敵がすべて出てからバリアが発生するまでの時間
+    [SerializeField] int barrierCreateMaxTime = 60;
+    private int barrierCreateTime;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +60,9 @@ public class EnemySpawnManager : MonoBehaviour
         {
             nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
         }
+
+        barrierFlag = true;
+        barrierCreateTime = barrierCreateMaxTime;
 
         moveFlag = false;
     }
@@ -86,18 +94,49 @@ public class EnemySpawnManager : MonoBehaviour
                 nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
             }
 
+            barrierFlag = true;
+            barrierCreateTime = barrierCreateMaxTime;
+
+            //deadFlag = false;
+
             enemyCount = 0;
+        }
+
+
+
+        //バリアの切り替え
+        if (barrierFlag == true)
+        {
+            barrier.SetActive(true);
+        }
+        else
+        {
+            barrier.SetActive(false);
         }
 
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
-			waveManager.WaveChangeFlagOn();
+			//waveManager.WaveChangeFlagOn();
 			moveFlag = false;
+
+            if (barrierFlag == false)
+            {
+                if (barrierCreateTime > 0)
+                {
+                    barrierCreateTime--;
+                }
+                else
+                {
+                    barrierCreateTime = barrierCreateMaxTime;
+                    barrierFlag = true;
+                }
+            }
+
             return;
         }
 
-        if(moveFlag)
+        if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
         {//　経過時間を足す
             elapsedTime += Time.deltaTime;
         }
@@ -107,11 +146,15 @@ public class EnemySpawnManager : MonoBehaviour
         {
             elapsedTime = 0.0f;
 
+            barrierFlag = false;
+            //敵の出現処理
             SpawnEnemy();
         }
     }
 
-    //　敵出現
+    /// <summary>
+    /// 敵の出現処理
+    /// </summary>
     void SpawnEnemy()
     {
         //出現させる敵をランダムに選ぶ
@@ -126,8 +169,14 @@ public class EnemySpawnManager : MonoBehaviour
         elapsedTime = 0.0f;
     }
 
+
     public void SetMoveFlag(bool arg_moveFlag)
 	{
         moveFlag = arg_moveFlag;
+	}
+
+    public void DecrimentEnemyCount()
+	{
+        enemyCount--;
 	}
 }
