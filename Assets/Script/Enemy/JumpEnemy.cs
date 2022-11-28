@@ -9,7 +9,6 @@ public class JumpEnemy : MonoBehaviour
 
     Rigidbody rigidbody;
 
-    private bool stopFlag;
     private bool deadFlag;
 
     [SerializeField] private int hp = 5;
@@ -53,7 +52,6 @@ public class JumpEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stopFlag = false;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 0;
