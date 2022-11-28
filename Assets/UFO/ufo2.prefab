@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -597521319923820054, guid: 95d49f889d6b4f040aa3899b02701c65, type: 3}
+  - {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -162,7 +162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8078617138743364992, guid: 95d49f889d6b4f040aa3899b02701c65, type: 3}
+  - {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 7686455342865905608}
   m_Layer: 0
   m_Name: ufo2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278,14 +278,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemys:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   spawnNextTime:
-  - 10
-  - 5
-  - 5
-  - 4
-  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   maxEnemyCount: 05000000080000000a0000000c0000000f000000
   spawnPoint: {fileID: 7520207075118015177}
   barrier: {fileID: 7520207075416178929}
@@ -305,6 +303,7 @@ MonoBehaviour:
   waveManager: {fileID: 0}
   mesh: {fileID: 1960085031354623402}
   mesh_2: {fileID: 6627941755185454031}
+  mesh_3: {fileID: 3313217915705008546}
   hp: 30
   explosion: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   explosionSize: {x: 10, y: 10, z: 10}
@@ -401,7 +400,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8529481535521766085, guid: 95d49f889d6b4f040aa3899b02701c65, type: 3}
+  - {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -648,6 +647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrier
       objectReference: {fileID: 0}
+    - target: {fileID: 7669751262219025435, guid: 3467433969d56ce49aec9124c5002591, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f0d91bd2d94dcea4aa7e83711bdfb902, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3467433969d56ce49aec9124c5002591, type: 3}
 --- !u!4 &7520207075416178925 stripped

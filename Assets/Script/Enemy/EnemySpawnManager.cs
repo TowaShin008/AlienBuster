@@ -120,7 +120,7 @@ public class EnemySpawnManager : MonoBehaviour
 			//waveManager.WaveChangeFlagOn();
 			moveFlag = false;
 
-            if (barrierFlag == false)
+            if (barrierFlag == false && gameObject.GetComponent<UFO>().GetEntryFlag() == false)
             {
                 if (barrierCreateTime > 0)
                 {
