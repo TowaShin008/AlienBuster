@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-
     //出現させる敵のオブジェクト
     [SerializeField] GameObject[] enemys;
     //waveごとの次に敵が出現するまでの時間
@@ -24,8 +23,6 @@ public class EnemySpawnManager : MonoBehaviour
     //次の敵を出現させるまでの待ち時間
     private float elapsedTime;
 
-    //現在のwaveをwaveManegerから取得
-    [SerializeField] WaveManager waveManager;
     //現在のwaveを保存するための変数
     int nowWave;
 
@@ -37,13 +34,6 @@ public class EnemySpawnManager : MonoBehaviour
     //敵がすべて出てからバリアが発生するまでの時間
     [SerializeField] int barrierCreateMaxTime = 60;
     private int barrierCreateTime;
-
-    [SerializeField] private int hp = 30;
-    private bool deadFlag;
-
-    //爆発エフェクト
-    [SerializeField] GameObject explosion;
-    [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -73,8 +63,6 @@ public class EnemySpawnManager : MonoBehaviour
 
         barrierFlag = true;
         barrierCreateTime = barrierCreateMaxTime;
-
-        deadFlag = false;
 
         moveFlag = false;
     }
@@ -109,25 +97,14 @@ public class EnemySpawnManager : MonoBehaviour
             barrierFlag = true;
             barrierCreateTime = barrierCreateMaxTime;
 
-            deadFlag = false;
+            //deadFlag = false;
 
             enemyCount = 0;
         }
 
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-
-        if (deadFlag)
-        {
-            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            newExplosion.transform.localScale = explosionSize;
-            Destroy(newExplosion, 1.0f);
-            Destroy(gameObject);
-        }
 
 
+        //バリアの切り替え
         if (barrierFlag == true)
         {
             barrier.SetActive(true);
@@ -137,11 +114,10 @@ public class EnemySpawnManager : MonoBehaviour
             barrier.SetActive(false);
         }
 
-       
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
-			waveManager.WaveChangeFlagOn();
+			//waveManager.WaveChangeFlagOn();
 			moveFlag = false;
 
             if (barrierFlag == false)
@@ -160,7 +136,7 @@ public class EnemySpawnManager : MonoBehaviour
             return;
         }
 
-        if(moveFlag)
+        if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
         {//　経過時間を足す
             elapsedTime += Time.deltaTime;
         }
@@ -170,11 +146,15 @@ public class EnemySpawnManager : MonoBehaviour
         {
             elapsedTime = 0.0f;
 
+            barrierFlag = false;
+            //敵の出現処理
             SpawnEnemy();
         }
     }
 
-    //　敵出現
+    /// <summary>
+    /// 敵の出現処理
+    /// </summary>
     void SpawnEnemy()
     {
         //出現させる敵をランダムに選ぶ
@@ -189,13 +169,14 @@ public class EnemySpawnManager : MonoBehaviour
         elapsedTime = 0.0f;
     }
 
-    public void Damage(int damegeValue)
-    {
-        hp -= damegeValue;
-    }
 
     public void SetMoveFlag(bool arg_moveFlag)
 	{
         moveFlag = arg_moveFlag;
+	}
+
+    public void DecrimentEnemyCount()
+	{
+        enemyCount--;
 	}
 }

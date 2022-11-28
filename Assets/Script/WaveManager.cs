@@ -7,6 +7,8 @@ public class WaveManager : MonoBehaviour
     private GameObject[] enemyBox;
     public GameObject wave_object = null;
     public GameObject ufo;
+    public GameObject ufo_2;
+    public GameObject ufo_3;
     public static int nowWave = 1;
     bool nextWaveCheck = false;
     int saveWave = 0;
@@ -24,6 +26,8 @@ public class WaveManager : MonoBehaviour
         }
 
         ufo.GetComponent<UFO>().Initialize();
+        ufo_2.SetActive(false);
+        ufo_3.SetActive(false);
     }
  
 
@@ -47,6 +51,15 @@ public class WaveManager : MonoBehaviour
             {
                 ufo.GetComponent<UFO>().Initialize();
                 nowWave++;
+
+                if(nowWave>=2)
+				{
+                    ufo_2.GetComponent<UFO>().Initialize();
+				}
+                if (nowWave >= 3)
+                {
+                    ufo_3.GetComponent<UFO>().Initialize();
+                }
                 nextWaveCheck = false;
             }
         }

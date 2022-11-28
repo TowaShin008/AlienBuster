@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
 
     Rigidbody rigidbody;
 
-    private bool stopFlag;
     private bool deadFlag;
 
     [SerializeField] private int hp = 5;
@@ -29,10 +28,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] private Vector3 explosionSize = new Vector3(1.0f, 1.0f, 1.0f);
 
+    public GameObject ufo;
+
     // Start is called before the first frame update
     void Start()
     {
-        stopFlag = false;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 50;
@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
         if (hp <= 0)
         {
             deadFlag = true;
+            ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
         }
 
         if (deadFlag)

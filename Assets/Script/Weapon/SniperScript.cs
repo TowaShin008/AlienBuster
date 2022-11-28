@@ -25,10 +25,16 @@ public class SniperScript : MonoBehaviour
     public Image sniperGauge;
     Vector3 defScale;
 
+    //効果音
+    public AudioClip shotSound;
+    public AudioClip bulletSound;
+    AudioSource audioSource;
+
     private float bulletSpeed = 60.0f;
     void Start()
     {
-
+        //音のコンポーネント取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -95,6 +101,10 @@ public class SniperScript : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {//弾の発射処理
+                //銃の音
+                audioSource.PlayOneShot(shotSound);
+                //薬莢の落ちる音
+                audioSource.PlayOneShot(bulletSound);
                 // 弾を発射する場所を取得
                 var bulletPosition = firingPoint.transform.position;
                 // 上で取得した場所に、"bullet"のPrefabを出現させる

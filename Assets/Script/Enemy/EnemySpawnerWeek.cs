@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnerWeek : MonoBehaviour
 {
-    [SerializeField] EnemySpawnManager Spawner;
-
+    [SerializeField] public GameObject ufo;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +24,11 @@ public class EnemySpawnerWeek : MonoBehaviour
 
         if (gameObjectName == "Bullet")
         {
-            Spawner.Damage(1);
+            ufo.GetComponent<UFO>().Damage(1);
         }
         else if (gameObjectName == "RocketBumb")
         {
-            Spawner.Damage(10);
+            ufo.GetComponent<UFO>().Damage(10);
         }
     }
 }

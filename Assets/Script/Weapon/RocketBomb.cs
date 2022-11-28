@@ -6,28 +6,50 @@ public class RocketBomb : MonoBehaviour
 {
     //爆発エフェクト
     [SerializeField] GameObject explosion;
-    // Start is called before the first frame update
-    void Start()
-    {
 
+	public AudioClip explosionSound;
+    private AudioSource audioSource;
+
+    private bool isDeadFlag = false;
+	// Start is called before the first frame update
+	void Start()
+    {
+        isDeadFlag = false;
+        audioSource = GetComponent<AudioSource>();
+        Invoke("ExplodeProcessing", 2.0f); // グレネードを発射してから1.5秒後に爆発させる
     }
     // Update is called once per frame
     void Update()
     {
-
+        if(isDeadFlag)
+		{
+            if (audioSource.isPlaying == false)
+			{
+                Destroy(gameObject);
+			}
+		}
     }
     private void OnDestroy()
     {
         //Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0)); // ★追加
-        GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-        Destroy(newExplosion, 1.0f);
-        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Enemy") { return; }
+        if (collision.gameObject.tag != "Enemy" || isDeadFlag) { return; }
 
-        Destroy(this);
+        ExplodeProcessing();
+    }
+
+    private void ExplodeProcessing()
+	{
+		if (isDeadFlag) { return; }
+        //爆破演出
+        GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(newExplosion, 1.0f);
+
+        audioSource.PlayOneShot(explosionSound);
+
+        isDeadFlag = true;
     }
 }
