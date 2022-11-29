@@ -26,6 +26,8 @@ public class WaveManager : MonoBehaviour
         }
 
         ufo.GetComponent<UFO>().Initialize();
+        ufo_2.SetActive(false);
+        ufo_3.SetActive(false);
     }
  
 
