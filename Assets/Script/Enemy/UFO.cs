@@ -20,10 +20,20 @@ public class UFO : MonoBehaviour
     [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
 
     private bool deadFlag;
+
+    [SerializeField] GameObject barrier;
+    //バリア発生しているか
+    bool barrierFlag;
+    //敵がすべて出てからバリアが発生するまでの時間
+    [SerializeField] int barrierCreateMaxTime = 60;
+    private int barrierCreateTime;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(false);
+
+        barrierFlag = true;
+        barrierCreateTime = barrierCreateMaxTime;
     }
 
     // Update is called once per frame
@@ -39,6 +49,47 @@ public class UFO : MonoBehaviour
         if (hp <= 0)
         {
             deadFlag = true;
+        }
+
+        //バリアの切り替え
+        if (barrierFlag == true)
+        {
+            barrier.SetActive(true);
+        }
+        else
+        {
+            barrier.SetActive(false);
+        }
+
+        if(gameObject.GetComponent<EnemySpawnManager>().ChangeNextWave())
+		{
+            barrierFlag = true;
+            barrierCreateTime = barrierCreateMaxTime;
+        }
+
+        if(gameObject.GetComponent<EnemySpawnManager>().StopProcessing())
+		{
+            if (barrierFlag == false)
+            {
+                if (barrierCreateTime > 0)
+                {
+                    barrierCreateTime--;
+                }
+                else
+                {
+                    barrierCreateTime = barrierCreateMaxTime;
+                    barrierFlag = true;
+                }
+            }
+        }
+        else
+		{
+            gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
+        }
+
+        if(gameObject.GetComponent<EnemySpawnManager>().LauncherProcessing())
+		{
+            barrierFlag = false;
         }
 
         if (deadFlag)
@@ -106,4 +157,14 @@ public class UFO : MonoBehaviour
     {
         hp -= damegeValue;
     }
+
+    public void SetBarrierFlag(bool arg_barrierFlag)
+	{
+        barrierFlag = arg_barrierFlag;
+	}
+
+    public bool GetBarrierFlag()
+	{
+        return barrierFlag;
+	}
 }
