@@ -10,6 +10,7 @@ public class UFO : MonoBehaviour
 
     public MeshRenderer mesh;
     public MeshRenderer mesh_2;
+    public MeshRenderer mesh_3;
     bool entryFlag = false;
     //public GameObject enemySpawnManager;
     private float rotateY = 0;
@@ -69,7 +70,7 @@ public class UFO : MonoBehaviour
 
         if(gameObject.GetComponent<EnemySpawnManager>().StopProcessing())
 		{
-            if (barrierFlag == false)
+            if (barrierFlag == false && entryFlag == false)
             {
                 if (barrierCreateTime > 0)
                 {
@@ -109,6 +110,7 @@ public class UFO : MonoBehaviour
     {
         mesh.material.color = mesh.material.color + new Color(0, 0, 0, 0.005f);
         mesh_2.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
+        mesh_3.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
         if (mesh.material.color.a >= 1.0f)
 		{
             entryFlag = false;
@@ -120,7 +122,7 @@ public class UFO : MonoBehaviour
     /// </summary>
     private void RotationProcessing()
 	{
-        if(rotateY>360)
+        if (rotateY > 360)
 		{
             rotateY = 0;
 		}
@@ -130,6 +132,7 @@ public class UFO : MonoBehaviour
 		}
         mesh.SetRotateY(rotateY);
         mesh_2.SetRotateY(rotateY);
+        mesh_3.SetRotateY(rotateY);
     }
     /// <summary>
     /// èâä˙âªèàóù
@@ -142,6 +145,7 @@ public class UFO : MonoBehaviour
         deadFlag = false;
         mesh.material.color = new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, 0);
         mesh_2.material.color = new Color(mesh_2.material.color.r, mesh_2.material.color.g, mesh_2.material.color.b, 0);
+        mesh_3.material.color = new Color(mesh_3.material.color.r, mesh_3.material.color.g, mesh_3.material.color.b, 0);
         gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(false);
     }
 	public void SetEntryFlag(bool arg_entryFlag)

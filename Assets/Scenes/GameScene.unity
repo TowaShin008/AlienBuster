@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09040206, g: 0.07883679, b: 0.16493005, a: 1}
+  m_IndirectSpecularColor: {r: 0.111771785, g: 0.09404371, b: 0.19364154, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -344,6 +344,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
+    - target: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
     - target: {fileID: 6627941755185454031, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -360,6 +364,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d91bd2d94dcea4aa7e83711bdfb902, type: 2}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: mesh_3
+      value: 
+      objectReference: {fileID: 1114705596}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: barrier
+      value: 
+      objectReference: {fileID: 874475513}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -1455,6 +1467,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+--- !u!1 &874475513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7520207075416178929, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 304965960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &986531968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1733,6 +1750,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
+    - target: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
     - target: {fileID: 6627941755185454031, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1749,6 +1770,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d91bd2d94dcea4aa7e83711bdfb902, type: 2}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: mesh_3
+      value: 
+      objectReference: {fileID: 1753313633}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: barrier
+      value: 
+      objectReference: {fileID: 1370602009}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -1854,6 +1883,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
+    - target: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
     - target: {fileID: 6627941755185454031, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1870,6 +1903,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d91bd2d94dcea4aa7e83711bdfb902, type: 2}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: mesh_3
+      value: 
+      objectReference: {fileID: 1700700753}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: barrier
+      value: 
+      objectReference: {fileID: 1927071930}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -1924,6 +1965,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+--- !u!23 &1114705596 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 304965960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1334680259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -762376342985516687, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
@@ -1943,6 +1989,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5557971868075982995, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
+--- !u!1 &1370602009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7520207075416178929, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 1034303008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1413249606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7076460622179387804, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
@@ -2194,6 +2245,16 @@ Transform:
   m_Father: {fileID: 347278917}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1700700753 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 1046609707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1753313633 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 1034303008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1805767909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2357,6 +2418,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac646c014e92b5745b82971d742ff555, type: 3}
+--- !u!1 &1927071930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7520207075416178929, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 1046609707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1969847356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2851,6 +2917,10 @@ PrefabInstance:
       propertyPath: explosionSound
       value: 
       objectReference: {fileID: 8300000, guid: f01c5505cb141334a9425e73f1986610, type: 3}
+    - target: {fileID: 8810401389568136611, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6495265380238387200, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
