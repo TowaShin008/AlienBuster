@@ -13,7 +13,7 @@ public class JumpEnemy : MonoBehaviour
 
     [SerializeField] private int hp = 5;
 
-    [SerializeField] private float speed = 0.05f;
+    //[SerializeField] private float speed = 0.05f;
 
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject firingPoint;
@@ -76,9 +76,7 @@ public class JumpEnemy : MonoBehaviour
         }
 
         transform.LookAt(playerObject.transform);
-        transform.position += transform.forward * speed;
-
-        //onTheGroundFlog = CheckGroundStatus();
+        
         // ジャンプの開始判定
         if (onTheGroundFlag == true && jumpDelayTime <= 0)
         {
