@@ -15,6 +15,12 @@ public class WaveManager : MonoBehaviour
 
     public bool waveChangeFlag = false;
 
+    [SerializeField] private AudioSource defaultAudioSource;
+    [SerializeField] private AudioSource bossAudioSource;
+
+    //[SerializeField] private AudioClip default_bgm;
+    //[SerializeField] private AudioClip boss_bgm;
+
     void Start()
     {
         //フレームレートの固定
@@ -28,12 +34,15 @@ public class WaveManager : MonoBehaviour
         ufo.GetComponent<UFO>().Initialize();
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
+
+        defaultAudioSource.Play();
     }
  
 
     void Update()
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
+
         //何かのトリガーで次のウェーブへ
         if (waveChangeFlag == true && enemyBox.Length <= 0)
         {
@@ -49,16 +58,29 @@ public class WaveManager : MonoBehaviour
         {
             if (nowWave == saveWave)
             {
-                ufo.GetComponent<UFO>().Initialize();
                 nowWave++;
 
-                if(nowWave>=2)
+                defaultAudioSource.Stop();
+                bossAudioSource.Stop();
+
+                if (nowWave >= 1)
+                {
+                    bossAudioSource.Play();
+                    ufo.GetComponent<UFO>().Initialize();
+                }
+                if (nowWave >= 2)
 				{
+                    bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
 				}
                 if (nowWave >= 3)
                 {
+                    bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
+                }
+                else
+				{
+                    bossAudioSource.Play();
                 }
                 nextWaveCheck = false;
             }
