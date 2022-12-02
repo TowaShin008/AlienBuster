@@ -122,6 +122,9 @@ public class JumpEnemy : MonoBehaviour
     {
         Jump();
     }
+    /// <summary>
+    /// ƒWƒƒƒ“ƒvˆ—
+    /// </summary>
     void Jump()
     {
         if (!jumping)

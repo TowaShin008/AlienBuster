@@ -12,7 +12,7 @@ public class UFO : MonoBehaviour
     public MeshRenderer mesh_2;
     public MeshRenderer mesh_3;
     bool entryFlag = false;
-    //public GameObject enemySpawnManager;
+
     private float rotateY = 0;
     [SerializeField] private int hp = 30;
 
@@ -83,12 +83,16 @@ public class UFO : MonoBehaviour
                 }
             }
         }
-        else
-		{
-            gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
+
+        if (gameObject.GetComponent<EnemySpawnManager>().GetEnemyCount() < gameObject.GetComponent<EnemySpawnManager>().GetMaxEnemyCount())
+        {
+            if(entryFlag == false)
+			{
+                gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
+            }
         }
 
-        if(gameObject.GetComponent<EnemySpawnManager>().LauncherProcessing())
+        if (gameObject.GetComponent<EnemySpawnManager>().LauncherProcessing())
 		{
             barrierFlag = false;
         }

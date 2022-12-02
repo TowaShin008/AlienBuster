@@ -29,8 +29,6 @@ public class EnemySpawnManager : MonoBehaviour
     bool moveFlag = false;
 
 
-
-    // Start is called before the first frame update
     void Start()
     {
         enemyCount = 0;
@@ -60,17 +58,15 @@ public class EnemySpawnManager : MonoBehaviour
     }
    
 
-    // Update is called once per frame
     void Update()
     {
 		if (moveFlag == false) { return; }
 
-        if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
+        //if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
         {//　経過時間を足す
             elapsedTime += Time.deltaTime;
         }
     }
-
     /// <summary>
     /// 敵の出現処理
     /// </summary>
@@ -87,7 +83,10 @@ public class EnemySpawnManager : MonoBehaviour
         enemyAllCount++;
         elapsedTime = 0.0f;
     }
-
+    /// <summary>
+    /// 次のウェーブへの切り替え処理
+    /// </summary>
+    /// <returns></returns>
     public bool ChangeNextWave()
 	{
         //wave変更時の処理
@@ -164,5 +163,15 @@ public class EnemySpawnManager : MonoBehaviour
     public void DecrimentEnemyCount()
 	{
         enemyCount--;
+	}
+
+    public int GetMaxEnemyCount()
+	{
+        return nowMaxEnemyCount;
+	}
+
+    public int GetEnemyCount()
+	{
+        return enemyCount;
 	}
 }
