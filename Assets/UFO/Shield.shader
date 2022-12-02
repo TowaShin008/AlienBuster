@@ -11,10 +11,11 @@ Shader "Unlit/Shield"
 		_ScrollSpeedU("Scroll U Speed",float) = 2
 		_ScrollSpeedV("Scroll V Speed",float) = 0
 		//[ToggleOff]_CullOff("Cull Front Side Intersection",float) = 1
+		_MyAlpha("Alpha",Range(0,1)) = 1
 	}
 	SubShader
 	{ 
-		Tags{ "Queue" = "Overlay" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
 
 		GrabPass{ "_GrabTexture" }
 		Pass
@@ -46,6 +47,7 @@ Shader "Unlit/Shield"
 			sampler2D _MainTex, _CameraDepthTexture, _GrabTexture;
 			fixed4 _MainTex_ST,_MainColor,_GrabTexture_ST, _GrabTexture_TexelSize;
 			fixed _Fresnel, _FresnelWidth, _Distort, _IntersectionThreshold, _ScrollSpeedU, _ScrollSpeedV;
+			float _MyAlpha;
 
 			v2f vert (appdata v)
 			{
@@ -83,8 +85,9 @@ Shader "Unlit/Shield"
 				
 				//lerp distort color & fresnel color
 				main = lerp(distortColor, main, i.rimColor.r);
-				main += (1 - intersect) * (face > 0 ? .03:.3) * _MainColor * _Fresnel;
-				return fixed4(main,.9);
+				main += (1 - intersect) * (face > 0 ? .03:.3) * _MainColor * _Fresnel;				
+				return fixed4(main, _MyAlpha);
+				//return fixed4(main,.9);
 			}
 			ENDCG
 		}

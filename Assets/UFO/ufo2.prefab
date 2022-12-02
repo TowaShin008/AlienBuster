@@ -304,6 +304,7 @@ MonoBehaviour:
   mesh: {fileID: 1960085031354623402}
   mesh_2: {fileID: 6627941755185454031}
   mesh_3: {fileID: 3313217915705008546}
+  mesh_barrier: {fileID: 7520207075416178931}
   hp: 30
   explosion: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   explosionSize: {x: 10, y: 10, z: 10}
@@ -661,5 +662,10 @@ Transform:
 --- !u!1 &7520207075416178929 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7669751262219025433, guid: 3467433969d56ce49aec9124c5002591, type: 3}
+  m_PrefabInstance: {fileID: 156863333031787752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7520207075416178931 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7669751262219025435, guid: 3467433969d56ce49aec9124c5002591, type: 3}
   m_PrefabInstance: {fileID: 156863333031787752}
   m_PrefabAsset: {fileID: 0}
