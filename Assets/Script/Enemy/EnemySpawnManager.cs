@@ -28,14 +28,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     bool moveFlag = false;
 
-    [SerializeField] GameObject barrier;
-    //バリア発生しているか
-    bool barrierFlag;
-    //敵がすべて出てからバリアが発生するまでの時間
-    [SerializeField] int barrierCreateMaxTime = 60;
-    private int barrierCreateTime;
 
-    // Start is called before the first frame update
     void Start()
     {
         enemyCount = 0;
@@ -61,16 +54,41 @@ public class EnemySpawnManager : MonoBehaviour
             nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
         }
 
-        barrierFlag = true;
-        barrierCreateTime = barrierCreateMaxTime;
-
         moveFlag = false;
     }
    
 
-    // Update is called once per frame
     void Update()
     {
+		if (moveFlag == false) { return; }
+
+        //if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
+        {//　経過時間を足す
+            elapsedTime += Time.deltaTime;
+        }
+    }
+    /// <summary>
+    /// 敵の出現処理
+    /// </summary>
+    void SpawnEnemy()
+    {
+        //出現させる敵をランダムに選ぶ
+        var randomValue = Random.Range(0, enemys.Length);
+        //敵の向きをランダムに決定
+        var randomRotationY = Random.value * 360f;
+
+        GameObject.Instantiate(enemys[randomValue], spawnPoint.transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
+
+        enemyCount++;
+        enemyAllCount++;
+        elapsedTime = 0.0f;
+    }
+    /// <summary>
+    /// 次のウェーブへの切り替え処理
+    /// </summary>
+    /// <returns></returns>
+    public bool ChangeNextWave()
+	{
         //wave変更時の処理
         if (nowWave != WaveManager.nowWave)
         {
@@ -94,81 +112,48 @@ public class EnemySpawnManager : MonoBehaviour
                 nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
             }
 
-            barrierFlag = true;
-            barrierCreateTime = barrierCreateMaxTime;
-
             //deadFlag = false;
 
             enemyCount = 0;
+
+            return true;
         }
 
-
-
-        //バリアの切り替え
-        if (barrierFlag == true)
-        {
-            barrier.SetActive(true);
-        }
-        else
-        {
-            barrier.SetActive(false);
-        }
-
+        return false;
+    }
+    /// <summary>
+    /// 停止処理
+    /// </summary>
+    /// <returns></returns>
+    public bool StopProcessing()
+	{
         //　この場所から出現する最大数を超えてたら何もしない
         if (enemyCount >= nowMaxEnemyCount)
         {
-			//waveManager.WaveChangeFlagOn();
-			moveFlag = false;
+            //waveManager.WaveChangeFlagOn();
+            moveFlag = false;
 
-            if (barrierFlag == false && gameObject.GetComponent<UFO>().GetEntryFlag() == false)
-            {
-                if (barrierCreateTime > 0)
-                {
-                    barrierCreateTime--;
-                }
-                else
-                {
-                    barrierCreateTime = barrierCreateMaxTime;
-                    barrierFlag = true;
-                }
-            }
-
-            return;
+            return true;
         }
-
-        if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
-        {//　経過時間を足す
-            elapsedTime += Time.deltaTime;
-        }
-
+        return false;
+    }
+    /// <summary>
+    /// 敵の投下処理
+    /// </summary>
+    /// <returns></returns>
+    public bool LauncherProcessing()
+	{
         //　経過時間が経ったら
         if (elapsedTime > nowSpawnNextTime)
         {
             elapsedTime = 0.0f;
-
-            barrierFlag = false;
             //敵の出現処理
             SpawnEnemy();
+
+            return true;
         }
-    }
-
-    /// <summary>
-    /// 敵の出現処理
-    /// </summary>
-    void SpawnEnemy()
-    {
-        //出現させる敵をランダムに選ぶ
-        var randomValue = Random.Range(0, enemys.Length);
-        //敵の向きをランダムに決定
-        var randomRotationY = Random.value * 360f;
-
-        GameObject.Instantiate(enemys[randomValue], spawnPoint.transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
-
-        enemyCount++;
-        enemyAllCount++;
-        elapsedTime = 0.0f;
-    }
-
+        return false;
+	}
 
     public void SetMoveFlag(bool arg_moveFlag)
 	{
@@ -178,5 +163,15 @@ public class EnemySpawnManager : MonoBehaviour
     public void DecrimentEnemyCount()
 	{
         enemyCount--;
+	}
+
+    public int GetMaxEnemyCount()
+	{
+        return nowMaxEnemyCount;
+	}
+
+    public int GetEnemyCount()
+	{
+        return enemyCount;
 	}
 }

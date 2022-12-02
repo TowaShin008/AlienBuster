@@ -27,7 +27,6 @@ public class SniperScript : MonoBehaviour
 
     //Œø‰Ê‰¹
     public AudioClip shotSound;
-    public AudioClip bulletSound;
     AudioSource audioSource;
 
     private float bulletSpeed = 60.0f;
@@ -103,8 +102,6 @@ public class SniperScript : MonoBehaviour
             {//’e‚Ì”­Ëˆ—
                 //e‚Ì‰¹
                 audioSource.PlayOneShot(shotSound);
-                //–òä°‚Ì—‚¿‚é‰¹
-                audioSource.PlayOneShot(bulletSound);
                 // ’e‚ğ”­Ë‚·‚éêŠ‚ğæ“¾
                 var bulletPosition = firingPoint.transform.position;
                 // ã‚Åæ“¾‚µ‚½êŠ‚ÉA"bullet"‚ÌPrefab‚ğoŒ»‚³‚¹‚é
