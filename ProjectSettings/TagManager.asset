@@ -7,9 +7,12 @@ TagManager:
   - Field
   - Enemy
   - Bullet
-  - Grenade
   - WeaponItem
   - EnemyBullet
+  - RocketBumb
+  - Weapon
+  - MiniMap
+  - UFO
   layers:
   - Default
   - TransparentFX
