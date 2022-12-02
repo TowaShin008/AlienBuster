@@ -181,6 +181,7 @@ public class FPSController : MonoBehaviour
         }
         if (stepTime > 0)
         {//ステップをしていないか、ステップ猶予時間でなければ抗力を強くする
+            stepTime--;
             rigidbody.drag = 0;
 		}
     }
@@ -257,6 +258,14 @@ public class FPSController : MonoBehaviour
         if (stepTime == 0 && collision.gameObject.CompareTag("Field"))
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 100;
+        }
+    }
+
+	private void OnCollisionExit(Collision collision)
+	{
+        if (collision.gameObject.CompareTag("Field"))
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+            rigidbody.drag = 0;
         }
     }
 	/// <summary>
