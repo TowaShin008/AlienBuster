@@ -15,14 +15,16 @@ public class Launcher : MonoBehaviour
     [SerializeField] private float DestroyTime = 2.0f; 
     private int shotDelayTime ;
 
+    Quaternion recoilgun;
     Quaternion recoil;
     Quaternion recoilback;
+    bool lerp = false;
+    bool lerpback = false;
 
-    public GameObject cam;
-    Quaternion cameraRot;
-
-    private Vector3 defaultPos;
-    [SerializeField] float Recoil;
+    [SerializeField] float angle = 90;
+    Vector3 axis = Vector3.right;
+    [SerializeField] float interpolant = 0.8f;
+    float sec;
 
     const float shakingNormalSpeed = 10.0f;
     const float shakingMaxSpeed = 15.0f;
@@ -33,14 +35,29 @@ public class Launcher : MonoBehaviour
     void Start()
     {
         shotDelayTime = shotDelayMaxTime;
-        recoil = Quaternion.AngleAxis(-10.0f, new Vector3(0.0f, 0.0f, 1.0f));
-        recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        //移動処理
+       
+        
+        if (lerp == true)
+        {
+            sec += Time.deltaTime;
+            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoil, sec * interpolant);
+            if (gunModel.transform.localRotation == recoil)
+            {
+                sec = 0;
+                lerp = false;
+                lerpback = true;
+                recoilgun = gunModel.transform.localRotation;
+            }
+        }
+
+        Recoilback();
+
+            //移動処理
         MoveProcessing();
         shotDelayTime--;
         if (Input.GetMouseButton(1))
@@ -59,14 +76,28 @@ public class Launcher : MonoBehaviour
                 //弾の発射処理
                 Shot();
                 shotDelayTime = shotDelayMaxTime;
-               // gunModel.transform.localRotation = gunModel.transform.localRotation * recoilback;//関数呼び出しで使える？
-
+                //Invoke("Recoilback", 0.5f);
             }
         }
         else
         {
             gunModel.transform.position = normalGunPosition.transform.position;
            
+        }
+    }
+
+    private void Recoilback()
+    {
+        if (lerpback == true)
+        {
+            sec += Time.deltaTime;
+            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoilback, sec * interpolant);
+            if (gunModel.transform.localRotation == recoilback)
+            {
+                sec = 0;
+                lerp = false;
+                lerpback = false;
+            }
         }
     }
 
@@ -98,6 +129,10 @@ public class Launcher : MonoBehaviour
     /// </summary>
     private void Shot()
     {
+        recoilgun = gunModel.transform.localRotation;
+        recoil = Quaternion.AngleAxis(angle, axis) * gunModel.transform.localRotation;
+        recoilback = recoilgun;
+
         // 弾を発射する場所を取得
         var bulletPosition = firingPoint.transform.position;
         // 上で取得した場所に、"grenade"のPrefabを出現させる
@@ -112,7 +147,9 @@ public class Launcher : MonoBehaviour
         // 出現させたボールを2秒後に消す
         Destroy(newBall, DestroyTime);
         //リコイルの表現（銃のみ）
-        gunModel.transform.localRotation = gunModel.transform.localRotation * recoil;
+        //gunModel.transform.localRotation = gunModel.transform.localRotation * recoil;
+        lerp = true;
+        
     }
 /// <summary>
 /// 銃を構える処理
