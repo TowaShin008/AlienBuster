@@ -11,6 +11,7 @@ public class UFO : MonoBehaviour
     public MeshRenderer mesh;
     public MeshRenderer mesh_2;
     public MeshRenderer mesh_3;
+    public MeshRenderer mesh_barrier;
     bool entryFlag = false;
 
     private float rotateY = 0;
@@ -114,7 +115,8 @@ public class UFO : MonoBehaviour
     {
         mesh.material.color = mesh.material.color + new Color(0, 0, 0, 0.005f);
         mesh_2.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
-        mesh_3.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
+        mesh_3.material.color = mesh_3.material.color + new Color(0, 0, 0, 0.005f);
+        mesh_barrier.material.SetFloat("_MyAlpha", mesh.material.color.a);
         if (mesh.material.color.a >= 1.0f)
 		{
             entryFlag = false;
@@ -150,6 +152,7 @@ public class UFO : MonoBehaviour
         mesh.material.color = new Color(mesh.material.color.r, mesh.material.color.g, mesh.material.color.b, 0);
         mesh_2.material.color = new Color(mesh_2.material.color.r, mesh_2.material.color.g, mesh_2.material.color.b, 0);
         mesh_3.material.color = new Color(mesh_3.material.color.r, mesh_3.material.color.g, mesh_3.material.color.b, 0);
+        mesh_barrier.material.SetFloat("_MyAlpha", 0);
         gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(false);
     }
 	public void SetEntryFlag(bool arg_entryFlag)
