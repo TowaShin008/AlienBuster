@@ -10,6 +10,8 @@ TagManager:
   - WeaponItem
   - EnemyBullet
   - RocketBumb
+  - Weapon
+  - UFO
   layers:
   - Default
   - TransparentFX
