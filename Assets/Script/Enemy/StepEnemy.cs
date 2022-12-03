@@ -24,12 +24,6 @@ public class StepEnemy : MonoBehaviour
 
     [SerializeField] private float bulletDestroyTime = 0.8f;
 
-    [SerializeField] private float stepSpeed = 50.0f;
-    const int stepMaxTime = 30;
-    private int stepTime = stepMaxTime;
-    const int stepDelayMaxTime = 120;
-    private int stepDelayTime = stepDelayMaxTime;
-
     //爆発エフェクト
     [SerializeField] GameObject explosion;
     [SerializeField] private Vector3 explosionSize = new Vector3(1.0f, 1.0f, 1.0f);
@@ -73,6 +67,7 @@ public class StepEnemy : MonoBehaviour
         transform.LookAt(playerObject.transform);
         transform.position += transform.forward * speed;
 
+<<<<<<<< HEAD:Assets/Script/Enemy/StepEnemy.cs
         //ステップ処理
         StepProcessing();
 
@@ -80,16 +75,25 @@ public class StepEnemy : MonoBehaviour
         {
             deadFlag = true;
             ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
+========
+        if (hp <= 0)
+        {
+            deadFlag = true;
+>>>>>>>> origin/kuronote:Assets/Script/Enemy/Enemy.cs
         }
 
         if (deadFlag)
         {
+<<<<<<<< HEAD:Assets/Script/Enemy/StepEnemy.cs
             DropWeapon();
+========
+>>>>>>>> origin/kuronote:Assets/Script/Enemy/Enemy.cs
             GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
             newExplosion.transform.localScale = explosionSize;
             Destroy(newExplosion, 1.0f);
             Destroy(gameObject);
         }
+<<<<<<<< HEAD:Assets/Script/Enemy/StepEnemy.cs
     }
     /// <summary>
     /// ステップ処理
@@ -117,6 +121,8 @@ public class StepEnemy : MonoBehaviour
                 }
             }
         }
+========
+>>>>>>>> origin/kuronote:Assets/Script/Enemy/Enemy.cs
     }
 
     private void OnCollisionEnter(Collision collision)
