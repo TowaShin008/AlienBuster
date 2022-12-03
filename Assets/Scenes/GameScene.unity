@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1333307, g: 0.12214174, b: 0.23145169, a: 1}
+  m_IndirectSpecularColor: {r: 0.09772328, g: 0.08460999, b: 0.17539313, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2297,6 +2297,11 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3313217915705008546, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
   m_PrefabInstance: {fileID: 304965960}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1215283285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6495265380238387206, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+  m_PrefabInstance: {fileID: 6495265379872976077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1334680259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -762376342985516687, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
@@ -2316,6 +2321,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5557971868075982995, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
+--- !u!1 &1336300568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 645942538980572486, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+  m_PrefabInstance: {fileID: 6495265379872976077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1370602009 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7520207075416178929, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
@@ -3027,6 +3037,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 269382537224153084, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0056
+      objectReference: {fileID: 0}
+    - target: {fileID: 269382537224153084, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0216
+      objectReference: {fileID: 0}
     - target: {fileID: 1556135244565891858, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_Name
       value: grenadeLauncherModel
@@ -3131,6 +3149,10 @@ PrefabInstance:
       propertyPath: gunSound
       value: 
       objectReference: {fileID: 8300000, guid: d69e71cce9585d4409b5d00a0916f1e2, type: 3}
+    - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: rocketLauncher
+      value: 
+      objectReference: {fileID: 1215283285}
     - target: {fileID: 6495265381181574630, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3195,6 +3217,10 @@ PrefabInstance:
       propertyPath: grenade
       value: 
       objectReference: {fileID: 5119787515121665675, guid: bdbadbf858f53d74cab67883852cd52f, type: 3}
+    - target: {fileID: 8635889465919813032, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: gunModel
+      value: 
+      objectReference: {fileID: 1336300568}
     - target: {fileID: 8635889465919813032, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: rocketBomb
       value: 
