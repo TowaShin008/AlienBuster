@@ -14,28 +14,69 @@ public class RocketLauncher : MonoBehaviour
     [SerializeField]
     private GameObject firingPoint;
 
-    //ロケットランチャーの反動演出
+    Quaternion recoilgun;
     Quaternion recoil;
     Quaternion recoilback;
+    bool lerp = false;
+    bool lerpback = false;
+
+    [SerializeField] float angle = -45.0f;
+    Vector3 axis = Vector3.left;
+    [SerializeField] float interpolant = 0.8f;
+    float sec;
 
     public AudioClip shotSound;
     AudioSource audioSource;
+
+    [SerializeField]
+    private GameObject gunModel;
 
     // Start is called before the first frame update
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
-        recoil = Quaternion.AngleAxis(-10.0f, new Vector3(0.0f, 0.0f, 1.0f));
+        recoil = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
         recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
+
+        recoilgun = gunModel.transform.localRotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (lerp)
+        {
+            sec += Time.deltaTime;
+            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoil, sec * interpolant);
+            if (gunModel.transform.localRotation == recoil)
+            {
+                sec = 0;
+                lerp = false;
+                lerpback = true;
+                recoilgun = gunModel.transform.localRotation;
+            }
+        }
+
+        Recoilback();
+
         if (shotDelayTime > 0)
         {
             shotDelayTime--;
+        }
+    }
+    private void Recoilback()
+    {
+        if (lerpback == true)
+        {
+            sec += Time.deltaTime;
+            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoilback, sec * interpolant);
+            if (gunModel.transform.localRotation == recoilback)
+            {
+                sec = 0;
+                lerp = false;
+                lerpback = false;
+            }
         }
     }
     /// <summary>
@@ -45,10 +86,13 @@ public class RocketLauncher : MonoBehaviour
     /// <param name="arg_cameraRotation">カメラの回転量</param>
     public void Shot(Quaternion arg_cameraRotation)
     {
-        if (shotDelayTime <= 0)
+        if (shotDelayTime <= 0 && lerpback == false)
         {// 弾の発射処理
-		 //銃の音
-			audioSource.PlayOneShot(shotSound);
+            recoilgun = gunModel.transform.localRotation;
+            recoil = Quaternion.AngleAxis(angle, axis) * gunModel.transform.localRotation;
+            recoilback = recoilgun;
+            //銃の音
+            audioSource.PlayOneShot(shotSound);
 			// 弾を発射する場所を取得
 			var bulletPosition = firingPoint.transform.position;
             // 上で取得した場所に、"grenade"のPrefabを出現させる
@@ -64,6 +108,8 @@ public class RocketLauncher : MonoBehaviour
             //Destroy(newBall, 1.5f);
 
             shotDelayTime = shotDelayMaxTime;
+
+            lerp = true;
         }
     }
     /// <summary>

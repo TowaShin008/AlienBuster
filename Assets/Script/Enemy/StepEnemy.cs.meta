@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/Enemy/StepEnemy.cs.meta
 guid: e915c0f4ccfe47f48a59ea382fc62e8d
+========
+guid: 97980b5b01b88d146b2f9e0b6090d676
+>>>>>>>> origin/kuronote:Assets/Script/RotateSkyBox.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

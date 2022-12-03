@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class WaveManager : MonoBehaviour
 {
     private GameObject[] enemyBox;
+    private GameObject[] ufoBox;
     public GameObject wave_object = null;
     public GameObject enemySpawner;
     public GameObject ufo;
@@ -41,9 +42,10 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
+        ufoBox = GameObject.FindGameObjectsWithTag("UFO");
 
         //何かのトリガーで次のウェーブへ
-        if (waveChangeFlag == true && enemyBox.Length <= 0)
+        if (waveChangeFlag == true && enemyBox.Length <= 0 && ufoBox.Length <= 0)
         {
             waveChangeFlag = false;
             nextWaveCheck = true;
@@ -69,12 +71,10 @@ public class WaveManager : MonoBehaviour
                 }
                 if (nowWave >= 3)
 				{
-                    bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
 				}
                 if (nowWave >= 4)
                 {
-                    bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
                 }
                 else

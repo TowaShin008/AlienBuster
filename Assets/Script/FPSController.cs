@@ -10,7 +10,7 @@ public class FPSController : MonoBehaviour
     private GameObject normalGun;
     //グレネートランチャー
     [SerializeField]
-    private GameObject grenadeLauncher;
+    private GameObject rocketLauncher;
     //スナイパーライフル
     [SerializeField]
     private GameObject sniperRifle;
@@ -85,7 +85,7 @@ public class FPSController : MonoBehaviour
         remain = 1;
         hp = maxHP;
         normalGun.SetActive(true);
-        grenadeLauncher.SetActive(false);
+        rocketLauncher.SetActive(false);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
         //スナイパーライフルのUI
@@ -119,7 +119,7 @@ public class FPSController : MonoBehaviour
 		else
 		{//マウス入力がない場合は、銃を構えない。
 			normalGun.transform.position = normalGunPosition.transform.position;
-            grenadeLauncher.transform.position = normalGunPosition.transform.position;
+            rocketLauncher.transform.position = normalGunPosition.transform.position;
             //sniperRifle.transform.position = normalGunPosition.transform.position;
             shotGun.transform.position = normalGunPosition.transform.position;
         }
@@ -221,7 +221,7 @@ public class FPSController : MonoBehaviour
             if (collision.gameObject.name == "NormalGunItem")
             {
                 normalGun.SetActive(true);
-                grenadeLauncher.SetActive(false);
+                rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(false);
                 gunType = 1;
@@ -229,7 +229,7 @@ public class FPSController : MonoBehaviour
             else if (collision.gameObject.name == "RocketLauncherItem")
             {
                 normalGun.SetActive(false);
-                grenadeLauncher.SetActive(true);
+                rocketLauncher.SetActive(true);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(false);
                 gunType = 2;
@@ -237,7 +237,7 @@ public class FPSController : MonoBehaviour
             else if (collision.gameObject.name == "SniperRifleItem")
             {
                 normalGun.SetActive(false);
-                grenadeLauncher.SetActive(false);
+                rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(true);
                 shotGun.SetActive(false);
                 gunType = 3;
@@ -245,7 +245,7 @@ public class FPSController : MonoBehaviour
             else if (collision.gameObject.name == "ShotGunItem")
             {
                 normalGun.SetActive(false);
-                grenadeLauncher.SetActive(false);
+                rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(true);
                 gunType = 4;
@@ -344,11 +344,11 @@ public class FPSController : MonoBehaviour
         shotGun.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
 
         //マウスのY軸ポジションの取得
-        float grenadeLauncheryRot = grenadeLauncher.transform.localRotation.eulerAngles.x;
+        float rocketLauncheryRot = rocketLauncher.transform.localRotation.eulerAngles.x;
         //三角関数を使い銃を縦に揺らす
-        grenadeLauncheryRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
+        rocketLauncheryRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
-        grenadeLauncher.transform.rotation *= Quaternion.Euler(-grenadeLauncheryRot, 0, 0);
+        rocketLauncher.transform.rotation *= Quaternion.Euler(-rocketLauncheryRot, 0, 0);
 
         //マウスのY軸ポジションの取得
         float sniperRifleyRot = sniperRifle.transform.localRotation.eulerAngles.x;
@@ -363,7 +363,7 @@ public class FPSController : MonoBehaviour
     private void HipShot()
 	{
         normalGun.transform.position = normalGunPosition.transform.position;
-        grenadeLauncher.transform.position = normalGunPosition.transform.position;
+        rocketLauncher.transform.position = normalGunPosition.transform.position;
         //sniperRifle.transform.position = normalGunPosition.transform.position;
         shotGun.transform.position = normalGunPosition.transform.position;
 
@@ -376,7 +376,7 @@ public class FPSController : MonoBehaviour
     private void HoldGun()
 	{
         normalGun.transform.position = holdGunPosition.transform.position;
-        grenadeLauncher.transform.position = holdGunPosition.transform.position;
+        rocketLauncher.transform.position = holdGunPosition.transform.position;
         //sniperRifle.transform.position = holdGunPosition.transform.position;
         shotGun.transform.position = holdGunPosition.transform.position;
 
@@ -433,7 +433,7 @@ public class FPSController : MonoBehaviour
         }
         else if (gunType == 2)
         {
-            grenadeLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation);
+            rocketLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation);
         }
         else if (gunType == 3)
         {

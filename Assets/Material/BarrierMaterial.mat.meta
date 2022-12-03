@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Material/BarrierMaterial.mat.meta
 guid: f0d91bd2d94dcea4aa7e83711bdfb902
+========
+guid: 94f4ec39e11763844877f81dc1a60e8e
+>>>>>>>> origin/kuronote:Assets/Material/Enemy/Enemy_JumpMaterial.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

@@ -95,7 +95,7 @@ public class StepEnemy : MonoBehaviour
     /// ステップ処理
     /// </summary>
     private void StepProcessing()
-	{
+    {
         if (stepTime > 0)
         {
             stepTime--;
@@ -155,7 +155,7 @@ public class StepEnemy : MonoBehaviour
     /// 武器のドロップ処理
     /// </summary>
     private void DropWeapon()
-	{
+    {
         //出現させる敵をランダムに選ぶ
         var randomValue = Random.Range(1, 10);
 
