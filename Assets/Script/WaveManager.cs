@@ -71,12 +71,10 @@ public class WaveManager : MonoBehaviour
                 }
                 if (nowWave >= 3)
 				{
-                    bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
 				}
                 if (nowWave >= 4)
                 {
-                    bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
                 }
                 else

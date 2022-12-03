@@ -30,7 +30,7 @@ public class PauseManager : MonoBehaviour
     {
         
         
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKey(KeyCode.M))
         {
             Pause();       // Time.timeScale = 0;
 

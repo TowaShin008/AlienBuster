@@ -70,7 +70,18 @@ public class DistanceOfPlayer : MonoBehaviour
                     }
                 }
             }
-        } 
+        }
+        else
+        {
+            if (savelookOn)
+            {
+                marker.color = Color.black;
+                foreach (var trans in transitions)
+                {
+                    trans.Hide();
+                }
+            }
+        }
         savelookOn = lookOn;
         lookOn = false;
     }
