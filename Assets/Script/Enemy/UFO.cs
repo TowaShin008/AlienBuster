@@ -29,6 +29,10 @@ public class UFO : MonoBehaviour
     //“G‚ª‚·‚×‚Äo‚Ä‚©‚çƒoƒŠƒA‚ª”­¶‚·‚é‚Ü‚Å‚ÌŠÔ
     [SerializeField] int barrierCreateMaxTime = 60;
     private int barrierCreateTime;
+
+    public AudioClip clip;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,10 @@ public class UFO : MonoBehaviour
 
         barrierFlag = true;
         barrierCreateTime = barrierCreateMaxTime;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     // Update is called once per frame
