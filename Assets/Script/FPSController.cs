@@ -67,6 +67,11 @@ public class FPSController : MonoBehaviour
     public Image sniperGaugeEdge;
     public Image sniperGauge;
 
+    [SerializeField]
+    private AudioSource jumpAudioSource;
+    [SerializeField]
+    private AudioSource stepAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,11 +104,19 @@ public class FPSController : MonoBehaviour
     {
         //視点移動処理
         MoveCameraProcessing();
+        if (Input.GetKeyDown(KeyCode.Space))
+		{
+            jumpAudioSource.Play();
+        }
 
         if (Input.GetKey(KeyCode.Space))
 		{//ジャンプ処理
             JumpProcessing();
 		}
+        else
+		{
+            jumpAudioSource.Stop();
+        }
 
         //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
@@ -171,6 +184,7 @@ public class FPSController : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {//ステップ処理
+                stepAudioSource.Play();
                 StepProcessing(velocity);
             }
 
