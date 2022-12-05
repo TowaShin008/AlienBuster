@@ -33,6 +33,15 @@ public class UFO : MonoBehaviour
     public AudioClip clip;
     private AudioSource audioSource;
 
+    //ダメージ時演出
+    Color defaultColor1;
+    Color defaultColor2;
+    Color defaultColor3;
+    [SerializeField] Color damageColor = Color.red;
+    bool damageFlag = false;
+    [SerializeField] int damageMaxCount = 5;
+    private int damageCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +53,12 @@ public class UFO : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = clip;
         audioSource.Play();
+
+        defaultColor1 = mesh.material.color;
+        defaultColor2 = mesh_2.material.color;
+        defaultColor3 = mesh_3.material.color;
+
+        damageCount = damageMaxCount;
     }
 
     // Update is called once per frame
@@ -105,6 +120,23 @@ public class UFO : MonoBehaviour
 		{
             barrierFlag = false;
         }
+
+        if (damageFlag)
+        {
+            mesh.material.color = damageColor;
+            mesh_2.material.color = damageColor;
+            mesh_3.material.color = damageColor;
+
+            damageCount--;
+
+            if (damageCount <= 0)
+            {
+                damageFlag = false;
+                mesh.material.color = defaultColor1;
+                mesh_2.material.color = defaultColor2;
+                mesh_3.material.color = defaultColor3;
+            }
+        }      
 
         if (deadFlag)
         {
@@ -175,6 +207,15 @@ public class UFO : MonoBehaviour
     public void Damage(int damegeValue)
     {
         hp -= damegeValue;
+        if (damageFlag == false)
+        {
+            defaultColor1 = mesh.material.color;
+            defaultColor2 = mesh_2.material.color;
+            defaultColor3 = mesh_3.material.color;
+        }
+
+        damageFlag = true;
+        damageCount = damageMaxCount;
     }
 
     public void SetBarrierFlag(bool arg_barrierFlag)

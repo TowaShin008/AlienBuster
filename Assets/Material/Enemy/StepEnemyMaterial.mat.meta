@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Material/Enemy/StepEnemyMaterial.mat.meta
-guid: ae9014113be3b3f4398d71a5aedd28ca
-========
-guid: b27c46a7d1cca3b4daa27302f479164b
->>>>>>>> origin/kuronote:Assets/Material/EnemyMateria.mat.meta
+guid: 64c56529b17dd4740aad99552921f025
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
