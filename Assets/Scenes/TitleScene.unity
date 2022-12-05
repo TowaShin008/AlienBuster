@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.14045075, g: 0.12658, b: 0.24055809, a: 1}
+  m_IndirectSpecularColor: {r: 0.09295393, g: 0.080394216, b: 0.16833097, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MoonBusters
+  m_Text: AlienBuster
 --- !u!222 &12364328
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Click to Space
+  m_Text: Space to Start
 --- !u!222 &1195291546
 CanvasRenderer:
   m_ObjectHideFlags: 0
