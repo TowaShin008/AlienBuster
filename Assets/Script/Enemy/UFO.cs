@@ -42,6 +42,9 @@ public class UFO : MonoBehaviour
     [SerializeField] int damageMaxCount = 5;
     private int damageCount;
 
+    //弱点の位置テキスト表示
+    public MeshRenderer textMesh;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,12 +62,14 @@ public class UFO : MonoBehaviour
         defaultColor3 = mesh_3.material.color;
 
         damageCount = damageMaxCount;
+
+        textMesh.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if(entryFlag)
+    {        
+        if (entryFlag)
 		{//出現演出
             EntryProcessing();
 		}
@@ -161,7 +166,8 @@ public class UFO : MonoBehaviour
 		{
             entryFlag = false;
             gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
-		}
+            textMesh.enabled = true;
+        }
     }
     /// <summary>
     /// UFOの回転演出
@@ -216,6 +222,7 @@ public class UFO : MonoBehaviour
 
         damageFlag = true;
         damageCount = damageMaxCount;
+        textMesh.enabled = false;
     }
 
     public void SetBarrierFlag(bool arg_barrierFlag)
