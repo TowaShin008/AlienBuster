@@ -28,12 +28,9 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
         if (Input.GetKey(KeyCode.M))
         {
             Pause();       // Time.timeScale = 0;
-
         }
     }
     private void Pause()

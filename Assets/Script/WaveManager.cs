@@ -35,6 +35,8 @@ public class WaveManager : MonoBehaviour
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
 
+        nowWave = 1;
+
         defaultAudioSource.Play();
     }
  
