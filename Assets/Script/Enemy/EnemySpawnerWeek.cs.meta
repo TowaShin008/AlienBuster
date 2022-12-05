@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/Enemy/EnemySpawnerWeek.cs.meta
 guid: 89048eb15efcdd84a84e043607e1dcf5
+========
+guid: 1476ab0c7e9903c4aa209197b2734202
+>>>>>>>> origin/kuronote:Assets/Script/Enemy/JumpEnemy.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

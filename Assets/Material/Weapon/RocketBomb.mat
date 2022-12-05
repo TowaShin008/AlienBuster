@@ -7,7 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<<< HEAD:Assets/Material/Weapon/RocketBomb.mat
   m_Name: RocketBomb
+========
+  m_Name: StepEnemyMaterial
+>>>>>>>> origin/kuronote:Assets/Material/Enemy/StepEnemyMaterial.mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -75,6 +79,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+<<<<<<<< HEAD:Assets/Material/Weapon/RocketBomb.mat
     - _Color: {r: 0.26513222, g: 0.5754717, b: 0.105322145, a: 1}
+========
+    - _Color: {r: 1, g: 0.96798253, b: 0.36320752, a: 1}
+>>>>>>>> origin/kuronote:Assets/Material/Enemy/StepEnemyMaterial.mat
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

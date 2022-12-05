@@ -36,6 +36,16 @@ public class StepEnemy : MonoBehaviour
 
     public GameObject ufo;
 
+    //ドロップする武器
+    [SerializeField]
+    private GameObject normalGunItem;
+    [SerializeField]
+    private GameObject rocketLauncherItem;
+    [SerializeField]
+    private GameObject sniperRifleItem;
+    [SerializeField]
+    private GameObject shotGunItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +84,7 @@ public class StepEnemy : MonoBehaviour
 
         if (deadFlag)
         {
+            DropWeapon();
             GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
             newExplosion.transform.localScale = explosionSize;
             Destroy(newExplosion, 1.0f);
@@ -84,7 +95,7 @@ public class StepEnemy : MonoBehaviour
     /// ステップ処理
     /// </summary>
     private void StepProcessing()
-	{
+    {
         if (stepTime > 0)
         {
             stepTime--;
@@ -139,5 +150,41 @@ public class StepEnemy : MonoBehaviour
         newBall.name = bullet.name;
         // 出現させたボールを0.8秒後に消す
         Destroy(newBall, bulletDestroyTime);
+    }
+    /// <summary>
+    /// 武器のドロップ処理
+    /// </summary>
+    private void DropWeapon()
+    {
+        //出現させる敵をランダムに選ぶ
+        var randomValue = Random.Range(1, 10);
+
+        int playerGunType = playerObject.GetComponent<FPSController>().GetGunType();
+
+        if (randomValue == playerGunType)
+        {
+            return;
+        }
+
+        if (randomValue == 1)
+        {
+            normalGunItem.SetActive(true);
+            normalGunItem.transform.position = this.transform.position;
+        }
+        else if (randomValue == 2)
+        {
+            rocketLauncherItem.SetActive(true);
+            rocketLauncherItem.transform.position = this.transform.position;
+        }
+        else if (randomValue == 3)
+        {
+            sniperRifleItem.SetActive(true);
+            sniperRifleItem.transform.position = this.transform.position;
+        }
+        else if (randomValue == 4)
+        {
+            shotGunItem.SetActive(true);
+            shotGunItem.transform.position = this.transform.position;
+        }
     }
 }

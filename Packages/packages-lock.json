@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "b870d64b5704a764fd03aaccb11f2dbe652b1756"
     },
+    "com.coffee.unmask": {
+      "version": "https://github.com/mob-sakai/UnmaskForUGUI.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0a70db88bfd11f8599d7b787e8e7f52d907befe2"
+    },
     "com.unity.collab-proxy": {
       "version": "1.17.2",
       "depth": 0,
