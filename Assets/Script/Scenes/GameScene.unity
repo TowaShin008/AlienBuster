@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.14225462, g: 0.12608099, b: 0.2419309, a: 1}
+  m_IndirectSpecularColor: {r: 0.09484806, g: 0.08227133, b: 0.17122331, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMainCamera: {fileID: 1353565319}
+  rayDistance: 100
   marker: {fileID: 110663639}
   transitions: []
 --- !u!1 &143950051
@@ -364,23 +365,23 @@ PrefabInstance:
       objectReference: {fileID: 478962278}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[0]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[1]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[2]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[3]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[4]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1960085031354623402, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2155,23 +2156,23 @@ PrefabInstance:
       objectReference: {fileID: 6074480666451648586}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[0]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[1]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[2]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[3]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[4]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1960085031354623402, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2288,23 +2289,23 @@ PrefabInstance:
       objectReference: {fileID: 478962278}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[0]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[1]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[2]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[3]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[4]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1960085031354623402, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3432,8 +3433,12 @@ PrefabInstance:
       value: grenadeLauncherModel
       objectReference: {fileID: 0}
     - target: {fileID: 1923005627454648266, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b53d28b69bc98940899f2e9eabc932e, type: 3}
+    - target: {fileID: 1923005627454648266, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_PlayOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2597447567430851393, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_PlayOnAwake
