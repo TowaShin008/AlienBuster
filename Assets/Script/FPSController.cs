@@ -104,12 +104,12 @@ public class FPSController : MonoBehaviour
     {
         //視点移動処理
         MoveCameraProcessing();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5"))
 		{
             jumpAudioSource.Play();
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 5"))
 		{//ジャンプ処理
             JumpProcessing();
 		}
@@ -121,21 +121,26 @@ public class FPSController : MonoBehaviour
         //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
-		if (Input.GetMouseButton(1))
+        float lTri = Input.GetAxis("L_Trigger");
+        float rTri = Input.GetAxis("R_Trigger");
+
+        if (Input.GetMouseButton(1) || lTri > 0)
 		{//銃を構える処理
-			HoldGun();
+			HoldGun(lTri);
 		}
-		else if (Input.GetMouseButton(0))
-		{//弾の発射処理(腰うち)
-			HipShot();
-		}
-		else
-		{//マウス入力がない場合は、銃を構えない。
-			normalGun.transform.position = normalGunPosition.transform.position;
+        else
+        {//マウス入力がない場合は、銃を構えない。
+            normalGun.transform.position = normalGunPosition.transform.position;
             rocketLauncher.transform.position = normalGunPosition.transform.position;
             //sniperRifle.transform.position = normalGunPosition.transform.position;
             shotGun.transform.position = normalGunPosition.transform.position;
         }
+
+        if (Input.GetMouseButton(0) || rTri > 0)
+		{//弾の発射処理
+			Shot();
+		}
+
 
 		//移動処理
 		MoveProcessing();
@@ -152,37 +157,40 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void MoveProcessing()
 	{
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+
         var velocity = new Vector3(0, 0, 0);
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || lsh != 0 || lsv != 0)
         {
             //移動処理
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || lsv > 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(0, 0, speed);
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || lsh < 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(-speed, 0, 0);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || lsv < 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(0, 0, -speed);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || lsh > 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(speed, 0, 0);
             }
             this.transform.position += velocity * Time.deltaTime;
 
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey("joystick button 4"))
             {
                 chargeCount++;
                 //スプリント処理
                 SprintProcessing();
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp("joystick button 4"))
             {//ステップ処理
                 stepAudioSource.Play();
                 StepProcessing(velocity);
@@ -287,15 +295,26 @@ public class FPSController : MonoBehaviour
 	/// </summary>
 	private void MoveCameraProcessing()
 	{
-        //Y軸視点移動
-        float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
-        cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-        //X軸視点移動
-        float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
-        characterRot *= Quaternion.Euler(0, xRot, 0);
+		//Y軸視点移動
+		float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
+		cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+		//X軸視点移動
+		float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
+		characterRot *= Quaternion.Euler(0, xRot, 0);
+
+		//      if (deadFlag == false)
+		//{
+		//          transform.localRotation = characterRot;
+		//      }
+
+		float rsh = Input.GetAxis("R_Stick_H") * Xsensityvity;
+        float rsv = Input.GetAxis("R_Stick_V") * Ysensityvity;
+
+        cameraRot *= Quaternion.Euler(-rsv, 0, 0);
+        characterRot *= Quaternion.Euler(0, rsh, 0);
 
         if (deadFlag == false)
-		{
+        {
             transform.localRotation = characterRot;
         }
 
@@ -374,30 +393,30 @@ public class FPSController : MonoBehaviour
     /// <summary>
     /// 腰だめうち
     /// </summary>
-    private void HipShot()
-	{
-        normalGun.transform.position = normalGunPosition.transform.position;
-        rocketLauncher.transform.position = normalGunPosition.transform.position;
-        //sniperRifle.transform.position = normalGunPosition.transform.position;
-        shotGun.transform.position = normalGunPosition.transform.position;
+ //   private void HipShot()
+	//{
+ //       normalGun.transform.position = normalGunPosition.transform.position;
+ //       rocketLauncher.transform.position = normalGunPosition.transform.position;
+ //       //sniperRifle.transform.position = normalGunPosition.transform.position;
+ //       shotGun.transform.position = normalGunPosition.transform.position;
 
-        //弾の発射処理
-        Shot();
-    }
+ //       //弾の発射処理
+ //       Shot();
+ //   }
     /// <summary>
     /// 銃を構える処理と発射処理
     /// </summary>
-    private void HoldGun()
+    private void HoldGun(float arg_tri)
 	{
         normalGun.transform.position = holdGunPosition.transform.position;
         rocketLauncher.transform.position = holdGunPosition.transform.position;
         //sniperRifle.transform.position = holdGunPosition.transform.position;
         shotGun.transform.position = holdGunPosition.transform.position;
 
-        if (Input.GetMouseButton(0))
-        {//弾の発射処理
-            Shot();
-        }
+        //if (Input.GetMouseButton(0) || arg_tri > 0)
+        //{//弾の発射処理
+        //    Shot();
+        //}
     }
     /// <summary>
     /// スタミナのリチャージ処理

@@ -123,7 +123,7 @@ public class FadeManager : MonoBehaviour
 			//GUI.color = this.fadeColor;
 			//GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
 		}
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 1"))
 		{
 			if (SceneManager.GetActiveScene().name == "TitleScene")
 			{
