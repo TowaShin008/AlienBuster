@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Util;
 public class FPSController : MonoBehaviour
 {
     //通常銃
@@ -149,6 +149,27 @@ public class FPSController : MonoBehaviour
         {//カーソルの非表示
             Cursor.visible = true;
         }
+
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+		{
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
 
         Debug.Log(stamina);
     }

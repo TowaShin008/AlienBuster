@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class EnemySpawnerWeek : MonoBehaviour
 {
@@ -24,17 +25,22 @@ public class EnemySpawnerWeek : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
 
         if (gameObjectName == "Bullet")
         {
             audioSource.PlayOneShot(soundDamege);
-            ufo.GetComponent<UFO>().Damage(1);
+            ufo.GetComponent<UFO>().Damage(Constants.normalBulletDamage);
         }
         else if (gameObjectName == "RocketBumb")
         {
             audioSource.PlayOneShot(soundDamege);
-            ufo.GetComponent<UFO>().Damage(10);
+            ufo.GetComponent<UFO>().Damage(Constants.rocketBombDamage);
+        }
+        else if (gameObjectName == "SniperBullet")
+        {
+            audioSource.PlayOneShot(soundDamege);
+            ufo.GetComponent<UFO>().Damage(Constants.sniperBulletDamage);
         }
     }
 }

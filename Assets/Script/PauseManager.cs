@@ -28,7 +28,7 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.M)/* || Input.GetKeyDown("joystick button 6")*/)
+        if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 6"))
         {
             Pause();       // Time.timeScale = 0;
         }

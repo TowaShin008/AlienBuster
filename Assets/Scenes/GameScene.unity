@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09858573, g: 0.08401651, b: 0.17552814, a: 1}
+  m_IndirectSpecularColor: {r: 0.10822108, g: 0.09031347, b: 0.18801713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -329,7 +329,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 90
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!4 &244873630 stripped
 Transform:
@@ -1563,7 +1563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4999920662458270591, guid: 5fa83b47d0145c042a9a1218cfe8c363, type: 3}
       propertyPath: type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fa83b47d0145c042a9a1218cfe8c363, type: 3}
@@ -1574,6 +1574,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1669555098}
     m_Modifications:
+    - target: {fileID: 4753451054794368570, guid: 919da2950abfbc24e80f073fdd4c0a37, type: 3}
+      propertyPath: m_Text
+      value: Menu:M or start
+      objectReference: {fileID: 0}
     - target: {fileID: 4753451055114499714, guid: 919da2950abfbc24e80f073fdd4c0a37, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1671,6 +1675,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1669555098}
     m_Modifications:
+    - target: {fileID: 4523285361841005826, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523285361841005826, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523285361841005826, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523285361841005826, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523285361841005826, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523285361841005829, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523285361841005829, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 4523285362990737943, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
       propertyPath: m_Name
       value: PausePanel
@@ -2869,6 +2901,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7695353325420440276, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872813793814887289, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
