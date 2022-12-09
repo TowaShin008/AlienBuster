@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13165244, g: 0.11546514, b: 0.22518969, a: 1}
+  m_IndirectSpecularColor: {r: 0.11480992, g: 0.10274912, b: 0.20241758, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -525,10 +525,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 478962278}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[0]
       value: 5
       objectReference: {fileID: 0}
@@ -547,26 +543,6 @@ PrefabInstance:
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[4]
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[5]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[6]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[7]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[8]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[9]
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1960085031354623402, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -596,10 +572,6 @@ PrefabInstance:
       propertyPath: mesh_3
       value: 
       objectReference: {fileID: 1114705596}
-    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2113986859}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: barrier
       value: 
@@ -1703,10 +1675,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1669555098}
     m_Modifications:
-    - target: {fileID: 4523285361292802791, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
-      propertyPath: m_Text
-      value: Back to title
-      objectReference: {fileID: 0}
     - target: {fileID: 4523285361841005826, guid: 4b445b300923d2d429588ac0d66ee03b, type: 3}
       propertyPath: m_SizeDelta.x
       value: 400
@@ -2663,10 +2631,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6074480666451648586}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[0]
       value: 5
       objectReference: {fileID: 0}
@@ -2685,26 +2649,6 @@ PrefabInstance:
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: spawnNextTime.Array.data[4]
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[5]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[6]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[7]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[8]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[9]
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1960085031354623402, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2734,10 +2678,6 @@ PrefabInstance:
       propertyPath: mesh_3
       value: 
       objectReference: {fileID: 1753313633}
-    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2113986859}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: barrier
       value: 
@@ -2811,38 +2751,10 @@ PrefabInstance:
       propertyPath: enemys.Array.data[0]
       value: 
       objectReference: {fileID: 478962278}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[5]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[6]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[7]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[8]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: spawnNextTime.Array.data[9]
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7249754901405583773, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Name
       value: ufo2
       objectReference: {fileID: 0}
-    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2113986859}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
