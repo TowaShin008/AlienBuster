@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 542033432}
   - component: {fileID: 630411669}
   m_Layer: 0
-  m_Name: weekTextPoint
+  m_Name: weakTextPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542033430}
-  m_Text: "\u3000\u2191\nweek"
+  m_Text: "\u3000\u2191\nweak"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 0.62
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 2146220268}
   - component: {fileID: 1700700759}
   m_Layer: 0
-  m_Name: UFO_week
+  m_Name: UFO_weak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

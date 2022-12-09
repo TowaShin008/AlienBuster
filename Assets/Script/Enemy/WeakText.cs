@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeekText : MonoBehaviour
+public class WeakText : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
     private Vector3 direction;
