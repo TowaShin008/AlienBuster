@@ -71,6 +71,8 @@ public class FPSController : MonoBehaviour
     private AudioSource jumpAudioSource;
     [SerializeField]
     private AudioSource stepAudioSource;
+
+    //ポーズに使うもの達
     [SerializeField]
     GameObject pauseObject;
     Vector3 savePosition;
@@ -116,6 +118,8 @@ public class FPSController : MonoBehaviour
             gameObject.transform.position = savePosition;
             cam.transform.localRotation = saveCamera;
             transform.localRotation = saveplayerRotation;
+            jumpAudioSource.Stop();
+            stepAudioSource.Stop();
             return;
         }
         
