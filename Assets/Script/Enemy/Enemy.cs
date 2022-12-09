@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class Enemy : MonoBehaviour
 {
@@ -73,6 +74,27 @@ public class Enemy : MonoBehaviour
             ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
         }
 
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+        {
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
+
         if (deadFlag)
         {
             DropWeapon();
@@ -86,15 +108,19 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
 
         if (gameObjectName == "Bullet")
         {
-            hp--;
+            hp -= Constants.normalBulletDamage;
         }
         else if (gameObjectName == "RocketBumb")
         {
-            hp -= 10;
+            hp -= Constants.rocketBombDamage;
+        }
+        else if (gameObjectName == "SniperBullet")
+        {
+            hp -= Constants.sniperBulletDamage;
         }
     }
     /// <summary>

@@ -6,7 +6,7 @@ public class DistanceOfPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject playerMainCamera;
     GameObject[] enemys;
-    private float rayDistance;
+    public float rayDistance = 100;
     [SerializeField] Text marker;
     [SerializeField] SimpleUITransition[] transitions;
     bool lookOn ;
@@ -16,7 +16,7 @@ public class DistanceOfPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rayDistance = 200;
+        rayDistance = 100;
         speed = 1.0f;
         lookOn = false;
         savelookOn = lookOn;

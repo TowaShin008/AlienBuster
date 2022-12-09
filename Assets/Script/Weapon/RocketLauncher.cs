@@ -21,7 +21,7 @@ public class RocketLauncher : MonoBehaviour
     bool lerpback = false;
 
     [SerializeField] float angle = -45.0f;
-    Vector3 axis = Vector3.left;
+    Vector3 axis = Vector3.right;
     [SerializeField] float interpolant = 0.8f;
     float sec;
 

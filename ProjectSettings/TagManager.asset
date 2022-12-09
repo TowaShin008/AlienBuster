@@ -12,6 +12,7 @@ TagManager:
   - RocketBumb
   - Weapon
   - UFO
+  - SniperBullet
   layers:
   - Default
   - TransparentFX

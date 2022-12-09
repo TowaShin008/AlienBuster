@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class JumpEnemy : MonoBehaviour
 {
@@ -134,6 +135,29 @@ public class JumpEnemy : MonoBehaviour
             }
         }
         
+           
+        
+
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+        {
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
 
         if (hp <= 0)
         {
@@ -194,19 +218,23 @@ public class JumpEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
 
         if (gameObjectName == "Bullet")
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
-            hp--;
+            hp -= Constants.normalBulletDamage;
         }
         else if (gameObjectName == "RocketBumb")
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
-            hp -= 10;
+            hp -= Constants.rocketBombDamage;
+        }
+        else if (gameObjectName == "SniperBullet")
+        {
+            hp -= Constants.sniperBulletDamage;
         }
 
         if (gameObjectName == "Field")

@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         if (gameObject.GetComponent<EnemySpawnManager>().StopProcessing())
-        {
+        {//ストップした際の処理をここに記述する
 
         }
 
