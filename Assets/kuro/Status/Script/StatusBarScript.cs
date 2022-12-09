@@ -99,6 +99,6 @@ public class StatusBarScript : MonoBehaviour
         staminaBar.transform.localPosition = staminaBarPos - staminaMask.localPosition;
 
 
-        Debug.Log("Stamina" + (float)stamina / (float)maxstamina);
+        //Debug.Log("Stamina" + (float)stamina / (float)maxstamina);
     }
 }

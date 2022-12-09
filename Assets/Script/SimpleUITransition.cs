@@ -43,6 +43,7 @@ public class SimpleUITransition : MonoBehaviour
 
     [SerializeField, Header("Debug"), Range(0, 1), Tooltip("アニメーションの確認を行います。0 が非表示、1 が表示。")]
     float       　    Value;
+    float             activeVal;
 
     [SerializeField, Header("Event")]
     public UnityEvent OnFadein   = null;
@@ -97,6 +98,7 @@ public class SimpleUITransition : MonoBehaviour
                 canvasGroup.blocksRaycasts = false;
             }
         }
+        activeVal = 0;
     }
 
     /// <summary>
@@ -166,6 +168,7 @@ public class SimpleUITransition : MonoBehaviour
 
         stopCoroutine();
         co_fadein = StartCoroutine(fadein());
+        
     }
 
     /// <summary>
@@ -219,18 +222,19 @@ public class SimpleUITransition : MonoBehaviour
     {
         yield return new WaitForSeconds(DelayTimeBeforeShow);
 
-        float time     = Time.time;
+        float time     = Time.unscaledTime;
         float startVal = Value;
 
         while (true)
         {
-            float value = Mathf.Clamp01((Time.time - time) / TotalTime);
+            float value = Mathf.Clamp01((Time.unscaledTime - time) / TotalTime);
             Value = Mathf.Clamp01(startVal + (1 - startVal) * value);
 
             transitionUpdate(rectTransform, canvasGroup, Value);
-            
+
             if (AutoBlockRaycasts == true)
             {
+
                 // 完全表示より少し前にレイキャストはONにしておく（ユーザビリティを考えて）
                 if (value >= 0.75f)
                 {
@@ -255,12 +259,12 @@ public class SimpleUITransition : MonoBehaviour
     {
         yield return new WaitForSeconds(DelayTimeBeforeHide);
 
-        float time     = Time.time;
+        float time     = Time.unscaledTime;
         float startVal = Value;
 
         while (true)
         {
-            float value = Mathf.Clamp01((Time.time - time) / TotalTime);
+            float value = Mathf.Clamp01((Time.unscaledTime - time) / TotalTime);
             Value = Mathf.Clamp01(startVal + (0 - startVal) * value);
 
             transitionUpdate(rectTransform, canvasGroup, Value);
@@ -321,5 +325,10 @@ public class SimpleUITransition : MonoBehaviour
         Vector3 trans = rect.gameObject.transform.localPosition;
         trans.y = y;
         rect.gameObject.transform.localPosition = trans;
+    }
+
+    public float GetValue()
+    {
+        return activeVal;
     }
 }

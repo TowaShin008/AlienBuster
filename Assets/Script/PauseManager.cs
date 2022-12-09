@@ -13,8 +13,10 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private Button titleButton;
     [SerializeField]SimpleUITransition[] transitions;
     [SerializeField] private GameObject[] nowPanels;
+    [SerializeField] GameObject player;
    
     bool pause;
+    float time;
     void Start()
     {
         pausePanel.SetActive(false);
@@ -23,6 +25,7 @@ public class PauseManager : MonoBehaviour
         exitButton.onClick.AddListener(GameEnd);
         titleButton.onClick.AddListener(TitleReturn);
         pause = false;
+        time = 0;
     }
 
     // Update is called once per frame
@@ -31,10 +34,22 @@ public class PauseManager : MonoBehaviour
         if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 6"))
         {
             Pause();       // Time.timeScale = 0;
+            //player.SetActive(false);
+            
+        }
+        if (pause)
+        {
+            time++;   
+            if (time >= 30)
+            {
+                Time.timeScale = 0; 
+
+            }
         }
     }
-    private void Pause()
-    {
+    public void Pause()
+    {       
+        pause = true;
         foreach (var panel in nowPanels)
         {
             panel.SetActive(false);
@@ -47,13 +62,21 @@ public class PauseManager : MonoBehaviour
         {
             trans.Show();
         }
+        
     }
     private void Resume()
     {
+        pause = false;
+        time = 0;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pausePanel.SetActive(false);
+
+        foreach (var trans in transitions)
+        {
+            trans.SetValue(0);
+        }
         foreach (var panel in nowPanels)
         {
             panel.SetActive(true);
