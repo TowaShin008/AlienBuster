@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 542033431}
   - component: {fileID: 542033433}
   - component: {fileID: 542033432}
+  - component: {fileID: 630411669}
   m_Layer: 0
-  m_Name: weekTextPoint
+  m_Name: weakTextPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +98,19 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4279042303
+--- !u!114 &630411669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542033430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22533e559a9897b46afeca49abf2e4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 0}
 --- !u!1 &709790548752920251
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
+  - {fileID: 2100000, guid: 57ab8e378efacbf48aeca59c6d9f7b07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,7 +225,7 @@ GameObject:
   - component: {fileID: 2146220268}
   - component: {fileID: 1700700759}
   m_Layer: 0
-  m_Name: UFO_week
+  m_Name: UFO_weak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -475,11 +489,11 @@ MonoBehaviour:
   enemys:
   - {fileID: 0}
   spawnNextTime:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
   maxEnemyCount: 05000000080000000a0000000c0000000f000000
   spawnPoint: {fileID: 7520207075118015177}
 --- !u!114 &7686455342865905608
@@ -716,7 +730,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2e260550bd9bf6a4ba1fdb3e4c547da9, type: 2}
+  - {fileID: 2100000, guid: 0172fa08fe9a5ab42b98115fae53cb40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

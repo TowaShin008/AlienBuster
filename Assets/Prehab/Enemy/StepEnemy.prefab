@@ -125,7 +125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6074480665320166824}
-  m_LocalRotation: {x: -0, y: -0.98551613, z: -0, w: 0.16958168}
+  m_LocalRotation: {x: 0, y: -0.9855162, z: 0, w: 0.16958179}
   m_LocalPosition: {x: 13, y: 14.8, z: 43.9}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
-  hp: 5
+  hp: 3
   speed: 0.1
   gun: {fileID: 6074480666520909243}
   firingPoint: {fileID: 6074480666197112560}
@@ -206,7 +206,7 @@ MonoBehaviour:
   bulletSpeed: 60
   bulletDestroyTime: 0.8
   stepSpeed: 50
-  explosion: {fileID: 100000, guid: f881607407b15cc46b24d6bda799037a, type: 3}
+  explosion: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   explosionSize: {x: 1, y: 1, z: 1}
   ufo: {fileID: 0}
   normalGunItem: {fileID: 0}
