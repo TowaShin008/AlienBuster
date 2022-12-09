@@ -99,8 +99,8 @@ public class WaveManager : MonoBehaviour
 				{
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
-                    ufo_2.GetComponent<UFO>().Initialize();
-                    ufo_3.GetComponent<UFO>().Initialize();
+                    ufo_2.GetComponent<UFO>().Initialize(1);
+                    ufo_3.GetComponent<UFO>().Initialize(3);
                 }
                 nextWaveCheck = false;
             }

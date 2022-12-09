@@ -60,6 +60,10 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField]
     private GameObject shotGunItem;
 
+    //ヒット時後ろに吹っ飛ばないように
+    [SerializeField, Min(0)] int hitStopMaxTime = 10;
+    private int hitStopTime = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +71,10 @@ public class JumpEnemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 0;
 
+        rigidbody.isKinematic = false;
+
         jumpDelayTime = jampDelayMaxTime;
+        hitStopTime = hitStopMaxTime;
     }
 
     // Update is called once per frame
@@ -87,32 +94,49 @@ public class JumpEnemy : MonoBehaviour
         }
 
         transform.LookAt(playerObject.transform);
-        
-        // ジャンプの開始判定
-        if (onTheGroundFlag == true && jumpDelayTime <= 0)
+
+        if (hitStopTime > 0)
         {
-            jumping = true;
-            jumpDelayTime = jampDelayMaxTime;
-            onTheGroundFlag = false;
-            randomValue = Random.Range(0, 3);
+            hitStopTime--;
         }
 
-        if (jumpDelayTime > 0 && onTheGroundFlag == true)
-        {
-            jumpDelayTime--;
-        }
 
-        // ジャンプ中の処理
-        if (jumping)
+        if (hitStopTime <= 0)
         {
-            jumpTime += Time.deltaTime;
-            if (jumpTime >= maxJumpTime)
+            rigidbody.isKinematic = false;
+
+            // ジャンプの開始判定
+            if (onTheGroundFlag == true && jumpDelayTime <= 0)
             {
-                jumping = false;
-                jumpTime = 0;
+                jumping = true;
+                jumpDelayTime = jampDelayMaxTime;
+                onTheGroundFlag = false;
+                randomValue = Random.Range(0, 3);
+                rigidbody.drag = 0;
             }
-           
+
+            if (jumpDelayTime > 0 && onTheGroundFlag == true)
+            {
+                jumpDelayTime--;
+                rigidbody.drag = 50;
+            }
+
+            // ジャンプ中の処理
+            if (jumping)
+            {
+                jumpTime += Time.deltaTime;
+                if (jumpTime >= maxJumpTime)
+                {
+                    Debug.Log(jumpTime);
+                    jumping = false;
+                    jumpTime = 0;
+                }
+
+            }
         }
+
+
+
 
         var currentPosition = gameObject.transform.position;
 
@@ -165,6 +189,7 @@ public class JumpEnemy : MonoBehaviour
         {
             return;
         }
+
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
         // ジャンプの速度をアニメーションカーブから取得
         float t = jumpTime / maxJumpTime;
@@ -197,14 +222,20 @@ public class JumpEnemy : MonoBehaviour
 
         if (gameObjectName == "Bullet")
         {
+            rigidbody.isKinematic = true;
+            hitStopTime = hitStopMaxTime;
             hp -= Constants.normalBulletDamage;
         }
         else if (gameObjectName == "RocketBumb")
         {
+            rigidbody.isKinematic = true;
+            hitStopTime = hitStopMaxTime;
             hp -= Constants.rocketBombDamage;
         }
         else if (gameObjectName == "SniperBullet")
         {
+            rigidbody.isKinematic = true;
+            hitStopTime = hitStopMaxTime;
             hp -= Constants.sniperBulletDamage;
         }
 

@@ -45,6 +45,9 @@ public class UFO : MonoBehaviour
     //弱点の位置テキスト表示
     public MeshRenderer textMesh;
 
+    [SerializeField]
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -189,9 +192,23 @@ public class UFO : MonoBehaviour
     /// <summary>
     /// 初期化処理
     /// </summary>
-	public void Initialize()
+    /// <param name="positionNum">UFOが三体同時に出た際の出現位置の調整1~3で2がプレイヤーの真上</param>
+	public void Initialize(int positionNum = 2)
 	{
+        var playerPosition = player.transform.position;
         gameObject.SetActive(true);
+        if (positionNum == 1)
+		{
+            gameObject.transform.position = new Vector3(player.transform.position.x + 160, gameObject.transform.position.y, player.transform.position.z);
+        }
+        else if (positionNum == 2)
+		{
+            gameObject.transform.position = new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z);
+        }
+        else
+		{
+            gameObject.transform.position = new Vector3(player.transform.position.x - 160, gameObject.transform.position.y, player.transform.position.z);
+        }
         entryFlag = true;
         hp = 30;
         deadFlag = false;
