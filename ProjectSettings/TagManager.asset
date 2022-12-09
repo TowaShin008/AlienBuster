@@ -6,11 +6,18 @@ TagManager:
   tags:
   - Field
   - Enemy
+  - Bullet
+  - WeaponItem
+  - EnemyBullet
+  - RocketBumb
+  - Weapon
+  - UFO
+  - SniperBullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MiniMap
   - Water
   - UI
   - 

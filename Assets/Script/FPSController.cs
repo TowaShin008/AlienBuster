@@ -1,22 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using Util;
 public class FPSController : MonoBehaviour
 {
+    //通常銃
+    [SerializeField]
+    private GameObject normalGun;
+    //グレネートランチャー
+    [SerializeField]
+    private GameObject rocketLauncher;
+    //スナイパーライフル
+    [SerializeField]
+    private GameObject sniperRifle;
+    //ショットガン
+    [SerializeField]
+    private GameObject shotGun;
+
+    [SerializeField]
+    private GameObject normalGunPosition;
+    [SerializeField]
+    private GameObject holdGunPosition;
+
+    private BoxCollider collider;
+
+    //プレイヤー移動速度
     const float normalSpeed = 5.0f;
     const float sprintSpeed = 15.0f;
     float speed = normalSpeed;
 
-    const int accelMaxCount = 2;
-    int accelCount = accelMaxCount;
+    //ステップ時の摩擦が強くなるまでの猶予時間
+    const int stepMaxTime = 120;
+    int stepTime = 0;
 
-    const int accelMaxTime = 120;
-    int accelTime = accelMaxTime;
+    //LSHIFTの入力時間を格納する変数
+    int chargeCount = 0;
 
-    const int accelRechargeMaxCount = 180;
-    int accelRechargeCount = accelRechargeMaxCount;
+    //プレイヤーのスタミナ
+    const int maxStamina = 300;
+    int stamina = maxStamina;
 
+    //カメラ関連変数
     public GameObject cam;
     Quaternion cameraRot, characterRot;
 
@@ -25,185 +50,188 @@ public class FPSController : MonoBehaviour
     //XY方向の視点感度
     public float Xsensityvity, Ysensityvity;
 
+    //残機
+    int remain;
+    const int maxHP = 3;
+    int hp = maxHP;
     bool deadFlag;
 
-    //変数の宣言(角度の制限用)
-    float minX;
-    float maxX;
-
-    int chargeCount = 0;
-
+    //銃の揺れ演出の変数
     const float shakingNormalSpeed = 10.0f;
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
-    [SerializeField]
-    private GameObject gunModel;
-    [SerializeField]
-    private GameObject normalGunPosition;
-    [SerializeField]
-    private GameObject holdGunPosition;
-    [SerializeField]
-    private GameObject firingPoint;
-    [SerializeField]
-    private GameObject bullet;
-    private float bulletSpeed = 60.0f;
-    const int shotDelayMaxTime = 10;
-    private int shotDelayTime = shotDelayMaxTime;
+    int gunType = 1;
+    //スナイパーライフルのUI
+    public Image sniperEdge;
+    public Image sniperGaugeEdge;
+    public Image sniperGauge;
 
-    private bool landingFlag;
+    [SerializeField]
+    private AudioSource jumpAudioSource;
+    [SerializeField]
+    private AudioSource stepAudioSource;
 
-    //ショットガン用変数
-    [SerializeField]
-    float randomDiffusion = 10;
-    [SerializeField]
-    int bulletCount = 10;
-
-    //空薬莢用の変数
-    [SerializeField]
-    private GameObject bulletPrefab;
-    [SerializeField]
-    private Transform bulletExitPosition;
-    [SerializeField]
-    private float exitSpeed=0.1f;
-    [SerializeField]
-    private float exitRotate = 360.0f;
     // Start is called before the first frame update
-
-    public AudioClip gunSound;
-    AudioSource audioSource;
-    
     void Start()
     {
-        Application.targetFrameRate = 60;
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
         deadFlag = false;
-        const float normalMaxX = 90.0f;
-        const float normalMinX = -90.0f;
-        minX = normalMinX;
-        maxX = normalMaxX;
         rigidbody = GetComponent<Rigidbody>();
+        collider = GetComponent<BoxCollider>();
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
         Cursor.lockState = CursorLockMode.Locked;
-        landingFlag = true;
-        Physics.gravity = new Vector3(0.0f, -4.0f, 0.0f);
-        //音のコンポーネント取得
-        audioSource = GetComponent<AudioSource>();
+        Physics.gravity = new Vector3(0.0f, -6.0f, 0.0f);
+
+        //残機
+        remain = 1;
+        hp = maxHP;
+        normalGun.SetActive(true);
+        rocketLauncher.SetActive(false);
+        sniperRifle.SetActive(false);
+        shotGun.SetActive(false);
+        //スナイパーライフルのUI
+        sniperEdge.enabled = false;
+        sniperGaugeEdge.enabled = false;
+        sniperGauge.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //カメラの移動処理
+        //視点移動処理
         MoveCameraProcessing();
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5"))
+		{
+            jumpAudioSource.Play();
+        }
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 5"))
 		{//ジャンプ処理
             JumpProcessing();
 		}
-
-        if(Input.GetKey(KeyCode.LeftShift))
-		{
-            chargeCount++;
-            if(chargeCount>=30)
-            {//スプリント処理
-                SprintProcessing();
-            }
-        }
-
-        //加速ゲージのリチャージ処理
-        AccelRechargeProcessing();
-
-        //カーソルの非表示
-        if (Input.GetKeyDown(KeyCode.Escape))
-		{
-            Cursor.visible = true;
-		}
-
-        if(Input.GetMouseButton(1))
-		{//銃を構える処理
-            HoldGun();
-		}
-        else if (Input.GetMouseButton(0))
-        {//弾の発射処理
-            gunModel.transform.position = normalGunPosition.transform.position;
-            if(shotDelayTime>0)
-			{
-                shotDelayTime--;
-			}
-            else
-			{
-                //銃の音
-                audioSource.PlayOneShot(gunSound);
-                //弾の発射処理
-                Shot();
-                ExitBullet();
-                shotDelayTime = shotDelayMaxTime;
-            }
-        }
         else
-        {
-            gunModel.transform.position = normalGunPosition.transform.position;
+		{
+            jumpAudioSource.Stop();
         }
-        //移動処理
-        MoveProcessing();
+
+        //ステップゲージのリチャージ処理
+        StaminaRechargeProcessing();
+
+        float lTri = Input.GetAxis("L_Trigger");
+        float rTri = Input.GetAxis("R_Trigger");
+
+        if (Input.GetMouseButton(1) || lTri > 0)
+		{//銃を構える処理
+			HoldGun(lTri);
+		}
+        else
+        {//マウス入力がない場合は、銃を構えない。
+            normalGun.transform.position = normalGunPosition.transform.position;
+            rocketLauncher.transform.position = normalGunPosition.transform.position;
+            //sniperRifle.transform.position = normalGunPosition.transform.position;
+            shotGun.transform.position = normalGunPosition.transform.position;
+        }
+
+        if (Input.GetMouseButton(0) || rTri > 0)
+		{//弾の発射処理
+			Shot();
+		}
+
+
+		//移動処理
+		MoveProcessing();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {//カーソルの非表示
+            Cursor.visible = true;
+        }
+
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+		{
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
+
+        Debug.Log(stamina);
     }
     /// <summary>
     /// 移動処理
     /// </summary>
     private void MoveProcessing()
 	{
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        float lsh = Input.GetAxis("L_Stick_H");
+        float lsv = Input.GetAxis("L_Stick_V");
+
+        var velocity = new Vector3(0, 0, 0);
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || lsh != 0 || lsv != 0)
         {
-            var velocity = new Vector3(0, 0, 0);
-            //プレイヤー移動処理
-            if (Input.GetKey(KeyCode.W))
+            //移動処理
+            if (Input.GetKey(KeyCode.W) || lsv > 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(0, 0, speed);
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || lsh < 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(-speed, 0, 0);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || lsv < 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(0, 0, -speed);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || lsh > 0)
             {
                 velocity += gameObject.transform.rotation * new Vector3(speed, 0, 0);
             }
-            gameObject.transform.position += velocity * Time.deltaTime;
+            this.transform.position += velocity * Time.deltaTime;
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {//加速処理
-                AccelProcessing(velocity);
+
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey("joystick button 4"))
+            {
+                chargeCount++;
+                //スプリント処理
+                SprintProcessing();
             }
 
-            if (Input.GetMouseButton(1) == false)
+            if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp("joystick button 4"))
+            {//ステップ処理
+                stepAudioSource.Play();
+                StepProcessing(velocity);
+            }
+
+			if (Input.GetMouseButton(1) == false)
 			{//呼吸演出処理
-                BreathProcessing();
-            }
-
-            rigidbody.drag = 1;
+				BreathProcessing();
+			}
         }
-
-        if (accelTime == 0)
-        {
-            rigidbody.drag = 50;
-        }
-        else
-		{
-            accelTime--;
+        if (stepTime > 0)
+        {//ステップをしていないか、ステップ猶予時間でなければ抗力を強くする
+            stepTime--;
+            rigidbody.drag = 0;
 		}
     }
     /// <summary>
     /// 角度制限関数の作成
     /// </summary>
-    /// <param name="q"></param>
+    /// <param name="q">対象となるもののクォータニオン</param>
     /// <returns>クォータニオン</returns>
     public Quaternion ClampRotation(Quaternion q)
     {
@@ -216,7 +244,7 @@ public class FPSController : MonoBehaviour
 
         float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
 
-        angleX = Mathf.Clamp(angleX, minX, maxX);
+        angleX = Mathf.Clamp(angleX, -90.0f, 90.0f);
 
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
@@ -225,25 +253,91 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
             Debug.Log("Hit");
-            deadFlag = true;
+            Damage();
+        }
+
+        if(collision.gameObject.tag == "WeaponItem")
+		{
+            if (collision.gameObject.name == "NormalGunItem")
+            {
+                normalGun.SetActive(true);
+                rocketLauncher.SetActive(false);
+                sniperRifle.SetActive(false);
+                shotGun.SetActive(false);
+                gunType = 1;
+            }
+            else if (collision.gameObject.name == "RocketLauncherItem")
+            {
+                normalGun.SetActive(false);
+                rocketLauncher.SetActive(true);
+                sniperRifle.SetActive(false);
+                shotGun.SetActive(false);
+                gunType = 2;
+            }
+            else if (collision.gameObject.name == "SniperRifleItem")
+            {
+                normalGun.SetActive(false);
+                rocketLauncher.SetActive(false);
+                sniperRifle.SetActive(true);
+                shotGun.SetActive(false);
+                gunType = 3;
+            }
+            else if (collision.gameObject.name == "ShotGunItem")
+            {
+                normalGun.SetActive(false);
+                rocketLauncher.SetActive(false);
+                sniperRifle.SetActive(false);
+                shotGun.SetActive(true);
+                gunType = 4;
+            }
         }
     }
-    /// <summary>
-    /// カメラの移動処理
-    /// </summary>
-    private void MoveCameraProcessing()
-	{
-        //Y軸視点移動
-        float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
-        cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-        //X軸視点
-        float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
-        characterRot *= Quaternion.Euler(0, xRot, 0);
 
-        transform.localRotation = characterRot;
+	private void OnCollisionStay(Collision collision)
+	{
+        if (stepTime == 0 && collision.gameObject.CompareTag("Field"))
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+            rigidbody.drag = 100;
+        }
+    }
+
+	private void OnCollisionExit(Collision collision)
+	{
+        if (collision.gameObject.CompareTag("Field"))
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+            rigidbody.drag = 0;
+        }
+    }
+	/// <summary>
+	/// カメラの移動処理
+	/// </summary>
+	private void MoveCameraProcessing()
+	{
+		//Y軸視点移動
+		float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
+		cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+		//X軸視点移動
+		float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
+		characterRot *= Quaternion.Euler(0, xRot, 0);
+
+		//      if (deadFlag == false)
+		//{
+		//          transform.localRotation = characterRot;
+		//      }
+
+		float rsh = Input.GetAxis("R_Stick_H") * Xsensityvity;
+        float rsv = Input.GetAxis("R_Stick_V") * Ysensityvity;
+
+        cameraRot *= Quaternion.Euler(-rsv, 0, 0);
+        characterRot *= Quaternion.Euler(0, rsh, 0);
+
+        if (deadFlag == false)
+        {
+            transform.localRotation = characterRot;
+        }
 
         //Updateの中で作成した関数を呼ぶ
         cameraRot = ClampRotation(cameraRot);
@@ -251,18 +345,17 @@ public class FPSController : MonoBehaviour
         cam.transform.localRotation = cameraRot;
     }
     /// <summary>
-    /// 加速処理
+    /// ステップ処理
     /// </summary>
-    public void AccelProcessing(Vector3 arg_velocity)
+    public void StepProcessing(Vector3 arg_velocity)
 	{
         if (chargeCount < 30)
-        {//加速処理
-            if (accelCount > 0)
+        {//ステップ処理
+            if (stamina >= 100)
             {
-                accelTime = accelMaxTime;
-                accelCount--;
-                rigidbody.AddForce(arg_velocity * 400.0f);
-                Debug.Log(accelCount);
+                stepTime = stepMaxTime;
+                stamina -= 100;
+                rigidbody.AddForce(arg_velocity * 5.0f, ForceMode.Impulse);
             }
         }
         //プレイヤーの初期化
@@ -275,15 +368,20 @@ public class FPSController : MonoBehaviour
     /// </summary>
     public void SprintProcessing()
 	{
-        speed = sprintSpeed;
-        shakingSpeed = shakingMaxSpeed;
+        if (chargeCount >= 30 && stamina > 0)
+        {//スプリント処理
+            stamina -= 2;
+            speed = sprintSpeed;
+            shakingSpeed = shakingMaxSpeed;
+        }
 	}
     /// <summary>
     /// ジャンプ処理
     /// </summary>
     public void JumpProcessing()
 	{
-        rigidbody.AddForce(new Vector3(0.0f, 3.0f, 0.0f));
+        rigidbody.drag = 0;
+        rigidbody.AddForce(new Vector3(0.0f, 10.0f, 0.0f));
 	}
     /// <summary>
     /// 呼吸演出
@@ -291,96 +389,154 @@ public class FPSController : MonoBehaviour
     private void BreathProcessing()
 	{
         //マウスのY軸ポジションの取得
-        float yRot = gunModel.transform.localRotation.eulerAngles.x;
+        float yRot = normalGun.transform.localRotation.eulerAngles.x;
+        //三角関数を使い銃を縦に揺らす
         yRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
 
-        gunModel.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
-    }
+        normalGun.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
 
+        shotGun.transform.rotation *= Quaternion.Euler(-yRot, 0, 0);
+
+        //マウスのY軸ポジションの取得
+        float rocketLauncheryRot = rocketLauncher.transform.localRotation.eulerAngles.x;
+        //三角関数を使い銃を縦に揺らす
+        rocketLauncheryRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
+
+        rocketLauncher.transform.rotation *= Quaternion.Euler(-rocketLauncheryRot, 0, 0);
+
+        //マウスのY軸ポジションの取得
+        float sniperRifleyRot = sniperRifle.transform.localRotation.eulerAngles.x;
+        //三角関数を使い銃を縦に揺らす
+        sniperRifleyRot += Mathf.Sin(Time.time * shakingSpeed) * 0.5f;
+
+        sniperRifle.transform.rotation *= Quaternion.Euler(-sniperRifleyRot, 0, 0);
+    }
     /// <summary>
-    /// 空薬莢の演出
+    /// 腰だめうち
     /// </summary>
-    private void ExitBullet()
-    {
-        var bulletInstance = Instantiate<GameObject>(bulletPrefab, bulletExitPosition.position, cam.transform.rotation);
-        var bulletRigit = bulletInstance.GetComponent<Rigidbody>();
-        bulletRigit.AddForce(bulletExitPosition.forward * exitSpeed);
-        bulletRigit.AddTorque(Random.insideUnitSphere * exitRotate);
-        Destroy(bulletInstance, 3f);
-    }
+ //   private void HipShot()
+	//{
+ //       normalGun.transform.position = normalGunPosition.transform.position;
+ //       rocketLauncher.transform.position = normalGunPosition.transform.position;
+ //       //sniperRifle.transform.position = normalGunPosition.transform.position;
+ //       shotGun.transform.position = normalGunPosition.transform.position;
 
+ //       //弾の発射処理
+ //       Shot();
+ //   }
     /// <summary>
-    /// 弾の発射処理
+    /// 銃を構える処理と発射処理
+    /// </summary>
+    private void HoldGun(float arg_tri)
+	{
+        normalGun.transform.position = holdGunPosition.transform.position;
+        rocketLauncher.transform.position = holdGunPosition.transform.position;
+        //sniperRifle.transform.position = holdGunPosition.transform.position;
+        shotGun.transform.position = holdGunPosition.transform.position;
+
+        //if (Input.GetMouseButton(0) || arg_tri > 0)
+        //{//弾の発射処理
+        //    Shot();
+        //}
+    }
+    /// <summary>
+    /// スタミナのリチャージ処理
+    /// </summary>
+    private void StaminaRechargeProcessing()
+	{
+        if (stamina < maxStamina)
+		{
+            stamina++;
+		}
+	}
+    /// <summary>
+    /// ダメージ処理
+    /// </summary>
+    public void Damage()
+	{
+        hp--;
+        if (hp < 1)
+		{
+            if (hp <= 0)
+			{//残機を減らす
+                DecrimentRemain();
+			}
+		}
+	}
+    /// <summary>
+    /// 残機の減少
+    /// </summary>
+    public void DecrimentRemain()
+	{
+        remain--;
+        if (remain <= 0)
+        {
+            deadFlag = true;
+            rigidbody.drag = 0;
+            FadeManager.Instance.LoadScene("EndScene", 0.5f);
+        }
+    }
+    /// <summary>
+    /// プレイヤーの射撃処理
     /// </summary>
     private void Shot()
 	{
-        for (int n = 0; n < bulletCount; n++)
+        if (gunType == 1)
         {
-            // 弾を発射する場所を取得
-            var bulletPosition = firingPoint.transform.position;
-            // 上で取得した場所に、"bullet"のPrefabを出現させる
-            GameObject newBall = Instantiate(bullet, bulletPosition, cam.transform.rotation);
-            //ランダムの方向に拡散
-            float randomX = Random.Range(randomDiffusion, -randomDiffusion);
-            float randomY = Random.Range(randomDiffusion, -randomDiffusion);
-            float randomZ = Random.Range(randomDiffusion, - randomDiffusion);
-
-            // 出現させたボールのforward(z軸方向)
-            var direction = new Vector3(randomX,randomY,randomZ);
-            Rigidbody newbulletRb = newBall.GetComponent<Rigidbody>();
-            // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-            newbulletRb.AddForce(direction , ForceMode.Impulse);
-            newbulletRb.AddForce(newBall.transform.forward * bulletSpeed, ForceMode.Impulse);
-            // 出現させたボールの名前を"bullet"に変更
-            newBall.name = bullet.name;
-            // 出現させたボールを0.8秒後に消す
-            Destroy(newBall, 0.8f);
+            normalGun.GetComponent<NormalGun>().Shot(cam.transform.rotation);
         }
-        /*var bulletPosition = firingPoint.transform.position;
-        GameObject newBall = Instantiate(bullet, bulletPosition, cam.transform.rotation);
-        var direction = newBall.transform.forward;
-        newBall.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-        newBall.name = bullet.name;
-        Destroy(newBall, 0.8f);*/
-    }
-    /// <summary>
-    /// 銃を構える処理
-    /// </summary>
-    private void HoldGun()
-	{
-        gunModel.transform.position = holdGunPosition.transform.position;
-        if (Input.GetMouseButton(0))
-        {//弾の発射処理
-            if (shotDelayTime > 0)
-            {
-                shotDelayTime--;
-            }
-            else
-            {
-                //弾の発射処理
-                Shot();
-                shotDelayTime = shotDelayMaxTime;
-            }
+        else if (gunType == 2)
+        {
+            rocketLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation);
         }
-    }
-    /// <summary>
-    /// 加速ゲージのリチャージ処理
-    /// </summary>
-    private void AccelRechargeProcessing()
-	{
-        if (accelCount < accelMaxCount)
+        else if (gunType == 3)
+        {
+            sniperRifle.GetComponent<SniperScript>().Shot(cam.transform.rotation);
+        }
+        else if (gunType == 4)
 		{
-            accelRechargeCount--;
-            //リチャージカウントがゼロかどうか
-            bool isAccelRechargeCountEmpty = accelRechargeCount <= 0;
-
-            if (isAccelRechargeCountEmpty)
-			{
-                accelCount++;
-                accelRechargeCount = accelRechargeMaxCount;
-
-                Debug.Log(accelCount);
-            }
-		}
+            shotGun.GetComponent<ShotGun>().Shot(cam.transform.rotation);
+        }
+    }
+    /// <summary>
+    /// 銃番号のセット
+    /// </summary>
+    /// <param name="arg_gunType">銃番号</param>
+    public void SetGunType(int arg_gunType)
+	{
+        gunType = arg_gunType;
 	}
+    /// <summary>
+    /// 銃番号のセット取得
+    /// </summary>
+    /// <param name="arg_gunType">銃番号</param>
+    public int GetGunType()
+    {
+        return gunType;
+    }
+    /// <summary>
+    /// 最大スタミナの取得
+    /// </summary>
+    /// <returns>最大スタミナ</returns>
+    public int GetMaxStamina()
+    {
+        return maxStamina;
+    }
+    /// <summary>
+    /// スタミナの取得
+    /// </summary>
+    /// <returns>スタミナ</returns>
+    public int GetStamina()
+    {
+        return stamina;
+    }
+
+    public int GetHP()
+	{
+        return hp;
+	}
+    public int GetMaxHP()
+    {
+        return maxHP;
+    }
 }

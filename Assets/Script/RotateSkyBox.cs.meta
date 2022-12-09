@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/RotateSkyBox.cs.meta
+guid: 97980b5b01b88d146b2f9e0b6090d676
+========
+guid: 32c8433966ec4d74b9bcd16f5dcc8510
+>>>>>>>> origin/kuronote:Assets/Script/Weapon/RocketBomb.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
