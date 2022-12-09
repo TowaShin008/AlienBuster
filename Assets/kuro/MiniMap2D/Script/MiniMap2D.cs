@@ -196,6 +196,7 @@ public class MiniMap2D : MonoBehaviour
         if (_MMItems.Count == 0) return;
         for(int i = 0; i < _MMItems.Count; i++)
         {
+            if(_MMItems[i]._Object == null) { continue; }
             ITEM item = _MMItems[i];
             Vector2 pos = CalculationPositionPlayer(_MMItems[i]._Object.transform.position);
             pos = pos * _MMDistance;

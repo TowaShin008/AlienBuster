@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.091392376, g: 0.07949493, b: 0.16627997, a: 1}
+  m_IndirectSpecularColor: {r: 0.12259553, g: 0.10695075, b: 0.21177581, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 630411669, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 2113986859}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -584,6 +588,10 @@ PrefabInstance:
       propertyPath: barrier
       value: 
       objectReference: {fileID: 874475513}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -2035,6 +2043,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
     - target: {fileID: -3127547391920786180, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
+    - target: {fileID: -3127547391920786180, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
       propertyPath: shotGunItem
       value: 
       objectReference: {fileID: 1676383331}
@@ -2270,6 +2282,14 @@ PrefabInstance:
       propertyPath: speed
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
+    - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: shotGunItem
       value: 
@@ -2622,6 +2642,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 630411669, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 2113986859}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -2699,6 +2723,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1370602009}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 362330757}
@@ -2759,6 +2787,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 210291225, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 630411669, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: playerObject
       value: 
@@ -2779,6 +2811,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2113986859}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
@@ -3086,6 +3122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7536143154843583554, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2113986859}
     - target: {fileID: 7536143154843583554, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
       propertyPath: exitButton
       value: 
@@ -4070,9 +4110,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 68534455}
     - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
+    - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: jumpPower
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
     - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: shotGunItem
       value: 
@@ -4139,6 +4187,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8900845156285053417, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900845156285053422, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
@@ -4376,6 +4428,10 @@ PrefabInstance:
       propertyPath: gunSound
       value: 
       objectReference: {fileID: 8300000, guid: d69e71cce9585d4409b5d00a0916f1e2, type: 3}
+    - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
     - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: rocketLauncher
       value: 

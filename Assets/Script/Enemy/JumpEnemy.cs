@@ -60,6 +60,9 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField]
     private GameObject shotGunItem;
 
+    bool stop;
+    [SerializeField]
+    GameObject pauseObject;
     //ヒット時後ろに吹っ飛ばないように
     [SerializeField, Min(0)] int hitStopMaxTime = 10;
     private int hitStopTime = 10;
@@ -67,6 +70,7 @@ public class JumpEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stop = false;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 0;
@@ -80,98 +84,109 @@ public class JumpEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //弾の発射処理
-        gun.transform.position = gun.transform.position;
-        if (shotDelayTime > 0)
+        if (pauseObject.activeSelf)
         {
-            shotDelayTime--;
+            stop = false;
         }
         else
         {
-            //弾の発射処理
-            Shot();
-            shotDelayTime = shotDelayMaxTime;
+            stop = true;
         }
 
         transform.LookAt(playerObject.transform);
 
-        if (hitStopTime > 0)
-        {
-            hitStopTime--;
-        }
-
-
-        if (hitStopTime <= 0)
-        {
-            rigidbody.isKinematic = false;
-
-            // ジャンプの開始判定
-            if (onTheGroundFlag == true && jumpDelayTime <= 0)
+        if (stop)
+		{
+            //弾の発射処理
+            gun.transform.position = gun.transform.position;
+            if (shotDelayTime > 0)
             {
-                jumping = true;
-                jumpDelayTime = jampDelayMaxTime;
-                onTheGroundFlag = false;
-                randomValue = Random.Range(0, 3);
-                rigidbody.drag = 0;
+                shotDelayTime--;
+            }
+            else
+            {
+                //弾の発射処理
+                Shot();
+                shotDelayTime = shotDelayMaxTime;
             }
 
-            if (jumpDelayTime > 0 && onTheGroundFlag == true)
+
+            if (hitStopTime > 0)
             {
-                jumpDelayTime--;
-                rigidbody.drag = 50;
+                hitStopTime--;
             }
 
-            // ジャンプ中の処理
-            if (jumping)
+
+            if (hitStopTime <= 0)
             {
-                jumpTime += Time.deltaTime;
-                if (jumpTime >= maxJumpTime)
+                rigidbody.isKinematic = false;
+
+                // ジャンプの開始判定
+                if (onTheGroundFlag == true && jumpDelayTime <= 0)
                 {
-                    Debug.Log(jumpTime);
-                    jumping = false;
-                    jumpTime = 0;
+                    jumping = true;
+                    jumpDelayTime = jampDelayMaxTime;
+                    onTheGroundFlag = false;
+                    randomValue = Random.Range(0, 3);
+                    rigidbody.drag = 0;
                 }
 
+                if (jumpDelayTime > 0 && onTheGroundFlag == true)
+                {
+                    jumpDelayTime--;
+                    rigidbody.drag = 50;
+                }
+
+                // ジャンプ中の処理
+                if (jumping)
+                {
+                    jumpTime += Time.deltaTime;
+                    if (jumpTime >= maxJumpTime)
+                    {
+                        Debug.Log(jumpTime);
+                        jumping = false;
+                        jumpTime = 0;
+                    }
+
+                }
             }
-        }
 
 
+            var currentPosition = gameObject.transform.position;
 
+            if (currentPosition.z > Constants.stageMaxPositionZ)
+            {
+                currentPosition.z = Constants.stageMaxPositionZ;
+            }
+            if (currentPosition.z < Constants.stageMinPositionZ)
+            {
+                currentPosition.z = Constants.stageMinPositionZ;
+            }
+            if (currentPosition.x > Constants.stageMaxPositionX)
+            {
+                currentPosition.x = Constants.stageMaxPositionX;
+            }
+            if (currentPosition.x < Constants.stageMinPositionX)
+            {
+                currentPosition.x = Constants.stageMinPositionX;
+            }
 
-        var currentPosition = gameObject.transform.position;
+            gameObject.transform.position = currentPosition;
 
-        if (currentPosition.z > Constants.stageMaxPositionZ)
-        {
-            currentPosition.z = Constants.stageMaxPositionZ;
-        }
-        if (currentPosition.z < Constants.stageMinPositionZ)
-        {
-            currentPosition.z = Constants.stageMinPositionZ;
-        }
-        if (currentPosition.x > Constants.stageMaxPositionX)
-        {
-            currentPosition.x = Constants.stageMaxPositionX;
-        }
-        if (currentPosition.x < Constants.stageMinPositionX)
-        {
-            currentPosition.x = Constants.stageMinPositionX;
-        }
+            if (hp <= 0)
+            {
+                deadFlag = true;
+                ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
+            }
 
-        gameObject.transform.position = currentPosition;
-
-        if (hp <= 0)
-        {
-            deadFlag = true;
-            ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
-        }
-
-        if (deadFlag)
-        {
-            DropWeapon();
-            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            newExplosion.transform.localScale = explosionSize;
-            Destroy(newExplosion, 1.0f);
-            Destroy(gameObject);
+            if (deadFlag)
+            {
+                DropWeapon();
+                GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+                newExplosion.transform.localScale = explosionSize;
+                Destroy(newExplosion, 1.0f);
+                Destroy(gameObject);
+            }
         }
     }
 

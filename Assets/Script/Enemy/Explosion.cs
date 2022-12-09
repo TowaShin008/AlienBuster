@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<<< HEAD:Assets/Script/Enemy/Explosion.cs
 public class Explosion : MonoBehaviour
-========
-public class Bullet : MonoBehaviour
->>>>>>>> origin/yamaguchi:Assets/Script/Weapon/Bullet.cs
+
 {
     //”š”­‰¹
     public AudioClip explosionSound;

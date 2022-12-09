@@ -64,6 +64,9 @@ public class Enemy : MonoBehaviour
         {
             stop = true;
         }
+
+        transform.LookAt(playerObject.transform);
+
         if (stop)
         {
             //íeÇÃî≠éÀèàóù
@@ -79,7 +82,6 @@ public class Enemy : MonoBehaviour
                 shotDelayTime = shotDelayMaxTime;
             }
 
-            transform.LookAt(playerObject.transform);
             transform.position += transform.forward * speed;
 
             if (hp <= 0)

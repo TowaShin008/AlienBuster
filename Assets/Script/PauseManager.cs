@@ -31,7 +31,7 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 6"))
+        if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 7"))
         {
             Pause();       // Time.timeScale = 0;
             //player.SetActive(false);
@@ -93,5 +93,11 @@ public class PauseManager : MonoBehaviour
     private void TitleReturn()
     {
         FadeManager.Instance.LoadScene("TitleScene", 1f);
+        pause = false;
+        time = 0;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //pausePanel.SetActive(false);
     }
 }
