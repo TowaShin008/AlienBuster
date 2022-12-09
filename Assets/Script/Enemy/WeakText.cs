@@ -17,7 +17,7 @@ public class WeakText : MonoBehaviour
     void Update()
     {
         direction = playerObject.transform.position - transform.position;
-        direction.y = 0;        
+        //direction.y = 0;        
 
         lookRotation = Quaternion.LookRotation(-direction, Vector3.up);
         transform.rotation = lookRotation;
