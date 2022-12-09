@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1215255, g: 0.10594597, b: 0.21011749, a: 1}
+  m_IndirectSpecularColor: {r: 0.10723772, g: 0.08941177, b: 0.18651816, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1668,6 +1668,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 919da2950abfbc24e80f073fdd4c0a37, type: 3}
+--- !u!1 &630411665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 542033430, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+  m_PrefabInstance: {fileID: 1046609707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &630411669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630411665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22533e559a9897b46afeca49abf2e4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 2113986859}
 --- !u!1001 &642041202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2408,7 +2426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemys:
-  - {fileID: 6074480666451648586}
+  - {fileID: 478962278}
   spawnNextTime:
   - 1
   maxEnemyCount: 05000000
@@ -4110,7 +4128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6495265379992043966, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 55
+      value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 6495265380238387206, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_Name
