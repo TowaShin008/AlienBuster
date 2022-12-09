@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.10822108, g: 0.09031347, b: 0.18801713, a: 1}
+  m_IndirectSpecularColor: {r: 0.1215255, g: 0.10594597, b: 0.21011749, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2408,7 +2408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemys:
-  - {fileID: 478962278}
+  - {fileID: 6074480666451648586}
   spawnNextTime:
   - 1
   maxEnemyCount: 05000000

@@ -234,6 +234,8 @@ public class JumpEnemy : MonoBehaviour
         }
         else if (gameObjectName == "SniperBullet")
         {
+            rigidbody.isKinematic = true;
+            hitStopTime = hitStopMaxTime;
             hp -= Constants.sniperBulletDamage;
         }
 
