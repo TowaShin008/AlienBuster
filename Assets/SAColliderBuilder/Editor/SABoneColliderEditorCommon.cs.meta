@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/SAColliderBuilder/Editor/SABoneColliderEditorCommon.cs.meta
 guid: eec6dd035cf4d26499df97eb07b19f8b
+========
+guid: 7381f8384a6322a4e80040871f8c913f
+>>>>>>>> origin/yamaguchi:Assets/Script/Weapon/EmptyBullet.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

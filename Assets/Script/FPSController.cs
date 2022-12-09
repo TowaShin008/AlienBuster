@@ -72,6 +72,12 @@ public class FPSController : MonoBehaviour
     [SerializeField]
     private AudioSource stepAudioSource;
 
+    //ポーズに使うもの達
+    [SerializeField]
+    GameObject pauseObject;
+    Vector3 savePosition;
+    Quaternion saveCamera;
+    Quaternion saveplayerRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -97,11 +103,26 @@ public class FPSController : MonoBehaviour
         sniperEdge.enabled = false;
         sniperGaugeEdge.enabled = false;
         sniperGauge.enabled = false;
+
+        //位置の保存
+        savePosition =new Vector3(0,0,0);
+        saveCamera = new Quaternion(0,0,0,0);
+        saveplayerRotation = new Quaternion(0, 0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (pauseObject.activeSelf)
+        {
+            gameObject.transform.position = savePosition;
+            cam.transform.localRotation = saveCamera;
+            transform.localRotation = saveplayerRotation;
+            jumpAudioSource.Stop();
+            stepAudioSource.Stop();
+            return;
+        }
+        
         //視点移動処理
         MoveCameraProcessing();
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5"))
@@ -170,8 +191,13 @@ public class FPSController : MonoBehaviour
         }
 
         gameObject.transform.position = currentPosition;
-
-        Debug.Log(stamina);
+        if (!pauseObject.activeSelf)
+        {
+            savePosition = gameObject.transform.position;
+            saveCamera = cam.transform.localRotation;
+            saveplayerRotation = transform.localRotation;
+        }
+        // Debug.Log(stamina);
     }
     /// <summary>
     /// 移動処理
