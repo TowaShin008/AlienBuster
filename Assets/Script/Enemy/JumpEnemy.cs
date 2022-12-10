@@ -60,9 +60,14 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField]
     private GameObject shotGunItem;
 
+    //ポーズ
+    bool stop;
+    [SerializeField]
+    GameObject pauseObject;
     // Start is called before the first frame update
     void Start()
     {
+        stop = false;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 0;
@@ -73,81 +78,93 @@ public class JumpEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //弾の発射処理
-        gun.transform.position = gun.transform.position;
-        if (shotDelayTime > 0)
+        if (pauseObject.activeSelf)
         {
-            shotDelayTime--;
+            stop = false;
         }
         else
         {
+            stop = true;
+        }
+        if (stop)
+        {
+
             //弾の発射処理
-            Shot();
-            shotDelayTime = shotDelayMaxTime;
-        }
-
-        transform.LookAt(playerObject.transform);
-        
-        // ジャンプの開始判定
-        if (onTheGroundFlag == true && jumpDelayTime <= 0)
-        {
-            jumping = true;
-            jumpDelayTime = jampDelayMaxTime;
-            onTheGroundFlag = false;
-            randomValue = Random.Range(0, 3);
-        }
-
-        if (jumpDelayTime > 0 && onTheGroundFlag == true)
-        {
-            jumpDelayTime--;
-        }
-
-        // ジャンプ中の処理
-        if (jumping)
-        {
-            jumpTime += Time.deltaTime;
-            if (jumpTime >= maxJumpTime)
+            gun.transform.position = gun.transform.position;
+            if (shotDelayTime > 0)
             {
-                jumping = false;
-                jumpTime = 0;
+                shotDelayTime--;
             }
-           
-        }
+            else
+            {
+                //弾の発射処理
+                Shot();
+                shotDelayTime = shotDelayMaxTime;
+            }
 
-        var currentPosition = gameObject.transform.position;
+            transform.LookAt(playerObject.transform);
 
-        if (currentPosition.z > Constants.stageMaxPositionZ)
-        {
-            currentPosition.z = Constants.stageMaxPositionZ;
-        }
-        if (currentPosition.z < Constants.stageMinPositionZ)
-        {
-            currentPosition.z = Constants.stageMinPositionZ;
-        }
-        if (currentPosition.x > Constants.stageMaxPositionX)
-        {
-            currentPosition.x = Constants.stageMaxPositionX;
-        }
-        if (currentPosition.x < Constants.stageMinPositionX)
-        {
-            currentPosition.x = Constants.stageMinPositionX;
-        }
+            // ジャンプの開始判定
+            if (onTheGroundFlag == true && jumpDelayTime <= 0)
+            {
+                jumping = true;
+                jumpDelayTime = jampDelayMaxTime;
+                onTheGroundFlag = false;
+                randomValue = Random.Range(0, 3);
+            }
 
-        gameObject.transform.position = currentPosition;
+            if (jumpDelayTime > 0 && onTheGroundFlag == true)
+            {
+                jumpDelayTime--;
+            }
 
-        if (hp <= 0)
-        {
-            deadFlag = true;
-            ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
-        }
+            // ジャンプ中の処理
+            if (jumping)
+            {
+                jumpTime += Time.deltaTime;
+                if (jumpTime >= maxJumpTime)
+                {
+                    jumping = false;
+                    jumpTime = 0;
+                }
 
-        if (deadFlag)
-        {
-            DropWeapon();
-            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            newExplosion.transform.localScale = explosionSize;
-            Destroy(newExplosion, 1.0f);
-            Destroy(gameObject);
+            }
+
+            var currentPosition = gameObject.transform.position;
+
+            if (currentPosition.z > Constants.stageMaxPositionZ)
+            {
+                currentPosition.z = Constants.stageMaxPositionZ;
+            }
+            if (currentPosition.z < Constants.stageMinPositionZ)
+            {
+                currentPosition.z = Constants.stageMinPositionZ;
+            }
+            if (currentPosition.x > Constants.stageMaxPositionX)
+            {
+                currentPosition.x = Constants.stageMaxPositionX;
+            }
+            if (currentPosition.x < Constants.stageMinPositionX)
+            {
+                currentPosition.x = Constants.stageMinPositionX;
+            }
+
+            gameObject.transform.position = currentPosition;
+
+            if (hp <= 0)
+            {
+                deadFlag = true;
+                ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
+            }
+
+            if (deadFlag)
+            {
+                DropWeapon();
+                GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+                newExplosion.transform.localScale = explosionSize;
+                Destroy(newExplosion, 1.0f);
+                Destroy(gameObject);
+            }
         }
     }
 

@@ -47,9 +47,14 @@ public class StepEnemy : MonoBehaviour
     [SerializeField]
     private GameObject shotGunItem;
 
+    //ポーズ
+    bool stop;
+    [SerializeField]
+    GameObject pauseObject;
     // Start is called before the first frame update
     void Start()
     {
+        stop = false;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 50;
@@ -58,59 +63,71 @@ public class StepEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //弾の発射処理
-        gun.transform.position = gun.transform.position;
-        if (shotDelayTime > 0)
+        if (pauseObject.activeSelf)
         {
-            shotDelayTime--;
+            stop = false;
         }
         else
         {
+            stop = true;
+        }
+        if (stop)
+        {
+
             //弾の発射処理
-            Shot();
-            shotDelayTime = shotDelayMaxTime;
-        }
+            gun.transform.position = gun.transform.position;
+            if (shotDelayTime > 0)
+            {
+                shotDelayTime--;
+            }
+            else
+            {
+                //弾の発射処理
+                Shot();
+                shotDelayTime = shotDelayMaxTime;
+            }
 
-        transform.LookAt(playerObject.transform);
-        transform.position += transform.forward * speed;
+            transform.LookAt(playerObject.transform);
+            transform.position += transform.forward * speed;
 
-        //ステップ処理
-        StepProcessing();
+            //ステップ処理
+            StepProcessing();
 
-        var currentPosition = gameObject.transform.position;
+            var currentPosition = gameObject.transform.position;
 
-        if (currentPosition.z > Constants.stageMaxPositionZ)
-        {
-            currentPosition.z = Constants.stageMaxPositionZ;
-        }
-        if (currentPosition.z < Constants.stageMinPositionZ)
-        {
-            currentPosition.z = Constants.stageMinPositionZ;
-        }
-        if (currentPosition.x > Constants.stageMaxPositionX)
-        {
-            currentPosition.x = Constants.stageMaxPositionX;
-        }
-        if (currentPosition.x < Constants.stageMinPositionX)
-        {
-            currentPosition.x = Constants.stageMinPositionX;
-        }
+            if (currentPosition.z > Constants.stageMaxPositionZ)
+            {
+                currentPosition.z = Constants.stageMaxPositionZ;
+            }
+            if (currentPosition.z < Constants.stageMinPositionZ)
+            {
+                currentPosition.z = Constants.stageMinPositionZ;
+            }
+            if (currentPosition.x > Constants.stageMaxPositionX)
+            {
+                currentPosition.x = Constants.stageMaxPositionX;
+            }
+            if (currentPosition.x < Constants.stageMinPositionX)
+            {
+                currentPosition.x = Constants.stageMinPositionX;
+            }
 
-        gameObject.transform.position = currentPosition;
+            gameObject.transform.position = currentPosition;
 
-        if (hp <= 0)
-        {
-            deadFlag = true;
-            ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
-        }
+            if (hp <= 0)
+            {
+                deadFlag = true;
+                ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
+            }
 
-        if (deadFlag)
-        {
-            DropWeapon();
-            GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            newExplosion.transform.localScale = explosionSize;
-            Destroy(newExplosion, 1.0f);
-            Destroy(gameObject);
+            if (deadFlag)
+            {
+                DropWeapon();
+                GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+                newExplosion.transform.localScale = explosionSize;
+                Destroy(newExplosion, 1.0f);
+                Destroy(gameObject);
+            }
         }
     }
     /// <summary>

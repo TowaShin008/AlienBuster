@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.10822108, g: 0.09031347, b: 0.18801713, a: 1}
+  m_IndirectSpecularColor: {r: 0.10940995, g: 0.09757457, b: 0.19449505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2027,6 +2027,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
     - target: {fileID: -3127547391920786180, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
+    - target: {fileID: -3127547391920786180, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
       propertyPath: shotGunItem
       value: 
       objectReference: {fileID: 1676383331}
@@ -2262,6 +2266,10 @@ PrefabInstance:
       propertyPath: speed
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: shotGunItem
       value: 
@@ -3075,6 +3083,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7536143154843583554, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2113986859}
+    - target: {fileID: 7536143154843583554, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
       propertyPath: exitButton
       value: 
       objectReference: {fileID: 329379583}
@@ -3114,6 +3126,14 @@ PrefabInstance:
       propertyPath: transitions.Array.data[2]
       value: 
       objectReference: {fileID: 1161219075}
+    - target: {fileID: 7536143154843583554, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
+      propertyPath: stopgGameObjects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536143154843583554, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
+      propertyPath: stopgGameObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7536143154843583555, guid: d7dd3be3e3c23cf468aff4aee38af236, type: 3}
       propertyPath: m_Name
       value: PauseEmpty
@@ -3966,6 +3986,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
+    - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: shotGunItem
       value: 
       objectReference: {fileID: 1676383331}
@@ -4168,6 +4192,10 @@ PrefabInstance:
       propertyPath: gunSound
       value: 
       objectReference: {fileID: 8300000, guid: d69e71cce9585d4409b5d00a0916f1e2, type: 3}
+    - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: pauseObject
+      value: 
+      objectReference: {fileID: 77777479}
     - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: rocketLauncher
       value: 
