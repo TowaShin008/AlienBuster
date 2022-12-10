@@ -22,7 +22,7 @@ public class RocketLauncher : MonoBehaviour
 
     [SerializeField] float angle = -45.0f;
     Vector3 axis = Vector3.right;
-    [SerializeField] float interpolant = 0.8f;
+    [SerializeField] float interpolant = 1.5f;
     float sec;
 
     public AudioClip shotSound;
@@ -31,6 +31,8 @@ public class RocketLauncher : MonoBehaviour
     [SerializeField]
     private GameObject gunModel;
 
+    private bool shotAgainFlag = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +40,8 @@ public class RocketLauncher : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         recoil = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
         recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
-
-        recoilgun = gunModel.transform.localRotation;
+        shotAgainFlag = true;
+        recoilback = gunModel.transform.localRotation;
     }
 
     // Update is called once per frame
@@ -76,6 +78,7 @@ public class RocketLauncher : MonoBehaviour
                 sec = 0;
                 lerp = false;
                 lerpback = false;
+                shotAgainFlag = true;
             }
         }
     }
@@ -86,11 +89,11 @@ public class RocketLauncher : MonoBehaviour
     /// <param name="arg_cameraRotation">ÉJÉÅÉâÇÃâÒì]ó </param>
     public void Shot(Quaternion arg_cameraRotation)
     {
-        if (shotDelayTime <= 0 && lerpback == false)
+        if (shotDelayTime <= 0 && lerpback == false && shotAgainFlag)
         {// íeÇÃî≠éÀèàóù
             recoilgun = gunModel.transform.localRotation;
             recoil = Quaternion.AngleAxis(angle, axis) * gunModel.transform.localRotation;
-            recoilback = recoilgun;
+            //recoilback = recoilgun;
             //èeÇÃâπ
             audioSource.PlayOneShot(shotSound);
 			// íeÇî≠éÀÇ∑ÇÈèÍèäÇéÊìæ
@@ -106,6 +109,7 @@ public class RocketLauncher : MonoBehaviour
             newBall.name = rocketBomb.name;
             // èoåªÇ≥ÇπÇΩÉ{Å[ÉãÇ2ïbå„Ç…è¡Ç∑
             //Destroy(newBall, 1.5f);
+            shotAgainFlag = false;
 
             shotDelayTime = shotDelayMaxTime;
 

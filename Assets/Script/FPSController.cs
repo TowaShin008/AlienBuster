@@ -147,7 +147,7 @@ public class FPSController : MonoBehaviour
 
         if (Input.GetMouseButton(1) || lTri > 0)
 		{//銃を構える処理
-			HoldGun(lTri);
+			HoldGun();
 		}
         else
         {//マウス入力がない場合は、銃を構えない。
@@ -453,7 +453,7 @@ public class FPSController : MonoBehaviour
     /// <summary>
     /// 銃を構える処理と発射処理
     /// </summary>
-    private void HoldGun(float arg_tri)
+    private void HoldGun()
 	{
         normalGun.transform.position = holdGunPosition.transform.position;
         rocketLauncher.transform.position = holdGunPosition.transform.position;

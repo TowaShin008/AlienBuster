@@ -11,10 +11,12 @@ public class RocketBomb : MonoBehaviour
     private AudioSource audioSource;
 
     private bool isDeadFlag = false;
+    Rigidbody rigidbody;
 	// Start is called before the first frame update
 	void Start()
     {
         isDeadFlag = false;
+        rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         Invoke("ExplodeProcessing", 2.0f); // グレネードを発射してから1.5秒後に爆発させる
     }
@@ -36,7 +38,7 @@ public class RocketBomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Enemy" || isDeadFlag) { return; }
+        if (collision.gameObject.tag != "Enemy" && isDeadFlag && collision.gameObject.name != "UFO_weak") { return; }
 
         ExplodeProcessing();
     }
@@ -49,6 +51,13 @@ public class RocketBomb : MonoBehaviour
         Destroy(newExplosion, 1.0f);
 
         audioSource.PlayOneShot(explosionSound);
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+
+        var renderer = gameObject.GetComponent<Renderer>();
+        // 非表示
+        renderer.enabled = false;
 
         isDeadFlag = true;
     }

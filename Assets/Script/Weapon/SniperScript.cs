@@ -29,7 +29,7 @@ public class SniperScript : MonoBehaviour
     public AudioClip shotSound;
     AudioSource audioSource;
 
-    private float bulletSpeed = 60.0f;
+    private float bulletSpeed = 120.0f;
     void Start()
     {
         //音のコンポーネント取得
@@ -39,7 +39,9 @@ public class SniperScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1))
+        float lTri = Input.GetAxis("L_Trigger");
+
+        if (Input.GetMouseButton(1) || lTri > 0)
         {//銃を構える処理
             HoldGun();
         }
@@ -65,7 +67,7 @@ public class SniperScript : MonoBehaviour
         defScale = sniperGauge.transform.localScale;
         if (defScale.y <= 0.25f)
         {
-            defScale.y += 0.005f;
+            defScale.y += 0.003f;
         }
         sniperGauge.transform.localScale = defScale;
     }
@@ -96,9 +98,10 @@ public class SniperScript : MonoBehaviour
 
     public void Shot(Quaternion arg_cameraRotation)
 	{
+        //float rTri = Input.GetAxis("R_Trigger");
         if (defScale.y >= 0.25f)
         {
-            if (Input.GetMouseButtonDown(0))
+            //if (Input.GetMouseButtonDown(0) || rTri > 0)
             {//弾の発射処理
                 //銃の音
                 audioSource.PlayOneShot(shotSound);
@@ -113,7 +116,7 @@ public class SniperScript : MonoBehaviour
                 // 出現させたボールの名前を"bullet"に変更
                 sBullet.name = "SniperBullet";
                 // 出現させたボールを0.8秒後に消す
-                Destroy(sBullet, 0.8f);
+                Destroy(sBullet, 1.0f);
 
                 defScale.y = 0;
                 sniperGauge.transform.localScale = defScale;

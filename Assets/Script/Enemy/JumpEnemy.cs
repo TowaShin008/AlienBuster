@@ -20,7 +20,7 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 60.0f;
-    const int shotDelayMaxTime = 30;
+    const int shotDelayMaxTime = 60;
     private int shotDelayTime = shotDelayMaxTime;
 
     [SerializeField] private float bulletDestroyTime = 0.8f;
