@@ -96,5 +96,12 @@ public class PauseManager : MonoBehaviour
     private void TitleReturn()
     {
         FadeManager.Instance.LoadScene("TitleScene", 1f);
+
+        pause = false;
+        time = 0;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //pausePanel.SetActive(false);
     }
 }
