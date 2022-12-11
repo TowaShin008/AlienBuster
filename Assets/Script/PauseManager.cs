@@ -33,7 +33,7 @@ public class PauseManager : MonoBehaviour
     {
         if (!pause)
         {
-            if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 6"))
+            if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 7"))
             {
 
                 Pause();       // Time.timeScale = 0;
