@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject shotGunItem;
 
+    //ƒ|[ƒY
     bool stop;
     [SerializeField]
     GameObject pauseObject;
@@ -58,7 +59,7 @@ public class Enemy : MonoBehaviour
     {
         if (pauseObject.activeSelf)
         {
-            stop = false; 
+            stop = false;
         }
         else
         {
@@ -69,6 +70,8 @@ public class Enemy : MonoBehaviour
 
         if (stop)
         {
+
+
             //’e‚Ì”­ŽËˆ—
             gun.transform.position = gun.transform.position;
             if (shotDelayTime > 0)
@@ -120,6 +123,7 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)

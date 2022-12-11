@@ -20,7 +20,7 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed = 60.0f;
-    const int shotDelayMaxTime = 60;
+    const int shotDelayMaxTime = 30;
     private int shotDelayTime = shotDelayMaxTime;
 
     [SerializeField] private float bulletDestroyTime = 0.8f;
@@ -60,13 +60,10 @@ public class JumpEnemy : MonoBehaviour
     [SerializeField]
     private GameObject shotGunItem;
 
+    //ポーズ
     bool stop;
     [SerializeField]
     GameObject pauseObject;
-    //ヒット時後ろに吹っ飛ばないように
-    [SerializeField, Min(0)] int hitStopMaxTime = 10;
-    private int hitStopTime = 10;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -75,10 +72,7 @@ public class JumpEnemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 0;
 
-        rigidbody.isKinematic = false;
-
         jumpDelayTime = jampDelayMaxTime;
-        hitStopTime = hitStopMaxTime;
     }
 
     // Update is called once per frame
@@ -92,11 +86,9 @@ public class JumpEnemy : MonoBehaviour
         {
             stop = true;
         }
-
-        transform.LookAt(playerObject.transform);
-
         if (stop)
-		{
+        {
+
             //弾の発射処理
             gun.transform.position = gun.transform.position;
             if (shotDelayTime > 0)
@@ -110,47 +102,33 @@ public class JumpEnemy : MonoBehaviour
                 shotDelayTime = shotDelayMaxTime;
             }
 
+            transform.LookAt(playerObject.transform);
 
-            if (hitStopTime > 0)
+            // ジャンプの開始判定
+            if (onTheGroundFlag == true && jumpDelayTime <= 0)
             {
-                hitStopTime--;
+                jumping = true;
+                jumpDelayTime = jampDelayMaxTime;
+                onTheGroundFlag = false;
+                randomValue = Random.Range(0, 3);
             }
 
-
-            if (hitStopTime <= 0)
+            if (jumpDelayTime > 0 && onTheGroundFlag == true)
             {
-                rigidbody.isKinematic = false;
-
-                // ジャンプの開始判定
-                if (onTheGroundFlag == true && jumpDelayTime <= 0)
-                {
-                    jumping = true;
-                    jumpDelayTime = jampDelayMaxTime;
-                    onTheGroundFlag = false;
-                    randomValue = Random.Range(0, 3);
-                    rigidbody.drag = 0;
-                }
-
-                if (jumpDelayTime > 0 && onTheGroundFlag == true)
-                {
-                    jumpDelayTime--;
-                    rigidbody.drag = 50;
-                }
-
-                // ジャンプ中の処理
-                if (jumping)
-                {
-                    jumpTime += Time.deltaTime;
-                    if (jumpTime >= maxJumpTime)
-                    {
-                        Debug.Log(jumpTime);
-                        jumping = false;
-                        jumpTime = 0;
-                    }
-
-                }
+                jumpDelayTime--;
             }
 
+            // ジャンプ中の処理
+            if (jumping)
+            {
+                jumpTime += Time.deltaTime;
+                if (jumpTime >= maxJumpTime)
+                {
+                    jumping = false;
+                    jumpTime = 0;
+                }
+
+            }
 
             var currentPosition = gameObject.transform.position;
 
@@ -204,7 +182,6 @@ public class JumpEnemy : MonoBehaviour
         {
             return;
         }
-
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
         // ジャンプの速度をアニメーションカーブから取得
         float t = jumpTime / maxJumpTime;
@@ -237,20 +214,14 @@ public class JumpEnemy : MonoBehaviour
 
         if (gameObjectName == "Bullet")
         {
-            rigidbody.isKinematic = true;
-            hitStopTime = hitStopMaxTime;
             hp -= Constants.normalBulletDamage;
         }
         else if (gameObjectName == "RocketBumb")
         {
-            rigidbody.isKinematic = true;
-            hitStopTime = hitStopMaxTime;
             hp -= Constants.rocketBombDamage;
         }
         else if (gameObjectName == "SniperBullet")
         {
-            rigidbody.isKinematic = true;
-            hitStopTime = hitStopMaxTime;
             hp -= Constants.sniperBulletDamage;
         }
 
