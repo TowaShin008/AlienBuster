@@ -30,6 +30,13 @@ public class ShotGun : MonoBehaviour
     AudioSource audioSource;
     public AudioClip bulletSound;
 
+    [SerializeField]
+    Vector3 muzzleFlashScale;
+    [SerializeField]
+    GameObject muzzleFlashPrefab;
+
+    GameObject muzzleFlash;
+
     void Start()
     {
         //音のコンポーネント取得
@@ -46,9 +53,9 @@ public class ShotGun : MonoBehaviour
     }
 
     public void Shot(Quaternion arg_cameraRotation)
-	{
+    {
         if (shotDelayTime <= 0)
-		{
+        {
             //銃の音
             audioSource.PlayOneShot(shotSound);
             audioSource.PlayOneShot(bulletSound);
@@ -82,7 +89,45 @@ public class ShotGun : MonoBehaviour
                 Destroy(newBall, 0.8f);
             }
 
+            MuzzleFashProcessing();
+
             shotDelayTime = shotDelayMaxTime;
+        }
+    }
+    /// <summary>
+    /// マズルフラッシュ演出
+    /// </summary>
+    private void MuzzleFashProcessing()
+    {
+        //マズルフラッシュON
+        if (muzzleFlashPrefab != null)
+        {
+            if (muzzleFlash != null)
+            {
+                muzzleFlash.SetActive(true);
+            }
+            else
+            {
+                muzzleFlash = Instantiate(muzzleFlashPrefab, firingPoint.transform.position, firingPoint.transform.rotation);
+                muzzleFlash.transform.SetParent(firingPoint.gameObject.transform);
+                muzzleFlash.transform.localScale = muzzleFlashScale;
+            }
+        }
+
+        //マズルフラッシュ終了演出
+        StartCoroutine(MuzzleFlashEndProcessing());
+    }
+    /// <summary>
+    /// マズルフラッシュ終了演出
+    /// </summary>
+    /// <returns>インターフェイス</returns>
+    IEnumerator MuzzleFlashEndProcessing()
+    {
+        yield return new WaitForSeconds(0.15f);
+        //マズルフラッシュOFF
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.SetActive(false);
         }
     }
 }

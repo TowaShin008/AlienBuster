@@ -30,6 +30,13 @@ public class SniperScript : MonoBehaviour
     AudioSource audioSource;
 
     private float bulletSpeed = 120.0f;
+
+    [SerializeField]
+    Vector3 muzzleFlashScale;
+    [SerializeField]
+    GameObject muzzleFlashPrefab;
+
+    GameObject muzzleFlash;
     void Start()
     {
         //音のコンポーネント取得
@@ -120,7 +127,45 @@ public class SniperScript : MonoBehaviour
 
                 defScale.y = 0;
                 sniperGauge.transform.localScale = defScale;
+
+                MuzzleFashProcessing();
             }
+        }
+    }
+    /// <summary>
+    /// マズルフラッシュ演出
+    /// </summary>
+    private void MuzzleFashProcessing()
+    {
+        //マズルフラッシュON
+        if (muzzleFlashPrefab != null)
+        {
+            if (muzzleFlash != null)
+            {
+                muzzleFlash.SetActive(true);
+            }
+            else
+            {
+                muzzleFlash = Instantiate(muzzleFlashPrefab, firingPoint.transform.position, firingPoint.transform.rotation);
+                muzzleFlash.transform.SetParent(firingPoint.gameObject.transform);
+                muzzleFlash.transform.localScale = muzzleFlashScale;
+            }
+        }
+
+        //マズルフラッシュ終了演出
+        StartCoroutine(MuzzleFlashEndProcessing());
+    }
+    /// <summary>
+    /// マズルフラッシュ終了演出
+    /// </summary>
+    /// <returns>インターフェイス</returns>
+    IEnumerator MuzzleFlashEndProcessing()
+    {
+        yield return new WaitForSeconds(0.15f);
+        //マズルフラッシュOFF
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.SetActive(false);
         }
     }
 }

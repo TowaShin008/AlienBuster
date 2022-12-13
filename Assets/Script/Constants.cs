@@ -19,7 +19,7 @@ namespace Util
 		//通常弾のダメージ量
 		public static int normalBulletDamage = 1;
 		//スナイパーライフルのダメージ量
-		public static int sniperBulletDamage = 5;
+		public static int sniperBulletDamage = 2;
 		//ロケット弾のダメージ量
 		public static int rocketBombDamage = 10;
 	}

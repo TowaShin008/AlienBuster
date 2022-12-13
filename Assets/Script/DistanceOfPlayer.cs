@@ -63,7 +63,7 @@ public class DistanceOfPlayer : MonoBehaviour
             {
                 if (savelookOn)
                 {
-                    marker.color = Color.black;
+                    marker.color = Color.gray;
                     foreach (var trans in transitions)
                     {
                         trans.Hide();
@@ -75,7 +75,7 @@ public class DistanceOfPlayer : MonoBehaviour
         {
             if (savelookOn)
             {
-                marker.color = Color.black;
+                marker.color = Color.gray;
                 foreach (var trans in transitions)
                 {
                     trans.Hide();
