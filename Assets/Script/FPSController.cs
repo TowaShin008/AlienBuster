@@ -163,9 +163,6 @@ public class FPSController : MonoBehaviour
 		}
 
 
-		//移動処理
-		MoveProcessing();
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {//カーソルの非表示
             Cursor.visible = true;
@@ -189,6 +186,15 @@ public class FPSController : MonoBehaviour
         {
             currentPosition.x = Constants.stageMinPositionX;
         }
+        if (currentPosition.y > Constants.stageMaxPositionY)
+        {
+            currentPosition.y = Constants.stageMaxPositionY;
+            rigidbody.velocity = Vector3.zero;
+        }
+        if (currentPosition.y < Constants.stageMinPositionY)
+        {
+            currentPosition.y = Constants.stageMinPositionY;
+        }
 
         gameObject.transform.position = currentPosition;
         if (!pauseObject.activeSelf)
@@ -199,10 +205,15 @@ public class FPSController : MonoBehaviour
         }
         // Debug.Log(stamina);
     }
-    /// <summary>
-    /// 移動処理
-    /// </summary>
-    private void MoveProcessing()
+	private void FixedUpdate()
+	{
+        //移動処理
+        MoveProcessing();
+    }
+	/// <summary>
+	/// 移動処理
+	/// </summary>
+	private void MoveProcessing()
 	{
         float lsh = Input.GetAxis("L_Stick_H");
         float lsv = Input.GetAxis("L_Stick_V");
@@ -285,9 +296,9 @@ public class FPSController : MonoBehaviour
             Damage();
         }
 
-        if(collision.gameObject.tag == "WeaponItem")
+        if(collision.gameObject.tag == Constants.weaponItemName)
 		{
-            if (collision.gameObject.name == "NormalGunItem")
+            if (collision.gameObject.name == Constants.normalGunItemName)
             {
                 normalGun.SetActive(true);
                 rocketLauncher.SetActive(false);
@@ -295,7 +306,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 gunType = 1;
             }
-            else if (collision.gameObject.name == "RocketLauncherItem")
+            else if (collision.gameObject.name == Constants.rocketLauncherItemName)
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);
@@ -303,7 +314,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 gunType = 2;
             }
-            else if (collision.gameObject.name == "SniperRifleItem")
+            else if (collision.gameObject.name == Constants.sniperRifleItemName)
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(false);
@@ -311,7 +322,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 gunType = 3;
             }
-            else if (collision.gameObject.name == "ShotGunItem")
+            else if (collision.gameObject.name == Constants.shotGunItemName)
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(false);
@@ -407,7 +418,7 @@ public class FPSController : MonoBehaviour
     public void JumpProcessing()
 	{
         rigidbody.drag = 0;
-        rigidbody.AddForce(new Vector3(0.0f, 10.0f, 0.0f));
+        rigidbody.AddForce(new Vector3(0.0f, 10.0f, 0.0f),ForceMode.Force);
 	}
     /// <summary>
     /// 呼吸演出
@@ -438,19 +449,6 @@ public class FPSController : MonoBehaviour
         sniperRifle.transform.rotation *= Quaternion.Euler(-sniperRifleyRot, 0, 0);
     }
     /// <summary>
-    /// 腰だめうち
-    /// </summary>
- //   private void HipShot()
-	//{
- //       normalGun.transform.position = normalGunPosition.transform.position;
- //       rocketLauncher.transform.position = normalGunPosition.transform.position;
- //       //sniperRifle.transform.position = normalGunPosition.transform.position;
- //       shotGun.transform.position = normalGunPosition.transform.position;
-
- //       //弾の発射処理
- //       Shot();
- //   }
-    /// <summary>
     /// 銃を構える処理と発射処理
     /// </summary>
     private void HoldGun()
@@ -459,11 +457,6 @@ public class FPSController : MonoBehaviour
         rocketLauncher.transform.position = holdGunPosition.transform.position;
         //sniperRifle.transform.position = holdGunPosition.transform.position;
         shotGun.transform.position = holdGunPosition.transform.position;
-
-        //if (Input.GetMouseButton(0) || arg_tri > 0)
-        //{//弾の発射処理
-        //    Shot();
-        //}
     }
     /// <summary>
     /// スタミナのリチャージ処理
