@@ -89,7 +89,7 @@ public class ShotGun : MonoBehaviour
                 Destroy(newBall, 0.8f);
             }
 
-            MuzzleFashProcessing();
+            MuzzleFlashProcessing();
 
             shotDelayTime = shotDelayMaxTime;
         }
@@ -97,7 +97,7 @@ public class ShotGun : MonoBehaviour
     /// <summary>
     /// マズルフラッシュ演出
     /// </summary>
-    private void MuzzleFashProcessing()
+    private void MuzzleFlashProcessing()
     {
         //マズルフラッシュON
         if (muzzleFlashPrefab != null)

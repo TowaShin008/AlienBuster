@@ -71,6 +71,8 @@ public class FPSController : MonoBehaviour
     private AudioSource jumpAudioSource;
     [SerializeField]
     private AudioSource stepAudioSource;
+    [SerializeField]
+    AudioSource getItemAudioSource;
 
     //ポーズに使うもの達
     [SerializeField]
@@ -125,6 +127,7 @@ public class FPSController : MonoBehaviour
         
         //視点移動処理
         MoveCameraProcessing();
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5"))
 		{
             jumpAudioSource.Play();
@@ -164,46 +167,18 @@ public class FPSController : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.Escape))
-        {//カーソルの非表示
+        {//カーソルの表示
             Cursor.visible = true;
         }
+        //ステージ外のポジション修正処理
+        StageOutProcessing();
 
-        var currentPosition = gameObject.transform.position;
-
-        if (currentPosition.z > Constants.stageMaxPositionZ)
-		{
-            currentPosition.z = Constants.stageMaxPositionZ;
-        }
-        if (currentPosition.z < Constants.stageMinPositionZ)
-        {
-            currentPosition.z = Constants.stageMinPositionZ;
-        }
-        if (currentPosition.x > Constants.stageMaxPositionX)
-        {
-            currentPosition.x = Constants.stageMaxPositionX;
-        }
-        if (currentPosition.x < Constants.stageMinPositionX)
-        {
-            currentPosition.x = Constants.stageMinPositionX;
-        }
-        if (currentPosition.y > Constants.stageMaxPositionY)
-        {
-            currentPosition.y = Constants.stageMaxPositionY;
-            rigidbody.velocity = Vector3.zero;
-        }
-        if (currentPosition.y < Constants.stageMinPositionY)
-        {
-            currentPosition.y = Constants.stageMinPositionY;
-        }
-
-        gameObject.transform.position = currentPosition;
         if (!pauseObject.activeSelf)
         {
             savePosition = gameObject.transform.position;
             saveCamera = cam.transform.localRotation;
             saveplayerRotation = transform.localRotation;
         }
-        // Debug.Log(stamina);
     }
 	private void FixedUpdate()
 	{
@@ -298,6 +273,7 @@ public class FPSController : MonoBehaviour
 
         if(collision.gameObject.tag == Constants.weaponItemName)
 		{
+            getItemAudioSource.Play();
             if (collision.gameObject.name == Constants.normalGunItemName)
             {
                 normalGun.SetActive(true);
@@ -392,6 +368,7 @@ public class FPSController : MonoBehaviour
             {
                 stepTime = stepMaxTime;
                 stamina -= 100;
+                rigidbody.velocity = Vector3.zero;
                 rigidbody.AddForce(arg_velocity * 5.0f, ForceMode.Impulse);
             }
         }
@@ -518,6 +495,42 @@ public class FPSController : MonoBehaviour
         }
     }
     /// <summary>
+    /// プレイヤーがステージ外に出てしまった際のポジション修正処理
+    /// </summary>
+    private void StageOutProcessing()
+	{
+        //ステージ外に出た時にポジションを正しい位置に戻す処理
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+        {
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+        if (currentPosition.y > Constants.stageMaxPositionY)
+        {
+            currentPosition.y = Constants.stageMaxPositionY;
+            rigidbody.velocity = Vector3.zero;
+        }
+        if (currentPosition.y < Constants.stageMinPositionY)
+        {
+            currentPosition.y = Constants.stageMinPositionY;
+        }
+
+        gameObject.transform.position = currentPosition;
+    }
+    /// <summary>
     /// 銃番号のセット
     /// </summary>
     /// <param name="arg_gunType">銃番号</param>
@@ -544,7 +557,7 @@ public class FPSController : MonoBehaviour
     /// <summary>
     /// スタミナの取得
     /// </summary>
-    /// <returns>スタミナ</returns>
+    /// <returns>現在のスタミナ</returns>
     public int GetStamina()
     {
         return stamina;

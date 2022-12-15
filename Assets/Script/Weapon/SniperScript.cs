@@ -37,10 +37,20 @@ public class SniperScript : MonoBehaviour
     GameObject muzzleFlashPrefab;
 
     GameObject muzzleFlash;
+
+    //ズーム
+    const float defaultCameraFov = 60; // 標準の視野角
+    const float defaultZoomCameraFov = 15;　//拡大時の視野角
+    float cameraFov = 60; //現在の視野角
+    const float zoomTime = 10; //拡大までの時間
+    Camera mainCamera;
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
+
+        //mainCamera取得
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>() as Camera;
     }
 
     // Update is called once per frame
@@ -51,12 +61,13 @@ public class SniperScript : MonoBehaviour
         if (Input.GetMouseButton(1) || lTri > 0)
         {//銃を構える処理
             HoldGun();
+            ZoomIn();
         }
         else
         {
-			transform.position = normalGunPosition.transform.position;
-			//transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
-			sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
+            transform.position = normalGunPosition.transform.position;
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
+            sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
             for (int i = 0; i < sniperMesh.Count; i++)
             {
                 sniperMesh[i].material.color = new Color32(255, 255, 255, 255);
@@ -68,6 +79,9 @@ public class SniperScript : MonoBehaviour
             color2.a = 0;
             sniperGauge.color = color;
             sniperGaugeEdge.color = color2;
+
+
+            ZoomOut();
         }
 
         //ゲージ
@@ -77,10 +91,11 @@ public class SniperScript : MonoBehaviour
             defScale.y += 0.003f;
         }
         sniperGauge.transform.localScale = defScale;
+
     }
 
     public void HoldGun()
-	{
+    {
         sniperEdge.enabled = true;
         sniperGaugeEdge.enabled = true;
         sniperGauge.enabled = true;
@@ -101,10 +116,11 @@ public class SniperScript : MonoBehaviour
             sniperGauge.color = color;
             sniperGaugeEdge.color = color2;
         }
+
     }
 
     public void Shot(Quaternion arg_cameraRotation)
-	{
+    {
         //float rTri = Input.GetAxis("R_Trigger");
         if (defScale.y >= 0.25f)
         {
@@ -167,5 +183,34 @@ public class SniperScript : MonoBehaviour
         {
             muzzleFlash.SetActive(false);
         }
+    }
+
+    void ZoomIn()
+    {
+        if (cameraFov <= defaultZoomCameraFov)
+        {
+            //cameraFov = defaultZoomCameraFov;
+            //mainCamera.fieldOfView = cameraFov;
+            return;
+        }
+        float n = (defaultCameraFov - defaultZoomCameraFov) / zoomTime;
+
+        cameraFov -= n;
+
+        mainCamera.fieldOfView = cameraFov;
+    }
+    void ZoomOut()
+    {
+        if (cameraFov >= defaultCameraFov)
+        {
+            //cameraFov = defaultCameraFov;
+            //mainCamera.fieldOfView = cameraFov;
+            return;
+        }
+        float n = (defaultCameraFov - defaultZoomCameraFov) / zoomTime;
+
+        cameraFov += n;
+
+        mainCamera.fieldOfView = cameraFov;
     }
 }
