@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09295731, g: 0.080398135, b: 0.16833529, a: 1}
+  m_IndirectSpecularColor: {r: 0.100357704, g: 0.08728588, b: 0.1795392, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2349,7 +2349,7 @@ PrefabInstance:
       objectReference: {fileID: 210291221}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: speed
-      value: 0.1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: explosion
@@ -2383,6 +2383,10 @@ PrefabInstance:
       propertyPath: sniperRifleItem
       value: 
       objectReference: {fileID: 2031247512}
+    - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: bulletDestroyTime
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: rocketLauncherItem
       value: 
@@ -2860,10 +2864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 210291225, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: m_Volume
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 630411669, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: playerObject
       value: 
@@ -2872,10 +2872,6 @@ PrefabInstance:
       propertyPath: enemys.Array.data[0]
       value: 
       objectReference: {fileID: 478962278}
-    - target: {fileID: 1046609709, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: m_Volume
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 7249754901405583773, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_Name
       value: ufo2
@@ -2884,10 +2880,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2113986859}
-    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
-      propertyPath: explosion
-      value: 
-      objectReference: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
     - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: waveManager
       value: 
