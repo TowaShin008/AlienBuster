@@ -52,6 +52,8 @@ public class UFO : MonoBehaviour
     //éÄñSââèo
     private bool deleteFlag;
     Rigidbody rigidbody;
+    [SerializeField, Min(0)] int explosionDelayMaxTime = 20;
+    int explosionDelayTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +76,8 @@ public class UFO : MonoBehaviour
         textMesh.enabled = false;
 
         rigidbody = GetComponent<Rigidbody>();
+
+        explosionDelayTime = explosionDelayMaxTime;
     }
 
     // Update is called once per frame
@@ -92,6 +96,23 @@ public class UFO : MonoBehaviour
         if (deadFlag)
         {
             rigidbody.isKinematic = false;
+
+            explosionDelayTime--;
+
+            if(explosionDelayTime <= 0)
+            {
+                // ÉâÉìÉ_ÉÄÇÃà íu
+                Vector3 pos;
+                pos = this.gameObject.transform.position + Random.insideUnitSphere * 50;
+                pos.y = this.gameObject.transform.position.y + 20.0f;
+
+                GameObject newExplosion = Instantiate(explosion, pos, Quaternion.Euler(0, 0, 0));
+                newExplosion.transform.localScale = explosionSize;
+                Destroy(newExplosion, 0.3f);
+
+                explosionDelayTime = explosionDelayMaxTime;
+            }
+
         }
         else
         {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.100357704, g: 0.08728588, b: 0.1795392, a: 1}
+  m_IndirectSpecularColor: {r: 0.14360183, g: 0.128275, b: 0.24446198, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2349,7 +2349,7 @@ PrefabInstance:
       objectReference: {fileID: 210291221}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: speed
-      value: 0.8
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: explosion
@@ -2385,7 +2385,7 @@ PrefabInstance:
       objectReference: {fileID: 2031247512}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: bulletDestroyTime
-      value: 0.02
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: rocketLauncherItem
@@ -2612,6 +2612,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
       propertyPath: m_Name
       value: dem_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7308b0eb7cc869e45b85be3fe41f6cef, type: 3}
       propertyPath: m_TagString
