@@ -26,6 +26,7 @@ public class EnemySpawnerWeek : MonoBehaviour
     {
         string gameObjectName = collision.gameObject.tag;
         if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
+        if (ufo.GetComponent<UFO>().GetDeadFlag() == true) { return; }
 
         if (gameObjectName == "Bullet")
         {

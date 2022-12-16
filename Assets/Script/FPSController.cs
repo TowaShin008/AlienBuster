@@ -170,6 +170,7 @@ public class FPSController : MonoBehaviour
         {//カーソルの表示
             Cursor.visible = true;
         }
+
         //ステージ外のポジション修正処理
         StageOutProcessing();
 

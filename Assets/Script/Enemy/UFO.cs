@@ -22,6 +22,7 @@ public class UFO : MonoBehaviour
     [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
 
     private bool deadFlag;
+    public bool GetDeadFlag() { return deadFlag; }
 
     [SerializeField] GameObject barrier;
     //バリア発生しているか
@@ -48,6 +49,10 @@ public class UFO : MonoBehaviour
     [SerializeField]
     public GameObject player;
 
+    //死亡演出
+    private bool deleteFlag;
+    Rigidbody rigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,86 +72,14 @@ public class UFO : MonoBehaviour
         damageCount = damageMaxCount;
 
         textMesh.enabled = false;
+
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
-    {        
-        if (entryFlag)
-		{//出現演出
-            EntryProcessing();
-		}
-        //回転演出
-        RotationProcessing();
-
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-
-        //バリアの切り替え
-        if (barrierFlag == true)
-        {
-            barrier.SetActive(true);
-        }
-        else
-        {
-            barrier.SetActive(false);
-        }
-
-        if(gameObject.GetComponent<EnemySpawnManager>().ChangeNextWave())
-		{
-            barrierFlag = true;
-            barrierCreateTime = barrierCreateMaxTime;
-        }
-
-        if(gameObject.GetComponent<EnemySpawnManager>().StopProcessing())
-		{
-            if (barrierFlag == false && entryFlag == false)
-            {
-                if (barrierCreateTime > 0)
-                {
-                    barrierCreateTime--;
-                }
-                else
-                {
-                    barrierCreateTime = barrierCreateMaxTime;
-                    barrierFlag = true;
-                }
-            }
-        }
-
-        if (gameObject.GetComponent<EnemySpawnManager>().GetEnemyCount() < gameObject.GetComponent<EnemySpawnManager>().GetMaxEnemyCount())
-        {
-            if(entryFlag == false)
-			{
-                gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
-            }
-        }
-
-        if (gameObject.GetComponent<EnemySpawnManager>().LauncherProcessing())
-		{
-            barrierFlag = false;
-        }
-
-        if (damageFlag)
-        {
-            mesh.material.color = damageColor;
-            mesh_2.material.color = damageColor;
-            mesh_3.material.color = damageColor;
-
-            damageCount--;
-
-            if (damageCount <= 0)
-            {
-                damageFlag = false;
-                mesh.material.color = defaultColor1;
-                mesh_2.material.color = defaultColor2;
-                mesh_3.material.color = defaultColor3;
-            }
-        }      
-
-        if (deadFlag)
+    {       
+        if (deleteFlag)
         {
             waveManager.WaveChangeFlagOn();
             GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
@@ -154,6 +87,88 @@ public class UFO : MonoBehaviour
             Destroy(newExplosion, 1.0f);
             //Destroy(gameObject);
             gameObject.SetActive(false);
+        }
+
+        if (deadFlag)
+        {
+            rigidbody.isKinematic = false;
+        }
+        else
+        {
+            if (entryFlag)
+            {//出現演出
+                EntryProcessing();
+            }
+            //回転演出
+            RotationProcessing();
+
+            if (hp <= 0)
+            {
+                deadFlag = true;
+            }
+
+            //バリアの切り替え
+            if (barrierFlag == true)
+            {
+                barrier.SetActive(true);
+            }
+            else
+            {
+                barrier.SetActive(false);
+            }
+
+            if (gameObject.GetComponent<EnemySpawnManager>().ChangeNextWave())
+            {
+                barrierFlag = true;
+                barrierCreateTime = barrierCreateMaxTime;
+            }
+
+            if (gameObject.GetComponent<EnemySpawnManager>().StopProcessing())
+            {
+                if (barrierFlag == false && entryFlag == false)
+                {
+                    if (barrierCreateTime > 0)
+                    {
+                        barrierCreateTime--;
+                    }
+                    else
+                    {
+                        barrierCreateTime = barrierCreateMaxTime;
+                        barrierFlag = true;
+                    }
+                }
+            }
+
+            if (gameObject.GetComponent<EnemySpawnManager>().GetEnemyCount() < gameObject.GetComponent<EnemySpawnManager>().GetMaxEnemyCount())
+            {
+                if (entryFlag == false)
+                {
+                    gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
+                }
+            }
+
+            if (gameObject.GetComponent<EnemySpawnManager>().LauncherProcessing())
+            {
+                barrierFlag = false;
+            }
+
+            if (damageFlag)
+            {
+                mesh.material.color = damageColor;
+                mesh_2.material.color = damageColor;
+                mesh_3.material.color = damageColor;
+
+                damageCount--;
+
+                if (damageCount <= 0)
+                {
+                    damageFlag = false;
+                    mesh.material.color = defaultColor1;
+                    mesh_2.material.color = defaultColor2;
+                    mesh_3.material.color = defaultColor3;
+                }
+            }
+
         }
     }
     /// <summary>
@@ -217,6 +232,8 @@ public class UFO : MonoBehaviour
         mesh_3.material.color = new Color(mesh_3.material.color.r, mesh_3.material.color.g, mesh_3.material.color.b, 0);
         mesh_barrier.material.SetFloat("_MyAlpha", 0);
         gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(false);
+        deleteFlag = false;
+        rigidbody.isKinematic = true;
     }
 	public void SetEntryFlag(bool arg_entryFlag)
 	{
@@ -251,4 +268,11 @@ public class UFO : MonoBehaviour
 	{
         return barrierFlag;
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        string gameObjectName = other.gameObject.tag;
+        if (gameObjectName != "Field"||deadFlag == false) { return; }
+        deleteFlag = true;
+    }
 }
