@@ -201,7 +201,7 @@ public class MiniMap2D : MonoBehaviour
             Vector2 pos = CalculationPositionPlayer(_MMItems[i]._Object.transform.position);
             pos = pos * _MMDistance;
 
-            if (item.tagName == "Enemy")
+            if (item.tagName == "Enemy"|| item.tagName == "WeaponItem")
             {
                 pos = IconInMap(pos);
             }

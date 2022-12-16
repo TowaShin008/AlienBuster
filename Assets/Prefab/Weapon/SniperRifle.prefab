@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8705425720635865749}
   m_Layer: 0
   m_Name: SniperRifle
-  m_TagString: WeaponItem
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,37 +173,6 @@ Transform:
   m_Father: {fileID: 8705425720635865749}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1 &9028001910258638841
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9028001910258638842}
-  m_Layer: 0
-  m_Name: defaultShotPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9028001910258638842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9028001910258638841}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00333, z: -0.018857}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8846018111711802702}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9028001910463746130
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +548,8 @@ MonoBehaviour:
   sniperGaugeEdge: {fileID: 9028001910116374026}
   sniperGauge: {fileID: 9028001910463746124}
   shotSound: {fileID: 0}
+  muzzleFlashScale: {x: 0, y: 0, z: 0}
+  muzzleFlashPrefab: {fileID: 0}
 --- !u!4 &8846018111711802702 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 17ce969a0ecf03c4da3b523d64cbd64f, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class SniperRifleItem : MonoBehaviour
 {
@@ -33,6 +34,15 @@ public class SniperRifleItem : MonoBehaviour
                 yRot = 0.0f;
             }
             sniperRifle.transform.rotation *= Quaternion.Euler(0, yRot, 0);
+        }
+
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.y < Constants.stageMinPositionY)
+        {
+            currentPosition.y = Constants.stageMinPositionY;
+
+            gameObject.transform.position = currentPosition;
         }
     }
 
