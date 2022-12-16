@@ -85,7 +85,6 @@ public class RocketLauncher : MonoBehaviour
     /// <summary>
     /// 弾の発射処理
     /// </summary>
-    /// <param name="arg_firingPoint">銃のポジション</param>
     /// <param name="arg_cameraRotation">カメラの回転量</param>
     public void Shot(Quaternion arg_cameraRotation)
     {

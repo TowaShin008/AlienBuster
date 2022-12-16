@@ -21,6 +21,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private AudioSource defaultAudioSource;
     [SerializeField] private AudioSource bossAudioSource;
+    [SerializeField] private GameObject CautionText;
 
     void Start()
     {
@@ -72,6 +73,7 @@ public class WaveManager : MonoBehaviour
 
                 if (nowWave == 2)
                 {
+                    CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
                 }
@@ -82,6 +84,7 @@ public class WaveManager : MonoBehaviour
                 }
                 if (nowWave == 4)
 				{
+                    CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
 				}
@@ -92,6 +95,7 @@ public class WaveManager : MonoBehaviour
                 }
                 if (nowWave == 6)
                 {
+                    CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
                 }

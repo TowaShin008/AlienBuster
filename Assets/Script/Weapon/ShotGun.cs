@@ -51,7 +51,10 @@ public class ShotGun : MonoBehaviour
             shotDelayTime--;
         }
     }
-
+    /// <summary>
+    /// ËŒ‚ˆ—
+    /// </summary>
+    /// <param name="arg_cameraRotation">ƒJƒƒ‰‚Ì‰ñ“]—Ê</param>
     public void Shot(Quaternion arg_cameraRotation)
     {
         if (shotDelayTime <= 0)
@@ -68,7 +71,6 @@ public class ShotGun : MonoBehaviour
 
             for (int n = 0; n < bulletCount; n++)
             {
-
                 var bulletPosition = firingPoint.transform.position;
 
                 GameObject newBall = Instantiate(bullet, bulletPosition, arg_cameraRotation);

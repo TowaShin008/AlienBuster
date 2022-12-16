@@ -90,26 +90,7 @@ public class Enemy : MonoBehaviour
                 ufo.GetComponent<EnemySpawnManager>().DecrimentEnemyCount();
             }
 
-            var currentPosition = gameObject.transform.position;
-
-            if (currentPosition.z > Constants.stageMaxPositionZ)
-            {
-                currentPosition.z = Constants.stageMaxPositionZ;
-            }
-            if (currentPosition.z < Constants.stageMinPositionZ)
-            {
-                currentPosition.z = Constants.stageMinPositionZ;
-            }
-            if (currentPosition.x > Constants.stageMaxPositionX)
-            {
-                currentPosition.x = Constants.stageMaxPositionX;
-            }
-            if (currentPosition.x < Constants.stageMinPositionX)
-            {
-                currentPosition.x = Constants.stageMinPositionX;
-            }
-
-            gameObject.transform.position = currentPosition;
+            StageOutProcessing();
 
             if (deadFlag)
             {
@@ -125,20 +106,47 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != Constants.normalBulletName && gameObjectName != Constants.rocketBombName && gameObjectName != Constants.sniperBulletName && gameObjectName == Constants.enemyBulletName) { return; }
 
-        if (gameObjectName == "Bullet")
+        if (gameObjectName == Constants.normalBulletName)
         {
             hp -= Constants.normalBulletDamage;
         }
-        else if (gameObjectName == "RocketBumb")
+        else if (gameObjectName == Constants.rocketBombName)
         {
             hp -= Constants.rocketBombDamage;
         }
-        else if (gameObjectName == "SniperBullet")
+        else if (gameObjectName == Constants.sniperBulletName)
         {
             hp -= Constants.sniperBulletDamage;
         }
+    }
+    /// <summary>
+    ///ステージ外に出てしまった際のポジション修正処理
+    /// </summary>
+    private void StageOutProcessing()
+    {
+        //ステージ外に出た時にポジションを正しい位置に戻す処理
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+        {
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
     }
     /// <summary>
     /// 弾の発射処理

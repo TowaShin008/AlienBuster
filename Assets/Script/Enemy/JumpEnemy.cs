@@ -151,27 +151,7 @@ public class JumpEnemy : MonoBehaviour
                 }
             }
 
-
-            var currentPosition = gameObject.transform.position;
-
-            if (currentPosition.z > Constants.stageMaxPositionZ)
-            {
-                currentPosition.z = Constants.stageMaxPositionZ;
-            }
-            if (currentPosition.z < Constants.stageMinPositionZ)
-            {
-                currentPosition.z = Constants.stageMinPositionZ;
-            }
-            if (currentPosition.x > Constants.stageMaxPositionX)
-            {
-                currentPosition.x = Constants.stageMaxPositionX;
-            }
-            if (currentPosition.x < Constants.stageMinPositionX)
-            {
-                currentPosition.x = Constants.stageMinPositionX;
-            }
-
-            gameObject.transform.position = currentPosition;
+            StageOutProcessing();
 
             if (hp <= 0)
             {
@@ -194,6 +174,33 @@ public class JumpEnemy : MonoBehaviour
     {
         //ジャンプ処理
         Jump();
+    }
+    /// <summary>
+    ///ステージ外に出てしまった際のポジション修正処理
+    /// </summary>
+    private void StageOutProcessing()
+    {
+        //ステージ外に出た時にポジションを正しい位置に戻す処理
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+        {
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
     }
     /// <summary>
     /// ジャンプ処理
@@ -233,28 +240,28 @@ public class JumpEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != Constants.normalBulletName && gameObjectName != Constants.rocketBombName && gameObjectName != Constants.sniperBulletName && gameObjectName == Constants.enemyBulletName) { return; }
 
-        if (gameObjectName == "Bullet")
+        if (gameObjectName == Constants.normalBulletName)
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.normalBulletDamage;
         }
-        else if (gameObjectName == "RocketBumb")
+        else if (gameObjectName == Constants.rocketBombName)
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.rocketBombDamage;
         }
-        else if (gameObjectName == "SniperBullet")
+        else if (gameObjectName == Constants.sniperBulletName)
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.sniperBulletDamage;
         }
 
-        if (gameObjectName == "Field")
+        if (gameObjectName == Constants.fieldName)
         {
             onTheGroundFlag = true;
         }

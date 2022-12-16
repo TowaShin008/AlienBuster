@@ -36,5 +36,17 @@ namespace Util
 		public static string sniperRifleItemName = "SniperRifleItem";
 		//ショットガンアイテムの名称
 		public static string shotGunItemName = "ShotGunItem";
+		//通常弾の名称
+		public static string normalBulletName = "Bullet";
+		//ロケット弾の名称
+		public static string rocketBombName = "RocketBomb";
+		//スナイパーライフル弾の名称
+		public static string sniperBulletName = "SniperBullet";
+		//敵弾の名称
+		public static string enemyBulletName = "EnemyBullet";
+		//フィールドの名称
+		public static string fieldName = "Field";
+		//フィールドの名称
+		public static string enemyName = "Enemy";
 	}
 }

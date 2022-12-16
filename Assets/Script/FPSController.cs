@@ -42,7 +42,7 @@ public class FPSController : MonoBehaviour
     int stamina = maxStamina;
 
     //カメラ関連変数
-    public GameObject cam;
+    public Camera cam;
     Quaternion cameraRot, characterRot;
 
     Rigidbody rigidbody;
@@ -55,6 +55,7 @@ public class FPSController : MonoBehaviour
     const int maxHP = 3;
     int hp = maxHP;
     bool deadFlag;
+    bool holdFlag = false;
 
     //銃の揺れ演出の変数
     const float shakingNormalSpeed = 10.0f;
@@ -80,9 +81,17 @@ public class FPSController : MonoBehaviour
     Vector3 savePosition;
     Quaternion saveCamera;
     Quaternion saveplayerRotation;
+
+    //ズーム
+    const float defaultCameraFov = 60; // 標準の視野角
+    float defaultZoomCameraFov = 30;　//拡大時の視野角
+    float cameraFov = 60; //現在の視野角
+    const float zoomTime = 10; //拡大までの時間
+    //Camera mainCamera;
     // Start is called before the first frame update
     void Start()
     {
+        holdFlag = false;
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
         deadFlag = false;
@@ -151,6 +160,7 @@ public class FPSController : MonoBehaviour
         if (Input.GetMouseButton(1) || lTri > 0)
 		{//銃を構える処理
 			HoldGun();
+            ZoomIn();
 		}
         else
         {//マウス入力がない場合は、銃を構えない。
@@ -158,6 +168,8 @@ public class FPSController : MonoBehaviour
             rocketLauncher.transform.position = normalGunPosition.transform.position;
             //sniperRifle.transform.position = normalGunPosition.transform.position;
             shotGun.transform.position = normalGunPosition.transform.position;
+            ZoomOut();
+            holdFlag = false;
         }
 
         if (Input.GetMouseButton(0) || rTri > 0)
@@ -266,7 +278,7 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        if (collision.gameObject.tag == Constants.enemyName || collision.gameObject.tag == Constants.enemyBulletName)
         {
             Debug.Log("Hit");
             Damage();
@@ -281,6 +293,7 @@ public class FPSController : MonoBehaviour
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(false);
+                defaultZoomCameraFov = 30;
                 gunType = 1;
             }
             else if (collision.gameObject.name == Constants.rocketLauncherItemName)
@@ -289,6 +302,7 @@ public class FPSController : MonoBehaviour
                 rocketLauncher.SetActive(true);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(false);
+                defaultZoomCameraFov = 30;
                 gunType = 2;
             }
             else if (collision.gameObject.name == Constants.sniperRifleItemName)
@@ -297,6 +311,7 @@ public class FPSController : MonoBehaviour
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(true);
                 shotGun.SetActive(false);
+                defaultZoomCameraFov = 15;
                 gunType = 3;
             }
             else if (collision.gameObject.name == Constants.shotGunItemName)
@@ -305,6 +320,7 @@ public class FPSController : MonoBehaviour
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(true);
+                defaultZoomCameraFov = 30;
                 gunType = 4;
             }
         }
@@ -435,6 +451,8 @@ public class FPSController : MonoBehaviour
         rocketLauncher.transform.position = holdGunPosition.transform.position;
         //sniperRifle.transform.position = holdGunPosition.transform.position;
         shotGun.transform.position = holdGunPosition.transform.position;
+
+        holdFlag = true;
     }
     /// <summary>
     /// スタミナのリチャージ処理
@@ -480,7 +498,7 @@ public class FPSController : MonoBehaviour
 	{
         if (gunType == 1)
         {
-            normalGun.GetComponent<NormalGun>().Shot(cam.transform.rotation);
+            normalGun.GetComponent<NormalGun>().Shot(cam.transform.rotation, holdFlag);
         }
         else if (gunType == 2)
         {
@@ -488,7 +506,7 @@ public class FPSController : MonoBehaviour
         }
         else if (gunType == 3)
         {
-            sniperRifle.GetComponent<SniperScript>().Shot(cam.transform.rotation);
+            sniperRifle.GetComponent<SniperScript>().Shot(cam.transform.rotation, holdFlag);
         }
         else if (gunType == 4)
 		{
@@ -571,5 +589,32 @@ public class FPSController : MonoBehaviour
     public int GetMaxHP()
     {
         return maxHP;
+    }
+
+    void ZoomIn()
+    {
+        if (cameraFov <= defaultZoomCameraFov)
+        {
+            //cameraFov = defaultZoomCameraFov;
+            //mainCamera.fieldOfView = cameraFov;
+            return;
+        }
+        float n = (defaultCameraFov - defaultZoomCameraFov) / zoomTime;
+
+        cameraFov -= n;
+
+        cam.fieldOfView = cameraFov;
+    }
+    void ZoomOut()
+    {
+        if (cameraFov >= defaultCameraFov)
+        {
+            return;
+        }
+        float n = (defaultCameraFov - defaultZoomCameraFov) / zoomTime;
+
+        cameraFov += n;
+
+        cam.fieldOfView = cameraFov;
     }
 }

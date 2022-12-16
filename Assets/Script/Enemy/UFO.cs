@@ -53,6 +53,8 @@ public class UFO : MonoBehaviour
     private bool deleteFlag;
     Rigidbody rigidbody;
 
+    [SerializeField] private GameObject CautionText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -182,6 +184,7 @@ public class UFO : MonoBehaviour
         mesh_barrier.material.SetFloat("_MyAlpha", mesh.material.color.a);
         if (mesh.material.color.a >= 1.0f)
 		{
+            CautionText.GetComponent<Controll_Var>().ChangeEndFlag();
             entryFlag = false;
             gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
             textMesh.enabled = true;
