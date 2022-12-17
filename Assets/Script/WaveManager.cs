@@ -6,6 +6,7 @@ public class WaveManager : MonoBehaviour
 {
     private GameObject[] enemyBox;
     private GameObject[] ufoBox;
+    private GameObject[] numberBox;
     public GameObject wave_object = null;
     public GameObject enemySpawner;
     public GameObject enemySpawner2;
@@ -14,15 +15,16 @@ public class WaveManager : MonoBehaviour
     public GameObject ufo_2;
     public GameObject ufo_3;
     public static int nowWave = 1;
-    bool nextWaveCheck = false;
+    public static bool nextWaveCheck = false;
     int saveWave = 0;
 
-    public bool waveChangeFlag = false;
+    public  bool waveChangeFlag = false;
 
     [SerializeField] private AudioSource defaultAudioSource;
     [SerializeField] private AudioSource bossAudioSource;
     [SerializeField] private GameObject CautionText;
 
+    public static bool numberchange = false;
     void Start()
     {
         //フレームレートの固定
@@ -50,12 +52,15 @@ public class WaveManager : MonoBehaviour
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
         ufoBox = GameObject.FindGameObjectsWithTag("UFO");
+        numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
 
+        numberchange = false;
         //何かのトリガーで次のウェーブへ
         if (waveChangeFlag == true && enemyBox.Length <= 0 && ufoBox.Length <= 0)
         {
             waveChangeFlag = false;
             nextWaveCheck = true;
+            numberchange = true;
         }
         else
         {
@@ -110,9 +115,9 @@ public class WaveManager : MonoBehaviour
                 nextWaveCheck = false;
             }
         }
+        NumberChange();
 
-        Text wave_text = wave_object.GetComponent<Text>();
-        wave_text.text = "Wave : " + nowWave;
+
     }
     /// <summary>
     /// どこまで進んだかのウェーブを渡す関数
@@ -128,5 +133,27 @@ public class WaveManager : MonoBehaviour
     public void WaveChangeFlagOn()
     {
         waveChangeFlag = true;
+    }
+    public static bool GetChangeWaveFlag()
+    {
+        return numberchange;
+    }
+    
+    private void NumberChange()
+    {
+        for(int i = 0; i < numberBox.Length; i++)
+        {
+            if (i == nowWave-1)
+            {
+                numberBox[i].transform.SetScaleXY(5, 5);
+                numberBox[i].GetComponent<ColorChangeText>().ChangeRed();
+            }
+            else
+            {
+                numberBox[i].transform.SetScaleXY(2, 2);
+                numberBox[i].GetComponent<ColorChangeText>().ChageNormal();
+
+            }
+        }
     }
 }
