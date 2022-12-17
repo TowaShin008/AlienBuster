@@ -76,6 +76,7 @@ public class WaveManager : MonoBehaviour
                     CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
+                    ufo.GetComponent<CameraMove>().ChangeFocusFlag();
                 }
                 if (nowWave == 3)
 				{

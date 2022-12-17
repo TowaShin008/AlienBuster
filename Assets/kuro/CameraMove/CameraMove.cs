@@ -7,11 +7,11 @@ public class CameraMove : MonoBehaviour
     Camera camera;
 
     bool focusFlag = false;
+    [SerializeField] float focusDirection = 60.0f;
     // Start is called before the first frame update
     void Start()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-
     }
 
     // Update is called once per frame
@@ -20,19 +20,21 @@ public class CameraMove : MonoBehaviour
         if (focusFlag)
         {
             camera.transform.LookAt(gameObject.transform);
-            camera.fieldOfView = 30;
+            camera.fieldOfView = focusDirection;
         }
         else
         {
             camera.fieldOfView = 60;
-
         }
-
-        if (Input.GetKeyDown(KeyCode.O)) ChangeFocusFlag();
     }
 
     public void ChangeFocusFlag()
     {
         focusFlag = !focusFlag;
     }
+
+    public void SetFocusFlag(bool arg_focusFlag)
+	{
+        focusFlag = arg_focusFlag;
+	}
 }
