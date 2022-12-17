@@ -13,6 +13,7 @@ TagManager:
   - Weapon
   - UFO
   - SniperBullet
+  - waveNumber
   layers:
   - Default
   - TransparentFX
