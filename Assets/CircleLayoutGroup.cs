@@ -29,13 +29,13 @@ namespace Hont
         Vector2 position;
         float onemoveNum = 36;
         float changeOffset = 0;
-        public void Start()
+        void Start()
         {
             changeOffset = -(onemoveNum * 4) + WaveManager.GetWave() * onemoveNum;
             offset = -(onemoveNum * 4) + WaveManager.GetWave() * onemoveNum;
 
         }
-        public void Update()
+        void Update()
         {
             if (WaveManager.GetChangeWaveFlag())
             {
