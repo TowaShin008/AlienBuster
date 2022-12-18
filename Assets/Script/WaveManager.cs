@@ -93,7 +93,8 @@ public class WaveManager : MonoBehaviour
                     CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
-				}
+                    ufo_2.GetComponent<CameraMove>().ChangeFocusFlag();
+                }
                 if (nowWave == 5)
                 {
                     defaultAudioSource.Play();
@@ -104,6 +105,7 @@ public class WaveManager : MonoBehaviour
                     CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
+                    ufo_3.GetComponent<CameraMove>().ChangeFocusFlag();
                 }
                 if (nowWave >= 7)
 				{
@@ -111,6 +113,7 @@ public class WaveManager : MonoBehaviour
                     ufo.GetComponent<UFO>().Initialize();
                     ufo_2.GetComponent<UFO>().Initialize(1);
                     ufo_3.GetComponent<UFO>().Initialize(3);
+                    ufo.GetComponent<CameraMove>().ChangeFocusFlag();
                 }
                 nextWaveCheck = false;
             }

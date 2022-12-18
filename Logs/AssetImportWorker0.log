@@ -15,7 +15,7 @@ D:/AlienBuster
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-65400
+49556
 Successfully changed project path to: D:/AlienBuster
 D:/AlienBuster
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ D:/AlienBuster
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 104.21 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 99.45 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.9f1 (ad3870b89536)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.9f1/Editor/Data/Resources/UnitySubsystems
@@ -65,45 +65,45 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.9f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.9f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.9f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56872
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56916
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.9f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.008923 seconds.
+Registered in 0.012077 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 102.60 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 96.46 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.769 seconds
+- Completed reload, in  0.741 seconds
 Domain Reload Profiling:
-	ReloadAssembly (770ms)
-		BeginReloadAssembly (88ms)
+	ReloadAssembly (741ms)
+		BeginReloadAssembly (90ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (533ms)
-			LoadAssemblies (84ms)
+		EndReloadAssembly (518ms)
+			LoadAssemblies (87ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (130ms)
+			SetupTypeCache (127ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (35ms)
-			SetupLoadedEditorAssemblies (311ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (301ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
+				InitializePlatformSupportModulesInManaged (8ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (103ms)
+				RefreshPlugins (97ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (143ms)
-				ProcessInitializeOnLoadMethodAttributes (55ms)
+				ProcessInitializeOnLoadAttributes (144ms)
+				ProcessInitializeOnLoadMethodAttributes (51ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.005881 seconds.
+Registered in 0.004461 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\AlienBuster\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\AlienBuster\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
@@ -111,45 +111,45 @@ Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.96 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.307 seconds
+- Completed reload, in  1.268 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1308ms)
-		BeginReloadAssembly (128ms)
+	ReloadAssembly (1269ms)
+		BeginReloadAssembly (153ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (6ms)
+			DisableScriptedObjects (8ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (21ms)
-		EndReloadAssembly (1026ms)
-			LoadAssemblies (99ms)
+			CreateAndSetChildDomain (22ms)
+		EndReloadAssembly (972ms)
+			LoadAssemblies (124ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (351ms)
+			SetupTypeCache (338ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (73ms)
-			SetupLoadedEditorAssemblies (450ms)
+			RebuildScriptCaches (71ms)
+			SetupLoadedEditorAssemblies (421ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (107ms)
-				ProcessInitializeOnLoadAttributes (288ms)
-				ProcessInitializeOnLoadMethodAttributes (36ms)
-				AfterProcessingInitializeOnLoad (11ms)
+				BeforeProcessingInitializeOnLoad (99ms)
+				ProcessInitializeOnLoadAttributes (267ms)
+				ProcessInitializeOnLoadMethodAttributes (37ms)
+				AfterProcessingInitializeOnLoad (9ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
 Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.81 ms, found 4 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.76 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4111 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 29 unused Assets / (94.5 KB). Loaded Objects now: 4589.
+Unloading 29 unused Assets / (94.3 KB). Loaded Objects now: 4589.
 Memory consumption went from 234.0 MB to 233.9 MB.
-Total: 3.186400 ms (FindLiveObjects: 0.406400 ms CreateObjectMapping: 0.286600 ms MarkObjects: 2.319200 ms  DeleteObjects: 0.173200 ms)
+Total: 3.074500 ms (FindLiveObjects: 0.318100 ms CreateObjectMapping: 0.254400 ms MarkObjects: 2.372600 ms  DeleteObjects: 0.128400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -164,162 +164,19 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 400174.234389 seconds.
-  path: Assets/Animation/TitleCliickAnimation.controller
-  artifactKey: Guid(f2b2272754f98d54cb36e447af757792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Animation/TitleCliickAnimation.controller using Guid(f2b2272754f98d54cb36e447af757792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcee0ab55054318096d64e8e5959ed2a') in 0.038365 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003884 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image D:\AlienBuster\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image D:\AlienBuster\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.85 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.228 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1229ms)
-		BeginReloadAssembly (145ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (8ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (981ms)
-			LoadAssemblies (91ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (325ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (67ms)
-			SetupLoadedEditorAssemblies (431ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (17ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (91ms)
-				ProcessInitializeOnLoadAttributes (272ms)
-				ProcessInitializeOnLoadMethodAttributes (38ms)
-				AfterProcessingInitializeOnLoad (12ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
-Platform modules already initialized, skipping
-Shader 'WFX/Transparent Diffuse': fallback shader 'Particles/Alpha Blended' not found
-Shader 'WFX/Transparent Specular': fallback shader 'Particles/Alpha Blended' not found
-Refreshing native plugins compatible for Editor in 2.95 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4057 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 22 unused Assets / (62.7 KB). Loaded Objects now: 4593.
-Memory consumption went from 229.1 MB to 229.0 MB.
-Total: 3.106200 ms (FindLiveObjects: 0.331200 ms CreateObjectMapping: 0.217100 ms MarkObjects: 2.467700 ms  DeleteObjects: 0.089200 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 168.278640 seconds.
-  path: Assets/kuro/Caution/Resources/Caution_Material.mat
-  artifactKey: Guid(19101987062ed8f4296f9872049a72ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/kuro/Caution/Resources/Caution_Material.mat using Guid(19101987062ed8f4296f9872049a72ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4880a41fae6c785973b311d59d539621') in 0.129823 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 11.189333 seconds.
-  path: Assets/Particle/EffectMaterial.mat
-  artifactKey: Guid(94cf96615342bbf488404384dd804a2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Particle/EffectMaterial.mat using Guid(94cf96615342bbf488404384dd804a2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '034856635c68599e46fccc48f7c605d1') in 0.022145 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.045858 seconds.
-  path: Assets/Material/Weapon/ItemCover.mat
-  artifactKey: Guid(921286577cf73c4408648f019809ae57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Material/Weapon/ItemCover.mat using Guid(921286577cf73c4408648f019809ae57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe1e49662af7ec8b09d8b14025d4802e') in 0.018093 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 6.748688 seconds.
-  path: Assets/3Skyboxes/Materials/Skybox_BlueNebular.mat
-  artifactKey: Guid(b6a3f8bca2c865243929bac258c89b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/3Skyboxes/Materials/Skybox_BlueNebular.mat using Guid(b6a3f8bca2c865243929bac258c89b96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bb8e4ec76ab8e4b9723325e72cde8fd') in 0.188461 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 3.609818 seconds.
-  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Concrete.mat
-  artifactKey: Guid(72b5a49033211f040b217a4431c08896) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Concrete.mat using Guid(72b5a49033211f040b217a4431c08896) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f609d21a3d8b6d06de30d1c52ed21e2b') in 0.022742 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic Dirt.mat
-  artifactKey: Guid(d1cd8b9b3c7d785469e17f97b682c90a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic Dirt.mat using Guid(d1cd8b9b3c7d785469e17f97b682c90a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb7d39bf8f7b5fe32b5e08091b710510') in 0.035172 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic.mat
-  artifactKey: Guid(38f55d80fabc44846a1222921faa20bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic.mat using Guid(38f55d80fabc44846a1222921faa20bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c392edb0b8b65bf50a3b1d68aeeef9c6') in 0.012286 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic Sand.mat
-  artifactKey: Guid(bdd14d80d6f714d4ebc207bf6ad3164c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Generic Sand.mat using Guid(bdd14d80d6f714d4ebc207bf6ad3164c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee0c70c30b76c420831510c00f95c02a') in 0.012889 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000023 seconds.
-  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Wood Lighted.mat
-  artifactKey: Guid(a1c66968b3879fd43abd0238bae09c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Wood Lighted.mat using Guid(a1c66968b3879fd43abd0238bae09c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9273852ddf5cd91aec8c0deaf6428444') in 0.099580 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Concrete Wall.mat
-  artifactKey: Guid(ab6453a18f7ff2f4ebb1d7ccb0fe1353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Concrete Wall.mat using Guid(ab6453a18f7ff2f4ebb1d7ccb0fe1353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71f465599e0482d0a16fad65b593606a') in 0.250439 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Metal.mat
-  artifactKey: Guid(d172212e29c865242b5302054f759758) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Metal.mat using Guid(d172212e29c865242b5302054f759758) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90c6331129beab85a112efc7c710f745') in 0.063678 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Checker.mat
-  artifactKey: Guid(dc070aa3464121b4d92dc268f1a79c93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Demo/Assets/WFX_Demo_M_Checker.mat using Guid(dc070aa3464121b4d92dc268f1a79c93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd98444c71491f0227c1cca6690a3822') in 0.079916 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Metal Lighted.mat
-  artifactKey: Guid(4775d7a61c94a87418fe5ebc4f938090) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/JMO Assets/WarFX/Desktop/Materials/Bullet Holes/WFX_BulletHole Metal Lighted.mat using Guid(4775d7a61c94a87418fe5ebc4f938090) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c18600b310a034aa1589f929e7d8dad7') in 0.087492 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 123.289585 seconds.
+  Time since last request: 24905.510346 seconds.
   path: Assets/title.png
   artifactKey: Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/title.png using Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '337bb6dd561fccb6f2b99b8cbb7d9ef4') in 0.021886 seconds 
+Start importing Assets/title.png using Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '121f9386b854a65fa937421fa691658a') in 0.128385 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 44.581849 seconds.
-  path: Assets/title.png
-  artifactKey: Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/title.png using Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb43c1887947165f10684e518c172d38') in 0.017276 seconds 
+  Time since last request: 6.624264 seconds.
+  path: Assets/Scenes/TitleScene.unity
+  artifactKey: Guid(391391c8772cd524c97b7d06b7da6e02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/TitleScene.unity using Guid(391391c8772cd524c97b7d06b7da6e02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa392067b1bea423176d8831c9cb345a') in 0.009363 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.077911 seconds.
-  path: Assets/title.png
-  artifactKey: Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/title.png using Guid(f2d85dc68a6ec9941942e3d0769567eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2db1e4e1484ef4a40d8a6773ddbce9f9') in 0.030619 seconds 
+  Time since last request: 2.508046 seconds.
+  path: Assets/Scenes/GameScene.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/GameScene.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14cf55932e9abca630cb6b6f5b55113d') in 0.004829 seconds 
