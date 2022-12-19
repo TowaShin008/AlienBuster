@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.090685986, g: 0.0786727, b: 0.16521466, a: 1}
+  m_IndirectSpecularColor: {r: 0.14170945, g: 0.12722027, b: 0.2421518, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 76534930}
   - component: {fileID: 76534932}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: number2
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -665.60583, y: 459.9259}
+  m_AnchoredPosition: {x: -885.98737, y: 287.74493}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &76534930
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 133241033}
   - component: {fileID: 133241035}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: number1
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,7 +369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -670.7371, y: 606.8667}
+  m_AnchoredPosition: {x: -747.8241, y: 338.03223}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133241033
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 378b04edf0925e649a82ec5657d17b30, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.829666, b: 0.36320752, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1799,7 +1799,7 @@ GameObject:
   - component: {fileID: 423296750}
   - component: {fileID: 423296752}
   m_Layer: 5
-  m_Name: Text (Legacy) (4)
+  m_Name: number5
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1822,7 +1822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1027.3219, y: 328.27194}
+  m_AnchoredPosition: {x: -1122.9741, y: 591.0741}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423296750
@@ -1908,7 +1908,7 @@ GameObject:
   - component: {fileID: 463351263}
   - component: {fileID: 463351265}
   m_Layer: 5
-  m_Name: Text (Legacy) (2)
+  m_Name: number3
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1931,7 +1931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -747.8241, y: 338.03223}
+  m_AnchoredPosition: {x: -1027.3219, y: 328.27194}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &463351263
@@ -3026,7 +3026,7 @@ GameObject:
   - component: {fileID: 840344877}
   - component: {fileID: 840344879}
   m_Layer: 5
-  m_Name: Text (Legacy) (9)
+  m_Name: number0
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3049,7 +3049,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -761.258, y: 722.728}
+  m_AnchoredPosition: {x: -665.60583, y: 459.92584}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &840344877
@@ -3220,7 +3220,7 @@ GameObject:
   - component: {fileID: 986297949}
   - component: {fileID: 986297951}
   m_Layer: 5
-  m_Name: Text (Legacy) (8)
+  m_Name: number9
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3243,7 +3243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -902.5926, y: 763.25507}
+  m_AnchoredPosition: {x: -670.73706, y: 606.8666}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &986297949
@@ -3732,7 +3732,7 @@ GameObject:
   - component: {fileID: 1060139690}
   - component: {fileID: 1060139692}
   m_Layer: 5
-  m_Name: Text (Legacy) (3)
+  m_Name: number4
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3755,7 +3755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -885.98737, y: 287.74493}
+  m_AnchoredPosition: {x: -1117.8429, y: 444.13342}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1060139690
@@ -4380,7 +4380,7 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 4
   lookAtToPivot: 1
-  offset: -34
+  offset: -106
   spacing: 0
   radius: 237.9
   mode: 0
@@ -4711,7 +4711,7 @@ GameObject:
   - component: {fileID: 1793071333}
   - component: {fileID: 1793071335}
   m_Layer: 5
-  m_Name: Text (Legacy) (7)
+  m_Name: number8
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4734,7 +4734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1040.7559, y: 712.9678}
+  m_AnchoredPosition: {x: -761.258, y: 722.728}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1793071333
@@ -4958,7 +4958,7 @@ GameObject:
   - component: {fileID: 1949231388}
   - component: {fileID: 1949231390}
   m_Layer: 5
-  m_Name: Text (Legacy) (6)
+  m_Name: number7
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4981,7 +4981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1122.9741, y: 591.0741}
+  m_AnchoredPosition: {x: -902.5926, y: 763.25507}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1949231388
@@ -5199,7 +5199,7 @@ GameObject:
   - component: {fileID: 2049750108}
   - component: {fileID: 2049750110}
   m_Layer: 5
-  m_Name: Text (Legacy) (5)
+  m_Name: number6
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5222,7 +5222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1117.8429, y: 444.13342}
+  m_AnchoredPosition: {x: -1040.7559, y: 712.9678}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2049750108

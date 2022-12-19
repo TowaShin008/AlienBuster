@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+
 public class WaveManager : MonoBehaviour
 {
     private GameObject[] enemyBox;
@@ -44,14 +46,16 @@ public class WaveManager : MonoBehaviour
         nowWave = 1;
 
         defaultAudioSource.Play();
+        numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
+        NumberChange();
+
     }
- 
+
 
     void Update()
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
         ufoBox = GameObject.FindGameObjectsWithTag("UFO");
-        numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
 
         numberchange = false;
         //何かのトリガーで次のウェーブへ
@@ -64,6 +68,7 @@ public class WaveManager : MonoBehaviour
         else
         {
             saveWave = nowWave;
+
         }
 
         if (nextWaveCheck)
@@ -76,7 +81,7 @@ public class WaveManager : MonoBehaviour
                 bossAudioSource.Stop();
 
                 if (nowWave == 2)
-                {
+                {      
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
                 }
@@ -109,9 +114,9 @@ public class WaveManager : MonoBehaviour
                 }
                 nextWaveCheck = false;
             }
-        }
-        NumberChange();
+            NumberChange();
 
+        }
 
     }
     /// <summary>
@@ -136,18 +141,17 @@ public class WaveManager : MonoBehaviour
     
     private void NumberChange()
     {
-        for(int i = 0; i < numberBox.Length; i++)
-        {
-            if (i == nowWave-1)
+        foreach(var num in numberBox ?? Enumerable.Empty<GameObject>())
+       {
+            if (num.name== "number" + nowWave)
             {
-                numberBox[i].transform.SetScaleXY(5, 5);
-                numberBox[i].GetComponent<ColorChangeText>().ChangeRed();
+                num.transform.SetScaleXY(5, 5);
+                num.GetComponent<ColorChangeText>().ChangeRed();
             }
             else
             {
-                numberBox[i].transform.SetScaleXY(2, 2);
-                numberBox[i].GetComponent<ColorChangeText>().ChageNormal();
-
+                num.transform.SetScaleXY(2, 2);
+                num.GetComponent<ColorChangeText>().ChageNormal();
             }
         }
     }
