@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 884228617166489764}
   - component: {fileID: 884228617166489762}
   m_Layer: 5
-  m_Name: Text (Legacy) (3)
+  m_Name: number4
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 884228617251867731}
   - component: {fileID: 884228617251867729}
   m_Layer: 5
-  m_Name: Text (Legacy) (8)
+  m_Name: number9
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 884228617382879011}
   - component: {fileID: 884228617382879009}
   m_Layer: 5
-  m_Name: Text (Legacy) (9)
+  m_Name: number0
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 884228617558437532}
   - component: {fileID: 884228617558437530}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: number2
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 884228617573294791}
   - component: {fileID: 884228617573294789}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: number1
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,7 +555,7 @@ GameObject:
   - component: {fileID: 884228617737536736}
   - component: {fileID: 884228617737536766}
   m_Layer: 5
-  m_Name: Text (Legacy) (4)
+  m_Name: number5
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 884228617777698769}
   - component: {fileID: 884228617777698799}
   m_Layer: 5
-  m_Name: Text (Legacy) (2)
+  m_Name: number3
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 884228618058851051}
   - component: {fileID: 884228618058851049}
   m_Layer: 5
-  m_Name: Text (Legacy) (7)
+  m_Name: number8
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 884228618323840594}
   - component: {fileID: 884228618323840592}
   m_Layer: 5
-  m_Name: Text (Legacy) (5)
+  m_Name: number6
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,7 +927,7 @@ GameObject:
   - component: {fileID: 884228618357510930}
   - component: {fileID: 884228618357510928}
   m_Layer: 5
-  m_Name: Text (Legacy) (6)
+  m_Name: number7
   m_TagString: waveNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
