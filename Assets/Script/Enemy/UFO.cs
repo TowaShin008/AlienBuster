@@ -55,6 +55,8 @@ public class UFO : MonoBehaviour
 
     [SerializeField] private GameObject CautionText;
 
+    private bool weakTextFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,7 @@ public class UFO : MonoBehaviour
         damageCount = damageMaxCount;
 
         textMesh.enabled = false;
+        weakTextFlag = false;
 
         rigidbody = GetComponent<Rigidbody>();
     }
@@ -182,13 +185,17 @@ public class UFO : MonoBehaviour
         mesh_2.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
         mesh_3.material.color = mesh_3.material.color + new Color(0, 0, 0, 0.005f);
         mesh_barrier.material.SetFloat("_MyAlpha", mesh.material.color.a);
+
         if (mesh.material.color.a >= 1.0f)
 		{
             CautionText.GetComponent<Controll_Var>().ChangeEndFlag();
             entryFlag = false;
             gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
             gameObject.GetComponent<CameraMove>().SetFocusFlag(false);
-            textMesh.enabled = true;
+            if(weakTextFlag)
+			{
+                textMesh.enabled = true;
+            }
         }
     }
     /// <summary>
@@ -211,8 +218,8 @@ public class UFO : MonoBehaviour
     /// <summary>
     /// 初期化処理
     /// </summary>
-    /// <param name="positionNum">UFOが三体同時に出た際の出現位置の調整1~3で2がプレイヤーの真上</param>
-	public void Initialize(int positionNum = 2)
+    /// <param name="arg_weakTextFlag">UFOが三体同時に出た際の出現位置の調整1~3で2がプレイヤーの真上</param>
+	public void Initialize(bool arg_weakTextFlag = false,bool arg_focusFlag = false)
 	{
         //var playerPosition = player.transform.position;
         gameObject.SetActive(true);
@@ -228,6 +235,10 @@ public class UFO : MonoBehaviour
 		//{
   //          gameObject.transform.position = new Vector3(player.transform.position.x - 160, gameObject.transform.position.y, player.transform.position.z);
   //      }
+        
+        weakTextFlag = arg_weakTextFlag;
+
+        gameObject.GetComponent<CameraMove>().SetFocusFlag(arg_focusFlag);
         entryFlag = true;
         hp = 30;
         deadFlag = false;

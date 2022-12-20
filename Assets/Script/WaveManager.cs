@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+
 public class WaveManager : MonoBehaviour
 {
     private GameObject[] enemyBox;
@@ -22,7 +24,6 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private AudioSource defaultAudioSource;
     [SerializeField] private AudioSource bossAudioSource;
-    [SerializeField] private GameObject CautionText;
 
     public static bool numberchange = false;
     void Start()
@@ -45,14 +46,16 @@ public class WaveManager : MonoBehaviour
         nowWave = 1;
 
         defaultAudioSource.Play();
+        numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
+        NumberChange();
+
     }
- 
+
 
     void Update()
     {
         enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
         ufoBox = GameObject.FindGameObjectsWithTag("UFO");
-        numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
 
         numberchange = false;
         //何かのトリガーで次のウェーブへ
@@ -65,6 +68,7 @@ public class WaveManager : MonoBehaviour
         else
         {
             saveWave = nowWave;
+
         }
 
         if (nextWaveCheck)
@@ -77,11 +81,9 @@ public class WaveManager : MonoBehaviour
                 bossAudioSource.Stop();
 
                 if (nowWave == 2)
-                {
-                    CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
+                {      
                     bossAudioSource.Play();
-                    ufo.GetComponent<UFO>().Initialize();
-                    ufo.GetComponent<CameraMove>().ChangeFocusFlag();
+                    ufo.GetComponent<UFO>().Initialize(true,true);
                 }
                 if (nowWave == 3)
 				{
@@ -90,11 +92,9 @@ public class WaveManager : MonoBehaviour
                 }
                 if (nowWave == 4)
 				{
-                    CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
-                    ufo_2.GetComponent<CameraMove>().ChangeFocusFlag();
-                }
+				}
                 if (nowWave == 5)
                 {
                     defaultAudioSource.Play();
@@ -102,24 +102,21 @@ public class WaveManager : MonoBehaviour
                 }
                 if (nowWave == 6)
                 {
-                    CautionText.GetComponent<Controll_Var>().ChangeStartFlag();
                     bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
-                    ufo_3.GetComponent<CameraMove>().ChangeFocusFlag();
                 }
                 if (nowWave >= 7)
 				{
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
-                    ufo_2.GetComponent<UFO>().Initialize(1);
-                    ufo_3.GetComponent<UFO>().Initialize(3);
-                    ufo.GetComponent<CameraMove>().ChangeFocusFlag();
+                    ufo_2.GetComponent<UFO>().Initialize();
+                    ufo_3.GetComponent<UFO>().Initialize();
                 }
                 nextWaveCheck = false;
             }
-        }
-        NumberChange();
+            NumberChange();
 
+        }
 
     }
     /// <summary>
@@ -144,18 +141,17 @@ public class WaveManager : MonoBehaviour
     
     private void NumberChange()
     {
-        for(int i = 0; i < numberBox.Length; i++)
-        {
-            if (i == nowWave-1)
+        foreach(var num in numberBox ?? Enumerable.Empty<GameObject>())
+       {
+            if (num.name== "number" + nowWave)
             {
-                numberBox[i].transform.SetScaleXY(5, 5);
-                numberBox[i].GetComponent<ColorChangeText>().ChangeRed();
+                num.transform.SetScaleXY(5, 5);
+                num.GetComponent<ColorChangeText>().ChangeRed();
             }
             else
             {
-                numberBox[i].transform.SetScaleXY(2, 2);
-                numberBox[i].GetComponent<ColorChangeText>().ChageNormal();
-
+                num.transform.SetScaleXY(2, 2);
+                num.GetComponent<ColorChangeText>().ChageNormal();
             }
         }
     }
