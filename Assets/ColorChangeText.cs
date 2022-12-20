@@ -11,7 +11,7 @@ public class ColorChangeText : MonoBehaviour
     void Start()
     {
         text = this.GetComponent<Text>();
-        color = new Color(255, 212, 93);
+        color = new Color(1, 0.92f, 0.016f,1);
         change = false;
     }
 

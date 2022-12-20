@@ -31,8 +31,8 @@ namespace Hont
         float changeOffset = 0;
         void Start()
         {
-            changeOffset = -(onemoveNum * 4) + WaveManager.GetWave() * onemoveNum;
-            offset = -(onemoveNum * 4) + WaveManager.GetWave() * onemoveNum;
+            changeOffset = -(onemoveNum * 4) + 1 * onemoveNum;
+            offset = -(onemoveNum * 4) + 1 * onemoveNum;
 
         }
         void Update()
