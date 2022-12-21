@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using Util;
 
 public class WaveManager : MonoBehaviour
 {
@@ -36,9 +37,9 @@ public class WaveManager : MonoBehaviour
             Screen.SetResolution(1920, 1080, false);
         }
 
-        enemySpawner.GetComponent<EnemySpawner>().Initialize();
-        enemySpawner2.SetActive(false);
-        enemySpawner3.SetActive(false);
+        enemySpawner.GetComponent<EnemySpawner>().Initialize(false,0);
+        enemySpawner2.GetComponent<EnemySpawner>().Initialize(false,0);
+        enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, 0);
         ufo.SetActive(false);
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
@@ -48,7 +49,6 @@ public class WaveManager : MonoBehaviour
         defaultAudioSource.Play();
         numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
         NumberChange();
-
     }
 
 
@@ -88,7 +88,9 @@ public class WaveManager : MonoBehaviour
                 if (nowWave == 3)
 				{
                     defaultAudioSource.Play();
-                    enemySpawner2.GetComponent<EnemySpawner>().Initialize();
+                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, 1);
+                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, 1);
+                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, 1);
                 }
                 if (nowWave == 4)
 				{
@@ -98,7 +100,9 @@ public class WaveManager : MonoBehaviour
                 if (nowWave == 5)
                 {
                     defaultAudioSource.Play();
-                    enemySpawner3.GetComponent<EnemySpawner>().Initialize();
+                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, 2);
+                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, 2);
+                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, 2);
                 }
                 if (nowWave == 6)
                 {

@@ -48,5 +48,12 @@ namespace Util
 		public static string fieldName = "Field";
 		//フィールドの名称
 		public static string enemyName = "Enemy";
+		//ステージに出現するエネミーの種類
+		public enum EnemtType
+		{
+			normalEnemy,
+			jumpEnemy,
+			stepEnemy
+		}
 	}
 }
