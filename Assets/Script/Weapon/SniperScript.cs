@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 public class SniperScript : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class SniperScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float lTri = Input.GetAxis("L_Trigger");
+        float lTri = Input.GetAxis(Constants.lTriggerName);
 
         if (Input.GetMouseButton(1) || lTri > 0)
         {//e‚ğ\‚¦‚éˆ—
@@ -63,7 +64,7 @@ public class SniperScript : MonoBehaviour
             sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
             for (int i = 0; i < sniperMesh.Count; i++)
             {
-                sniperMesh[i].material.color = new Color32(255, 255, 255, 255);
+                sniperMesh[i].material.color = Color.white;
             }
 
             Color32 color = sniperGauge.color;

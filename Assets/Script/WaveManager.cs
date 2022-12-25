@@ -37,9 +37,9 @@ public class WaveManager : MonoBehaviour
             Screen.SetResolution(1920, 1080, false);
         }
 
-        enemySpawner.GetComponent<EnemySpawner>().Initialize(false,0);
-        enemySpawner2.GetComponent<EnemySpawner>().Initialize(false,0);
-        enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, 0);
+        enemySpawner.GetComponent<EnemySpawner>().Initialize(false,Constants.normalEnemy);
+        enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+        enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
         ufo.SetActive(false);
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
@@ -88,9 +88,9 @@ public class WaveManager : MonoBehaviour
                 if (nowWave == 3)
 				{
                     defaultAudioSource.Play();
-                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, 1);
-                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, 1);
-                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, 1);
+                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.jumpEnemy);
+                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.jumpEnemy);
+                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.jumpEnemy);
                 }
                 if (nowWave == 4)
 				{
@@ -100,9 +100,9 @@ public class WaveManager : MonoBehaviour
                 if (nowWave == 5)
                 {
                     defaultAudioSource.Play();
-                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, 2);
-                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, 2);
-                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, 2);
+                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.stepEnemy);
+                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.stepEnemy);
+                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.stepEnemy);
                 }
                 if (nowWave == 6)
                 {
