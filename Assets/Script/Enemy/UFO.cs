@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class UFO : MonoBehaviour
 {
@@ -287,7 +288,7 @@ public class UFO : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string gameObjectName = other.gameObject.tag;
-        if (gameObjectName != "Field"||deadFlag == false) { return; }
+        if (gameObjectName != Constants.fieldName || deadFlag == false) { return; }
         deleteFlag = true;
     }
 }

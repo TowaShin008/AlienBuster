@@ -36,9 +36,12 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// ‰Šú‰»ˆ—
     /// </summary>
-	public void Initialize()
+	public void Initialize(bool arg_randomSpawnFlag = true, int arg_enemtType = 0)
     {
+        isDeadlag = false;
+        enemySpawnCount = 0;
         gameObject.SetActive(true);
         gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
+        gameObject.GetComponent<EnemySpawnManager>().Initialize(arg_randomSpawnFlag, arg_enemtType);
     }
 }

@@ -62,7 +62,7 @@ public class FPSController : MonoBehaviour
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
-    int gunType = 1;
+    int gunType = 2;
     //スナイパーライフルのUI
     public Image sniperEdge;
     public Image sniperGaugeEdge;
@@ -106,8 +106,8 @@ public class FPSController : MonoBehaviour
         //残機
         remain = 1;
         hp = maxHP;
-        normalGun.SetActive(true);
-        rocketLauncher.SetActive(false);
+        normalGun.SetActive(false);
+        rocketLauncher.SetActive(true);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
         //スナイパーライフルのUI
@@ -137,12 +137,12 @@ public class FPSController : MonoBehaviour
         //視点移動処理
         MoveCameraProcessing();
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 5"))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button5))
 		{
             jumpAudioSource.Play();
         }
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey("joystick button 5"))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Joystick1Button5))
 		{//ジャンプ処理
             JumpProcessing();
 		}
@@ -154,8 +154,8 @@ public class FPSController : MonoBehaviour
         //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
-        float lTri = Input.GetAxis("L_Trigger");
-        float rTri = Input.GetAxis("R_Trigger");
+        float lTri = Input.GetAxis(Constants.lTriggerName);
+        float rTri = Input.GetAxis(Constants.rTriggerName);
 
         if (Input.GetMouseButton(1) || lTri > 0)
 		{//銃を構える処理
@@ -203,8 +203,8 @@ public class FPSController : MonoBehaviour
 	/// </summary>
 	private void MoveProcessing()
 	{
-        float lsh = Input.GetAxis("L_Stick_H");
-        float lsv = Input.GetAxis("L_Stick_V");
+        float lsh = Input.GetAxis(Constants.lStickHorizontalName);
+        float lsv = Input.GetAxis(Constants.lStickVerticalName);
 
         var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || lsh != 0 || lsv != 0)
@@ -229,14 +229,14 @@ public class FPSController : MonoBehaviour
             this.transform.position += velocity * Time.deltaTime;
 
 
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey("joystick button 4"))
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.Joystick1Button4))
             {
                 chargeCount++;
                 //スプリント処理
                 SprintProcessing();
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp("joystick button 4"))
+            if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.Joystick1Button4))
             {//ステップ処理
                 stepAudioSource.Play();
                 StepProcessing(velocity);
@@ -328,7 +328,7 @@ public class FPSController : MonoBehaviour
 
 	private void OnCollisionStay(Collision collision)
 	{
-        if (stepTime == 0 && collision.gameObject.CompareTag("Field"))
+        if (stepTime == 0 && collision.gameObject.CompareTag(Constants.fieldName))
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 100;
         }
@@ -336,7 +336,7 @@ public class FPSController : MonoBehaviour
 
 	private void OnCollisionExit(Collision collision)
 	{
-        if (collision.gameObject.CompareTag("Field"))
+        if (collision.gameObject.CompareTag(Constants.fieldName))
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 0;
         }
@@ -347,19 +347,14 @@ public class FPSController : MonoBehaviour
 	private void MoveCameraProcessing()
 	{
 		//Y軸視点移動
-		float yRot = Input.GetAxis("Mouse Y") * Ysensityvity;
+		float yRot = Input.GetAxis(Constants.mouseAxisYName) * Ysensityvity;
 		cameraRot *= Quaternion.Euler(-yRot, 0, 0);
 		//X軸視点移動
-		float xRot = Input.GetAxis("Mouse X") * Xsensityvity;
+		float xRot = Input.GetAxis(Constants.mouseAxisXName) * Xsensityvity;
 		characterRot *= Quaternion.Euler(0, xRot, 0);
 
-		//      if (deadFlag == false)
-		//{
-		//          transform.localRotation = characterRot;
-		//      }
-
-		float rsh = Input.GetAxis("R_Stick_H") * Xsensityvity;
-        float rsv = Input.GetAxis("R_Stick_V") * Ysensityvity;
+		float rsh = Input.GetAxis(Constants.rStickHorizontalName) * Xsensityvity;
+        float rsv = Input.GetAxis(Constants.rStickVerticalName) * Ysensityvity;
 
         cameraRot *= Quaternion.Euler(-rsv, 0, 0);
         characterRot *= Quaternion.Euler(0, rsh, 0);
@@ -590,7 +585,9 @@ public class FPSController : MonoBehaviour
     {
         return maxHP;
     }
-
+    /// <summary>
+    /// カメラのズームイン処理
+    /// </summary>
     void ZoomIn()
     {
         if (cameraFov <= defaultZoomCameraFov)
@@ -605,6 +602,9 @@ public class FPSController : MonoBehaviour
 
         cam.fieldOfView = cameraFov;
     }
+    /// <summary>
+    /// カメラのズームアウト処理
+    /// </summary>
     void ZoomOut()
     {
         if (cameraFov >= defaultCameraFov)

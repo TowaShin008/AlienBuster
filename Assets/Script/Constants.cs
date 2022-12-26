@@ -46,7 +46,28 @@ namespace Util
 		public static string enemyBulletName = "EnemyBullet";
 		//フィールドの名称
 		public static string fieldName = "Field";
-		//フィールドの名称
+		//敵の名称
 		public static string enemyName = "Enemy";
+		//右トリガーの名称
+		public static string rTriggerName = "R_Trigger";
+		//左トリガーの名称
+		public static string lTriggerName = "L_Trigger";
+		//左スティックの横方向の名称
+		public static string lStickHorizontalName = "L_Stick_H";
+		//左スティックの縦方向の名称
+		public static string lStickVerticalName = "L_Stick_V";
+		//右スティックの横方向の名称
+		public static string rStickHorizontalName = "R_Stick_H";
+		//右スティックの縦方向の名称
+		public static string rStickVerticalName = "R_Stick_V";
+		//マウスのY軸ポジションの名前
+		public static string mouseAxisYName = "Mouse Y";
+		//マウスのY軸ポジションの名前
+		public static string mouseAxisXName = "Mouse X";
+		//ステージに出現するエネミーの種類
+		public const int normalEnemy = 0;
+		public const int jumpEnemy = 1;
+		public const int stepEnemy = 2;
+
 	}
 }

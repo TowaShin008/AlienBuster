@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class RocketLauncher : MonoBehaviour
 {
@@ -49,18 +50,14 @@ public class RocketLauncher : MonoBehaviour
     {
         if (lerp)
         {
-            sec += Time.deltaTime;
-            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoil, sec * interpolant);
-            if (gunModel.transform.localRotation == recoil)
-            {
-                sec = 0;
-                lerp = false;
-                lerpback = true;
-                recoilgun = gunModel.transform.localRotation;
-            }
+            //リコイル処理（イージング処理付き）
+            lerp = false;
+            lerpback = true;
+            gunModel.transform.DOLocalRotateQuaternion(recoil, interpolant)
+                              .SetEase(Ease.InOutQuart).OnComplete(Recoilback);
         }
 
-        Recoilback();
+        //Recoilback();
 
         if (shotDelayTime > 0)
         {
@@ -71,15 +68,11 @@ public class RocketLauncher : MonoBehaviour
     {
         if (lerpback == true)
         {
-            sec += Time.deltaTime;
-            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoilback, sec * interpolant);
-            if (gunModel.transform.localRotation == recoilback)
-            {
-                sec = 0;
-                lerp = false;
-                lerpback = false;
-                shotAgainFlag = true;
-            }
+            gunModel.transform.DOLocalRotateQuaternion(recoilback, interpolant)
+                          .SetEase(Ease.InOutQuart);
+            lerp = false;
+            lerpback = false;
+            shotAgainFlag = true;
         }
     }
     /// <summary>
