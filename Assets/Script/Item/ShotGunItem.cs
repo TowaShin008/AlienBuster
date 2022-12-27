@@ -8,7 +8,7 @@ public class ShotGunItem : MonoBehaviour
     [SerializeField]
     private GameObject player;
     [SerializeField]
-    private GameObject shotGun;
+    private GameObject shotGunItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,23 +18,22 @@ public class ShotGunItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<FPSController>().GetGunType() == 4)
-        {
-            shotGun.SetActive(false);
-        }
-        else
-        {
-            shotGun.SetActive(true);
+		if (player.GetComponent<FPSController>().GetGunType() == 4)
+		{
+			shotGunItem.SetActive(false);
+		}
+		//else
+		//{
 
-            float yRot = 0.0f;
+		float yRot = 0.0f;
 
             yRot += 2.0f;
             if (yRot > 360.0f)
             {
                 yRot = 0.0f;
             }
-            shotGun.transform.rotation *= Quaternion.Euler(0, yRot, 0);
-        }
+            shotGunItem.transform.rotation *= Quaternion.Euler(0, yRot, 0);
+        //}
 
         var currentPosition = gameObject.transform.position;
 

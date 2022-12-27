@@ -34,6 +34,10 @@ public class RocketLauncher : MonoBehaviour
 
     private bool shotAgainFlag = true;
 
+    [SerializeField]
+    const int remainingMaxBullet = 10;
+    int remainingBullets = remainingMaxBullet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,7 @@ public class RocketLauncher : MonoBehaviour
         recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
         shotAgainFlag = true;
         recoilback = gunModel.transform.localRotation;
+        remainingBullets = remainingMaxBullet;
     }
 
     // Update is called once per frame
@@ -79,10 +84,14 @@ public class RocketLauncher : MonoBehaviour
     /// íeÇÃî≠éÀèàóù
     /// </summary>
     /// <param name="arg_cameraRotation">ÉJÉÅÉâÇÃâÒì]ó </param>
-    public void Shot(Quaternion arg_cameraRotation)
+    public bool Shot(Quaternion arg_cameraRotation)
     {
         if (shotDelayTime <= 0 && lerpback == false && shotAgainFlag)
         {// íeÇÃî≠éÀèàóù
+            if(remainingBullets>0)
+			{
+                remainingBullets--;
+            }
             recoilgun = gunModel.transform.localRotation;
             recoil = Quaternion.AngleAxis(angle, axis) * gunModel.transform.localRotation;
             //recoilback = recoilgun;
@@ -107,6 +116,12 @@ public class RocketLauncher : MonoBehaviour
 
             lerp = true;
         }
+        if(remainingBullets<=0)
+		{
+            return false;
+		}
+
+        return true;
     }
     /// <summary>
     /// îöîjââèo
@@ -124,5 +139,12 @@ public class RocketLauncher : MonoBehaviour
                 cube.GetComponent<Rigidbody>().AddExplosionForce(30f, transform.position, 30f, 5f, ForceMode.Impulse);
             }
         }
+    }
+    /// <summary>
+    /// écíeêîÇÃÉäÉZÉbÉg
+    /// </summary>
+    public void ResetRemainigBullet()
+	{
+        remainingBullets = remainingMaxBullet;
     }
 }

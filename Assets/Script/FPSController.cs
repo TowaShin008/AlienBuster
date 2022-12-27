@@ -287,6 +287,7 @@ public class FPSController : MonoBehaviour
         if(collision.gameObject.tag == Constants.weaponItemName)
 		{
             getItemAudioSource.Play();
+            sniperRifle.GetComponent<SniperScript>().Initialize();
             if (collision.gameObject.name == Constants.normalGunItemName)
             {
                 normalGun.SetActive(true);
@@ -300,6 +301,7 @@ public class FPSController : MonoBehaviour
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);
+                rocketLauncher.GetComponent<RocketLauncher>().ResetRemainigBullet();
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 30;
@@ -310,6 +312,7 @@ public class FPSController : MonoBehaviour
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(true);
+                sniperRifle.GetComponent<SniperScript>().ResetRemainigBullet();
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 15;
                 gunType = 3;
@@ -320,6 +323,7 @@ public class FPSController : MonoBehaviour
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(true);
+                shotGun.GetComponent<ShotGun>().ResetRemainigBullet();
                 defaultZoomCameraFov = 30;
                 gunType = 4;
             }
@@ -483,7 +487,7 @@ public class FPSController : MonoBehaviour
         {
             deadFlag = true;
             rigidbody.drag = 0;
-            FadeManager.Instance.LoadScene("EndScene", 0.5f);
+            FadeManager.Instance.LoadScene(Constants.endSceneName, 0.5f);
         }
     }
     /// <summary>
@@ -497,15 +501,31 @@ public class FPSController : MonoBehaviour
         }
         else if (gunType == 2)
         {
-            rocketLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation);
+            if (rocketLauncher.GetComponent<RocketLauncher>().Shot(cam.transform.rotation) == false)
+			{
+                rocketLauncher.SetActive(false);
+                normalGun.SetActive(true);
+                gunType = 1;
+			}
         }
         else if (gunType == 3)
         {
-            sniperRifle.GetComponent<SniperScript>().Shot(cam.transform.rotation, holdFlag);
+            if (sniperRifle.GetComponent<SniperScript>().Shot(cam.transform.rotation, holdFlag) == false)
+			{
+                defaultZoomCameraFov = 30;
+                sniperRifle.SetActive(false);
+                normalGun.SetActive(true);
+                gunType = 1;
+            }
         }
         else if (gunType == 4)
 		{
-            shotGun.GetComponent<ShotGun>().Shot(cam.transform.rotation);
+            if (shotGun.GetComponent<ShotGun>().Shot(cam.transform.rotation) == false)
+			{
+				shotGun.SetActive(false);
+				normalGun.SetActive(true);
+				gunType = 1;
+			}
         }
     }
     /// <summary>
@@ -592,9 +612,9 @@ public class FPSController : MonoBehaviour
     {
         if (cameraFov <= defaultZoomCameraFov)
         {
-            //cameraFov = defaultZoomCameraFov;
-            //mainCamera.fieldOfView = cameraFov;
-            return;
+			cameraFov = defaultZoomCameraFov;
+			cam.fieldOfView = cameraFov;
+			return;
         }
         float n = (defaultCameraFov - defaultZoomCameraFov) / zoomTime;
 
@@ -609,6 +629,7 @@ public class FPSController : MonoBehaviour
     {
         if (cameraFov >= defaultCameraFov)
         {
+            cameraFov = defaultCameraFov;
             return;
         }
         float n = (defaultCameraFov - defaultZoomCameraFov) / zoomTime;

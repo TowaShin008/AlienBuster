@@ -20,11 +20,11 @@ public class CameraMove : MonoBehaviour
         if (focusFlag)
         {
             camera.transform.LookAt(gameObject.transform);
-            camera.fieldOfView = focusDirection;
+            //camera.fieldOfView = focusDirection;
         }
         else
         {
-            camera.fieldOfView = 60;
+            //camera.fieldOfView = 60;
         }
     }
 

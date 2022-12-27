@@ -42,10 +42,15 @@ public class SniperScript : MonoBehaviour
     [SerializeField] float dispersion = 0.02f; // ばらつき具合
     [SerializeField] float verticalToHorizontalRatio = 1.5f; // ばらつきの縦横比
 
+    [SerializeField]
+    const int remainingMaxBullet = 20;
+    int remainingBullets = remainingMaxBullet;
+
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
+        remainingBullets = remainingMaxBullet;
     }
 
     // Update is called once per frame
@@ -111,13 +116,17 @@ public class SniperScript : MonoBehaviour
     /// 射撃処理
     /// </summary>
     /// <param name="arg_cameraRotation">カメラの回転量</param>
-    public void Shot(Quaternion arg_cameraRotation,bool arg_holdFlag)
+    public bool Shot(Quaternion arg_cameraRotation,bool arg_holdFlag)
     {
         //float rTri = Input.GetAxis("R_Trigger");
         if (defScale.y >= 0.25f)
         {
             //if (Input.GetMouseButtonDown(0) || rTri > 0)
             {//弾の発射処理
+                if (remainingBullets > 0)
+                {
+                    remainingBullets--;
+                }
                 //銃の音
                 audioSource.PlayOneShot(shotSound);
                 // 弾を発射する場所を取得
@@ -166,6 +175,14 @@ public class SniperScript : MonoBehaviour
                 MuzzleFashProcessing();
             }
         }
+
+        if (remainingBullets <= 0)
+        {
+            Initialize();
+            return false;
+        }
+
+        return true;
     }
     /// <summary>
     /// マズルフラッシュ演出
@@ -202,5 +219,30 @@ public class SniperScript : MonoBehaviour
         {
             muzzleFlash.SetActive(false);
         }
+    }
+    /// <summary>
+    /// 残弾数のリセット
+    /// </summary>
+    public void ResetRemainigBullet()
+    {
+        remainingBullets = remainingMaxBullet;
+    }
+
+    public void Initialize()
+	{
+        transform.position = normalGunPosition.transform.position;
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
+        sniperEdge.transform.localScale = new Vector2(5.0f, 5.0f);
+        for (int i = 0; i < sniperMesh.Count; i++)
+        {
+            sniperMesh[i].material.color = Color.white;
+        }
+
+        Color32 color = sniperGauge.color;
+        Color32 color2 = sniperGaugeEdge.color;
+        color.a = 0;
+        color2.a = 0;
+        sniperGauge.color = color;
+        sniperGaugeEdge.color = color2;
     }
 }

@@ -26,6 +26,12 @@ namespace Util
 		public static int sniperBulletDamage = 2;
 		//ロケット弾のダメージ量
 		public static int rocketBombDamage = 10;
+		//マウスのY軸ポジションの名前
+		public static string titleSceneName = "TitleScene";
+		//マウスのY軸ポジションの名前
+		public static string gameSceneName = "GameScene";
+		//マウスのY軸ポジションの名前
+		public static string endSceneName = "EndScene";
 		//武器アイテムの名称
 		public static string weaponItemName = "WeaponItem";
 		//通常銃アイテムの名称

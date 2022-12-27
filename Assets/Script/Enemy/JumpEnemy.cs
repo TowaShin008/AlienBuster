@@ -52,8 +52,6 @@ public class JumpEnemy : MonoBehaviour
 
     //ドロップする武器
     [SerializeField]
-    private GameObject normalGunItem;
-    [SerializeField]
     private GameObject rocketLauncherItem;
     [SerializeField]
     private GameObject sniperRifleItem;
@@ -66,6 +64,10 @@ public class JumpEnemy : MonoBehaviour
     //ヒット時後ろに吹っ飛ばないように
     [SerializeField, Min(0)] int hitStopMaxTime = 10;
     private int hitStopTime = 10;
+    //ダメージ時se
+    AudioSource damageAudioSource;
+    [SerializeField]
+    AudioClip damageAudioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +81,7 @@ public class JumpEnemy : MonoBehaviour
 
         jumpDelayTime = jampDelayMaxTime;
         hitStopTime = hitStopMaxTime;
+        damageAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -247,18 +250,21 @@ public class JumpEnemy : MonoBehaviour
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.normalBulletDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
         else if (gameObjectName == Constants.rocketBombName)
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.rocketBombDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
         else if (gameObjectName == Constants.sniperBulletName)
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.sniperBulletDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
 
         if (gameObjectName == Constants.fieldName)
@@ -301,20 +307,15 @@ public class JumpEnemy : MonoBehaviour
 
         if (randomValue == 1)
         {
-            normalGunItem.SetActive(true);
-            normalGunItem.transform.position = this.transform.position;
-        }
-        else if (randomValue == 2)
-        {
             rocketLauncherItem.SetActive(true);
             rocketLauncherItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 3)
+        else if (randomValue == 2)
         {
             sniperRifleItem.SetActive(true);
             sniperRifleItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 4)
+        else if (randomValue == 3)
         {
             shotGunItem.SetActive(true);
             shotGunItem.transform.position = this.transform.position;

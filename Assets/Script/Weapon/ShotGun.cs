@@ -37,10 +37,15 @@ public class ShotGun : MonoBehaviour
 
     GameObject muzzleFlash;
 
+    [SerializeField]
+    const int remainingMaxBullet = 30;
+    int remainingBullets = remainingMaxBullet;
+
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
+        remainingBullets = remainingMaxBullet;
     }
 
     // Update is called once per frame
@@ -55,10 +60,14 @@ public class ShotGun : MonoBehaviour
     /// 射撃処理
     /// </summary>
     /// <param name="arg_cameraRotation">カメラの回転量</param>
-    public void Shot(Quaternion arg_cameraRotation)
+    public bool Shot(Quaternion arg_cameraRotation)
     {
         if (shotDelayTime <= 0)
         {
+            if (remainingBullets > 0)
+            {
+                remainingBullets--;
+            }
             //銃の音
             audioSource.PlayOneShot(shotSound);
             audioSource.PlayOneShot(bulletSound);
@@ -95,6 +104,13 @@ public class ShotGun : MonoBehaviour
 
             shotDelayTime = shotDelayMaxTime;
         }
+
+        if (remainingBullets <= 0)
+        {
+            return false;
+        }
+
+        return true;
     }
     /// <summary>
     /// マズルフラッシュ演出
@@ -131,5 +147,12 @@ public class ShotGun : MonoBehaviour
         {
             muzzleFlash.SetActive(false);
         }
+    }
+    /// <summary>
+    /// 残弾数のリセット
+    /// </summary>
+    public void ResetRemainigBullet()
+    {
+        remainingBullets = remainingMaxBullet;
     }
 }
