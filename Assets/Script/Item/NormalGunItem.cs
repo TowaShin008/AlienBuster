@@ -22,19 +22,16 @@ public class NormalGunItem : MonoBehaviour
 		{
             normalGunItem.SetActive(false);
 		}
-		//else
-		//{
-            normalGunItem.SetActive(true);
+        normalGunItem.SetActive(true);
 
-            float yRot = 0.0f;
+        float yRot = 0.0f;
 
-            yRot += 2.0f;
-            if (yRot > 360.0f)
-            {
-                yRot = 0.0f;
-            }
-            normalGunItem.transform.rotation *= Quaternion.Euler(0, yRot, 0);
-        //}
+        yRot += 2.0f;
+        if (yRot > 360.0f)
+        {
+            yRot = 0.0f;
+        }
+        normalGunItem.transform.rotation *= Quaternion.Euler(0, yRot, 0);
 
         var currentPosition = gameObject.transform.position;
 

@@ -22,29 +22,26 @@ public class RocketLauncherItem : MonoBehaviour
 		{
 			rocketLauncherItem.SetActive(false);
 		}
-		//else
-		//{
-		//    rocketLauncherItem.SetActive(true);
 
 		float yRot = 0.0f;
 
-            yRot += 2.0f;
-            if (yRot > 360.0f)
-            {
-                yRot = 0.0f;
-            }
-            rocketLauncherItem.transform.rotation *= Quaternion.Euler(0, yRot, 0);
-        //}
+		yRot += 2.0f;
+		if (yRot > 360.0f)
+		{
+		    yRot = 0.0f;
+		}
+        rocketLauncherItem.transform.rotation *= Quaternion.Euler(0, yRot, 0);
 
-        var currentPosition = gameObject.transform.position;
 
-        if (currentPosition.y < Constants.stageMinPositionY)
-        {
-            currentPosition.y = Constants.stageMinPositionY;
-
-            gameObject.transform.position = currentPosition;
-        }
-    }
+		var currentPosition = gameObject.transform.position;
+		
+		if (currentPosition.y < Constants.stageMinPositionY)
+		{
+		    currentPosition.y = Constants.stageMinPositionY;
+		
+		    gameObject.transform.position = currentPosition;
+		}
+	}
 
     private void OnCollisionEnter(Collision collision)
     {

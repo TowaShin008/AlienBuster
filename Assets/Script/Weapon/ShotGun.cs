@@ -9,21 +9,14 @@ public class ShotGun : MonoBehaviour
     [SerializeField]
     private GameObject firingPoint;
 
-    private float bulletSpeed = 30.0f;
+    private float bulletSpeed = 60.0f;
     const int shotDelayMaxTime = 100;
     private int shotDelayTime = 0;
 
     [SerializeField]
-    float randomDiffusion = 10;
+    float randomDiffusion = 200.0f;
     [SerializeField]
     int bulletCount = 10;
-
-    [SerializeField]
-    private Transform bulletExitPosition;
-    [SerializeField]
-    private float exitSpeed = 0.1f;
-    [SerializeField]
-    private float exitRotate = 360.0f;
 
     //å¯â âπ
     public AudioClip shotSound;
@@ -71,11 +64,6 @@ public class ShotGun : MonoBehaviour
             //èeÇÃâπ
             audioSource.PlayOneShot(shotSound);
             audioSource.PlayOneShot(bulletSound);
-            var bulletInstance = Instantiate(bullet, bulletExitPosition.position, arg_cameraRotation);
-            var bulletRigit = bulletInstance.GetComponent<Rigidbody>();
-            bulletRigit.AddForce(bulletExitPosition.forward * exitSpeed);
-            bulletRigit.AddTorque(Random.insideUnitSphere * exitRotate);
-            Destroy(bulletInstance, 3f);
 
 
             for (int n = 0; n < bulletCount; n++)
@@ -92,8 +80,8 @@ public class ShotGun : MonoBehaviour
                 var direction = new Vector3(randomX, randomY, randomZ);
                 Rigidbody newbulletRb = newBall.GetComponent<Rigidbody>();
 
-                newbulletRb.AddForce(direction, ForceMode.Impulse);
-                newbulletRb.AddForce(newBall.transform.forward * bulletSpeed, ForceMode.Impulse);
+                newbulletRb.AddForce(direction);
+                newbulletRb.AddForce(newBall.transform.forward * bulletSpeed,ForceMode.Impulse);
 
                 newBall.name = bullet.name;
 

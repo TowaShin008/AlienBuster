@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.11733467, g: 0.100747414, b: 0.2030626, a: 1}
+  m_IndirectSpecularColor: {r: 0.14179489, g: 0.12727195, b: 0.24217838, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4942,13 +4942,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: shotgunModel
       objectReference: {fileID: 0}
+    - target: {fileID: 6495265379676882912, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0003
+      objectReference: {fileID: 0}
     - target: {fileID: 6495265379852553689, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6495265379992043966, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 119
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 6495265380238387206, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_Name
