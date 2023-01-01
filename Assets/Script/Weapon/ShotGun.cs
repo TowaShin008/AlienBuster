@@ -34,11 +34,15 @@ public class ShotGun : MonoBehaviour
     const int remainingMaxBullet = 30;
     int remainingBullets = remainingMaxBullet;
 
+    MagazineScript magazineScript = null;
+
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
         remainingBullets = remainingMaxBullet;
+        MagazineInitialize();
+        magazineScript.ReloadEnable(true);
     }
 
     // Update is called once per frame
@@ -55,8 +59,15 @@ public class ShotGun : MonoBehaviour
     /// <param name="arg_cameraRotation">カメラの回転量</param>
     public bool Shot(Quaternion arg_cameraRotation)
     {
+        if (!magazineScript.CheckBullets())
+        {
+            magazineScript.SetRemainingBulletsSize(remainingBullets);
+            return true;
+        }
+
         if (shotDelayTime <= 0)
         {
+            magazineScript.DecrementMagazine();
             if (remainingBullets > 0)
             {
                 remainingBullets--;
@@ -142,5 +153,24 @@ public class ShotGun : MonoBehaviour
     public void ResetRemainigBullet()
     {
         remainingBullets = remainingMaxBullet;
+    }
+    /// <summary>
+    /// マガジンの初期化
+    /// </summary>
+    void MagazineInitialize()
+    {
+        this.gameObject.AddComponent<MagazineScript>();
+        magazineScript = this.gameObject.GetComponent<MagazineScript>();
+
+        magazineScript.ReloadEnable(false);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
+    }
+    public void Initialize()
+    {
+        ResetRemainigBullet();
+        magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
     }
 }

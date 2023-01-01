@@ -38,6 +38,8 @@ public class RocketLauncher : MonoBehaviour
     const int remainingMaxBullet = 10;
     int remainingBullets = remainingMaxBullet;
 
+    MagazineScript magazineScript = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,8 @@ public class RocketLauncher : MonoBehaviour
         shotAgainFlag = true;
         recoilback = gunModel.transform.localRotation;
         remainingBullets = remainingMaxBullet;
+        MagazineInitialize();
+        magazineScript.ReloadEnable(true);
     }
 
     // Update is called once per frame
@@ -86,9 +90,16 @@ public class RocketLauncher : MonoBehaviour
     /// <param name="arg_cameraRotation">ÉJÉÅÉâÇÃâÒì]ó </param>
     public bool Shot(Quaternion arg_cameraRotation)
     {
+        if (!magazineScript.CheckBullets())
+		{
+            magazineScript.SetRemainingBulletsSize(remainingBullets);
+            return true;
+        }
+
         if (shotDelayTime <= 0 && lerpback == false && shotAgainFlag)
         {// íeÇÃî≠éÀèàóù
-            if(remainingBullets>0)
+            magazineScript.DecrementMagazine();
+            if (remainingBullets>0)
 			{
                 remainingBullets--;
             }
@@ -146,5 +157,25 @@ public class RocketLauncher : MonoBehaviour
     public void ResetRemainigBullet()
 	{
         remainingBullets = remainingMaxBullet;
+    }
+    /// <summary>
+    /// É}ÉKÉWÉìÇÃèâä˙âª
+    /// </summary>
+    void MagazineInitialize()
+    {
+        this.gameObject.AddComponent<MagazineScript>();
+        magazineScript = this.gameObject.GetComponent<MagazineScript>();
+
+        magazineScript.ReloadEnable(false);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
+    }
+
+    public void Initialize()
+	{
+        ResetRemainigBullet();
+        magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
+        magazineScript.SetMagazineSize(1);
+        magazineScript.SetReloadTime(120);
     }
 }

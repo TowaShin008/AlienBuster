@@ -62,7 +62,7 @@ public class FPSController : MonoBehaviour
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
-    int gunType = 4;
+    int gunType = 1;
     //スナイパーライフルのUI
     public Image sniperEdge;
     public Image sniperGaugeEdge;
@@ -106,10 +106,10 @@ public class FPSController : MonoBehaviour
         //残機
         remain = 1;
         hp = maxHP;
-        normalGun.SetActive(false);
+        normalGun.SetActive(true);
         rocketLauncher.SetActive(false);
         sniperRifle.SetActive(false);
-        shotGun.SetActive(true);
+        shotGun.SetActive(false);
         //スナイパーライフルのUI
         sniperEdge.enabled = false;
         sniperGaugeEdge.enabled = false;
@@ -301,7 +301,7 @@ public class FPSController : MonoBehaviour
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);
-                rocketLauncher.GetComponent<RocketLauncher>().ResetRemainigBullet();
+                rocketLauncher.GetComponent<RocketLauncher>().Initialize();
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 30;
@@ -312,7 +312,7 @@ public class FPSController : MonoBehaviour
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(true);
-                sniperRifle.GetComponent<SniperScript>().ResetRemainigBullet();
+                sniperRifle.GetComponent<SniperScript>().Initialize();
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 15;
                 gunType = 3;
@@ -323,7 +323,7 @@ public class FPSController : MonoBehaviour
                 rocketLauncher.SetActive(false);
                 sniperRifle.SetActive(false);
                 shotGun.SetActive(true);
-                shotGun.GetComponent<ShotGun>().ResetRemainigBullet();
+                shotGun.GetComponent<ShotGun>().Initialize();
                 defaultZoomCameraFov = 30;
                 gunType = 4;
             }

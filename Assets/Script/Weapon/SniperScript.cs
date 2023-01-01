@@ -46,11 +46,15 @@ public class SniperScript : MonoBehaviour
     const int remainingMaxBullet = 20;
     int remainingBullets = remainingMaxBullet;
 
+    MagazineScript magazineScript = null;
+
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
         remainingBullets = remainingMaxBullet;
+        MagazineInitialize();
+        magazineScript.ReloadEnable(true);
     }
 
     // Update is called once per frame
@@ -118,9 +122,15 @@ public class SniperScript : MonoBehaviour
     /// <param name="arg_cameraRotation">カメラの回転量</param>
     public bool Shot(Quaternion arg_cameraRotation,bool arg_holdFlag)
     {
+        if (!magazineScript.CheckBullets())
+        {
+            magazineScript.SetRemainingBulletsSize(remainingBullets);
+            return true;
+        }
         //float rTri = Input.GetAxis("R_Trigger");
         if (defScale.y >= 0.25f)
         {
+            magazineScript.DecrementMagazine();
             //if (Input.GetMouseButtonDown(0) || rTri > 0)
             {//弾の発射処理
                 if (remainingBullets > 0)
@@ -230,6 +240,10 @@ public class SniperScript : MonoBehaviour
 
     public void Initialize()
 	{
+        ResetRemainigBullet();
+        magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
         transform.position = normalGunPosition.transform.position;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
         sniperEdge.transform.localScale = new Vector2(5.0f, 5.0f);
@@ -244,5 +258,17 @@ public class SniperScript : MonoBehaviour
         color2.a = 0;
         sniperGauge.color = color;
         sniperGaugeEdge.color = color2;
+    }
+    /// <summary>
+    /// マガジンの初期化
+    /// </summary>
+    void MagazineInitialize()
+    {
+        this.gameObject.AddComponent<MagazineScript>();
+        magazineScript = this.gameObject.GetComponent<MagazineScript>();
+
+        magazineScript.ReloadEnable(false);
+        magazineScript.SetMagazineSize(10);
+        magazineScript.SetReloadTime(120);
     }
 }

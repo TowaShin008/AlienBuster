@@ -296,7 +296,7 @@ public class JumpEnemy : MonoBehaviour
     private void DropWeapon()
     {
         //oŒ»‚³‚¹‚é“G‚ğƒ‰ƒ“ƒ_ƒ€‚É‘I‚Ô
-        var randomValue = Random.Range(1, 10);
+        int randomValue = Random.Range(1, 11);
 
         int playerGunType = playerObject.GetComponent<FPSController>().GetGunType();
 
