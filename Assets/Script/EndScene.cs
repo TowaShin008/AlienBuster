@@ -19,7 +19,7 @@ public class EndScene : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                FadeManager.Instance.LoadScene(Constants.titleSceneName, 0.5f);
+                FadeManager.Instance.LoadScene(Constants.titleSceneName.ToString(), 0.5f);
             }
         }
         else

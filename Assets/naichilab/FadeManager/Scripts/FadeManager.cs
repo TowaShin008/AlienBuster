@@ -85,13 +85,13 @@ public class FadeManager : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
 		{
-			if (SceneManager.GetActiveScene().name == Constants.titleSceneName)
+			if (SceneManager.GetActiveScene().name == Constants.titleSceneName.ToString())
 			{
-				LoadScene(Constants.gameSceneName, 1.0f);
+				LoadScene(Constants.gameSceneName.ToString(), 1.0f);
 			}
-			else if (SceneManager.GetActiveScene().name == Constants.endSceneName)
+			else if (SceneManager.GetActiveScene().name == Constants.endSceneName.ToString())
 			{
-				LoadScene(Constants.titleSceneName, 1.0f);
+				LoadScene(Constants.titleSceneName.ToString(), 1.0f);
 			}
 		}
 	}

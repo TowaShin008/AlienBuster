@@ -33,7 +33,7 @@ public class MagazineScript : MonoBehaviour
                 {
                     nowReloadTime = 0;
                     magazine = maxMagazine;
-                    ResizeOtherMagazineBullet();
+                    UpdateOtherMagazineBullets();
                 }
                 nowReloadTime++;
             }
@@ -69,7 +69,7 @@ public class MagazineScript : MonoBehaviour
     public void SetMagazineSize(int mag)
     {
         maxMagazine = magazine = mag;
-        ResizeOtherMagazineBullet();
+        UpdateOtherMagazineBullets();
     }
 
     public void SetRemainingBulletsSize(int arg_remainingBullet)
@@ -97,8 +97,10 @@ public class MagazineScript : MonoBehaviour
     {
         reloadEnable = flag;
     }
-
-    public void ResizeOtherMagazineBullet()
+    /// <summary>
+    /// マガジン外の弾数の更新処理
+    /// </summary>
+    public void UpdateOtherMagazineBullets()
 	{
         otherMagazineBullets = remainingBullet - maxMagazine;
         if (otherMagazineBullets < 0)

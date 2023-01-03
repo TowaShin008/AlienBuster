@@ -7,7 +7,7 @@ public class CameraMove : MonoBehaviour
     Camera camera;
 
     bool focusFlag = false;
-    [SerializeField] float focusDirection = 60.0f;
+    //[SerializeField] float focusDirection = 60.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +21,6 @@ public class CameraMove : MonoBehaviour
         {
             camera.transform.LookAt(gameObject.transform);
             //camera.fieldOfView = focusDirection;
-        }
-        else
-        {
-            //camera.fieldOfView = 60;
         }
     }
 

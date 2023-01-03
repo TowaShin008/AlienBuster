@@ -243,23 +243,23 @@ public class JumpEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != Constants.normalBulletName && gameObjectName != Constants.rocketBombName && gameObjectName != Constants.sniperBulletName && gameObjectName == Constants.enemyBulletName) { return; }
+        if (gameObjectName != Constants.normalBulletName.ToString() && gameObjectName != Constants.rocketBombName.ToString() && gameObjectName != Constants.sniperBulletName.ToString() && gameObjectName == Constants.enemyBulletName.ToString()) { return; }
 
-        if (gameObjectName == Constants.normalBulletName)
+        if (gameObjectName == Constants.normalBulletName.ToString())
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.normalBulletDamage;
             damageAudioSource.PlayOneShot(damageAudioClip);
         }
-        else if (gameObjectName == Constants.rocketBombName)
+        else if (gameObjectName == Constants.rocketBombName.ToString())
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.rocketBombDamage;
             damageAudioSource.PlayOneShot(damageAudioClip);
         }
-        else if (gameObjectName == Constants.sniperBulletName)
+        else if (gameObjectName == Constants.sniperBulletName.ToString())
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
@@ -267,7 +267,7 @@ public class JumpEnemy : MonoBehaviour
             damageAudioSource.PlayOneShot(damageAudioClip);
         }
 
-        if (gameObjectName == Constants.fieldName)
+        if (gameObjectName == Constants.fieldName.ToString())
         {
             onTheGroundFlag = true;
         }

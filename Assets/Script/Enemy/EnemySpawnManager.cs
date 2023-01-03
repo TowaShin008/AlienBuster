@@ -66,9 +66,9 @@ public class EnemySpawnManager : MonoBehaviour
 		if (moveFlag == false) { return; }
 
         //if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
-        {//　経過時間を足す
+        //{//　経過時間を足す
             elapsedTime += Time.deltaTime;
-        }
+        //}
     }
     /// <summary>
     /// 敵の出現処理
@@ -123,8 +123,6 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
             }
-
-            //deadFlag = false;
 
             enemyCount = 0;
 

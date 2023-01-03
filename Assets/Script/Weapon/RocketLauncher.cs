@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Util;
 
 public class RocketLauncher : MonoBehaviour
 {
@@ -139,7 +140,7 @@ public class RocketLauncher : MonoBehaviour
     /// </summary>
     void Explode()
     {
-        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Enemy"); //「Enemy」タグのついたオブジェクトを全て検索して配列にいれる
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString()); //「Enemy」タグのついたオブジェクトを全て検索して配列にいれる
 
         if (cubes.Length == 0) return; // 「Enemy」タグがついたオブジェクトがなければ何もしない。
 

@@ -154,8 +154,8 @@ public class FPSController : MonoBehaviour
         //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
-        float lTri = Input.GetAxis(Constants.lTriggerName);
-        float rTri = Input.GetAxis(Constants.rTriggerName);
+        float lTri = Input.GetAxis(Constants.lTriggerName.ToString());
+        float rTri = Input.GetAxis(Constants.rTriggerName.ToString());
 
         if (Input.GetMouseButton(1) || lTri > 0)
 		{//銃を構える処理
@@ -203,8 +203,8 @@ public class FPSController : MonoBehaviour
 	/// </summary>
 	private void MoveProcessing()
 	{
-        float lsh = Input.GetAxis(Constants.lStickHorizontalName);
-        float lsv = Input.GetAxis(Constants.lStickVerticalName);
+        float lsh = Input.GetAxis(Constants.lStickHorizontalName.ToString());
+        float lsv = Input.GetAxis(Constants.lStickVerticalName.ToString());
 
         var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || lsh != 0 || lsv != 0)
@@ -278,17 +278,17 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == Constants.enemyName || collision.gameObject.tag == Constants.enemyBulletName)
+        if (collision.gameObject.tag == Constants.enemyName.ToString() || collision.gameObject.tag == Constants.enemyBulletName.ToString())
         {
             Debug.Log("Hit");
             Damage();
         }
 
-        if(collision.gameObject.tag == Constants.weaponItemName)
+        if(collision.gameObject.tag == Constants.weaponItemName.ToString())
 		{
             getItemAudioSource.Play();
             sniperRifle.GetComponent<SniperScript>().Initialize();
-            if (collision.gameObject.name == Constants.normalGunItemName)
+            if (collision.gameObject.name == Constants.normalGunItemName.ToString())
             {
                 normalGun.SetActive(true);
                 rocketLauncher.SetActive(false);
@@ -297,7 +297,7 @@ public class FPSController : MonoBehaviour
                 defaultZoomCameraFov = 30;
                 gunType = 1;
             }
-            else if (collision.gameObject.name == Constants.rocketLauncherItemName)
+            else if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);
@@ -307,7 +307,7 @@ public class FPSController : MonoBehaviour
                 defaultZoomCameraFov = 30;
                 gunType = 2;
             }
-            else if (collision.gameObject.name == Constants.sniperRifleItemName)
+            else if (collision.gameObject.name == Constants.sniperRifleItemName.ToString())
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(false);
@@ -317,7 +317,7 @@ public class FPSController : MonoBehaviour
                 defaultZoomCameraFov = 15;
                 gunType = 3;
             }
-            else if (collision.gameObject.name == Constants.shotGunItemName)
+            else if (collision.gameObject.name == Constants.shotGunItemName.ToString())
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(false);
@@ -332,7 +332,7 @@ public class FPSController : MonoBehaviour
 
 	private void OnCollisionStay(Collision collision)
 	{
-        if (stepTime == 0 && collision.gameObject.CompareTag(Constants.fieldName))
+        if (stepTime == 0 && collision.gameObject.CompareTag(Constants.fieldName.ToString()))
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 100;
         }
@@ -340,7 +340,7 @@ public class FPSController : MonoBehaviour
 
 	private void OnCollisionExit(Collision collision)
 	{
-        if (collision.gameObject.CompareTag(Constants.fieldName))
+        if (collision.gameObject.CompareTag(Constants.fieldName.ToString()))
         {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
             rigidbody.drag = 0;
         }
@@ -351,14 +351,14 @@ public class FPSController : MonoBehaviour
 	private void MoveCameraProcessing()
 	{
 		//Y軸視点移動
-		float yRot = Input.GetAxis(Constants.mouseAxisYName) * Ysensityvity;
+		float yRot = Input.GetAxis(Constants.mouseAxisYName.ToString()) * Ysensityvity;
 		cameraRot *= Quaternion.Euler(-yRot, 0, 0);
 		//X軸視点移動
-		float xRot = Input.GetAxis(Constants.mouseAxisXName) * Xsensityvity;
+		float xRot = Input.GetAxis(Constants.mouseAxisXName.ToString()) * Xsensityvity;
 		characterRot *= Quaternion.Euler(0, xRot, 0);
 
-		float rsh = Input.GetAxis(Constants.rStickHorizontalName) * Xsensityvity;
-        float rsv = Input.GetAxis(Constants.rStickVerticalName) * Ysensityvity;
+		float rsh = Input.GetAxis(Constants.rStickHorizontalName.ToString()) * Xsensityvity;
+        float rsv = Input.GetAxis(Constants.rStickVerticalName.ToString()) * Ysensityvity;
 
         cameraRot *= Quaternion.Euler(-rsv, 0, 0);
         characterRot *= Quaternion.Euler(0, rsh, 0);
@@ -487,7 +487,7 @@ public class FPSController : MonoBehaviour
         {
             deadFlag = true;
             rigidbody.drag = 0;
-            FadeManager.Instance.LoadScene(Constants.endSceneName, 0.5f);
+            FadeManager.Instance.LoadScene(Constants.endSceneName.ToString(), 0.5f);
         }
     }
     /// <summary>

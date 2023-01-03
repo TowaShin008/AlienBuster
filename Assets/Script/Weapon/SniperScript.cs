@@ -60,7 +60,7 @@ public class SniperScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float lTri = Input.GetAxis(Constants.lTriggerName);
+        float lTri = Input.GetAxis(Constants.lTriggerName.ToString());
 
         if (Input.GetMouseButton(1) || lTri > 0)
         {//e‚ð\‚¦‚éˆ—

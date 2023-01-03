@@ -288,7 +288,7 @@ public class UFO : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string gameObjectName = other.gameObject.tag;
-        if (gameObjectName != Constants.fieldName || deadFlag == false) { return; }
+        if (gameObjectName != Constants.fieldName.ToString() || deadFlag == false) { return; }
         deleteFlag = true;
     }
 }
