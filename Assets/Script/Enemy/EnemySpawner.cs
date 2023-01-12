@@ -6,11 +6,11 @@ public class EnemySpawner : MonoBehaviour
 {
     //åªç›ÇÃwaveÇwaveManegerÇ©ÇÁéÊìæ
     [SerializeField] WaveManager waveManager;
-    private bool isDeadlag = false;
+    private bool isDeadFlag = false;
     private int enemySpawnCount = 0;
     void Start()
     {
-        isDeadlag = false;
+        isDeadFlag = false;
         enemySpawnCount = 0;
         gameObject.SetActive(false);
     }
@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
             enemySpawnCount++;
             if(enemySpawnCount >=gameObject.GetComponent<EnemySpawnManager>().GetMaxEnemyCount())
 			{
-                isDeadlag = true;
+                isDeadFlag = true;
                 waveManager.WaveChangeFlagOn();
             }
         }
@@ -36,9 +36,12 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// èâä˙âªèàóù
     /// </summary>
-	public void Initialize()
+	public void Initialize(bool arg_randomSpawnFlag = true, int arg_enemtType = 0)
     {
+        isDeadFlag = false;
+        enemySpawnCount = 0;
         gameObject.SetActive(true);
         gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
+        gameObject.GetComponent<EnemySpawnManager>().Initialize(arg_randomSpawnFlag, arg_enemtType);
     }
 }

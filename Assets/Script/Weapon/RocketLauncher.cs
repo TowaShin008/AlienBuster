@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using Util;
 
 public class RocketLauncher : MonoBehaviour
 {
@@ -33,6 +35,12 @@ public class RocketLauncher : MonoBehaviour
 
     private bool shotAgainFlag = true;
 
+    [SerializeField]
+    const int remainingMaxBullet = 10;
+    int remainingBullets = remainingMaxBullet;
+
+    MagazineScript magazineScript = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +50,9 @@ public class RocketLauncher : MonoBehaviour
         recoilback = Quaternion.AngleAxis(10.0f, new Vector3(0.0f, 0.0f, 1.0f));
         shotAgainFlag = true;
         recoilback = gunModel.transform.localRotation;
+        remainingBullets = remainingMaxBullet;
+        MagazineInitialize();
+        magazineScript.ReloadEnable(true);
     }
 
     // Update is called once per frame
@@ -49,18 +60,14 @@ public class RocketLauncher : MonoBehaviour
     {
         if (lerp)
         {
-            sec += Time.deltaTime;
-            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoil, sec * interpolant);
-            if (gunModel.transform.localRotation == recoil)
-            {
-                sec = 0;
-                lerp = false;
-                lerpback = true;
-                recoilgun = gunModel.transform.localRotation;
-            }
+            //リコイル処理（イージング処理付き）
+            lerp = false;
+            lerpback = true;
+            gunModel.transform.DOLocalRotateQuaternion(recoil, interpolant)
+                              .SetEase(Ease.InOutQuart).OnComplete(Recoilback);
         }
 
-        Recoilback();
+        //Recoilback();
 
         if (shotDelayTime > 0)
         {
@@ -71,26 +78,32 @@ public class RocketLauncher : MonoBehaviour
     {
         if (lerpback == true)
         {
-            sec += Time.deltaTime;
-            gunModel.transform.localRotation = Quaternion.Lerp(recoilgun, recoilback, sec * interpolant);
-            if (gunModel.transform.localRotation == recoilback)
-            {
-                sec = 0;
-                lerp = false;
-                lerpback = false;
-                shotAgainFlag = true;
-            }
+            gunModel.transform.DOLocalRotateQuaternion(recoilback, interpolant)
+                          .SetEase(Ease.InOutQuart);
+            lerp = false;
+            lerpback = false;
+            shotAgainFlag = true;
         }
     }
     /// <summary>
     /// 弾の発射処理
     /// </summary>
-    /// <param name="arg_firingPoint">銃のポジション</param>
     /// <param name="arg_cameraRotation">カメラの回転量</param>
-    public void Shot(Quaternion arg_cameraRotation)
+    public bool Shot(Quaternion arg_cameraRotation)
     {
+        if (!magazineScript.CheckBullets())
+		{
+            magazineScript.SetRemainingBulletsSize(remainingBullets);
+            return true;
+        }
+
         if (shotDelayTime <= 0 && lerpback == false && shotAgainFlag)
         {// 弾の発射処理
+            magazineScript.DecrementMagazine();
+            if (remainingBullets>0)
+			{
+                remainingBullets--;
+            }
             recoilgun = gunModel.transform.localRotation;
             recoil = Quaternion.AngleAxis(angle, axis) * gunModel.transform.localRotation;
             //recoilback = recoilgun;
@@ -115,13 +128,19 @@ public class RocketLauncher : MonoBehaviour
 
             lerp = true;
         }
+        if(remainingBullets<=0)
+		{
+            return false;
+		}
+
+        return true;
     }
     /// <summary>
     /// 爆破演出
     /// </summary>
     void Explode()
     {
-        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Enemy"); //「Enemy」タグのついたオブジェクトを全て検索して配列にいれる
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString()); //「Enemy」タグのついたオブジェクトを全て検索して配列にいれる
 
         if (cubes.Length == 0) return; // 「Enemy」タグがついたオブジェクトがなければ何もしない。
 
@@ -132,5 +151,32 @@ public class RocketLauncher : MonoBehaviour
                 cube.GetComponent<Rigidbody>().AddExplosionForce(30f, transform.position, 30f, 5f, ForceMode.Impulse);
             }
         }
+    }
+    /// <summary>
+    /// 残弾数のリセット
+    /// </summary>
+    public void ResetRemainigBullet()
+	{
+        remainingBullets = remainingMaxBullet;
+    }
+    /// <summary>
+    /// マガジンの初期化
+    /// </summary>
+    void MagazineInitialize()
+    {
+        this.gameObject.AddComponent<MagazineScript>();
+        magazineScript = this.gameObject.GetComponent<MagazineScript>();
+
+        magazineScript.ReloadEnable(false);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
+    }
+
+    public void Initialize()
+	{
+        ResetRemainigBullet();
+        magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
+        magazineScript.SetMagazineSize(1);
+        magazineScript.SetReloadTime(120);
     }
 }

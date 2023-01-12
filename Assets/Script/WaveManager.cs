@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using Util;
+
 public class WaveManager : MonoBehaviour
 {
     private GameObject[] enemyBox;
     private GameObject[] ufoBox;
+    private GameObject[] numberBox;
     public GameObject wave_object = null;
     public GameObject enemySpawner;
     public GameObject enemySpawner2;
@@ -14,14 +18,15 @@ public class WaveManager : MonoBehaviour
     public GameObject ufo_2;
     public GameObject ufo_3;
     public static int nowWave = 1;
-    bool nextWaveCheck = false;
-    int saveWave = 0;
+    public static bool nextWaveCheck = false;
+    private int saveWave = 0;
 
-    public bool waveChangeFlag = false;
+    public  bool waveChangeFlag = false;
 
     [SerializeField] private AudioSource defaultAudioSource;
     [SerializeField] private AudioSource bossAudioSource;
 
+    public static bool numberchange = false;
     void Start()
     {
         //フレームレートの固定
@@ -32,9 +37,9 @@ public class WaveManager : MonoBehaviour
             Screen.SetResolution(1920, 1080, false);
         }
 
-        enemySpawner.GetComponent<EnemySpawner>().Initialize();
-        enemySpawner2.SetActive(false);
-        enemySpawner3.SetActive(false);
+        enemySpawner.GetComponent<EnemySpawner>().Initialize(false,Constants.normalEnemy);
+        enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+        enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
         ufo.SetActive(false);
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
@@ -42,23 +47,28 @@ public class WaveManager : MonoBehaviour
         nowWave = 1;
 
         defaultAudioSource.Play();
+        numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
+        NumberChange();
     }
- 
+
 
     void Update()
     {
-        enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
-        ufoBox = GameObject.FindGameObjectsWithTag("UFO");
+        enemyBox = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString());
+        ufoBox = GameObject.FindGameObjectsWithTag(Constants.ufoName.ToString());
 
+        numberchange = false;
         //何かのトリガーで次のウェーブへ
         if (waveChangeFlag == true && enemyBox.Length <= 0 && ufoBox.Length <= 0)
         {
             waveChangeFlag = false;
             nextWaveCheck = true;
+            numberchange = true;
         }
         else
         {
             saveWave = nowWave;
+
         }
 
         if (nextWaveCheck)
@@ -71,14 +81,16 @@ public class WaveManager : MonoBehaviour
                 bossAudioSource.Stop();
 
                 if (nowWave == 2)
-                {
+                {      
                     bossAudioSource.Play();
-                    ufo.GetComponent<UFO>().Initialize();
+                    ufo.GetComponent<UFO>().Initialize(true,true);
                 }
                 if (nowWave == 3)
 				{
                     defaultAudioSource.Play();
-                    enemySpawner2.GetComponent<EnemySpawner>().Initialize();
+                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.jumpEnemy);
+                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.jumpEnemy);
+                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.jumpEnemy);
                 }
                 if (nowWave == 4)
 				{
@@ -88,7 +100,9 @@ public class WaveManager : MonoBehaviour
                 if (nowWave == 5)
                 {
                     defaultAudioSource.Play();
-                    enemySpawner3.GetComponent<EnemySpawner>().Initialize();
+                    enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.stepEnemy);
+                    enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.stepEnemy);
+                    enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.stepEnemy);
                 }
                 if (nowWave == 6)
                 {
@@ -99,15 +113,15 @@ public class WaveManager : MonoBehaviour
 				{
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
-                    ufo_2.GetComponent<UFO>().Initialize(1);
-                    ufo_3.GetComponent<UFO>().Initialize(3);
+                    ufo_2.GetComponent<UFO>().Initialize();
+                    ufo_3.GetComponent<UFO>().Initialize();
                 }
                 nextWaveCheck = false;
             }
+            NumberChange();
+
         }
 
-        Text wave_text = wave_object.GetComponent<Text>();
-        wave_text.text = "Wave : " + nowWave;
     }
     /// <summary>
     /// どこまで進んだかのウェーブを渡す関数
@@ -123,5 +137,26 @@ public class WaveManager : MonoBehaviour
     public void WaveChangeFlagOn()
     {
         waveChangeFlag = true;
+    }
+    public static bool GetChangeWaveFlag()
+    {
+        return numberchange;
+    }
+    
+    private void NumberChange()
+    {
+        foreach(var num in numberBox ?? Enumerable.Empty<GameObject>())
+       {
+            if (num.name== "number" + nowWave)
+            {
+                num.transform.SetScaleXY(5, 5);
+                num.GetComponent<ColorChangeText>().ChangeRed();
+            }
+            else
+            {
+                num.transform.SetScaleXY(2, 2);
+                num.GetComponent<ColorChangeText>().ChageNormal();
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemySpawnManager : MonoBehaviour
 {
     //出現させる敵のオブジェクト
@@ -27,6 +26,9 @@ public class EnemySpawnManager : MonoBehaviour
     int nowWave;
 
     bool moveFlag = false;
+
+    bool randomSpawnFlag = true;
+    int enemyType = 0;
 
 
     void Start()
@@ -55,6 +57,7 @@ public class EnemySpawnManager : MonoBehaviour
         }
 
         moveFlag = false;
+        randomSpawnFlag = true;
     }
    
 
@@ -63,21 +66,30 @@ public class EnemySpawnManager : MonoBehaviour
 		if (moveFlag == false) { return; }
 
         //if(gameObject.GetComponent<UFO>().GetEntryFlag()==false)
-        {//　経過時間を足す
+        //{//　経過時間を足す
             elapsedTime += Time.deltaTime;
-        }
+        //}
     }
     /// <summary>
     /// 敵の出現処理
     /// </summary>
     void SpawnEnemy()
     {
-        //出現させる敵をランダムに選ぶ
-        var randomValue = Random.Range(0, enemys.Length);
-        //敵の向きをランダムに決定
-        var randomRotationY = Random.value * 360f;
+        if(randomSpawnFlag)
+		{
+            //出現させる敵をランダムに選ぶ
+            var randomValue = Random.Range(0, enemys.Length);
+            //敵の向きをランダムに決定
+            var randomRotationY = Random.value * 360f;
 
-        GameObject.Instantiate(enemys[randomValue], spawnPoint.transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
+            GameObject.Instantiate(enemys[randomValue], spawnPoint.transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
+        }
+        else
+		{
+            //敵の向きをランダムに決定
+            var randomRotationY = Random.value * 360f;
+            GameObject.Instantiate(enemys[enemyType], spawnPoint.transform.position, Quaternion.Euler(0f, randomRotationY, 0f));
+        }
 
         enemyCount++;
         enemyAllCount++;
@@ -111,8 +123,6 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 nowMaxEnemyCount = maxEnemyCount[maxEnemyCount.Length - 1];
             }
-
-            //deadFlag = false;
 
             enemyCount = 0;
 
@@ -173,5 +183,12 @@ public class EnemySpawnManager : MonoBehaviour
     public int GetEnemyCount()
 	{
         return enemyCount;
+	}
+
+    public void Initialize(bool arg_randomSpawnFlag,int arg_enemtType)
+	{
+        enemyCount = 0;
+        randomSpawnFlag = arg_randomSpawnFlag;
+        enemyType = arg_enemtType;
 	}
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class UFO : MonoBehaviour
 {
@@ -46,14 +47,18 @@ public class UFO : MonoBehaviour
     //弱点の位置テキスト表示
     public MeshRenderer textMesh;
 
-    [SerializeField]
-    public GameObject player;
+    //[SerializeField]
+    //public GameObject player;
 
     //死亡演出
     private bool deleteFlag;
     Rigidbody rigidbody;
     [SerializeField, Min(0)] int explosionDelayMaxTime = 20;
     int explosionDelayTime = 0;
+
+    [SerializeField] private GameObject CautionText;
+
+    private bool weakTextFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +79,7 @@ public class UFO : MonoBehaviour
         damageCount = damageMaxCount;
 
         textMesh.enabled = false;
+        weakTextFlag = false;
 
         rigidbody = GetComponent<Rigidbody>();
 
@@ -201,11 +207,17 @@ public class UFO : MonoBehaviour
         mesh_2.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
         mesh_3.material.color = mesh_3.material.color + new Color(0, 0, 0, 0.005f);
         mesh_barrier.material.SetFloat("_MyAlpha", mesh.material.color.a);
+
         if (mesh.material.color.a >= 1.0f)
 		{
+            CautionText.GetComponent<Controll_Var>().ChangeEndFlag();
             entryFlag = false;
             gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
-            textMesh.enabled = true;
+            gameObject.GetComponent<CameraMove>().SetFocusFlag(false);
+            if(weakTextFlag)
+			{
+                textMesh.enabled = true;
+            }
         }
     }
     /// <summary>
@@ -228,23 +240,27 @@ public class UFO : MonoBehaviour
     /// <summary>
     /// 初期化処理
     /// </summary>
-    /// <param name="positionNum">UFOが三体同時に出た際の出現位置の調整1~3で2がプレイヤーの真上</param>
-	public void Initialize(int positionNum = 2)
+    /// <param name="arg_weakTextFlag">UFOが三体同時に出た際の出現位置の調整1~3で2がプレイヤーの真上</param>
+	public void Initialize(bool arg_weakTextFlag = false,bool arg_focusFlag = false)
 	{
-        var playerPosition = player.transform.position;
+        //var playerPosition = player.transform.position;
         gameObject.SetActive(true);
-        if (positionNum == 1)
-		{
-            gameObject.transform.position = new Vector3(player.transform.position.x + 160, gameObject.transform.position.y, player.transform.position.z);
-        }
-        else if (positionNum == 2)
-		{
-            gameObject.transform.position = new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z);
-        }
-        else
-		{
-            gameObject.transform.position = new Vector3(player.transform.position.x - 160, gameObject.transform.position.y, player.transform.position.z);
-        }
+  //      if (positionNum == 1)
+		//{
+  //          gameObject.transform.position = new Vector3(player.transform.position.x + 160, gameObject.transform.position.y, player.transform.position.z);
+  //      }
+  //      else if (positionNum == 2)
+		//{
+  //          gameObject.transform.position = new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z);
+  //      }
+  //      else
+		//{
+  //          gameObject.transform.position = new Vector3(player.transform.position.x - 160, gameObject.transform.position.y, player.transform.position.z);
+  //      }
+        
+        weakTextFlag = arg_weakTextFlag;
+
+        gameObject.GetComponent<CameraMove>().SetFocusFlag(arg_focusFlag);
         entryFlag = true;
         hp = 30;
         deadFlag = false;
@@ -293,7 +309,7 @@ public class UFO : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string gameObjectName = other.gameObject.tag;
-        if (gameObjectName != "Field"||deadFlag == false) { return; }
+        if (gameObjectName != Constants.fieldName.ToString() || deadFlag == false) { return; }
         deleteFlag = true;
     }
 }

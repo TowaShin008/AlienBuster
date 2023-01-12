@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 /// <summary>
 /// シーン遷移時のフェードイン・アウトを制御するためのクラス .
@@ -63,7 +64,6 @@ public class FadeManager : MonoBehaviour
 
 	public void OnGUI ()
 	{
-
 		// Fade .
 		if (this.isFading)
 		{
@@ -72,46 +72,6 @@ public class FadeManager : MonoBehaviour
 			GUI.color = this.fadeColor;
 			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
 		}
-
-		if (this.DebugMode)
-		{
-			if (!this.isFading)
-			{
-				//Scene一覧を作成 .
-				//(UnityEditor名前空間を使わないと自動取得できなかったので決めうちで作成) .
-				//List<string> scenes = new List<string>();
-				//scenes.Add("SampleScene");
-				//scenes.Add ("SomeScene1");
-				//scenes.Add ("SomeScene2");
-
-
-				////Sceneが一つもない .
-				//if (scenes.Count == 0)
-				//{
-				//	GUI.Box(new Rect(10, 10, 200, 50), "Fade Manager(Debug Mode)");
-				//	GUI.Label(new Rect(20, 35, 180, 20), "Scene not found.");
-				//	return;
-				//}
-
-
-				//GUI.Box(new Rect(10, 10, 300, 50 + scenes.Count * 25), "Fade Manager(Debug Mode)");
-				//GUI.Label(new Rect(20, 30, 280, 20), "Current Scene : " + SceneManager.GetActiveScene().name);
-
-				//int i = 0;
-				//foreach (string sceneName in scenes)
-				//{
-				//	if (GUI.Button(new Rect(20, 55 + i * 25, 100, 20), "Load Level"))
-				//	{
-				//		LoadScene(sceneName, 1.0f);
-				//	}
-				//	GUI.Label(new Rect(125, 55 + i * 25, 1000, 20), sceneName);
-				//	i++;
-				//}
-			}
-		}
-
-
-
 	}
 
 	public void Update()
@@ -123,15 +83,15 @@ public class FadeManager : MonoBehaviour
 			//GUI.color = this.fadeColor;
 			//GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Texture2D.whiteTexture);
 		}
-		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 1"))
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1))
 		{
-			if (SceneManager.GetActiveScene().name == "TitleScene")
+			if (SceneManager.GetActiveScene().name == Constants.titleSceneName.ToString())
 			{
-				LoadScene("GameScene", 1.0f);
+				LoadScene(Constants.gameSceneName.ToString(), 1.0f);
 			}
-			else if (SceneManager.GetActiveScene().name == "EndScene")
+			else if (SceneManager.GetActiveScene().name == Constants.endSceneName.ToString())
 			{
-				LoadScene("TitleScene", 1.0f);
+				LoadScene(Constants.titleSceneName.ToString(), 1.0f);
 			}
 		}
 	}

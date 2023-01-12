@@ -10,10 +10,8 @@ public class TitleSceneScript : MonoBehaviour
     [SerializeField]
     Animator animator;
     float speed = 1f;
-    bool click = false;
     void Start()
     {
-        click = false;
         speed = 1f;
     }
 

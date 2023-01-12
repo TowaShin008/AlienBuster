@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class EndScene : MonoBehaviour
 {
@@ -16,9 +17,9 @@ public class EndScene : MonoBehaviour
     {
         if (timer > 120)
         {
-            if (Input.GetKeyDown("space"))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                FadeManager.Instance.LoadScene("TitleScene", 0.5f);
+                FadeManager.Instance.LoadScene(Constants.titleSceneName.ToString(), 0.5f);
             }
         }
         else

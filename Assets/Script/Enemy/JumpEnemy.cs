@@ -52,8 +52,6 @@ public class JumpEnemy : MonoBehaviour
 
     //ドロップする武器
     [SerializeField]
-    private GameObject normalGunItem;
-    [SerializeField]
     private GameObject rocketLauncherItem;
     [SerializeField]
     private GameObject sniperRifleItem;
@@ -66,6 +64,10 @@ public class JumpEnemy : MonoBehaviour
     //ヒット時後ろに吹っ飛ばないように
     [SerializeField, Min(0)] int hitStopMaxTime = 10;
     private int hitStopTime = 10;
+    //ダメージ時se
+    AudioSource damageAudioSource;
+    [SerializeField]
+    AudioClip damageAudioClip;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +81,7 @@ public class JumpEnemy : MonoBehaviour
 
         jumpDelayTime = jampDelayMaxTime;
         hitStopTime = hitStopMaxTime;
+        damageAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -151,27 +154,7 @@ public class JumpEnemy : MonoBehaviour
                 }
             }
 
-
-            var currentPosition = gameObject.transform.position;
-
-            if (currentPosition.z > Constants.stageMaxPositionZ)
-            {
-                currentPosition.z = Constants.stageMaxPositionZ;
-            }
-            if (currentPosition.z < Constants.stageMinPositionZ)
-            {
-                currentPosition.z = Constants.stageMinPositionZ;
-            }
-            if (currentPosition.x > Constants.stageMaxPositionX)
-            {
-                currentPosition.x = Constants.stageMaxPositionX;
-            }
-            if (currentPosition.x < Constants.stageMinPositionX)
-            {
-                currentPosition.x = Constants.stageMinPositionX;
-            }
-
-            gameObject.transform.position = currentPosition;
+            StageOutProcessing();
 
             if (hp <= 0)
             {
@@ -194,6 +177,33 @@ public class JumpEnemy : MonoBehaviour
     {
         //ジャンプ処理
         Jump();
+    }
+    /// <summary>
+    ///ステージ外に出てしまった際のポジション修正処理
+    /// </summary>
+    private void StageOutProcessing()
+    {
+        //ステージ外に出た時にポジションを正しい位置に戻す処理
+        var currentPosition = gameObject.transform.position;
+
+        if (currentPosition.z > Constants.stageMaxPositionZ)
+        {
+            currentPosition.z = Constants.stageMaxPositionZ;
+        }
+        if (currentPosition.z < Constants.stageMinPositionZ)
+        {
+            currentPosition.z = Constants.stageMinPositionZ;
+        }
+        if (currentPosition.x > Constants.stageMaxPositionX)
+        {
+            currentPosition.x = Constants.stageMaxPositionX;
+        }
+        if (currentPosition.x < Constants.stageMinPositionX)
+        {
+            currentPosition.x = Constants.stageMinPositionX;
+        }
+
+        gameObject.transform.position = currentPosition;
     }
     /// <summary>
     /// ジャンプ処理
@@ -233,28 +243,31 @@ public class JumpEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != Constants.normalBulletName.ToString() && gameObjectName != Constants.rocketBombName.ToString() && gameObjectName != Constants.sniperBulletName.ToString() && gameObjectName == Constants.enemyBulletName.ToString()) { return; }
 
-        if (gameObjectName == "Bullet")
+        if (gameObjectName == Constants.normalBulletName.ToString())
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.normalBulletDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
-        else if (gameObjectName == "RocketBumb")
+        else if (gameObjectName == Constants.rocketBombName.ToString())
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.rocketBombDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
-        else if (gameObjectName == "SniperBullet")
+        else if (gameObjectName == Constants.sniperBulletName.ToString())
         {
             rigidbody.isKinematic = true;
             hitStopTime = hitStopMaxTime;
             hp -= Constants.sniperBulletDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
 
-        if (gameObjectName == "Field")
+        if (gameObjectName == Constants.fieldName.ToString())
         {
             onTheGroundFlag = true;
         }
@@ -283,7 +296,7 @@ public class JumpEnemy : MonoBehaviour
     private void DropWeapon()
     {
         //出現させる敵をランダムに選ぶ
-        var randomValue = Random.Range(1, 10);
+        int randomValue = Random.Range(1, 11);
 
         int playerGunType = playerObject.GetComponent<FPSController>().GetGunType();
 
@@ -294,20 +307,15 @@ public class JumpEnemy : MonoBehaviour
 
         if (randomValue == 1)
         {
-            normalGunItem.SetActive(true);
-            normalGunItem.transform.position = this.transform.position;
-        }
-        else if (randomValue == 2)
-        {
             rocketLauncherItem.SetActive(true);
             rocketLauncherItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 3)
+        else if (randomValue == 2)
         {
             sniperRifleItem.SetActive(true);
             sniperRifleItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 4)
+        else if (randomValue == 3)
         {
             shotGunItem.SetActive(true);
             shotGunItem.transform.position = this.transform.position;

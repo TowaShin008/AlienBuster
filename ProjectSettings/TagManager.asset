@@ -9,10 +9,11 @@ TagManager:
   - Bullet
   - WeaponItem
   - EnemyBullet
-  - RocketBumb
   - Weapon
   - UFO
   - SniperBullet
+  - RocketBomb
+  - waveNumber
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Bullet
   - 
   - 
   - 

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6505327580029970763}
   m_Layer: 0
   m_Name: RocketBomb
-  m_TagString: RocketBumb
+  m_TagString: RocketBomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
