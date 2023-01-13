@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Util;
 public class Barrier : MonoBehaviour
 {
     //’e‚­‰¹
@@ -23,9 +23,9 @@ public class Barrier : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != Constants.normalBulletName.ToString() && gameObjectName != Constants.rocketBombName.ToString() && gameObjectName != Constants.sniperBulletName.ToString() && gameObjectName == Constants.enemyBulletName.ToString()) { return; }
 
-        if (gameObjectName == "Bullet"|| gameObjectName == "RocketBumb"|| gameObjectName == "SniperBullet")
+        if (gameObjectName == Constants.normalBulletName.ToString()|| gameObjectName == Constants.rocketBombName.ToString()|| gameObjectName == Constants.sniperBulletName.ToString())
         {
             audioSource.PlayOneShot(barrierSound);
         }

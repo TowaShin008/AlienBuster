@@ -9,21 +9,14 @@ public class ShotGun : MonoBehaviour
     [SerializeField]
     private GameObject firingPoint;
 
-    private float bulletSpeed = 30.0f;
+    private float bulletSpeed = 60.0f;
     const int shotDelayMaxTime = 100;
     private int shotDelayTime = 0;
 
     [SerializeField]
-    float randomDiffusion = 10;
+    float randomDiffusion = 200.0f;
     [SerializeField]
     int bulletCount = 10;
-
-    [SerializeField]
-    private Transform bulletExitPosition;
-    [SerializeField]
-    private float exitSpeed = 0.1f;
-    [SerializeField]
-    private float exitRotate = 360.0f;
 
     //効果音
     public AudioClip shotSound;
@@ -37,10 +30,19 @@ public class ShotGun : MonoBehaviour
 
     GameObject muzzleFlash;
 
+    [SerializeField]
+    const int remainingMaxBullet = 30;
+    int remainingBullets = remainingMaxBullet;
+
+    MagazineScript magazineScript = null;
+
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
+        remainingBullets = remainingMaxBullet;
+        MagazineInitialize();
+        magazineScript.ReloadEnable(true);
     }
 
     // Update is called once per frame
@@ -55,18 +57,24 @@ public class ShotGun : MonoBehaviour
     /// 射撃処理
     /// </summary>
     /// <param name="arg_cameraRotation">カメラの回転量</param>
-    public void Shot(Quaternion arg_cameraRotation)
+    public bool Shot(Quaternion arg_cameraRotation)
     {
+        if (!magazineScript.CheckBullets())
+        {
+            magazineScript.SetRemainingBulletsSize(remainingBullets);
+            return true;
+        }
+
         if (shotDelayTime <= 0)
         {
+            magazineScript.DecrementMagazine();
+            if (remainingBullets > 0)
+            {
+                remainingBullets--;
+            }
             //銃の音
             audioSource.PlayOneShot(shotSound);
             audioSource.PlayOneShot(bulletSound);
-            var bulletInstance = Instantiate(bullet, bulletExitPosition.position, arg_cameraRotation);
-            var bulletRigit = bulletInstance.GetComponent<Rigidbody>();
-            bulletRigit.AddForce(bulletExitPosition.forward * exitSpeed);
-            bulletRigit.AddTorque(Random.insideUnitSphere * exitRotate);
-            Destroy(bulletInstance, 3f);
 
 
             for (int n = 0; n < bulletCount; n++)
@@ -83,8 +91,8 @@ public class ShotGun : MonoBehaviour
                 var direction = new Vector3(randomX, randomY, randomZ);
                 Rigidbody newbulletRb = newBall.GetComponent<Rigidbody>();
 
-                newbulletRb.AddForce(direction, ForceMode.Impulse);
-                newbulletRb.AddForce(newBall.transform.forward * bulletSpeed, ForceMode.Impulse);
+                newbulletRb.AddForce(direction);
+                newbulletRb.AddForce(newBall.transform.forward * bulletSpeed,ForceMode.Impulse);
 
                 newBall.name = bullet.name;
 
@@ -95,6 +103,13 @@ public class ShotGun : MonoBehaviour
 
             shotDelayTime = shotDelayMaxTime;
         }
+
+        if (remainingBullets <= 0)
+        {
+            return false;
+        }
+
+        return true;
     }
     /// <summary>
     /// マズルフラッシュ演出
@@ -131,5 +146,31 @@ public class ShotGun : MonoBehaviour
         {
             muzzleFlash.SetActive(false);
         }
+    }
+    /// <summary>
+    /// 残弾数のリセット
+    /// </summary>
+    public void ResetRemainigBullet()
+    {
+        remainingBullets = remainingMaxBullet;
+    }
+    /// <summary>
+    /// マガジンの初期化
+    /// </summary>
+    void MagazineInitialize()
+    {
+        this.gameObject.AddComponent<MagazineScript>();
+        magazineScript = this.gameObject.GetComponent<MagazineScript>();
+
+        magazineScript.ReloadEnable(false);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
+    }
+    public void Initialize()
+    {
+        ResetRemainigBullet();
+        magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
+        magazineScript.SetMagazineSize(2);
+        magazineScript.SetReloadTime(120);
     }
 }

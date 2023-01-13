@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 public class DistanceOfPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject playerMainCamera;
@@ -11,27 +12,25 @@ public class DistanceOfPlayer : MonoBehaviour
     [SerializeField] SimpleUITransition[] transitions;
     bool lookOn ;
     bool savelookOn;
-    float speed;
-    float distance;
+    //float distance;
     // Start is called before the first frame update
     void Start()
     {
         rayDistance = 100;
-        speed = 1.0f;
         lookOn = false;
         savelookOn = lookOn;
-        distance = 0;
-        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        //distance = 0;
+        enemys = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
         //‹——£‚ÌŒvŽZ
-        for (int i = 0; i < enemys.Length; i++)
-        {
-            float distance = Vector3.Distance(playerMainCamera.transform.position,
-                enemys[i].transform.position);
+        //for (int i = 0; i < enemys.Length; i++)
+        //{
+        //    float distance = Vector3.Distance(playerMainCamera.transform.position,
+        //        enemys[i].transform.position);
            /* if (distance<=rayDistance)
             {
                 lookOn = true;
@@ -40,7 +39,7 @@ public class DistanceOfPlayer : MonoBehaviour
             {
                 lookOn = false;
             }*/
-        }
+        //}
         //ƒŒƒC‚Ì¢Š«
         Ray ray = new Ray(playerMainCamera.transform.position, playerMainCamera.transform.forward);
         Debug.DrawRay(playerMainCamera.transform.position, playerMainCamera.transform.forward * rayDistance, Color.red);
@@ -49,7 +48,7 @@ public class DistanceOfPlayer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            if (hit.collider.gameObject.tag == "Enemy")
+            if (hit.collider.gameObject.tag == Constants.enemyName.ToString())
             {
                 Debug.Log("HHHHHHHHIT");
                 lookOn = true;

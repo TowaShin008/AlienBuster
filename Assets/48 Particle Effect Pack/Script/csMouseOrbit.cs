@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using Util;
 public class csMouseOrbit : MonoBehaviour
 {
 
@@ -34,8 +34,8 @@ public class csMouseOrbit : MonoBehaviour
     {
         if (Target)
         {
-            x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-            y += Input.GetAxis("Mouse Y") * ySpeed * 0.05f;
+            x += Input.GetAxis(Constants.mouseAxisXName.ToString()) * xSpeed * 0.02f;
+            y += Input.GetAxis(Constants.mouseAxisYName.ToString()) * ySpeed * 0.05f;
 
             y = ClampAngle(y, yMinLimit, yMaxLimit);
 

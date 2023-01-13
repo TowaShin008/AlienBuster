@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
     public GameObject ufo_3;
     public static int nowWave = 1;
     public static bool nextWaveCheck = false;
-    int saveWave = 0;
+    private int saveWave = 0;
 
     public  bool waveChangeFlag = false;
 
@@ -54,8 +54,8 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        enemyBox = GameObject.FindGameObjectsWithTag("Enemy");
-        ufoBox = GameObject.FindGameObjectsWithTag("UFO");
+        enemyBox = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString());
+        ufoBox = GameObject.FindGameObjectsWithTag(Constants.ufoName.ToString());
 
         numberchange = false;
         //何かのトリガーで次のウェーブへ

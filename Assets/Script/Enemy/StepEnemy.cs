@@ -39,8 +39,6 @@ public class StepEnemy : MonoBehaviour
 
     //ドロップする武器
     [SerializeField]
-    private GameObject normalGunItem;
-    [SerializeField]
     private GameObject rocketLauncherItem;
     [SerializeField]
     private GameObject sniperRifleItem;
@@ -50,6 +48,10 @@ public class StepEnemy : MonoBehaviour
     bool stop;
     [SerializeField]
     GameObject pauseObject;
+    //ダメージ時se
+    AudioSource damageAudioSource;
+    [SerializeField]
+    AudioClip damageAudioClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,7 @@ public class StepEnemy : MonoBehaviour
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.drag = 50;
+        damageAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -169,19 +172,22 @@ public class StepEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != Constants.normalBulletName && gameObjectName != Constants.rocketBombName && gameObjectName != Constants.sniperBulletName && gameObjectName == Constants.enemyBulletName) { return; }
+        if (gameObjectName != Constants.normalBulletName.ToString() && gameObjectName != Constants.rocketBombName.ToString() && gameObjectName != Constants.sniperBulletName.ToString() && gameObjectName == Constants.enemyBulletName.ToString()) { return; }
 
-        if (gameObjectName == Constants.normalBulletName)
+        if (gameObjectName == Constants.normalBulletName.ToString())
         {
             hp -= Constants.normalBulletDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
-        else if (gameObjectName == Constants.rocketBombName)
+        else if (gameObjectName == Constants.rocketBombName.ToString())
         {
             hp -= Constants.rocketBombDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
-        else if (gameObjectName == Constants.sniperBulletName)
+        else if (gameObjectName == Constants.sniperBulletName.ToString())
         {
             hp -= Constants.sniperBulletDamage;
+            damageAudioSource.PlayOneShot(damageAudioClip);
         }
     }
     /// <summary>
@@ -208,7 +214,7 @@ public class StepEnemy : MonoBehaviour
     private void DropWeapon()
     {
         //出現させる敵をランダムに選ぶ
-        var randomValue = Random.Range(1, 10);
+        int randomValue = Random.Range(1, 11);
 
         int playerGunType = playerObject.GetComponent<FPSController>().GetGunType();
 
@@ -219,20 +225,15 @@ public class StepEnemy : MonoBehaviour
 
         if (randomValue == 1)
         {
-            normalGunItem.SetActive(true);
-            normalGunItem.transform.position = this.transform.position;
-        }
-        else if (randomValue == 2)
-        {
             rocketLauncherItem.SetActive(true);
             rocketLauncherItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 3)
+        else if (randomValue == 2)
         {
             sniperRifleItem.SetActive(true);
             sniperRifleItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 4)
+        else if (randomValue == 3)
         {
             shotGunItem.SetActive(true);
             shotGunItem.transform.position = this.transform.position;

@@ -26,10 +26,14 @@ public class NormalGun : MonoBehaviour
     [SerializeField] float dispersion = 0.02f; // ばらつき具合
     [SerializeField] float verticalToHorizontalRatio = 1.5f; // ばらつきの縦横比
 
+    MagazineScript magazineScript = null;
+
     void Start()
     {
         //音のコンポーネント取得
         audioSource = GetComponent<AudioSource>();
+        MagazineInitialize();
+        magazineScript.ReloadEnable(true);
     }
 
     // Update is called once per frame
@@ -46,8 +50,11 @@ public class NormalGun : MonoBehaviour
     /// <param name="arg_cameraRotation">カメラの回転量</param>
     public void Shot(Quaternion arg_cameraRotation,bool arg_holdFlag)
     {
+        if (!magazineScript.CheckBullets()) return;
+
         if (shotDelayTime <= 0)
         {
+            magazineScript.DecrementMagazine();
             //銃の音
             audioSource.PlayOneShot(gunSound);
             //弾の発射処理
@@ -133,5 +140,23 @@ public class NormalGun : MonoBehaviour
         {
             muzzleFlash.SetActive(false);
         }
+    }
+    /// <summary>
+    /// マガジンの初期化
+    /// </summary>
+    void MagazineInitialize()
+    {
+        this.gameObject.AddComponent<MagazineScript>();
+        magazineScript = this.gameObject.GetComponent<MagazineScript>();
+
+        magazineScript.ReloadEnable(false);
+        magazineScript.SetMagazineSize(10);
+        magazineScript.SetReloadTime(120);
+    }
+    public void Initialize()
+    {
+        magazineScript.SetRemainingBulletsSize(0);
+        magazineScript.SetMagazineSize(10);
+        magazineScript.SetReloadTime(120);
     }
 }

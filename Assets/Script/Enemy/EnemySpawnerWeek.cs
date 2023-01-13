@@ -25,20 +25,20 @@ public class EnemySpawnerWeek : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string gameObjectName = collision.gameObject.tag;
-        if (gameObjectName != "Bullet" && gameObjectName != "RocketBumb" && gameObjectName != "SniperBullet" && gameObjectName == "EnemyBullet") { return; }
+        if (gameObjectName != Constants.normalBulletName.ToString() && gameObjectName != Constants.rocketBombName.ToString() && gameObjectName != Constants.sniperBulletName.ToString() && gameObjectName == Constants.enemyBulletName.ToString()) { return; }
         if (ufo.GetComponent<UFO>().GetDeadFlag() == true) { return; }
 
-        if (gameObjectName == "Bullet")
+        if (gameObjectName == Constants.normalBulletName.ToString())
         {
             audioSource.PlayOneShot(soundDamege);
             ufo.GetComponent<UFO>().Damage(Constants.normalBulletDamage);
         }
-        else if (gameObjectName == "RocketBumb")
+        else if (gameObjectName == Constants.rocketBombName.ToString())
         {
             audioSource.PlayOneShot(soundDamege);
             ufo.GetComponent<UFO>().Damage(Constants.rocketBombDamage);
         }
-        else if (gameObjectName == "SniperBullet")
+        else if (gameObjectName == Constants.sniperBulletName.ToString())
         {
             audioSource.PlayOneShot(soundDamege);
             ufo.GetComponent<UFO>().Damage(Constants.sniperBulletDamage);
