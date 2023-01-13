@@ -101,14 +101,14 @@ public class NormalGun : MonoBehaviour
             Destroy(newBullet, 1.5f);
 
             shotDelayTime = shotDelayMaxTime;
-
-            MuzzleFashProcessing();
+            //マズルフラッシュ演出
+            MuzzleFlashProcessing();
         }
     }
     /// <summary>
     /// マズルフラッシュ演出
     /// </summary>
-    private void MuzzleFashProcessing()
+    private void MuzzleFlashProcessing()
     {
         //マズルフラッシュON
         if (muzzleFlashPrefab != null)

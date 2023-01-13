@@ -98,7 +98,7 @@ public class ShotGun : MonoBehaviour
 
                 Destroy(newBall, 0.8f);
             }
-
+            //マズルフラッシュ演出
             MuzzleFlashProcessing();
 
             shotDelayTime = shotDelayMaxTime;

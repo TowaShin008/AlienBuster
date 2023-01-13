@@ -13,9 +13,5 @@ public class GameScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("2"))
-        {
-            FadeManager.Instance.LoadScene("EndScene", 0.5f);
-        }
     }
 }
