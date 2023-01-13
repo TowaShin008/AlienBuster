@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class TitleSceneScript : MonoBehaviour
 {
@@ -18,11 +19,11 @@ public class TitleSceneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             speed += 10;
             animator.SetFloat("Speed", speed);
-            FadeManager.Instance.LoadScene("GameScene", 1f);
+            FadeManager.Instance.LoadScene(Constants.gameSceneName.ToString(), 1f);
         }
     }
 }

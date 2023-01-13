@@ -62,7 +62,7 @@ public class FPSController : MonoBehaviour
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
-    int gunType = 1;
+    int gunType = 2;
     //スナイパーライフルのUI
     public Image sniperEdge;
     public Image sniperGaugeEdge;
@@ -106,8 +106,8 @@ public class FPSController : MonoBehaviour
         //残機
         remain = 1;
         hp = maxHP;
-        normalGun.SetActive(true);
-        rocketLauncher.SetActive(false);
+        normalGun.SetActive(false);
+        rocketLauncher.SetActive(true);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
         //スナイパーライフルのUI

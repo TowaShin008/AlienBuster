@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Util;
 public class RocketBomb : MonoBehaviour
 {
     //爆発エフェクト
@@ -38,7 +38,7 @@ public class RocketBomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Enemy" && isDeadFlag && collision.gameObject.name != "UFO_weak") { return; }
+        if (collision.gameObject.tag != Constants.enemyName.ToString() && isDeadFlag && collision.gameObject.name != "UFO_weak") { return; }
 
         ExplodeProcessing();
     }

@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
+using Util;
 public class PauseManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -33,7 +33,7 @@ public class PauseManager : MonoBehaviour
     {
         if (!pause)
         {
-            if (Input.GetKey(KeyCode.M) || Input.GetKeyDown("joystick button 7"))
+            if (Input.GetKey(KeyCode.M) || Input.GetKeyDown(KeyCode.Joystick1Button7))
             {
 
                 Pause();       // Time.timeScale = 0;
@@ -95,7 +95,7 @@ public class PauseManager : MonoBehaviour
     }
     private void TitleReturn()
     {
-        FadeManager.Instance.LoadScene("TitleScene", 1f);
+        FadeManager.Instance.LoadScene(Constants.titleSceneName.ToString(), 1f);
 
         pause = false;
         time = 0;
