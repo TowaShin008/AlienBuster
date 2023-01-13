@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 public class DistanceOfPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject playerMainCamera;
@@ -19,7 +20,7 @@ public class DistanceOfPlayer : MonoBehaviour
         lookOn = false;
         savelookOn = lookOn;
         //distance = 0;
-        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        enemys = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString());
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class DistanceOfPlayer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            if (hit.collider.gameObject.tag == "Enemy")
+            if (hit.collider.gameObject.tag == Constants.enemyName.ToString())
             {
                 Debug.Log("HHHHHHHHIT");
                 lookOn = true;

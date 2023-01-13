@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Util;
 public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Bullet") { return; }
+        if (collision.gameObject.tag == Constants.normalBulletName.ToString()) { return; }
 
         Destroy(gameObject);
     }

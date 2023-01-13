@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Util;
 public class MiniMap2D : MonoBehaviour
 {
     [System.Serializable]
@@ -201,7 +201,7 @@ public class MiniMap2D : MonoBehaviour
             Vector2 pos = CalculationPositionPlayer(_MMItems[i]._Object.transform.position);
             pos = pos * _MMDistance;
 
-            if (item.tagName == "Enemy"|| item.tagName == "WeaponItem")
+            if (item.tagName == Constants.enemyName.ToString()|| item.tagName == Constants.weaponItemName.ToString())
             {
                 pos = IconInMap(pos);
             }

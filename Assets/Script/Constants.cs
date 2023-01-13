@@ -73,9 +73,8 @@ namespace Util
 		//マウスのY軸ポジションの名前
 		public static FormattableString mouseAxisXName = $"Mouse X";
 		//ステージに出現するエネミーの種類
-		public const int normalEnemy = 0;
-		public const int jumpEnemy = 1;
-		public const int stepEnemy = 2;
-
+		public static int normalEnemy = 0;
+		public static int jumpEnemy = 1;
+		public static int stepEnemy = 2;
 	}
 }
