@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13895157, g: 0.122999005, b: 0.23686734, a: 1}
+  m_IndirectSpecularColor: {r: 0.14689565, g: 0.13036731, b: 0.24870595, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,11 +182,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_Font: {fileID: 12800000, guid: 473693a310ee7174b806aaa2a2a231c5, type: 3}
+    m_FontSize: 59
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 6
+    m_MinSize: 0
     m_MaxSize: 191
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -221,6 +221,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2002852746}
     m_Modifications:
+    - target: {fileID: 5327418349499680464, guid: bead8ee126b3e2a4198db4306d0e8f64, type: 3}
+      propertyPath: m_Text
+      value: Volume
+      objectReference: {fileID: 0}
     - target: {fileID: 5327418349499680464, guid: bead8ee126b3e2a4198db4306d0e8f64, type: 3}
       propertyPath: m_Color.b
       value: 0.45098042
