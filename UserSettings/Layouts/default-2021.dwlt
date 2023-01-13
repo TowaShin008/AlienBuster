@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 15
+  controlID: 17
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 16
+  controlID: 18
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17
+  controlID: 19
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -346,22 +346,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab/Enemy
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefab/Enemy
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: "C:\\Users\\K019G1327\\Desktop\\4\u5E74\u5F8C\u671F\u5236\u4F5C\\MoonBusters"
+  m_LastProjectPath: C:\Users\K019G1327\Desktop\StarStrikers
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 305.40002}
-    m_SelectedIDs: 80740000
-    m_LastClickedID: 29824
-    m_ExpandedIDs: 000000002a7400002c7400002e74000030740000327400003474000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 2a740000
+    m_LastClickedID: 29738
+    m_ExpandedIDs: 000000002a74000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -389,7 +389,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002a7400002c7400002e740000307400003274000034740000
+    m_ExpandedIDs: 000000002a740000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -516,24 +516,24 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 6.799988}
-      m_SelectedIDs: 98f7ffff
-      m_LastClickedID: -2152
-      m_ExpandedIDs: 34fbfffff4600000
+      scrollPos: {x: 0, y: 294.8}
+      m_SelectedIDs: c0f8ffff
+      m_LastClickedID: -1856
+      m_ExpandedIDs: 34fbffff6a600000bc600000f460000094610000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Enemy_Oct (2)
+        m_OriginalName: Enemy_Oct (2)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 24852
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -768,9 +768,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 13, y: 14.799999, z: 43.9}
+    m_Target: {x: 1058.3195, y: 95.57052, z: 48.033066}
     speed: 2
-    m_Value: {x: 13, y: 14.799999, z: 43.9}
+    m_Value: {x: 1058.3195, y: 95.57052, z: 48.033066}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -817,13 +817,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.27526835, y: -0.01601374, z: 0.0017498079, w: -0.96179503}
+    m_Target: {x: -0.0712323, y: 0.6251913, z: -0.05678267, w: -0.7752878}
     speed: 2
-    m_Value: {x: -0.27526838, y: -0.01601374, z: 0.0017498079, w: -0.96179503}
+    m_Value: {x: -0.071223974, y: 0.62511826, z: -0.05677604, w: -0.77519727}
   m_Size:
-    m_Target: 6.527522
+    m_Target: 4.783193
     speed: 2
-    m_Value: 6.527522
+    m_Value: 4.783193
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -907,7 +907,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 1
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -920,7 +920,7 @@ MonoBehaviour:
       y: 21
       width: 879.60004
       height: 393.2
-    m_Scale: {x: 0.47939816, y: 0.47939816}
+    m_Scale: {x: 0.4550926, y: 0.4550926}
     m_Translation: {x: 439.80002, y: 196.6}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -928,12 +928,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -917.4003
-      y: -410.09753
-      width: 1834.8007
-      height: 820.19507
+      x: -966.3967
+      y: -432
+      width: 1932.7935
+      height: 864
     m_MinimalGUI: 1
-  m_defaultScale: 0.47939816
+  m_defaultScale: 0.4550926
   m_LastWindowPixelSize: {x: 1099.5, y: 517.75}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
