@@ -287,7 +287,7 @@ public class FPSController : MonoBehaviour
         if(collision.gameObject.tag == Constants.weaponItemName.ToString())
 		{
             getItemAudioSource.Play();
-            sniperRifle.GetComponent<SniperScript>().Initialize();
+            //sniperRifle.GetComponent<SniperScript>().Initialize();
             if (collision.gameObject.name == Constants.normalGunItemName.ToString())
             {
                 normalGun.SetActive(true);

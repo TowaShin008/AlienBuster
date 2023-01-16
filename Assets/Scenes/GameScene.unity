@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09018206, g: 0.07862394, b: 0.16466963, a: 1}
+  m_IndirectSpecularColor: {r: 0.092303075, g: 0.08024498, b: 0.16759455, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1308,6 +1308,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 213315995}
     m_Modifications:
+    - target: {fileID: 5578683219364175622, guid: 7448e3303c4a6e24f912b4fa86df23c7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6602541503478516203, guid: 7448e3303c4a6e24f912b4fa86df23c7, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1366,7 +1370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9099538007905755930, guid: 7448e3303c4a6e24f912b4fa86df23c7, type: 3}
       propertyPath: m_Name
-      value: corver
+      value: cover
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7448e3303c4a6e24f912b4fa86df23c7, type: 3}
@@ -2223,6 +2227,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 105685950154853178, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Name
+      value: cover
+      objectReference: {fileID: 0}
     - target: {fileID: 531153169854434043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Name
       value: RocketLauncherModel
@@ -2310,6 +2318,10 @@ PrefabInstance:
     - target: {fileID: 2981631082252657133, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626527448993888038, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4188414528681818478, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
@@ -3092,6 +3104,14 @@ PrefabInstance:
     - target: {fileID: 699347958833076629, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
       propertyPath: m_Mass
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212752779297421854, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
+      propertyPath: m_Name
+      value: cover
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591799001869370882, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7025813053706743918, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
       propertyPath: m_Name
