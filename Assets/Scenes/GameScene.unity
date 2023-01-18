@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.092303075, g: 0.08024498, b: 0.16759455, a: 1}
+  m_IndirectSpecularColor: {r: 0.09618356, g: 0.08331873, b: 0.17320475, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2225,7 +2225,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 23566027506217441, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 105685950154853178, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Name
@@ -2237,7 +2237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 531153169854434043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 870558478728384577, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -2245,7 +2245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1086493660501193768, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1342825758672310553, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Name
@@ -2317,7 +2317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2981631082252657133, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3626527448993888038, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Enabled
@@ -2325,11 +2325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4188414528681818478, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4515387188237353257, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4805693454692305510, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Drag
@@ -2341,7 +2341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7227779372520732828, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7569418662802700573, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_IsTrigger
@@ -2349,11 +2349,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031310017791375032, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9053294173400259766, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6455009166211689043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
@@ -2388,7 +2388,7 @@ PrefabInstance:
       objectReference: {fileID: 210291221}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: speed
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166826, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: explosion
