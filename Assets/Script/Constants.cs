@@ -8,6 +8,10 @@ namespace Util
 {
 	class Constants
     {
+		//スクリーン横幅
+		public static int screen_width = 1920;
+		//スクリーン縦幅
+		public static int screen_height = 1080;
 		//ステージのZ軸の最大値
 		public static float stageMaxPositionZ = 725.0f;
 		//ステージのZ軸の最小値

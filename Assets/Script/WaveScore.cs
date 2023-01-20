@@ -24,6 +24,6 @@ public class WaveScore : MonoBehaviour
     void Update()
     {
         Text wave_text = wave_object.GetComponent<Text>();
-        wave_text.text = "Wave : " + waveScore;
+        wave_text.text = ""+waveScore;
     }
 }

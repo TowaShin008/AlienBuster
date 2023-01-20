@@ -287,17 +287,8 @@ public class FPSController : MonoBehaviour
         if(collision.gameObject.tag == Constants.weaponItemName.ToString())
 		{
             getItemAudioSource.Play();
-            sniperRifle.GetComponent<SniperScript>().Initialize();
-            if (collision.gameObject.name == Constants.normalGunItemName.ToString())
-            {
-                normalGun.SetActive(true);
-                rocketLauncher.SetActive(false);
-                sniperRifle.SetActive(false);
-                shotGun.SetActive(false);
-                defaultZoomCameraFov = 30;
-                gunType = 1;
-            }
-            else if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
+			sniperRifle.GetComponent<SniperScript>().InitializePosition();
+			if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);

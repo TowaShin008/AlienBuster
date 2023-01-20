@@ -27,6 +27,16 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private AudioSource bossAudioSource;
 
     public static bool numberchange = false;
+
+    public const float tutorialMaxTime = 1000.0f;
+    public float tutorialTime = 0.0f;
+    private bool startFlag = false;
+
+
+    [SerializeField]
+    GameObject tutorialTextObject;
+
+    Text tutorialText;
     void Start()
     {
         //フレームレートの固定
@@ -34,12 +44,9 @@ public class WaveManager : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.LinuxPlayer)
         {
-            Screen.SetResolution(1920, 1080, false);
+            Screen.SetResolution(Constants.screen_width, Constants.screen_height, false);
         }
 
-        enemySpawner.GetComponent<EnemySpawner>().Initialize(false,Constants.normalEnemy);
-        enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-        enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
         ufo.SetActive(false);
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
@@ -49,11 +56,23 @@ public class WaveManager : MonoBehaviour
         defaultAudioSource.Play();
         numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
         NumberChange();
+
+        startFlag = false;
+
+        tutorialText = tutorialTextObject.GetComponent<Text>();
+
+        tutorialText.text = "";
     }
 
 
     void Update()
     {
+		if (startFlag == false)
+        {
+            TutorialProcessing();
+            return;
+        }
+
         enemyBox = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString());
         ufoBox = GameObject.FindGameObjectsWithTag(Constants.ufoName.ToString());
 
@@ -159,4 +178,42 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// チューリアル処理
+    /// </summary>
+    /// <returns>終了判定フラグ</returns>
+    public bool TutorialProcessing()
+	{
+        tutorialTime++;
+
+        if(tutorialTime/tutorialMaxTime<0.25f)
+		{
+            tutorialText.text = "WASD or LStick：移動\n";
+        }
+        else if (tutorialTime / tutorialMaxTime < 0.5f)
+        {
+            tutorialText.text = "RClick or LT：構える\nLClick or RT：射撃";
+        }
+        else if (tutorialTime / tutorialMaxTime < 0.75f)
+        {
+            tutorialText.text = "SPACE or RB：上昇\nLShift or LB：ステップ";
+        }
+        else if (tutorialTime / tutorialMaxTime < 1.0f)
+        {
+            tutorialText.text = "LShift or LB長押し：ダッシュ";
+        }
+
+        if (tutorialTime > tutorialMaxTime)
+		{
+            tutorialText.text = "";
+            enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+
+            startFlag = true;
+
+            return true;
+		}
+        return false;
+	}
 }

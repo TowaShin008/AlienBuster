@@ -9,7 +9,7 @@ public class ShotGun : MonoBehaviour
     [SerializeField]
     private GameObject firingPoint;
 
-    private float bulletSpeed = 60.0f;
+    private float bulletSpeed = 80.0f;
     const int shotDelayMaxTime = 100;
     private int shotDelayTime = 0;
 
@@ -98,7 +98,7 @@ public class ShotGun : MonoBehaviour
 
                 Destroy(newBall, 0.8f);
             }
-
+            //マズルフラッシュ演出
             MuzzleFlashProcessing();
 
             shotDelayTime = shotDelayMaxTime;

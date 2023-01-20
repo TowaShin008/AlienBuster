@@ -127,63 +127,62 @@ public class SniperScript : MonoBehaviour
             magazineScript.SetRemainingBulletsSize(remainingBullets);
             return true;
         }
-        //float rTri = Input.GetAxis("R_Trigger");
+
         if (defScale.y >= 0.25f)
         {
             magazineScript.DecrementMagazine();
-            //if (Input.GetMouseButtonDown(0) || rTri > 0)
-            {//弾の発射処理
-                if (remainingBullets > 0)
-                {
-                    remainingBullets--;
-                }
-                //銃の音
-                audioSource.PlayOneShot(shotSound);
-                // 弾を発射する場所を取得
-                var bulletPosition = firingPoint.transform.position;
-                // 上で取得した場所に、"bullet"のPrefabを出現させる
-                GameObject newBullet = Instantiate(bullet, bulletPosition, arg_cameraRotation);
-                // 縦のばらつき
-                float v = Random.Range(-dispersion * verticalToHorizontalRatio, dispersion * verticalToHorizontalRatio);
-                Vector3 direction;
 
-                if (arg_holdFlag)
+            //弾の発射処理
+            if (remainingBullets > 0)
+            {
+                remainingBullets--;
+            }
+            //銃の音
+            audioSource.PlayOneShot(shotSound);
+            // 弾を発射する場所を取得
+            var bulletPosition = firingPoint.transform.position;
+            // 上で取得した場所に、"bullet"のPrefabを出現させる
+            GameObject newBullet = Instantiate(bullet, bulletPosition, arg_cameraRotation);
+            // 縦のばらつき
+            float v = Random.Range(-dispersion * verticalToHorizontalRatio, dispersion * verticalToHorizontalRatio);
+            Vector3 direction;
+
+            if (arg_holdFlag)
+            {
+                direction = newBullet.transform.forward;
+            }
+            else
+            {
+                if (v >= 0)
                 {
-                    direction = newBullet.transform.forward;
+                    direction = Vector3.Slerp(newBullet.transform.forward, newBullet.transform.up, v);
                 }
                 else
                 {
-                    if (v >= 0)
-                    {
-                        direction = Vector3.Slerp(newBullet.transform.forward, newBullet.transform.up, v);
-                    }
-                    else
-                    {
-                        direction = Vector3.Slerp(newBullet.transform.forward, -newBullet.transform.up, -v);
-                    }
-                    // 横のばらつき
-                    float h = Random.Range(-dispersion, dispersion);
-                    if (h >= 0)
-                    {
-                        direction = Vector3.Slerp(direction, newBullet.transform.right, h);
-                    }
-                    else
-                    {
-                        direction = Vector3.Slerp(direction, -newBullet.transform.right, -h);
-                    }
+                    direction = Vector3.Slerp(newBullet.transform.forward, -newBullet.transform.up, -v);
                 }
-                // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-                newBullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-                // 出現させたボールの名前を"bullet"に変更
-                newBullet.name = "SniperBullet";
-                // 出現させたボールを0.8秒後に消す
-                Destroy(newBullet, 1.0f);
-
-                defScale.y = 0;
-                sniperGauge.transform.localScale = defScale;
-
-                MuzzleFashProcessing();
+                // 横のばらつき
+                float h = Random.Range(-dispersion, dispersion);
+                if (h >= 0)
+                {
+                    direction = Vector3.Slerp(direction, newBullet.transform.right, h);
+                }
+                else
+                {
+                    direction = Vector3.Slerp(direction, -newBullet.transform.right, -h);
+                }
             }
+            // 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
+            newBullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
+            // 出現させたボールの名前を"bullet"に変更
+            newBullet.name = "SniperBullet";
+            // 出現させたボールを0.8秒後に消す
+            Destroy(newBullet, 1.0f);
+
+            defScale.y = 0;
+            sniperGauge.transform.localScale = defScale;
+            //マズルフラッシュ演出
+            MuzzleFlashProcessing();
         }
 
         if (remainingBullets <= 0)
@@ -197,7 +196,7 @@ public class SniperScript : MonoBehaviour
     /// <summary>
     /// マズルフラッシュ演出
     /// </summary>
-    private void MuzzleFashProcessing()
+    private void MuzzleFlashProcessing()
     {
         //マズルフラッシュON
         if (muzzleFlashPrefab != null)
@@ -247,6 +246,29 @@ public class SniperScript : MonoBehaviour
         transform.position = normalGunPosition.transform.position;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
         sniperEdge.transform.localScale = new Vector2(5.0f, 5.0f);
+        for (int i = 0; i < sniperMesh.Count; i++)
+        {
+            sniperMesh[i].material.color = Color.white;
+        }
+
+        Color32 color = sniperGauge.color;
+        Color32 color2 = sniperGaugeEdge.color;
+        color.a = 0;
+        color2.a = 0;
+        sniperGauge.color = color;
+        sniperGaugeEdge.color = color2;
+    }
+    /// <summary>
+    /// スナイパーライフルの位置の初期化
+    /// </summary>
+    public void InitializePosition()
+	{
+        sniperEdge.enabled = false;
+        sniperGaugeEdge.enabled = false;
+        sniperGauge.enabled = false;
+        transform.position = normalGunPosition.transform.position;
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
+        sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
         for (int i = 0; i < sniperMesh.Count; i++)
         {
             sniperMesh[i].material.color = Color.white;
