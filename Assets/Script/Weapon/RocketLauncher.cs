@@ -86,6 +86,13 @@ public class RocketLauncher : MonoBehaviour
         }
     }
     /// <summary>
+    /// e‚ğ\‚¦‚éˆ—
+    /// </summary>
+    public void HoldGun(Vector3 arg_holdGunPosition)
+    {
+        this.transform.position = arg_holdGunPosition;
+    }
+    /// <summary>
     /// ’e‚Ì”­Ëˆ—
     /// </summary>
     /// <param name="arg_cameraRotation">ƒJƒƒ‰‚Ì‰ñ“]—Ê</param>

@@ -437,10 +437,27 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void HoldGun()
 	{
-        normalGun.transform.position = holdGunPosition.transform.position;
-        rocketLauncher.transform.position = holdGunPosition.transform.position;
-        //sniperRifle.transform.position = holdGunPosition.transform.position;
-        shotGun.transform.position = holdGunPosition.transform.position;
+        //normalGun.transform.position = holdGunPosition.transform.position;
+        //rocketLauncher.transform.position = holdGunPosition.transform.position;
+        ////sniperRifle.transform.position = holdGunPosition.transform.position;
+        //shotGun.transform.position = holdGunPosition.transform.position;
+
+        if (gunType == 1)
+        {
+            normalGun.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
+        }
+        else if (gunType == 2)
+        {
+            rocketLauncher.GetComponent<RocketLauncher>().HoldGun(holdGunPosition.transform.position);
+        }
+        else if (gunType == 3)
+        {
+            //sniperRifle.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
+        }
+        else if (gunType == 4)
+        {
+            shotGun.GetComponent<ShotGun>().HoldGun(holdGunPosition.transform.position);
+        }
 
         holdFlag = true;
     }

@@ -28,15 +28,18 @@ public class WaveManager : MonoBehaviour
 
     public static bool numberchange = false;
 
-    public const float tutorialMaxTime = 1000.0f;
+    public const float tutorialMaxTime = 2000.0f;
     public float tutorialTime = 0.0f;
     private bool startFlag = false;
 
 
     [SerializeField]
     GameObject tutorialTextObject;
+    [SerializeField]
+    GameObject skipTextObject;
 
     Text tutorialText;
+    Text skipText;
     void Start()
     {
         //フレームレートの固定
@@ -62,6 +65,8 @@ public class WaveManager : MonoBehaviour
         tutorialText = tutorialTextObject.GetComponent<Text>();
 
         tutorialText.text = "";
+
+        skipText = skipTextObject.GetComponent<Text>();
     }
 
 
@@ -186,25 +191,37 @@ public class WaveManager : MonoBehaviour
 	{
         tutorialTime++;
 
-        if(tutorialTime/tutorialMaxTime<0.25f)
+        skipText.enabled = true;
+
+        if (tutorialTime / tutorialMaxTime < 0.2f)
 		{
-            tutorialText.text = "WASD or LStick：移動\n";
+            tutorialText.text = "移動：WASD or LStick\n";
         }
-        else if (tutorialTime / tutorialMaxTime < 0.5f)
+        else if (tutorialTime / tutorialMaxTime < 0.4f)
         {
-            tutorialText.text = "RClick or LT：構える\nLClick or RT：射撃";
+            tutorialText.text = "構える：RClick or LT\n射撃：LClick or RT";
         }
-        else if (tutorialTime / tutorialMaxTime < 0.75f)
+        else if (tutorialTime / tutorialMaxTime < 0.6f)
         {
-            tutorialText.text = "SPACE or RB：上昇\nLShift or LB：ステップ";
+            tutorialText.text = "上昇：SPACE or RB\nステップ：LShift or LB";
+        }
+        else if (tutorialTime / tutorialMaxTime < 0.8f)
+        {
+            tutorialText.text = "ダッシュ：LShift or LB長押し";
         }
         else if (tutorialTime / tutorialMaxTime < 1.0f)
         {
-            tutorialText.text = "LShift or LB長押し：ダッシュ";
+            tutorialText.text = "迫りくる敵を倒し続けろ！";
         }
+
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKey(KeyCode.Joystick1Button3))
+		{
+            tutorialTime = tutorialMaxTime;
+		}
 
         if (tutorialTime > tutorialMaxTime)
 		{
+            skipText.enabled = false;
             tutorialText.text = "";
             enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
             enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);

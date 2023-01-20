@@ -6,6 +6,7 @@ using Util;
 
 public class SniperScript : MonoBehaviour
 {
+    public MeshRenderer mesh;
     public GameObject bullet;
 
     public float speed = 0.1f;
@@ -115,6 +116,13 @@ public class SniperScript : MonoBehaviour
             sniperGauge.color = color;
             sniperGaugeEdge.color = color2;
         }
+    }
+    /// <summary>
+    /// e‚ğ\‚¦‚éˆ—
+    /// </summary>
+    public void HoldGun(Vector3 arg_holdGunPosition)
+    {
+        this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
     /// ËŒ‚ˆ—

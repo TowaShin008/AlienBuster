@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShotGun : MonoBehaviour
 {
+    public MeshRenderer mesh;
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
@@ -52,6 +53,13 @@ public class ShotGun : MonoBehaviour
         {
             shotDelayTime--;
         }
+    }
+    /// <summary>
+    /// e‚ğ\‚¦‚éˆ—
+    /// </summary>
+    public void HoldGun(Vector3 arg_holdGunPosition)
+    {
+        this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
     /// ËŒ‚ˆ—

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NormalGun : MonoBehaviour
 {
+    public MeshRenderer mesh;
     [SerializeField]
     private GameObject bullet;
     public float bulletSpeed = 30.0f;
@@ -39,10 +40,24 @@ public class NormalGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Color color = mesh.material.color;
+        color.a = 1.0f;
+        mesh.material.color = color;
         if (shotDelayTime > 0)
         {
             shotDelayTime--;
         }
+    }
+    /// <summary>
+    /// e‚ğ\‚¦‚éˆ—
+    /// </summary>
+    public void HoldGun(Vector3 arg_holdGunPosition)
+    {
+        Color color = mesh.material.color;
+        color.a = 0.2f;
+        mesh.material.color = color;
+
+        this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
     /// ’e‚Ì”­Ëˆ—
