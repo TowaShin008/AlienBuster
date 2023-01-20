@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13293424, g: 0.116796754, b: 0.22726524, a: 1}
+  m_IndirectSpecularColor: {r: 0.08992068, g: 0.07826839, b: 0.1642578, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 297174555}
   - component: {fileID: 297174554}
   - component: {fileID: 297174553}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TutorialCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2329,7 +2329,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 23566027506217441, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 105685950154853178, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Name
@@ -2341,7 +2341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 531153169854434043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 870558478728384577, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -2349,7 +2349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1086493660501193768, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342825758672310553, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Name
@@ -2421,7 +2421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2981631082252657133, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3626527448993888038, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Enabled
@@ -2429,11 +2429,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4188414528681818478, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4515387188237353257, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4805693454692305510, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Drag
@@ -2445,7 +2445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7227779372520732828, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7569418662802700573, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_IsTrigger
@@ -2453,11 +2453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031310017791375032, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9053294173400259766, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6455009166211689043, guid: e203a0d4362e31f46a53b1e828f2e105, type: 3}
@@ -4690,7 +4690,7 @@ GameObject:
   - component: {fileID: 1955896427}
   - component: {fileID: 1955896429}
   - component: {fileID: 1955896428}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TutorialText (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
