@@ -26,10 +26,18 @@ namespace Util
 		public static float stageMinPositionY = 0.0f;
 		//通常弾のダメージ量
 		public static int normalBulletDamage = 1;
+		//通常銃の射程距離
+		public static float normalBulletRange = 100;
 		//スナイパーライフルのダメージ量
 		public static int sniperBulletDamage = 2;
+		//スナイパーライフルの射程距離
+		public static float sniperBulletRange = 100;
 		//ロケット弾のダメージ量
 		public static int rocketBombDamage = 10;
+		//ロケット弾の射程距離
+		public static float rocketBombRange = 100;
+		//通常銃の射程距離
+		public static float shotGunBulletRange = 70;
 		//マウスのY軸ポジションの名前
 		public static FormattableString titleSceneName = $"TitleScene";
 		//マウスのY軸ポジションの名前

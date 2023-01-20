@@ -22,6 +22,8 @@ public class FPSController : MonoBehaviour
     private GameObject normalGunPosition;
     [SerializeField]
     private GameObject holdGunPosition;
+    [SerializeField]
+    private GameObject reticle;
 
     private BoxCollider collider;
 
@@ -119,6 +121,7 @@ public class FPSController : MonoBehaviour
         savePosition =new Vector3(0,0,0);
         saveCamera = new Quaternion(0,0,0,0);
         saveplayerRotation = new Quaternion(0, 0, 0, 0);
+        reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
     }
 
     // Update is called once per frame
@@ -297,6 +300,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 30;
                 gunType = 2;
+                reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
             else if (collision.gameObject.name == Constants.sniperRifleItemName.ToString())
             {
@@ -307,6 +311,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 15;
                 gunType = 3;
+                reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
             else if (collision.gameObject.name == Constants.shotGunItemName.ToString())
             {
@@ -317,6 +322,7 @@ public class FPSController : MonoBehaviour
                 shotGun.GetComponent<ShotGun>().Initialize();
                 defaultZoomCameraFov = 30;
                 gunType = 4;
+                reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
         }
     }

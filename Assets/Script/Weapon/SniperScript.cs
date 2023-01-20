@@ -6,7 +6,6 @@ using Util;
 
 public class SniperScript : MonoBehaviour
 {
-    public MeshRenderer mesh;
     public GameObject bullet;
 
     public float speed = 0.1f;

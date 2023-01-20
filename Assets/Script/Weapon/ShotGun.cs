@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShotGun : MonoBehaviour
 {
-    public MeshRenderer mesh;
     [SerializeField]
     private GameObject bullet;
     [SerializeField]

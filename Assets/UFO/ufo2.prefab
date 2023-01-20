@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 278094294}
   m_Layer: 0
   m_Name: UFO_weak
-  m_TagString: Untagged
+  m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,13 +552,15 @@ MonoBehaviour:
   mesh_barrier: {fileID: 7520207075416178931}
   hp: 30
   explosion: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
-  explosionSize: {x: 10, y: 10, z: 10}
+  largeExplosionSize: {x: 30, y: 30, z: 30}
+  smallExplosionSize: {x: 5, y: 5, z: 5}
   barrier: {fileID: 7520207075416178929}
   barrierCreateMaxTime: 60
   clip: {fileID: 8300000, guid: 3280204d6a7f4e143826af3a6e254638, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   damageMaxCount: 5
   textMesh: {fileID: 542033433}
+  explosionDelayMaxTime: 20
   CautionText: {fileID: 0}
 --- !u!82 &210291225
 AudioSource:
@@ -716,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad567f8aed6aa043bd84289e0573fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusDirection: 60
+  speed: 1
 --- !u!1 &7520207075118015177
 GameObject:
   m_ObjectHideFlags: 0

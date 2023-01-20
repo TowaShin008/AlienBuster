@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09226868, g: 0.07981538, b: 0.16735613, a: 1}
+  m_IndirectSpecularColor: {r: 0.094202004, g: 0.081748344, b: 0.17025259, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5616,6 +5616,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1353565321}
+    - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: reticle
+      value: 
+      objectReference: {fileID: 110663637}
     - target: {fileID: 6495265381181574624, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: gunSound
       value: 
