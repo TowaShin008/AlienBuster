@@ -20,7 +20,8 @@ public class UFO : MonoBehaviour
 
     //爆発エフェクト
     [SerializeField] GameObject explosion;
-    [SerializeField] private Vector3 explosionSize = new Vector3(10.0f, 10.0f, 10.0f);
+    [SerializeField] private Vector3 largeExplosionSize = new Vector3(30.0f, 30.0f, 30.0f);
+    [SerializeField] private Vector3 smallExplosionSize = new Vector3(5.0f, 5.0f, 5.0f);
 
     private bool deadFlag;
     public bool GetDeadFlag() { return deadFlag; }
@@ -93,7 +94,7 @@ public class UFO : MonoBehaviour
         {
             waveManager.WaveChangeFlagOn();
             GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            newExplosion.transform.localScale = explosionSize;
+            newExplosion.transform.localScale = largeExplosionSize;
             Destroy(newExplosion, 1.0f);
             //Destroy(gameObject);
             gameObject.SetActive(false);
@@ -113,7 +114,7 @@ public class UFO : MonoBehaviour
                 pos.y = this.gameObject.transform.position.y + 20.0f;
 
                 GameObject newExplosion = Instantiate(explosion, pos, Quaternion.Euler(0, 0, 0));
-                newExplosion.transform.localScale = explosionSize;
+                newExplosion.transform.localScale = smallExplosionSize;
                 Destroy(newExplosion, 0.3f);
 
                 explosionDelayTime = explosionDelayMaxTime;

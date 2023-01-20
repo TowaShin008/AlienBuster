@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13293424, g: 0.116796754, b: 0.22726524, a: 1}
+  m_IndirectSpecularColor: {r: 0.091671, g: 0.07971422, b: 0.1666787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -517,6 +517,18 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 362330757}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8059082684151698215, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2669,7 +2681,7 @@ MonoBehaviour:
   - {fileID: 10128674}
   spawnNextTime:
   - 1
-  maxEnemyCount: 03000000
+  maxEnemyCount: 00000000
   spawnPoint: {fileID: 870990080}
 --- !u!4 &896170538
 Transform:
@@ -2984,6 +2996,18 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 362330757}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8059082684151698215, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -3117,6 +3141,18 @@ PrefabInstance:
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 362330757}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686455342865905608, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
+      propertyPath: largeExplosionSize.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8059082684151698215, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -3870,7 +3906,7 @@ MonoBehaviour:
   - {fileID: 10128674}
   spawnNextTime:
   - 1
-  maxEnemyCount: 03000000
+  maxEnemyCount: 00000000
   spawnPoint: {fileID: 418350457}
 --- !u!4 &1373980358
 Transform:
@@ -4196,7 +4232,7 @@ MonoBehaviour:
   - {fileID: 10128674}
   spawnNextTime:
   - 1
-  maxEnemyCount: 03000000
+  maxEnemyCount: 01000000
   spawnPoint: {fileID: 1059123165}
 --- !u!4 &1576246174
 Transform:
