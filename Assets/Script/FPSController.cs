@@ -167,10 +167,24 @@ public class FPSController : MonoBehaviour
 		}
         else
         {//マウス入力がない場合は、銃を構えない。
-            normalGun.transform.position = normalGunPosition.transform.position;
-            rocketLauncher.transform.position = normalGunPosition.transform.position;
-            //sniperRifle.transform.position = normalGunPosition.transform.position;
-            shotGun.transform.position = normalGunPosition.transform.position;
+            if (gunType == 1)
+            {
+                normalGun.transform.position = normalGunPosition.transform.position;
+                normalGun.GetComponent<NormalGun>().OpaqueRenderingMode();
+            }
+            else if (gunType == 2)
+            {
+                rocketLauncher.transform.position = normalGunPosition.transform.position;
+            }
+            else if (gunType == 3)
+            {
+                //sniperRifle.transform.position = normalGunPosition.transform.position;
+            }
+            else if (gunType == 4)
+            {
+                shotGun.transform.position = normalGunPosition.transform.position;
+            }
+
             ZoomOut();
             holdFlag = false;
         }
@@ -451,6 +465,7 @@ public class FPSController : MonoBehaviour
         if (gunType == 1)
         {
             normalGun.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
+            normalGun.GetComponent<NormalGun>().FadeRenderingMode();
         }
         else if (gunType == 2)
         {

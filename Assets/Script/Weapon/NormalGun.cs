@@ -35,6 +35,7 @@ public class NormalGun : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         MagazineInitialize();
         magazineScript.ReloadEnable(true);
+        OpaqueRenderingMode();
     }
 
     // Update is called once per frame
@@ -173,5 +174,29 @@ public class NormalGun : MonoBehaviour
         magazineScript.SetRemainingBulletsSize(0);
         magazineScript.SetMagazineSize(10);
         magazineScript.SetReloadTime(120);
+    }
+
+    public void OpaqueRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mesh.material.SetInt("_ZWrite", 1);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.DisableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = -1;
+    }
+
+    public void FadeRenderingMode()
+	{
+        mesh.material.SetOverrideTag("RenderType", "Transparent");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mesh.material.SetInt("_ZWrite", 0);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.EnableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = 3000;
     }
 }

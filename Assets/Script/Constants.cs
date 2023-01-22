@@ -23,7 +23,7 @@ namespace Util
 		//ステージのX軸の最大値
 		public static float stageMaxPositionY = 400.0f;
 		//ステージのX軸の最小値
-		public static float stageMinPositionY = 0.0f;
+		public static float stageMinPositionY = -50.0f;
 		//通常弾のダメージ量
 		public static int normalBulletDamage = 1;
 		//通常銃の射程距離
@@ -88,5 +88,6 @@ namespace Util
 		public static int normalEnemy = 0;
 		public static int jumpEnemy = 1;
 		public static int stepEnemy = 2;
+		public static int stayEnemy = 3;
 	}
 }

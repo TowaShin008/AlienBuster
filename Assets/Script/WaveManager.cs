@@ -14,6 +14,9 @@ public class WaveManager : MonoBehaviour
     public GameObject enemySpawner;
     public GameObject enemySpawner2;
     public GameObject enemySpawner3;
+    public GameObject enemySpawner4;
+    public GameObject enemySpawner5;
+    public GameObject enemySpawner6;
     public GameObject ufo;
     public GameObject ufo_2;
     public GameObject ufo_3;
@@ -105,9 +108,11 @@ public class WaveManager : MonoBehaviour
                 bossAudioSource.Stop();
 
                 if (nowWave == 2)
-                {      
-                    bossAudioSource.Play();
-                    ufo.GetComponent<UFO>().Initialize(true,true);
+                {
+                    defaultAudioSource.Play();
+                    enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
                 }
                 if (nowWave == 3)
 				{
@@ -133,7 +138,14 @@ public class WaveManager : MonoBehaviour
                     bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
                 }
-                if (nowWave >= 7)
+                if (nowWave == 7)
+                {
+                    defaultAudioSource.Play();
+                    enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                }
+                if (nowWave >= 8)
 				{
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
