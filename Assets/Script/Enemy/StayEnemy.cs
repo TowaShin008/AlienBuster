@@ -164,8 +164,8 @@ public class StayEnemy : MonoBehaviour
         //var direction = newBall.transform.up;
         //// 弾の発射方向にnewBallのz方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
         //newBall.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-        Invoke("Explode", 6.0f); // グレネードを発射してから1.5秒後に爆発させる
-                                 // 出現させたボールの名前を"bullet"に変更
+        Invoke("Explode", Constants.missileLife); // ミサイル弾を発射してから1.5秒後に爆発させる
+        // 出現させたボールの名前を"bullet"に変更
         newBall.name = homingMissile.name;
     }
     /// <summary>

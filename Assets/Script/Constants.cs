@@ -89,5 +89,6 @@ namespace Util
 		public static int jumpEnemy = 1;
 		public static int stepEnemy = 2;
 		public static int stayEnemy = 3;
+		public static float missileLife = 6.0f;
 	}
 }

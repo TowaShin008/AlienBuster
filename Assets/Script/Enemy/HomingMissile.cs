@@ -25,7 +25,7 @@ public class HomingMissile : MonoBehaviour
         isDeadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        Invoke("ExplodeProcessing", 6.0f); // グレネードを発射してから1.5秒後に爆発させる
+        Invoke("ExplodeProcessing", Constants.missileLife); // グレネードを発射してから1.5秒後に爆発させる
         riseCounter = riseMaxCounter;
     }
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class HomingMissile : MonoBehaviour
         {
             if (isDeadFlag == false)
 			{
-                transform.LookAt(target);
+                rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 transform.position += transform.forward;
             }
         }
@@ -56,10 +56,12 @@ public class HomingMissile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == Constants.enemyName.ToString() || isDeadFlag || collision.gameObject.name == "UFO_weak" || collision.gameObject.tag == Constants.enemyBulletName.ToString()) { return; }
-
+        //爆破演出
         ExplodeProcessing();
     }
-
+    /// <summary>
+    /// 爆破演出
+    /// </summary>
     private void ExplodeProcessing()
     {
         if (isDeadFlag) { return; }
@@ -84,7 +86,7 @@ public class HomingMissile : MonoBehaviour
     /// <returns>処理が完了したかどうか</returns>
     private bool RiseProcessing()
 	{
-        if(riseCounter>0)
+        if (riseCounter > 0)
 		{
             riseCounter--;
             transform.position += transform.up;

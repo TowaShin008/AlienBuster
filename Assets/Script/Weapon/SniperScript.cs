@@ -243,7 +243,9 @@ public class SniperScript : MonoBehaviour
     {
         remainingBullets = remainingMaxBullet;
     }
-
+    /// <summary>
+    /// スナイパーの初期化処理
+    /// </summary>
     public void Initialize()
 	{
         ResetRemainigBullet();

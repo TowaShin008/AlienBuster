@@ -31,10 +31,12 @@ public class FPSController : MonoBehaviour
     const float normalSpeed = 5.0f;
     const float sprintSpeed = 15.0f;
     float speed = normalSpeed;
+    bool sprintFlag = false;
 
     //ステップ時の摩擦が強くなるまでの猶予時間
     const int stepMaxTime = 120;
     int stepTime = 0;
+    float stepPower = 5.0f;
 
     //LSHIFTの入力時間を格納する変数
     int chargeCount = 0;
@@ -155,6 +157,9 @@ public class FPSController : MonoBehaviour
             jumpAudioSource.Stop();
         }
 
+        //移動処理
+        MoveProcessing();
+
         //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
@@ -213,11 +218,6 @@ public class FPSController : MonoBehaviour
             saveplayerRotation = transform.localRotation;
         }
     }
-	private void FixedUpdate()
-	{
-        //移動処理
-        MoveProcessing();
-    }
 	/// <summary>
 	/// 移動処理
 	/// </summary>
@@ -225,6 +225,8 @@ public class FPSController : MonoBehaviour
 	{
         float lsh = Input.GetAxis(Constants.lStickHorizontalName.ToString());
         float lsv = Input.GetAxis(Constants.lStickVerticalName.ToString());
+
+        sprintFlag = false;
 
         var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || lsh != 0 || lsv != 0)
@@ -266,6 +268,11 @@ public class FPSController : MonoBehaviour
 			{//呼吸演出処理
 				BreathProcessing();
 			}
+        }
+        if(sprintFlag == false)
+		{
+            speed = normalSpeed;
+            chargeCount = 0;
         }
         if (stepTime > 0)
         {//ステップをしていないか、ステップ猶予時間でなければ抗力を強くする
@@ -399,19 +406,20 @@ public class FPSController : MonoBehaviour
                 stepTime = stepMaxTime;
                 stamina -= 100;
                 rigidbody.velocity = Vector3.zero;
-                rigidbody.AddForce(arg_velocity * 5.0f, ForceMode.Impulse);
+                rigidbody.AddForce(arg_velocity * stepPower, ForceMode.Impulse);
+                chargeCount = 0;
             }
         }
         //プレイヤーの初期化
-        speed = normalSpeed;
-        shakingSpeed = shakingNormalSpeed;
-        chargeCount = 0;
+        //speed = normalSpeed;
+        //shakingSpeed = shakingNormalSpeed;
     }
     /// <summary>
     /// スプリント処理
     /// </summary>
     public void SprintProcessing()
 	{
+        sprintFlag = true;
         if (chargeCount >= 30 && stamina > 0)
         {//スプリント処理
             stamina -= 2;
@@ -460,11 +468,6 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void HoldGun()
 	{
-        //normalGun.transform.position = holdGunPosition.transform.position;
-        //rocketLauncher.transform.position = holdGunPosition.transform.position;
-        ////sniperRifle.transform.position = holdGunPosition.transform.position;
-        //shotGun.transform.position = holdGunPosition.transform.position;
-
         if (gunType == 1)
         {
             normalGun.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
@@ -633,11 +636,18 @@ public class FPSController : MonoBehaviour
     {
         return stamina;
     }
-
+    /// <summary>
+    /// 現在のHPの取得
+    /// </summary>
+    /// <returns></returns>
     public int GetHP()
 	{
         return hp;
 	}
+    /// <summary>
+    /// 最大HPの取得
+    /// </summary>
+    /// <returns>最大HP</returns>
     public int GetMaxHP()
     {
         return maxHP;
