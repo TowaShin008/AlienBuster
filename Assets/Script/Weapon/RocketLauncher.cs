@@ -6,6 +6,7 @@ using Util;
 
 public class RocketLauncher : MonoBehaviour
 {
+    public MeshRenderer mesh;
     [SerializeField]
     private GameObject rocketBomb;
     private float bulletSpeed = 30.0f;
@@ -53,11 +54,15 @@ public class RocketLauncher : MonoBehaviour
         remainingBullets = remainingMaxBullet;
         MagazineInitialize();
         magazineScript.ReloadEnable(true);
+        OpaqueRenderingMode();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Color color = mesh.material.color;
+        color.a = 1.0f;
+        mesh.material.color = color;
         if (lerp)
         {
             //リコイル処理（イージング処理付き）
@@ -90,6 +95,10 @@ public class RocketLauncher : MonoBehaviour
     /// </summary>
     public void HoldGun(Vector3 arg_holdGunPosition)
     {
+        Color color = mesh.material.color;
+        color.a = 0.2f;
+        mesh.material.color = color;
+
         this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
@@ -185,5 +194,29 @@ public class RocketLauncher : MonoBehaviour
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
         magazineScript.SetMagazineSize(1);
         magazineScript.SetReloadTime(120);
+    }
+
+    public void OpaqueRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mesh.material.SetInt("_ZWrite", 1);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.DisableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = -1;
+    }
+
+    public void FadeRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "Transparent");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mesh.material.SetInt("_ZWrite", 0);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.EnableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = 3000;
     }
 }

@@ -109,10 +109,8 @@ public class WaveManager : MonoBehaviour
 
                 if (nowWave == 2)
                 {
-                    defaultAudioSource.Play();
-                    enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-                    enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-                    enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    bossAudioSource.Play();
+                    ufo.GetComponent<UFO>().Initialize();
                 }
                 if (nowWave == 3)
 				{
@@ -235,9 +233,13 @@ public class WaveManager : MonoBehaviour
 		{
             skipText.enabled = false;
             tutorialText.text = "";
-            enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-            enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-            enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            //enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            //enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            //enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+
+            enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+            enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+            enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
 
             startFlag = true;
 

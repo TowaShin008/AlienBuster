@@ -109,6 +109,7 @@ public class FPSController : MonoBehaviour
         remain = 1;
         hp = maxHP;
         normalGun.SetActive(true);
+        normalGun.GetComponent<NormalGun>().Initialize();
         rocketLauncher.SetActive(false);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
@@ -175,6 +176,7 @@ public class FPSController : MonoBehaviour
             else if (gunType == 2)
             {
                 rocketLauncher.transform.position = normalGunPosition.transform.position;
+                rocketLauncher.GetComponent<RocketLauncher>().OpaqueRenderingMode();
             }
             else if (gunType == 3)
             {
@@ -183,6 +185,7 @@ public class FPSController : MonoBehaviour
             else if (gunType == 4)
             {
                 shotGun.transform.position = normalGunPosition.transform.position;
+                shotGun.GetComponent<ShotGun>().OpaqueRenderingMode();
             }
 
             ZoomOut();
@@ -470,6 +473,7 @@ public class FPSController : MonoBehaviour
         else if (gunType == 2)
         {
             rocketLauncher.GetComponent<RocketLauncher>().HoldGun(holdGunPosition.transform.position);
+            rocketLauncher.GetComponent<RocketLauncher>().FadeRenderingMode();
         }
         else if (gunType == 3)
         {
@@ -478,6 +482,7 @@ public class FPSController : MonoBehaviour
         else if (gunType == 4)
         {
             shotGun.GetComponent<ShotGun>().HoldGun(holdGunPosition.transform.position);
+            shotGun.GetComponent<ShotGun>().FadeRenderingMode();
         }
 
         holdFlag = true;
@@ -534,6 +539,7 @@ public class FPSController : MonoBehaviour
 			{
                 rocketLauncher.SetActive(false);
                 normalGun.SetActive(true);
+                normalGun.GetComponent<NormalGun>().Initialize();
                 gunType = 1;
 			}
         }
@@ -544,6 +550,7 @@ public class FPSController : MonoBehaviour
                 defaultZoomCameraFov = 30;
                 sniperRifle.SetActive(false);
                 normalGun.SetActive(true);
+                normalGun.GetComponent<NormalGun>().Initialize();
                 gunType = 1;
             }
         }
@@ -553,7 +560,8 @@ public class FPSController : MonoBehaviour
 			{
 				shotGun.SetActive(false);
 				normalGun.SetActive(true);
-				gunType = 1;
+                normalGun.GetComponent<NormalGun>().Initialize();
+                gunType = 1;
 			}
         }
     }
