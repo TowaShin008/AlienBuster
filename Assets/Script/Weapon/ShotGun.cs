@@ -50,9 +50,6 @@ public class ShotGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Color color = mesh.material.color;
-        color.a = 1.0f;
-        mesh.material.color = color;
         if (shotDelayTime > 0)
         {
             shotDelayTime--;
@@ -63,6 +60,7 @@ public class ShotGun : MonoBehaviour
     /// </summary>
     public void HoldGun(Vector3 arg_holdGunPosition)
     {
+        FadeRenderingMode();
         Color color = mesh.material.color;
         color.a = 0.2f;
         mesh.material.color = color;
@@ -182,14 +180,20 @@ public class ShotGun : MonoBehaviour
         magazineScript.SetMagazineSize(2);
         magazineScript.SetReloadTime(120);
     }
+    /// <summary>
+    /// ‰Šú‰»ˆ—
+    /// </summary>
     public void Initialize()
     {
+        OpaqueRenderingMode();
         ResetRemainigBullet();
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
         magazineScript.SetMagazineSize(2);
         magazineScript.SetReloadTime(120);
     }
-
+    /// <summary>
+    /// ’Êí•`‰æˆ—
+    /// </summary>
     public void OpaqueRenderingMode()
     {
         mesh.material.SetOverrideTag("RenderType", "");
@@ -201,7 +205,9 @@ public class ShotGun : MonoBehaviour
         mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mesh.material.renderQueue = -1;
     }
-
+    /// <summary>
+    /// “§‰ß•`‰æˆ—
+    /// </summary>
     public void FadeRenderingMode()
     {
         mesh.material.SetOverrideTag("RenderType", "Transparent");

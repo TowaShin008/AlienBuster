@@ -20,10 +20,8 @@ public class StayEnemy : MonoBehaviour
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private GameObject homingMissile;
     [SerializeField] private float bulletSpeed = 60.0f;
-    const int shotDelayMaxTime = 180;
+    const int shotDelayMaxTime = 360;
     private int shotDelayTime = shotDelayMaxTime;
-
-    [SerializeField] private float bulletDestroyTime = 0.8f;
 
     //爆発エフェクト
     [SerializeField] GameObject explosion;

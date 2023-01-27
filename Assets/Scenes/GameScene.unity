@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09316384, g: 0.08059982, b: 0.16866714, a: 1}
+  m_IndirectSpecularColor: {r: 0.14531925, g: 0.12924203, b: 0.24659711, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -284,6 +284,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &213315998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213315994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffea0aa83c8f52246b31054444c90825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &244873630 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6074480665320166830, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
@@ -1157,7 +1169,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395812959}
-  m_Material: {fileID: 13400000, guid: d223bd71063c1ef42b02d31031c14a6d, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -3495,7 +3507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2591799001869370882, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7025813053706743918, guid: a0a67973cb5021f429ed7e36cc44458a, type: 3}
       propertyPath: m_Name
@@ -5702,6 +5714,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8900845156285053422, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_Name
       value: JumpEnemy
@@ -6346,6 +6362,10 @@ PrefabInstance:
       propertyPath: sniperRifleItem
       value: 
       objectReference: {fileID: 2031247512}
+    - target: {fileID: 6388736499531431619, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
+      propertyPath: bulletDestroyTime
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 6388736499531431619, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
       propertyPath: rocketLauncherItem
       value: 

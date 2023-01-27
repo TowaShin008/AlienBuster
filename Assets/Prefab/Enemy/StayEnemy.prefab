@@ -299,7 +299,7 @@ MonoBehaviour:
   firingPoint: {fileID: 6170506741067733079}
   homingMissile: {fileID: 0}
   bulletSpeed: 30
-  bulletDestroyTime: 20
+  bulletDestroyTime: 270
   explosion: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   explosionSize: {x: 1, y: 1, z: 1}
   rocketLauncherItem: {fileID: 0}

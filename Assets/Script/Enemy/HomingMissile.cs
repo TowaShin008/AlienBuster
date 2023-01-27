@@ -5,6 +5,9 @@ using Util;
 
 public class HomingMissile : MonoBehaviour
 {
+    public MeshRenderer mesh;
+    public MeshRenderer mesh_2;
+    public MeshRenderer mesh_3;
     //プレイヤーのポジション
     [SerializeField] private GameObject playerObject;
     //爆発エフェクト
@@ -12,6 +15,8 @@ public class HomingMissile : MonoBehaviour
 
     public AudioClip explosionSound;
     private AudioSource audioSource;
+
+    public AudioSource missileAudioSource;
 
     private bool isDeadFlag = false;
     Rigidbody rigidbody;
@@ -27,6 +32,7 @@ public class HomingMissile : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         Invoke("ExplodeProcessing", Constants.missileLife); // グレネードを発射してから1.5秒後に爆発させる
         riseCounter = riseMaxCounter;
+        missileAudioSource.Play();
     }
     // Update is called once per frame
     void Update()
@@ -42,6 +48,7 @@ public class HomingMissile : MonoBehaviour
 
         if (isDeadFlag)
         {
+            missileAudioSource.Stop();
             if (audioSource.isPlaying == false)
             {
                 Destroy(gameObject);
@@ -74,9 +81,13 @@ public class HomingMissile : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
 
-        var renderer = gameObject.GetComponent<Renderer>();
-        // 非表示
-        renderer.enabled = false;
+        //var renderer = gameObject.GetComponent<Renderer>();
+
+        mesh.enabled = false;
+        mesh_2.enabled = false;
+        mesh_3.enabled = false;
+        //// 非表示
+        //renderer.enabled = false;
 
         isDeadFlag = true;
     }

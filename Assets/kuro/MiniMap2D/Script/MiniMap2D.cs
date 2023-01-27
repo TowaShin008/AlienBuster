@@ -41,6 +41,10 @@ public class MiniMap2D : MonoBehaviour
     public float _BaseIconSize = 0.1f;
 
     public float edge = 50.0f;
+
+
+    //Tagに対応した数を数える
+    List<int> tagCounter = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -49,18 +53,32 @@ public class MiniMap2D : MonoBehaviour
 
         MMInitialize();
         CreateObjects();
+
+        for (int i = 0; i < _MMType.Count; i++)
+        {
+            tagCounter.Add(0);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GetAllObjectCount() != _MMItems.Count) CreateObjects();
+        tagCounter = GetAllObjectCount();
+        for (int i = 0; i < _MMType.Count; i++)
+        {
+            int counter = 0;
+            for (int n = 0; n < _MMItems.Count; n++)
+            {
+                if (_MMType[i]._TagName == _MMItems[n].tagName) counter++;
+            }
+            if (tagCounter[i] != counter) CreateObjects();
+        }
 
-        for(int i = 0; i < _MMType.Count; i++)
+        for (int i = 0; i < _MMType.Count; i++)
         {
             for (int n = 0; n < _MMItems.Count; n++)
             {
-                if(_MMType[i]._TagName == _MMItems[n].tagName)
+                if (_MMType[i]._TagName == _MMItems[n].tagName)
                 {
                     ITEM item = _MMItems[n];
                     item._IconSize = _MMType[i]._IconSize;
@@ -78,7 +96,7 @@ public class MiniMap2D : MonoBehaviour
 
     void SetSprite()
     {
-        for(int i = 0; i < _MMItems.Count; i++)//ミニマップに描画されるオブジェクト
+        for (int i = 0; i < _MMItems.Count; i++)//ミニマップに描画されるオブジェクト
         {
             ITEM mmItem = _MMItems[i];
             for (int t = 0; t < _MMType.Count; t++) //Tagの数
@@ -96,9 +114,9 @@ public class MiniMap2D : MonoBehaviour
     void CreateObjects()
     {
         //とりあえず全部作り直す
-        if(_MMItems.Count != 0)
+        if (_MMItems.Count != 0)
         {
-            for(int i = 0; i < _MMItems.Count; i++)
+            for (int i = 0; i < _MMItems.Count; i++)
             {
                 //Destroy(_Objects[i]._object);
                 Destroy(_MMItems[i]._MMObject);
@@ -132,15 +150,16 @@ public class MiniMap2D : MonoBehaviour
 
         SetSprite();
     }
-    int GetAllObjectCount()
+    List<int> GetAllObjectCount()
     {
-        int counter = 0;
+
+        List<int> counters = new List<int>();
         for (int i = 0; i < _MMType.Count; i++)
         {
             GameObject[] items = GameObject.FindGameObjectsWithTag(_MMType[i]._TagName);//特定のTagのオブジェクトをセット
-            counter += items.Length;
+            counters.Add(items.Length);
         }
-        return counter;
+        return counters;
     }
 
     void MMInitialize()
@@ -172,8 +191,10 @@ public class MiniMap2D : MonoBehaviour
 
         //_MMBackGround.transform.position = new Vector3(0, 0, 0);
         _MMBackGround.transform.position = sampleObject.transform.position;
-        _MMFrame.transform.position = sampleObject.transform.position; ;
-        _MMPlayer.transform.position = sampleObject.transform.position; ;
+        _MMBackGround.transform.localScale = new Vector3(1, 1, 1);
+        _MMFrame.transform.position = sampleObject.transform.position;
+        _MMFrame.transform.localScale = new Vector3(1, 1, 1);
+        _MMPlayer.transform.position = sampleObject.transform.position;
 
 
         _MMPlayer.transform.localScale = new Vector3(_BaseIconSize, _BaseIconSize, 1.0f);
@@ -181,7 +202,7 @@ public class MiniMap2D : MonoBehaviour
 
     float CalculationDistancePlayer(Vector3 pos)//プレイヤーと指定の座標のYを無視した距離を計算
     {
-        return Vector3.Distance(pos,_MMPlayer.transform.localPosition);
+        return Vector3.Distance(pos, _MMPlayer.transform.localPosition);
     }
 
     Vector2 CalculationPositionPlayer(Vector3 pos)//Y mushi
@@ -194,14 +215,14 @@ public class MiniMap2D : MonoBehaviour
     void CalculationUpdate()
     {
         if (_MMItems.Count == 0) return;
-        for(int i = 0; i < _MMItems.Count; i++)
+        for (int i = 0; i < _MMItems.Count; i++)
         {
-            if(_MMItems[i]._Object == null) { continue; }
+            if (_MMItems[i]._Object == null) { continue; }
             ITEM item = _MMItems[i];
             Vector2 pos = CalculationPositionPlayer(_MMItems[i]._Object.transform.position);
             pos = pos * _MMDistance;
 
-            if (item.tagName == Constants.enemyName.ToString()|| item.tagName == Constants.weaponItemName.ToString())
+            if (item.tagName == Constants.enemyName.ToString() || item.tagName == Constants.weaponItemName.ToString())
             {
                 pos = IconInMap(pos);
             }
@@ -219,13 +240,13 @@ public class MiniMap2D : MonoBehaviour
     Vector3 IconInMap(Vector3 _Pos)
     {
         Vector3 pos = _Pos;
-            while (true) 
-            {
-                float distance = CalculationDistancePlayer(pos);
-                if (distance < edge) break;
+        while (true)
+        {
+            float distance = CalculationDistancePlayer(pos);
+            if (distance < edge) break;
 
-                pos = Vector3.MoveTowards(pos, _MMPlayer.transform.localPosition, 1.0f);
-            }
+            pos = Vector3.MoveTowards(pos, _MMPlayer.transform.localPosition, 1.0f);
+        }
         return pos;
     }
 

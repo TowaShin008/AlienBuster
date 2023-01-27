@@ -25,8 +25,6 @@ public class FPSController : MonoBehaviour
     [SerializeField]
     private GameObject reticle;
 
-    private BoxCollider collider;
-
     //プレイヤー移動速度
     const float normalSpeed = 5.0f;
     const float sprintSpeed = 15.0f;
@@ -91,7 +89,7 @@ public class FPSController : MonoBehaviour
     float defaultZoomCameraFov = 30;　//拡大時の視野角
     float cameraFov = 60; //現在の視野角
     const float zoomTime = 10; //拡大までの時間
-    //Camera mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,7 +98,6 @@ public class FPSController : MonoBehaviour
         characterRot = transform.localRotation;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<BoxCollider>();
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
@@ -306,8 +303,7 @@ public class FPSController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == Constants.enemyName.ToString() || collision.gameObject.tag == Constants.enemyBulletName.ToString())
-        {
-            Debug.Log("Hit");
+        {//ダメージ演出
             Damage();
         }
 
@@ -410,9 +406,6 @@ public class FPSController : MonoBehaviour
                 chargeCount = 0;
             }
         }
-        //プレイヤーの初期化
-        //speed = normalSpeed;
-        //shakingSpeed = shakingNormalSpeed;
     }
     /// <summary>
     /// スプリント処理
@@ -471,12 +464,10 @@ public class FPSController : MonoBehaviour
         if (gunType == 1)
         {
             normalGun.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
-            normalGun.GetComponent<NormalGun>().FadeRenderingMode();
         }
         else if (gunType == 2)
         {
             rocketLauncher.GetComponent<RocketLauncher>().HoldGun(holdGunPosition.transform.position);
-            rocketLauncher.GetComponent<RocketLauncher>().FadeRenderingMode();
         }
         else if (gunType == 3)
         {
@@ -485,7 +476,6 @@ public class FPSController : MonoBehaviour
         else if (gunType == 4)
         {
             shotGun.GetComponent<ShotGun>().HoldGun(holdGunPosition.transform.position);
-            shotGun.GetComponent<ShotGun>().FadeRenderingMode();
         }
 
         holdFlag = true;

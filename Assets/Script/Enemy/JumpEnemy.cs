@@ -153,7 +153,7 @@ public class JumpEnemy : MonoBehaviour
 
                 }
             }
-
+            //ステージ外に出た際のポジションの修正処理
             StageOutProcessing();
 
             if (hp <= 0)

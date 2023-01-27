@@ -92,7 +92,9 @@ public class SniperScript : MonoBehaviour
         }
         sniperGauge.transform.localScale = defScale;
     }
-
+    /// <summary>
+    /// \‚¦‚éˆ—
+    /// </summary>
     public void HoldGun()
     {
         sniperEdge.enabled = true;

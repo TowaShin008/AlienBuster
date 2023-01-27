@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1342825758672310555}
   - component: {fileID: 7569418662802700573}
   - component: {fileID: 4805693454692305510}
+  - component: {fileID: 2603270607966120681}
   m_Layer: 0
   m_Name: RocketLauncherItem
   m_TagString: WeaponItem
@@ -64,6 +65,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &2603270607966120681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342825758672310553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffea0aa83c8f52246b31054444c90825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &837213437618698154
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -153,9 +153,7 @@ public class WaveManager : MonoBehaviour
                 nextWaveCheck = false;
             }
             NumberChange();
-
         }
-
     }
     /// <summary>
     /// どこまで進んだかのウェーブを渡す関数
@@ -172,11 +170,17 @@ public class WaveManager : MonoBehaviour
     {
         waveChangeFlag = true;
     }
+    /// <summary>
+    /// チェンジウェーブフラグの取得
+    /// </summary>
+    /// <returns>チェンジウェーブフラグ</returns>
     public static bool GetChangeWaveFlag()
     {
         return numberchange;
     }
-    
+    /// <summary>
+    /// ウェーブ数の切り替え描画処理
+    /// </summary>
     private void NumberChange()
     {
         foreach(var num in numberBox ?? Enumerable.Empty<GameObject>())
@@ -233,15 +237,11 @@ public class WaveManager : MonoBehaviour
 		{
             skipText.enabled = false;
             tutorialText.text = "";
-            //enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-            //enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-            //enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+			enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+			enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+			enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
 
-            enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-            enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-            enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-
-            startFlag = true;
+			startFlag = true;
 
             return true;
 		}

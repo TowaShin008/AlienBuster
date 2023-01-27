@@ -60,9 +60,6 @@ public class RocketLauncher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Color color = mesh.material.color;
-        color.a = 1.0f;
-        mesh.material.color = color;
         if (lerp)
         {
             //リコイル処理（イージング処理付き）
@@ -95,6 +92,7 @@ public class RocketLauncher : MonoBehaviour
     /// </summary>
     public void HoldGun(Vector3 arg_holdGunPosition)
     {
+        FadeRenderingMode();
         Color color = mesh.material.color;
         color.a = 0.2f;
         mesh.material.color = color;
@@ -187,15 +185,20 @@ public class RocketLauncher : MonoBehaviour
         magazineScript.SetMagazineSize(2);
         magazineScript.SetReloadTime(120);
     }
-
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
     public void Initialize()
 	{
+        OpaqueRenderingMode();
         ResetRemainigBullet();
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
         magazineScript.SetMagazineSize(1);
         magazineScript.SetReloadTime(120);
     }
-
+    /// <summary>
+    /// 通常描画処理
+    /// </summary>
     public void OpaqueRenderingMode()
     {
         mesh.material.SetOverrideTag("RenderType", "");
@@ -207,7 +210,9 @@ public class RocketLauncher : MonoBehaviour
         mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mesh.material.renderQueue = -1;
     }
-
+    /// <summary>
+    /// 透過描画処理
+    /// </summary>
     public void FadeRenderingMode()
     {
         mesh.material.SetOverrideTag("RenderType", "Transparent");
