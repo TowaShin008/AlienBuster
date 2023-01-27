@@ -16,7 +16,7 @@ public class DistanceOfPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rayDistance = 100;
+        
         speed = 1.0f;
         lookOn = false;
         savelookOn = lookOn;

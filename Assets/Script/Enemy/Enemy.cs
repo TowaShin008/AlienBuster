@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     GameObject pauseObject;
     // Start is called before the first frame update
+
     void Start()
     {
         stop = false;
@@ -114,6 +115,7 @@ public class Enemy : MonoBehaviour
 
             if (deadFlag)
             {
+                DestroyEnemyUfoCounter.EnemyCounterPlus();
                 DropWeapon();
                 GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
                 newExplosion.transform.localScale = explosionSize;
