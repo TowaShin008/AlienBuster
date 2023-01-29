@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.08992068, g: 0.07826839, b: 0.1642578, a: 1}
+  m_IndirectSpecularColor: {r: 0.09993758, g: 0.08444541, b: 0.17692071, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2157,9 +2157,17 @@ PrefabInstance:
       propertyPath: rocketLauncherItem
       value: 
       objectReference: {fileID: 989590777}
+    - target: {fileID: 1656144453873643753, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1e224a911d9b92443b16731341b89909, type: 2}
     - target: {fileID: 6074480665320166824, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
       propertyPath: m_Name
       value: StepEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074480665320166824, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166824, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
       propertyPath: m_TagString
@@ -2479,6 +2487,10 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166824, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074480665320166824, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -2538,6 +2550,10 @@ PrefabInstance:
       propertyPath: rocketLauncherItem
       value: 
       objectReference: {fileID: 989590777}
+    - target: {fileID: 6074480665320166828, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 226d4f7690a07594cb67e65eedd910dd, type: 2}
     - target: {fileID: 6074480665320166830, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2582,6 +2598,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6129887428889100382, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 226d4f7690a07594cb67e65eedd910dd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
 --- !u!1 &870990080
@@ -2669,7 +2689,7 @@ MonoBehaviour:
   - {fileID: 10128674}
   spawnNextTime:
   - 1
-  maxEnemyCount: 03000000
+  maxEnemyCount: 00000000
   spawnPoint: {fileID: 870990080}
 --- !u!4 &896170538
 Transform:
@@ -4196,7 +4216,7 @@ MonoBehaviour:
   - {fileID: 10128674}
   spawnNextTime:
   - 1
-  maxEnemyCount: 03000000
+  maxEnemyCount: 00000000
   spawnPoint: {fileID: 1059123165}
 --- !u!4 &1576246174
 Transform:
@@ -4980,6 +5000,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1024985611}
     m_Modifications:
+    - target: {fileID: 1916197281637677124, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b93a9135986705945a08569dd6076e7f, type: 2}
     - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: hp
       value: 3
@@ -5076,6 +5100,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8900845156285053419, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b93a9135986705945a08569dd6076e7f, type: 2}
     - target: {fileID: 8900845156285053422, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_Constraints
       value: 0
@@ -5083,6 +5111,10 @@ PrefabInstance:
     - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_Name
       value: JumpEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_TagString
