@@ -106,6 +106,7 @@ public class StepEnemy : MonoBehaviour
 
             if (deadFlag)
             {
+                DestroyEnemyUfoCounter.EnemyCounterPlus();
                 DropWeapon();
                 GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
                 newExplosion.transform.localScale = explosionSize;
