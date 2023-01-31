@@ -237,9 +237,9 @@ public class WaveManager : MonoBehaviour
 		{
             skipText.enabled = false;
             tutorialText.text = "";
-			enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-			enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
-			enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+			enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+			enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+			enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
 
 			startFlag = true;
 
