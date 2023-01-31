@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/Enemy/JumpEnemy.cs.meta
+guid: 1476ab0c7e9903c4aa209197b2734202
+========
+guid: e915c0f4ccfe47f48a59ea382fc62e8d
+>>>>>>>> origin/kuronote:Assets/Script/Enemy/StepEnemy.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
