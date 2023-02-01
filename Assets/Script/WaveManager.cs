@@ -152,6 +152,7 @@ public class WaveManager : MonoBehaviour
                 }
                 nextWaveCheck = false;
             }
+            //ウェーブ数の切り替え描画処理
             NumberChange();
         }
     }

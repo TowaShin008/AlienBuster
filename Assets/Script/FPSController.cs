@@ -128,7 +128,7 @@ public class FPSController : MonoBehaviour
     void Update()
     {
         if (pauseObject.activeSelf)
-        {
+        {//ƒ|[ƒY‚Ì’â~ˆ—
             gameObject.transform.position = savePosition;
             cam.transform.localRotation = saveCamera;
             transform.localRotation = saveplayerRotation;
