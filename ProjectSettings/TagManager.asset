@@ -9,11 +9,12 @@ TagManager:
   - Bullet
   - WeaponItem
   - EnemyBullet
+  - RocketBumb
   - Weapon
   - UFO
   - SniperBullet
-  - RocketBomb
   - waveNumber
+  - RocketBomb
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - MiniMap
   - Water
   - UI
-  - Enemy
-  - Bullet
+  - particle
+  - Item
   - 
   - 
   - 
@@ -48,6 +49,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: back
+    uniqueID: 4291401859
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: front
+    uniqueID: 2937015581
     locked: 0

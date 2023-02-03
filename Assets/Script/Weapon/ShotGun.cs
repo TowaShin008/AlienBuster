@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ShotGun : MonoBehaviour
 {
+    public MeshRenderer mesh;
     [SerializeField]
     private GameObject bullet;
     [SerializeField]
     private GameObject firingPoint;
 
-    private float bulletSpeed = 60.0f;
+    private float bulletSpeed = 80.0f;
     const int shotDelayMaxTime = 100;
     private int shotDelayTime = 0;
 
@@ -43,6 +44,7 @@ public class ShotGun : MonoBehaviour
         remainingBullets = remainingMaxBullet;
         MagazineInitialize();
         magazineScript.ReloadEnable(true);
+        OpaqueRenderingMode();
     }
 
     // Update is called once per frame
@@ -52,6 +54,18 @@ public class ShotGun : MonoBehaviour
         {
             shotDelayTime--;
         }
+    }
+    /// <summary>
+    /// èeÇç\Ç¶ÇÈèàóù
+    /// </summary>
+    public void HoldGun(Vector3 arg_holdGunPosition)
+    {
+        FadeRenderingMode();
+        Color color = mesh.material.color;
+        color.a = 0.2f;
+        mesh.material.color = color;
+
+        this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
     /// éÀåÇèàóù
@@ -166,11 +180,43 @@ public class ShotGun : MonoBehaviour
         magazineScript.SetMagazineSize(2);
         magazineScript.SetReloadTime(120);
     }
+    /// <summary>
+    /// èâä˙âªèàóù
+    /// </summary>
     public void Initialize()
     {
+        OpaqueRenderingMode();
         ResetRemainigBullet();
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
         magazineScript.SetMagazineSize(2);
         magazineScript.SetReloadTime(120);
+    }
+    /// <summary>
+    /// í èÌï`âÊèàóù
+    /// </summary>
+    public void OpaqueRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mesh.material.SetInt("_ZWrite", 1);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.DisableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = -1;
+    }
+    /// <summary>
+    /// ìßâﬂï`âÊèàóù
+    /// </summary>
+    public void FadeRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "Transparent");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mesh.material.SetInt("_ZWrite", 0);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.EnableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = 3000;
     }
 }

@@ -16,6 +16,8 @@ public class MagazineScript : MonoBehaviour
 
     TMPro.TextMeshProUGUI text = null;
     int otherMagazineBullets;
+
+    bool infiniteFlag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +41,15 @@ public class MagazineScript : MonoBehaviour
             }
         }
 
+        if (infiniteFlag == false)
+		{
+            text.text = magazine.ToString() + "/" + otherMagazineBullets.ToString();
+        }
+        else
+		{
+            text.text = magazine.ToString() + "/" + "∞";
+        }
 
-        text.text = magazine.ToString() + "/" + otherMagazineBullets.ToString();
         if(magazine <= 0)
         {
             if (reloadEnable)
@@ -86,6 +95,15 @@ public class MagazineScript : MonoBehaviour
     public void SetRemainingBulletsSize(int arg_remainingBullet)
     {
         remainingBullet = arg_remainingBullet;
+
+        if(arg_remainingBullet==0)
+		{
+            infiniteFlag = true;
+		}
+		else
+		{
+            infiniteFlag = false;
+		}
     }
     /// <summary>
     /// マガジンの残段数を1減らす処理

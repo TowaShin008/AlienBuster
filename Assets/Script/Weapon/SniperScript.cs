@@ -92,7 +92,9 @@ public class SniperScript : MonoBehaviour
         }
         sniperGauge.transform.localScale = defScale;
     }
-
+    /// <summary>
+    /// 構える処理
+    /// </summary>
     public void HoldGun()
     {
         sniperEdge.enabled = true;
@@ -115,6 +117,13 @@ public class SniperScript : MonoBehaviour
             sniperGauge.color = color;
             sniperGaugeEdge.color = color2;
         }
+    }
+    /// <summary>
+    /// 銃を構える処理
+    /// </summary>
+    public void HoldGun(Vector3 arg_holdGunPosition)
+    {
+        this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
     /// 射撃処理
@@ -236,7 +245,9 @@ public class SniperScript : MonoBehaviour
     {
         remainingBullets = remainingMaxBullet;
     }
-
+    /// <summary>
+    /// スナイパーの初期化処理
+    /// </summary>
     public void Initialize()
 	{
         ResetRemainigBullet();
@@ -246,6 +257,29 @@ public class SniperScript : MonoBehaviour
         transform.position = normalGunPosition.transform.position;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
         sniperEdge.transform.localScale = new Vector2(5.0f, 5.0f);
+        for (int i = 0; i < sniperMesh.Count; i++)
+        {
+            sniperMesh[i].material.color = Color.white;
+        }
+
+        Color32 color = sniperGauge.color;
+        Color32 color2 = sniperGaugeEdge.color;
+        color.a = 0;
+        color2.a = 0;
+        sniperGauge.color = color;
+        sniperGaugeEdge.color = color2;
+    }
+    /// <summary>
+    /// スナイパーライフルの位置の初期化
+    /// </summary>
+    public void InitializePosition()
+	{
+        sniperEdge.enabled = false;
+        sniperGaugeEdge.enabled = false;
+        sniperGauge.enabled = false;
+        transform.position = normalGunPosition.transform.position;
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
+        sniperEdge.transform.localScale = Vector2.MoveTowards(sniperEdge.transform.localScale, new Vector2(5.0f, 5.0f), speed * 5.0f);
         for (int i = 0; i < sniperMesh.Count; i++)
         {
             sniperMesh[i].material.color = Color.white;

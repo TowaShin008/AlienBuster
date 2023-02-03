@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7bfe0d4cd33684cbbac67b13e35e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
   rocketBomb: {fileID: 5119787515121665675, guid: bdbadbf858f53d74cab67883852cd52f, type: 3}
   firingPoint: {fileID: 7775441271954427681}
   angle: -45
@@ -440,13 +441,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c968e596e1ba34f4c911faf5cd1ada88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
   bullet: {fileID: 5916105538358857093, guid: e05a68289e08f834f8d68d326c8f6cdd, type: 3}
   firingPoint: {fileID: 6495265379676882913}
   randomDiffusion: 10
   bulletCount: 10
-  bulletExitPosition: {fileID: 6495265379676882912}
-  exitSpeed: 0.1
-  exitRotate: 360
   shotSound: {fileID: 8300000, guid: 6414117118d10fe4696e760090fb975a, type: 3}
   bulletSound: {fileID: 8300000, guid: 4900e41bca6f9934ea66b8a01edd02c4, type: 3}
   muzzleFlashScale: {x: 0, y: 0, z: 0}
@@ -497,12 +496,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1a402abdd458f458e982886ca99941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
   bullet: {fileID: 5916105538358857093, guid: f0089b39d1e2af94c9f63be423fa8ce0, type: 3}
   bulletSpeed: 30
   firingPoint: {fileID: 6495265379958275214}
   gunSound: {fileID: 8300000, guid: d69e71cce9585d4409b5d00a0916f1e2, type: 3}
   muzzleFlashScale: {x: 0, y: 0, z: 0}
   muzzleFlashPrefab: {fileID: 0}
+  dispersion: 0.02
+  verticalToHorizontalRatio: 1.5
 --- !u!82 &8810401389568136611
 AudioSource:
   m_ObjectHideFlags: 0
@@ -667,7 +669,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 73192ee6764189743b121f9ac14bc623, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -720,6 +722,7 @@ MonoBehaviour:
   shotGun: {fileID: 6495265380330694178}
   normalGunPosition: {fileID: 6495265379937864884}
   holdGunPosition: {fileID: 6495265379739354249}
+  reticle: {fileID: 0}
   cam: {fileID: 6495265379992043964}
   Xsensityvity: 1
   Ysensityvity: 1

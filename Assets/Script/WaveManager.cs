@@ -14,6 +14,9 @@ public class WaveManager : MonoBehaviour
     public GameObject enemySpawner;
     public GameObject enemySpawner2;
     public GameObject enemySpawner3;
+    public GameObject enemySpawner4;
+    public GameObject enemySpawner5;
+    public GameObject enemySpawner6;
     public GameObject ufo;
     public GameObject ufo_2;
     public GameObject ufo_3;
@@ -27,6 +30,19 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private AudioSource bossAudioSource;
 
     public static bool numberchange = false;
+
+    public const float tutorialMaxTime = 2000.0f;
+    public float tutorialTime = 0.0f;
+    private bool startFlag = false;
+
+
+    [SerializeField]
+    GameObject tutorialTextObject;
+    [SerializeField]
+    GameObject skipTextObject;
+
+    Text tutorialText;
+    Text skipText;
     void Start()
     {
         //フレームレートの固定
@@ -34,12 +50,9 @@ public class WaveManager : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.LinuxPlayer)
         {
-            Screen.SetResolution(1920, 1080, false);
+            Screen.SetResolution(Constants.screen_width, Constants.screen_height, false);
         }
 
-        enemySpawner.GetComponent<EnemySpawner>().Initialize(false,Constants.normalEnemy);
-        enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-        enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
         ufo.SetActive(false);
         ufo_2.SetActive(false);
         ufo_3.SetActive(false);
@@ -49,11 +62,25 @@ public class WaveManager : MonoBehaviour
         defaultAudioSource.Play();
         numberBox = GameObject.FindGameObjectsWithTag("waveNumber");
         NumberChange();
+
+        startFlag = false;
+
+        tutorialText = tutorialTextObject.GetComponent<Text>();
+
+        tutorialText.text = "";
+
+        skipText = skipTextObject.GetComponent<Text>();
     }
 
 
     void Update()
     {
+		if (startFlag == false)
+        {
+            TutorialProcessing();
+            return;
+        }
+
         enemyBox = GameObject.FindGameObjectsWithTag(Constants.enemyName.ToString());
         ufoBox = GameObject.FindGameObjectsWithTag(Constants.ufoName.ToString());
 
@@ -81,9 +108,9 @@ public class WaveManager : MonoBehaviour
                 bossAudioSource.Stop();
 
                 if (nowWave == 2)
-                {      
+                {
                     bossAudioSource.Play();
-                    ufo.GetComponent<UFO>().Initialize(true,true);
+                    ufo.GetComponent<UFO>().Initialize();
                 }
                 if (nowWave == 3)
 				{
@@ -109,7 +136,14 @@ public class WaveManager : MonoBehaviour
                     bossAudioSource.Play();
                     ufo_3.GetComponent<UFO>().Initialize();
                 }
-                if (nowWave >= 7)
+                if (nowWave == 7)
+                {
+                    defaultAudioSource.Play();
+                    enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                }
+                if (nowWave >= 8)
 				{
                     bossAudioSource.Play();
                     ufo.GetComponent<UFO>().Initialize();
@@ -118,10 +152,9 @@ public class WaveManager : MonoBehaviour
                 }
                 nextWaveCheck = false;
             }
+            //ウェーブ数の切り替え描画処理
             NumberChange();
-
         }
-
     }
     /// <summary>
     /// どこまで進んだかのウェーブを渡す関数
@@ -138,11 +171,17 @@ public class WaveManager : MonoBehaviour
     {
         waveChangeFlag = true;
     }
+    /// <summary>
+    /// チェンジウェーブフラグの取得
+    /// </summary>
+    /// <returns>チェンジウェーブフラグ</returns>
     public static bool GetChangeWaveFlag()
     {
         return numberchange;
     }
-    
+    /// <summary>
+    /// ウェーブ数の切り替え描画処理
+    /// </summary>
     private void NumberChange()
     {
         foreach(var num in numberBox ?? Enumerable.Empty<GameObject>())
@@ -159,4 +198,54 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// チューリアル処理
+    /// </summary>
+    /// <returns>終了判定フラグ</returns>
+    public bool TutorialProcessing()
+	{
+        tutorialTime++;
+
+        skipText.enabled = true;
+
+        if (tutorialTime / tutorialMaxTime < 0.2f)
+		{
+            tutorialText.text = "移動：WASD or LStick\n";
+        }
+        else if (tutorialTime / tutorialMaxTime < 0.4f)
+        {
+            tutorialText.text = "構える：RClick or LT\n射撃：LClick or RT";
+        }
+        else if (tutorialTime / tutorialMaxTime < 0.6f)
+        {
+            tutorialText.text = "上昇：SPACE or RB\nステップ：LShift or LB";
+        }
+        else if (tutorialTime / tutorialMaxTime < 0.8f)
+        {
+            tutorialText.text = "ダッシュ：LShift or LB長押し";
+        }
+        else if (tutorialTime / tutorialMaxTime < 1.0f)
+        {
+            tutorialText.text = "迫りくる敵を倒し続けろ！";
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKey(KeyCode.Joystick1Button3))
+		{
+            tutorialTime = tutorialMaxTime;
+		}
+
+        if (tutorialTime > tutorialMaxTime)
+		{
+            skipText.enabled = false;
+            tutorialText.text = "";
+			enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+			enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+			enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+
+			startFlag = true;
+
+            return true;
+		}
+        return false;
+	}
 }

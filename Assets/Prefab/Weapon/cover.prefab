@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4208943841882622702}
   - component: {fileID: 5578683219364175622}
   m_Layer: 0
-  m_Name: corver
+  m_Name: cover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ SphereCollider:
   m_GameObject: {fileID: 9099538007905755930}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: -0.0000009536743, z: 0}

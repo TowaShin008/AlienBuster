@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 7695353325420440276}
   - component: {fileID: 7872813793814887289}
   - component: {fileID: 699347958833076629}
+  - component: {fileID: 4265314255274307364}
   m_Layer: 0
   m_Name: SniperRifleItem
   m_TagString: WeaponItem
@@ -148,6 +149,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &4265314255274307364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7025813053706743918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffea0aa83c8f52246b31054444c90825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7249643049191401580
 GameObject:
   m_ObjectHideFlags: 0

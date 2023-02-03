@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     AudioClip damageAudioClip;
     // Start is called before the first frame update
+
     void Start()
     {
         stop = false;
@@ -97,6 +98,7 @@ public class Enemy : MonoBehaviour
 
             if (deadFlag)
             {
+                DestroyEnemyUfoCounter.EnemyCounterPlus();
                 DropWeapon();
                 GameObject newExplosion = Instantiate(explosion, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
                 newExplosion.transform.localScale = explosionSize;
@@ -178,7 +180,7 @@ public class Enemy : MonoBehaviour
     private void DropWeapon()
     {
         //èoåªÇ≥ÇπÇÈìGÇÉâÉìÉ_ÉÄÇ…ëIÇ‘
-        int randomValue = Random.Range(1, 11);
+        int randomValue = Random.Range(2, 6);
 
         int playerGunType = playerObject.GetComponent<FPSController>().GetGunType();
 
@@ -187,17 +189,17 @@ public class Enemy : MonoBehaviour
             return;
 		}
 
-        if (randomValue == 1)
+        if (randomValue == 2)
         {
             rocketLauncherItem.SetActive(true);
             rocketLauncherItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 2)
+        else if (randomValue == 3)
         {
             sniperRifleItem.SetActive(true);
             sniperRifleItem.transform.position = this.transform.position;
         }
-        else if (randomValue == 3)
+        else if (randomValue == 4)
         {
             shotGunItem.SetActive(true);
             shotGunItem.transform.position = this.transform.position;

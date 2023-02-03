@@ -12,6 +12,7 @@ public class DistanceOfPlayer : MonoBehaviour
     [SerializeField] SimpleUITransition[] transitions;
     bool lookOn ;
     bool savelookOn;
+    int playerGunType;
     //float distance;
     // Start is called before the first frame update
     void Start()
@@ -31,14 +32,14 @@ public class DistanceOfPlayer : MonoBehaviour
         //{
         //    float distance = Vector3.Distance(playerMainCamera.transform.position,
         //        enemys[i].transform.position);
-           /* if (distance<=rayDistance)
-            {
-                lookOn = true;
-            }
-            else
-            {
-                lookOn = false;
-            }*/
+        /* if (distance<=rayDistance)
+         {
+             lookOn = true;
+         }
+         else
+         {
+             lookOn = false;
+         }*/
         //}
         //ƒŒƒC‚Ì¢Š«
         Ray ray = new Ray(playerMainCamera.transform.position, playerMainCamera.transform.forward);
@@ -48,7 +49,7 @@ public class DistanceOfPlayer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            if (hit.collider.gameObject.tag == Constants.enemyName.ToString())
+            if (hit.collider.gameObject.tag == Constants.enemyName.ToString()|| hit.collider.gameObject.tag == Constants.ufoName.ToString())
             {
                 Debug.Log("HHHHHHHHIT");
                 lookOn = true;
@@ -85,4 +86,25 @@ public class DistanceOfPlayer : MonoBehaviour
         lookOn = false;
     }
 
+    public void SetPlayerGunType(int arg_playerGunType)
+	{
+        playerGunType = arg_playerGunType;
+
+        if (playerGunType == 1)
+        {
+            rayDistance = Constants.normalBulletRange;
+        }
+        else if (playerGunType == 2)
+        {
+            rayDistance = Constants.rocketBombRange;
+        }
+        else if (playerGunType == 3)
+        {
+            rayDistance = Constants.sniperBulletRange;
+        }
+        else if (playerGunType == 4)
+        {
+            rayDistance = Constants.shotGunBulletRange;
+        }
+    }
 }

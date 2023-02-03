@@ -22,17 +22,19 @@ public class FPSController : MonoBehaviour
     private GameObject normalGunPosition;
     [SerializeField]
     private GameObject holdGunPosition;
-
-    private BoxCollider collider;
+    [SerializeField]
+    private GameObject reticle;
 
     //プレイヤー移動速度
     const float normalSpeed = 5.0f;
     const float sprintSpeed = 15.0f;
     float speed = normalSpeed;
+    bool sprintFlag = false;
 
     //ステップ時の摩擦が強くなるまでの猶予時間
     const int stepMaxTime = 120;
     int stepTime = 0;
+    float stepPower = 5.0f;
 
     //LSHIFTの入力時間を格納する変数
     int chargeCount = 0;
@@ -62,7 +64,7 @@ public class FPSController : MonoBehaviour
     const float shakingMaxSpeed = 15.0f;
     float shakingSpeed = shakingNormalSpeed;
 
-    int gunType = 2;
+    int gunType = 1;
     //スナイパーライフルのUI
     public Image sniperEdge;
     public Image sniperGaugeEdge;
@@ -87,7 +89,7 @@ public class FPSController : MonoBehaviour
     float defaultZoomCameraFov = 30;　//拡大時の視野角
     float cameraFov = 60; //現在の視野角
     const float zoomTime = 10; //拡大までの時間
-    //Camera mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +98,6 @@ public class FPSController : MonoBehaviour
         characterRot = transform.localRotation;
         deadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<BoxCollider>();
         //カーソルの表示
         Cursor.visible = false;
         //カーソルのロック
@@ -106,8 +107,9 @@ public class FPSController : MonoBehaviour
         //残機
         remain = 1;
         hp = maxHP;
-        normalGun.SetActive(false);
-        rocketLauncher.SetActive(true);
+        normalGun.SetActive(true);
+        normalGun.GetComponent<NormalGun>().Initialize();
+        rocketLauncher.SetActive(false);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
         //スナイパーライフルのUI
@@ -119,13 +121,14 @@ public class FPSController : MonoBehaviour
         savePosition =new Vector3(0,0,0);
         saveCamera = new Quaternion(0,0,0,0);
         saveplayerRotation = new Quaternion(0, 0, 0, 0);
+        reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (pauseObject.activeSelf)
-        {
+        {//ポーズ時の停止処理
             gameObject.transform.position = savePosition;
             cam.transform.localRotation = saveCamera;
             transform.localRotation = saveplayerRotation;
@@ -151,6 +154,9 @@ public class FPSController : MonoBehaviour
             jumpAudioSource.Stop();
         }
 
+        //移動処理
+        MoveProcessing();
+
         //ステップゲージのリチャージ処理
         StaminaRechargeProcessing();
 
@@ -164,10 +170,26 @@ public class FPSController : MonoBehaviour
 		}
         else
         {//マウス入力がない場合は、銃を構えない。
-            normalGun.transform.position = normalGunPosition.transform.position;
-            rocketLauncher.transform.position = normalGunPosition.transform.position;
-            //sniperRifle.transform.position = normalGunPosition.transform.position;
-            shotGun.transform.position = normalGunPosition.transform.position;
+            if (gunType == 1)
+            {
+                normalGun.transform.position = normalGunPosition.transform.position;
+                normalGun.GetComponent<NormalGun>().OpaqueRenderingMode();
+            }
+            else if (gunType == 2)
+            {
+                rocketLauncher.transform.position = normalGunPosition.transform.position;
+                rocketLauncher.GetComponent<RocketLauncher>().OpaqueRenderingMode();
+            }
+            else if (gunType == 3)
+            {
+                //sniperRifle.transform.position = normalGunPosition.transform.position;
+            }
+            else if (gunType == 4)
+            {
+                shotGun.transform.position = normalGunPosition.transform.position;
+                shotGun.GetComponent<ShotGun>().OpaqueRenderingMode();
+            }
+
             ZoomOut();
             holdFlag = false;
         }
@@ -193,11 +215,6 @@ public class FPSController : MonoBehaviour
             saveplayerRotation = transform.localRotation;
         }
     }
-	private void FixedUpdate()
-	{
-        //移動処理
-        MoveProcessing();
-    }
 	/// <summary>
 	/// 移動処理
 	/// </summary>
@@ -205,6 +222,8 @@ public class FPSController : MonoBehaviour
 	{
         float lsh = Input.GetAxis(Constants.lStickHorizontalName.ToString());
         float lsv = Input.GetAxis(Constants.lStickVerticalName.ToString());
+
+        sprintFlag = false;
 
         var velocity = new Vector3(0, 0, 0);
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || lsh != 0 || lsv != 0)
@@ -247,6 +266,11 @@ public class FPSController : MonoBehaviour
 				BreathProcessing();
 			}
         }
+        if(sprintFlag == false)
+		{
+            speed = normalSpeed;
+            chargeCount = 0;
+        }
         if (stepTime > 0)
         {//ステップをしていないか、ステップ猶予時間でなければ抗力を強くする
             stepTime--;
@@ -279,25 +303,15 @@ public class FPSController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == Constants.enemyName.ToString() || collision.gameObject.tag == Constants.enemyBulletName.ToString())
-        {
-            Debug.Log("Hit");
+        {//ダメージ演出
             Damage();
         }
 
         if(collision.gameObject.tag == Constants.weaponItemName.ToString())
 		{
             getItemAudioSource.Play();
-            sniperRifle.GetComponent<SniperScript>().Initialize();
-            if (collision.gameObject.name == Constants.normalGunItemName.ToString())
-            {
-                normalGun.SetActive(true);
-                rocketLauncher.SetActive(false);
-                sniperRifle.SetActive(false);
-                shotGun.SetActive(false);
-                defaultZoomCameraFov = 30;
-                gunType = 1;
-            }
-            else if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
+			sniperRifle.GetComponent<SniperScript>().InitializePosition();
+			if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);
@@ -306,6 +320,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 30;
                 gunType = 2;
+                reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
             else if (collision.gameObject.name == Constants.sniperRifleItemName.ToString())
             {
@@ -316,6 +331,7 @@ public class FPSController : MonoBehaviour
                 shotGun.SetActive(false);
                 defaultZoomCameraFov = 15;
                 gunType = 3;
+                reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
             else if (collision.gameObject.name == Constants.shotGunItemName.ToString())
             {
@@ -326,6 +342,7 @@ public class FPSController : MonoBehaviour
                 shotGun.GetComponent<ShotGun>().Initialize();
                 defaultZoomCameraFov = 30;
                 gunType = 4;
+                reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
         }
     }
@@ -385,19 +402,17 @@ public class FPSController : MonoBehaviour
                 stepTime = stepMaxTime;
                 stamina -= 100;
                 rigidbody.velocity = Vector3.zero;
-                rigidbody.AddForce(arg_velocity * 5.0f, ForceMode.Impulse);
+                rigidbody.AddForce(arg_velocity * stepPower, ForceMode.Impulse);
+                chargeCount = 0;
             }
         }
-        //プレイヤーの初期化
-        speed = normalSpeed;
-        shakingSpeed = shakingNormalSpeed;
-        chargeCount = 0;
     }
     /// <summary>
     /// スプリント処理
     /// </summary>
     public void SprintProcessing()
 	{
+        sprintFlag = true;
         if (chargeCount >= 30 && stamina > 0)
         {//スプリント処理
             stamina -= 2;
@@ -446,10 +461,22 @@ public class FPSController : MonoBehaviour
     /// </summary>
     private void HoldGun()
 	{
-        normalGun.transform.position = holdGunPosition.transform.position;
-        rocketLauncher.transform.position = holdGunPosition.transform.position;
-        //sniperRifle.transform.position = holdGunPosition.transform.position;
-        shotGun.transform.position = holdGunPosition.transform.position;
+        if (gunType == 1)
+        {
+            normalGun.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
+        }
+        else if (gunType == 2)
+        {
+            rocketLauncher.GetComponent<RocketLauncher>().HoldGun(holdGunPosition.transform.position);
+        }
+        else if (gunType == 3)
+        {
+            //sniperRifle.GetComponent<NormalGun>().HoldGun(holdGunPosition.transform.position);
+        }
+        else if (gunType == 4)
+        {
+            shotGun.GetComponent<ShotGun>().HoldGun(holdGunPosition.transform.position);
+        }
 
         holdFlag = true;
     }
@@ -505,6 +532,7 @@ public class FPSController : MonoBehaviour
 			{
                 rocketLauncher.SetActive(false);
                 normalGun.SetActive(true);
+                normalGun.GetComponent<NormalGun>().Initialize();
                 gunType = 1;
 			}
         }
@@ -515,6 +543,7 @@ public class FPSController : MonoBehaviour
                 defaultZoomCameraFov = 30;
                 sniperRifle.SetActive(false);
                 normalGun.SetActive(true);
+                normalGun.GetComponent<NormalGun>().Initialize();
                 gunType = 1;
             }
         }
@@ -524,7 +553,8 @@ public class FPSController : MonoBehaviour
 			{
 				shotGun.SetActive(false);
 				normalGun.SetActive(true);
-				gunType = 1;
+                normalGun.GetComponent<NormalGun>().Initialize();
+                gunType = 1;
 			}
         }
     }
@@ -596,11 +626,18 @@ public class FPSController : MonoBehaviour
     {
         return stamina;
     }
-
+    /// <summary>
+    /// 現在のHPの取得
+    /// </summary>
+    /// <returns></returns>
     public int GetHP()
 	{
         return hp;
 	}
+    /// <summary>
+    /// 最大HPの取得
+    /// </summary>
+    /// <returns>最大HP</returns>
     public int GetMaxHP()
     {
         return maxHP;
