@@ -15,19 +15,11 @@ Shader "Unlit/Shield"
 	}
 	SubShader
 	{ 
-		Tags{
-			"Queue" = "Transparent"
-			"IgnoreProjector" = "True"
-			"RenderType" = "Transparent" 
-			"RenderPipeline"="UniversalPipeline"
-		}
+		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
 
 		GrabPass{ "_GrabTexture" }
 		Pass
 		{
-			Name "ForwardLit"
-			Tags { "LightMode" = "UniversalForward"}
-
 			Lighting Off ZWrite On
 			Blend SrcAlpha OneMinusSrcAlpha
 			Cull Off
@@ -53,16 +45,9 @@ Shader "Unlit/Shield"
 			};
 
 			sampler2D _MainTex, _CameraDepthTexture, _GrabTexture;
-
-			CBUFFER_START(UnityPerMaterial)
-
-			fixed4 _MainTex_ST,_MainColor,_GrabTexture_ST;
+			fixed4 _MainTex_ST,_MainColor,_GrabTexture_ST, _GrabTexture_TexelSize;
 			fixed _Fresnel, _FresnelWidth, _Distort, _IntersectionThreshold, _ScrollSpeedU, _ScrollSpeedV;
 			float _MyAlpha;
-
-			CBUFFER_END
-
-			fixed4 _GrabTexture_TexelSize;
 
 			v2f vert (appdata v)
 			{

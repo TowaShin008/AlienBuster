@@ -237,11 +237,13 @@ public class WaveManager : MonoBehaviour
 		{
             skipText.enabled = false;
             tutorialText.text = "";
-			enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-			enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
-			enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            //enemySpawner.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            //enemySpawner2.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
+            //enemySpawner3.GetComponent<EnemySpawner>().Initialize(false, Constants.normalEnemy);
 
-			startFlag = true;
+            ufo.GetComponent<UFO>().Initialize();
+
+            startFlag = true;
 
             return true;
 		}
