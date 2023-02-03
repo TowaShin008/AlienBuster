@@ -92,11 +92,11 @@ public class MagazineScript : MonoBehaviour
     /// 残弾数のセット
     /// </summary>
     /// <param name="arg_remainingBullet"></param>
-    public void SetRemainingBulletsSize(int arg_remainingBullet)
+    public void SetRemainingBulletsSize(int arg_remainingBullet = 0)
     {
         remainingBullet = arg_remainingBullet;
 
-        if(arg_remainingBullet==0)
+        if (arg_remainingBullet == 0)
 		{
             infiniteFlag = true;
 		}

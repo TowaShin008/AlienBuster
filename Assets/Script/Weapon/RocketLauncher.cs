@@ -182,8 +182,8 @@ public class RocketLauncher : MonoBehaviour
         magazineScript = this.gameObject.GetComponent<MagazineScript>();
 
         magazineScript.ReloadEnable(false);
-        magazineScript.SetMagazineSize(2);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetMagazineSize(Constants.rocketLauncherMagazineSize);
+        magazineScript.SetReloadTime(Constants.rocketLauncherReloadTime);
     }
     /// <summary>
     /// ‰Šú‰»ˆ—
@@ -193,8 +193,8 @@ public class RocketLauncher : MonoBehaviour
         OpaqueRenderingMode();
         ResetRemainigBullet();
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
-        magazineScript.SetMagazineSize(1);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetMagazineSize(Constants.rocketLauncherMagazineSize);
+        magazineScript.SetReloadTime(Constants.rocketLauncherReloadTime);
     }
     /// <summary>
     /// ’Êí•`‰æˆ—

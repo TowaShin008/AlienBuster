@@ -27,17 +27,33 @@ namespace Util
 		//通常弾のダメージ量
 		public static int normalBulletDamage = 1;
 		//通常銃の射程距離
-		public static float normalBulletRange = 100;
+		public static float normalGunBulletRange = 100;
+		//通常銃のリロード時間
+		public static int normalGunReloadTime = 120;
+		//通常銃のマガジンサイズ
+		public static int normalGunMagazineSize = 10;
 		//スナイパーライフルのダメージ量
 		public static int sniperBulletDamage = 2;
 		//スナイパーライフルの射程距離
 		public static float sniperBulletRange = 100;
+		//スナイパーライフルのリロード時間
+		public static int sniperReloadTime = 120;
+		//スナイパーライフルのマガジンサイズ
+		public static int sniperMagazineSize = 2;
+		//通常銃のリロード時間
+		public static int rocketLauncherReloadTime = 120;
+		//ロケットランチャーのマガジンサイズ
+		public static int rocketLauncherMagazineSize = 2;
 		//ロケット弾のダメージ量
 		public static int rocketBombDamage = 10;
 		//ロケット弾の射程距離
 		public static float rocketBombRange = 100;
 		//通常銃の射程距離
 		public static float shotGunBulletRange = 70;
+		//通常銃のリロード時間
+		public static int shotGunReloadTime = 120;
+		//ショットガンのマガジンサイズ
+		public static int shotGunMagazineSize = 2;
 		//マウスのY軸ポジションの名前
 		public static FormattableString titleSceneName = $"TitleScene";
 		//マウスのY軸ポジションの名前

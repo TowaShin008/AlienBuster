@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class NormalGun : MonoBehaviour
 {
@@ -165,17 +166,17 @@ public class NormalGun : MonoBehaviour
         magazineScript = this.gameObject.GetComponent<MagazineScript>();
 
         magazineScript.ReloadEnable(false);
-        magazineScript.SetMagazineSize(10);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetMagazineSize(Constants.normalGunMagazineSize);
+        magazineScript.SetReloadTime(Constants.normalGunReloadTime);
     }
     /// <summary>
     /// ‰Šú‰»ˆ—
     /// </summary>
     public void Initialize()
     {
-        magazineScript.SetRemainingBulletsSize(0);
-        magazineScript.SetMagazineSize(10);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetRemainingBulletsSize();
+        magazineScript.SetMagazineSize(Constants.normalGunMagazineSize);
+        magazineScript.SetReloadTime(Constants.normalGunReloadTime);
     }
     /// <summary>
     /// ’Êí•`‰æˆ—

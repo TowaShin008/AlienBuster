@@ -76,7 +76,7 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
 		if (startFlag == false)
-        {
+        {//チュートリアル処理
             TutorialProcessing();
             return;
         }
@@ -95,7 +95,6 @@ public class WaveManager : MonoBehaviour
         else
         {
             saveWave = nowWave;
-
         }
 
         if (nextWaveCheck)
@@ -110,7 +109,7 @@ public class WaveManager : MonoBehaviour
                 if (nowWave == 2)
                 {
                     bossAudioSource.Play();
-                    ufo.GetComponent<UFO>().Initialize();
+                    ufo.GetComponent<UFO>().Initialize(true, true);
                 }
                 if (nowWave == 3)
 				{
@@ -186,7 +185,7 @@ public class WaveManager : MonoBehaviour
     {
         foreach(var num in numberBox ?? Enumerable.Empty<GameObject>())
        {
-            if (num.name== "number" + nowWave)
+            if (num.name == "number" + nowWave)
             {
                 num.transform.SetScaleXY(5, 5);
                 num.GetComponent<ColorChangeText>().ChangeRed();
