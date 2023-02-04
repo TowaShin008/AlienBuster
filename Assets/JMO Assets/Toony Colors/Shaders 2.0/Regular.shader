@@ -76,7 +76,7 @@ Shader "Toony Colors Free/Regular"
 			_SColor = lerp(_HColor, _SColor, _SColor.a);	//Shadows intensity through alpha
 			ramp = lerp(_SColor.rgb,_HColor.rgb,ramp);
 			fixed4 c;
-			c.rgb = s.Albedo * _LightColor0.rgb * ramp;
+			c.rgb = s.Albedo/* * _LightColor0.rgb*/ * ramp;
 			c.a = s.Alpha;
 		//#if (POINT || SPOT)
 			//c.rgb *= atten;
