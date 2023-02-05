@@ -60,6 +60,8 @@ public class UFO : MonoBehaviour
 
     private bool weakTextFlag = false;
 
+    private Vector3 defaultPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,8 @@ public class UFO : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
 
         explosionDelayTime = explosionDelayMaxTime;
+
+        defaultPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -274,6 +278,8 @@ public class UFO : MonoBehaviour
         rigidbody.isKinematic = true;
         //ìßâﬂï`âÊê›íË
         FadeRenderingMode();
+
+        gameObject.transform.position = defaultPosition;
     }
     public bool GetDeadFlag()
     {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09187, g: 0.079497434, b: 0.166816, a: 1}
+  m_IndirectSpecularColor: {r: 0.1276887, g: 0.11713032, b: 0.22318241, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3401,7 +3401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: maxEnemyCount.Array.data[0]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 720504410, guid: 0d5559a8361b94640b552b29684b8ad1, type: 3}
       propertyPath: maxEnemyCount.Array.data[5]
@@ -6224,11 +6224,11 @@ PrefabInstance:
     - target: {fileID: 6495265380330694204, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: shotSound
       value: 
-      objectReference: {fileID: 8300000, guid: 6414117118d10fe4696e760090fb975a, type: 3}
+      objectReference: {fileID: 8300000, guid: c52d3f468b209b0498d131d8cac04d18, type: 3}
     - target: {fileID: 6495265380330694204, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: bulletSound
       value: 
-      objectReference: {fileID: 8300000, guid: 4900e41bca6f9934ea66b8a01edd02c4, type: 3}
+      objectReference: {fileID: 8300000, guid: 2c2c5390f5dcc4a449eb78c4ef08fb84, type: 3}
     - target: {fileID: 6495265380330694204, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: muzzleFlashPrefab
       value: 
