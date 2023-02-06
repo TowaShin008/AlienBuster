@@ -11,11 +11,14 @@ public class FlashingText : MonoBehaviour
     [SerializeField]
     GameObject nextText;
     float startPosition;
+
+    int maxTime;
     void Start()
     {
         startPosition = nextText.transform.position.x;
         active = true;
         time = 0;
+        maxTime = 120;
     }
     // Update is called once per frame
     void Update()
@@ -24,10 +27,10 @@ public class FlashingText : MonoBehaviour
         {
             time++;
         }
-        if (time > 60)
+        if (time > maxTime)
         {
             active = !active;
-            time = 0;
+            time = maxTime/2;
         }
         nextText.SetActive(active);
     }
