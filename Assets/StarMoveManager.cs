@@ -51,7 +51,7 @@ public class StarMoveManager : MonoBehaviour
                 rank = 2;
                 break;
             //4~5
-            case int i when i <= 5:
+            case int i when i <= 8:
                 rank = 3;
                 break;
         }
@@ -60,7 +60,7 @@ public class StarMoveManager : MonoBehaviour
             transitions[i].Hide();
         }
 
-        for (int i = 0; i < rank; i++)
+        for (int i = 0; i <= rank; ++i)
         {
             if (baseStar[i].transform.position.y ==
                 changeStar[i].transform.position.y)
