@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1276887, g: 0.11713032, b: 0.22318241, a: 1}
+  m_IndirectSpecularColor: {r: 0.09244945, g: 0.07996421, b: 0.16761464, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2434,9 +2434,17 @@ PrefabInstance:
       propertyPath: rocketLauncherItem
       value: 
       objectReference: {fileID: 989590777}
+    - target: {fileID: 1656144453873643753, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1e224a911d9b92443b16731341b89909, type: 2}
     - target: {fileID: 6074480665320166824, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
       propertyPath: m_Name
       value: StepEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074480665320166824, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166824, guid: 34669d85aa33dee428295e7615e7b4fd, type: 3}
       propertyPath: m_TagString
@@ -2764,6 +2772,10 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6074480665320166824, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074480665320166824, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -2867,6 +2879,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6129887428889100382, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 226d4f7690a07594cb67e65eedd910dd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6acd9c86319a7b84fa359a7103ed3f58, type: 3}
 --- !u!1 &870990080
@@ -5775,6 +5791,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1024985611}
     m_Modifications:
+    - target: {fileID: 1916197281637677124, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b93a9135986705945a08569dd6076e7f, type: 2}
     - target: {fileID: 7220360242670771920, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: hp
       value: 3
@@ -5882,6 +5902,10 @@ PrefabInstance:
     - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_Name
       value: JumpEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900845156285053423, guid: b41c776c382851944a360015a2eec0d9, type: 3}
       propertyPath: m_TagString
@@ -6431,6 +6455,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1024985611}
     m_Modifications:
+    - target: {fileID: 3765887447141099917, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c60f005942d1fb4d998c2911942f65b, type: 2}
     - target: {fileID: 6170506741406890761, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6475,6 +6503,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6170506741406890763, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c60f005942d1fb4d998c2911942f65b, type: 2}
     - target: {fileID: 6170506741406890765, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
       propertyPath: ufo
       value: 
@@ -6502,6 +6534,10 @@ PrefabInstance:
     - target: {fileID: 6170506741406890767, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
       propertyPath: m_Name
       value: StayEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170506741406890767, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6388736499531431619, guid: 6dfc30a3538a55747b4b08f0aa8972ad, type: 3}
       propertyPath: pauseObject

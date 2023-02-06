@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: takoTex2
-  m_Shader: {fileID: 4800000, guid: 4609c28b77ae6c04689a8ba2b2fccba7, type: 3}
+  m_Shader: {fileID: 4800000, guid: 51f8f0b59f4053640a03aeef7953793a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -29,7 +29,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Redify: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _HColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
