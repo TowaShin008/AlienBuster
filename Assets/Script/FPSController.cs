@@ -214,10 +214,20 @@ public class FPSController : MonoBehaviour
             holdFlag = false;
         }
 
-        if (Input.GetMouseButton(0) || rTri > 0)
-		{//’e‚Ì”­Ëˆ—
-			Shot();
-		}
+        //      if (Input.GetMouseButton(0) || rTri > 0)
+        //{//’e‚Ì”­Ëˆ—
+        //	Shot();
+        //}
+
+        if (gunType != 2 && Input.GetMouseButton(0) || rTri > 0)
+        {//’e‚Ì”­Ëˆ—(ƒƒPƒ‰ƒ“ˆÈŠO)
+            Shot();
+        }
+
+        if (gunType == 2 && Input.GetMouseButtonDown(0) || rTri > 0)
+        {//’e‚Ì”­Ëˆ—(ƒƒPƒ‰ƒ“‚Ì‚İ)
+            Shot();
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Escape))

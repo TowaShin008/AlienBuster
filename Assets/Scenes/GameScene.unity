@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09244945, g: 0.07996421, b: 0.16761464, a: 1}
+  m_IndirectSpecularColor: {r: 0.096462496, g: 0.08347162, b: 0.1734322, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1220,9 +1220,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6414117118d10fe4696e760090fb975a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6117,6 +6117,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71181232558990672, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 269382537224153084, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0056
@@ -6137,14 +6141,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: grenadeLauncherModel
       objectReference: {fileID: 0}
+    - target: {fileID: 1857407721568077053, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900783158093842459, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1900783158093842459, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923005627454648266, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2413738786395236936, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6907e8be2c177b2409c7f20898dde2d4, type: 2}
+    - target: {fileID: 2597447567430851393, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2597447567430851393, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
@@ -6439,7 +6459,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: f01c5505cb141334a9425e73f1986610, type: 3}
     - target: {fileID: 8810401389568136611, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8810401389568136611, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: m_PlayOnAwake
