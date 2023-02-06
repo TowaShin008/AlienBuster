@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 100000, guid: f881607407b15cc46b24d6bda799037a, type: 3}
   explosionSound: {fileID: 8300000, guid: f01c5505cb141334a9425e73f1986610, type: 3}
+  mesh: {fileID: 7238686021885313012}
 --- !u!82 &6505327580029970763
 AudioSource:
   m_ObjectHideFlags: 0
@@ -297,6 +298,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 20a46067d69dd664682b2e812dd41e97, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 20a46067d69dd664682b2e812dd41e97, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c71a603e2a794714d8cf2ff69f340e9a, type: 2}
@@ -306,6 +311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a46067d69dd664682b2e812dd41e97, type: 3}
+--- !u!23 &7238686021885313012 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 20a46067d69dd664682b2e812dd41e97, type: 3}
+  m_PrefabInstance: {fileID: 8337692556383855472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8376649441004799131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20a46067d69dd664682b2e812dd41e97, type: 3}

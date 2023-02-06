@@ -100,6 +100,7 @@ public class UFO : MonoBehaviour
             newExplosion.transform.localScale = largeExplosionSize;
             Destroy(newExplosion, 1.0f);
             //Destroy(gameObject);
+            DestroyEnemyUfoCounter.UfoCounterPlus();
             gameObject.SetActive(false);
         }
 

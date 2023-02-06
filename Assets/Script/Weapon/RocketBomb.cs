@@ -12,8 +12,9 @@ public class RocketBomb : MonoBehaviour
 
     private bool isDeadFlag = false;
     Rigidbody rigidbody;
-	// Start is called before the first frame update
-	void Start()
+    public MeshRenderer mesh;
+    // Start is called before the first frame update
+    void Start()
     {
         isDeadFlag = false;
         rigidbody = GetComponent<Rigidbody>();
@@ -54,10 +55,8 @@ public class RocketBomb : MonoBehaviour
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
-
-        var renderer = gameObject.GetComponent<Renderer>();
         // ”ñ•\Ž¦
-        renderer.enabled = false;
+        mesh.enabled = false;
 
         isDeadFlag = true;
     }
