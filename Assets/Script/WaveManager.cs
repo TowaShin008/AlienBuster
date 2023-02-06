@@ -122,7 +122,11 @@ public class WaveManager : MonoBehaviour
 				{
                     bossAudioSource.Play();
                     ufo_2.GetComponent<UFO>().Initialize();
-				}
+
+                    enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                }
                 if (nowWave == 5)
                 {
                     defaultAudioSource.Play();
@@ -148,6 +152,10 @@ public class WaveManager : MonoBehaviour
                     ufo.GetComponent<UFO>().Initialize();
                     ufo_2.GetComponent<UFO>().Initialize();
                     ufo_3.GetComponent<UFO>().Initialize();
+
+                    enemySpawner4.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner5.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
+                    enemySpawner6.GetComponent<EnemySpawner>().Initialize(false, Constants.stayEnemy);
                 }
                 nextWaveCheck = false;
             }

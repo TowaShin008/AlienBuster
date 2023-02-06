@@ -107,11 +107,31 @@ public class FPSController : MonoBehaviour
         //残機
         remain = 1;
         hp = maxHP;
-        normalGun.SetActive(true);
-        normalGun.GetComponent<NormalGun>().Initialize();
+        normalGun.SetActive(false);
         rocketLauncher.SetActive(false);
         sniperRifle.SetActive(false);
         shotGun.SetActive(false);
+
+        if (gunType == 1)
+		{
+            normalGun.SetActive(true);
+            normalGun.GetComponent<NormalGun>().Initialize();
+        }
+        else if (gunType == 2)
+        {
+            rocketLauncher.SetActive(true);
+            rocketLauncher.GetComponent<RocketLauncher>().Initialize();
+        }
+        else if (gunType == 3)
+        {
+            sniperRifle.SetActive(true);
+            sniperRifle.GetComponent<SniperScript>().Initialize();
+        }
+        else if (gunType == 4)
+        {
+            shotGun.SetActive(true);
+            shotGun.GetComponent<ShotGun>().Initialize();
+        }
         //スナイパーライフルのUI
         sniperEdge.enabled = false;
         sniperGaugeEdge.enabled = false;
@@ -306,12 +326,20 @@ public class FPSController : MonoBehaviour
         {//ダメージ演出
             Damage();
         }
+    }
 
-        if(collision.gameObject.tag == Constants.weaponItemName.ToString())
-		{
+	private void OnCollisionStay(Collision collision)
+	{
+        if (stepTime == 0 && collision.gameObject.CompareTag(Constants.fieldName.ToString()))
+        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
+            rigidbody.drag = 100;
+        }
+
+        if (collision.gameObject.tag == Constants.weaponItemName.ToString())
+        {
             getItemAudioSource.Play();
-			sniperRifle.GetComponent<SniperScript>().InitializePosition();
-			if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
+            sniperRifle.GetComponent<SniperScript>().InitializePosition();
+            if (collision.gameObject.name == Constants.rocketLauncherItemName.ToString())
             {
                 normalGun.SetActive(false);
                 rocketLauncher.SetActive(true);
@@ -344,14 +372,6 @@ public class FPSController : MonoBehaviour
                 gunType = 4;
                 reticle.GetComponent<DistanceOfPlayer>().SetPlayerGunType(gunType);
             }
-        }
-    }
-
-	private void OnCollisionStay(Collision collision)
-	{
-        if (stepTime == 0 && collision.gameObject.CompareTag(Constants.fieldName.ToString()))
-        {//ステップをしていないか、ステップ猶予時間でなければ摩擦を強くする
-            rigidbody.drag = 100;
         }
     }
 
