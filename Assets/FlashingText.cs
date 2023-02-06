@@ -11,13 +11,14 @@ public class FlashingText : MonoBehaviour
     [SerializeField]
     GameObject nextText;
     float startPosition;
-    [SerializeField]
+
     int maxTime;
     void Start()
     {
         startPosition = nextText.transform.position.x;
         active = true;
         time = 0;
+        maxTime = 120;
     }
     // Update is called once per frame
     void Update()
