@@ -11,6 +11,8 @@ public class FlashingText : MonoBehaviour
     [SerializeField]
     GameObject nextText;
     float startPosition;
+    [SerializeField]
+    int maxTime;
     void Start()
     {
         startPosition = nextText.transform.position.x;
@@ -24,10 +26,10 @@ public class FlashingText : MonoBehaviour
         {
             time++;
         }
-        if (time > 60)
+        if (time > maxTime)
         {
             active = !active;
-            time = 0;
+            time = maxTime/2;
         }
         nextText.SetActive(active);
     }
