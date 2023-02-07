@@ -93,7 +93,7 @@ public class SniperScript : MonoBehaviour
         sniperGauge.transform.localScale = defScale;
     }
     /// <summary>
-    /// \‚¦‚éˆ—
+    /// e‚ğ\‚¦‚éˆ—
     /// </summary>
     public void HoldGun()
     {
@@ -117,13 +117,6 @@ public class SniperScript : MonoBehaviour
             sniperGauge.color = color;
             sniperGaugeEdge.color = color2;
         }
-    }
-    /// <summary>
-    /// e‚ğ\‚¦‚éˆ—
-    /// </summary>
-    public void HoldGun(Vector3 arg_holdGunPosition)
-    {
-        this.transform.position = arg_holdGunPosition;
     }
     /// <summary>
     /// ËŒ‚ˆ—
@@ -252,8 +245,8 @@ public class SniperScript : MonoBehaviour
 	{
         ResetRemainigBullet();
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
-        magazineScript.SetMagazineSize(2);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetMagazineSize(Constants.sniperMagazineSize);
+        magazineScript.SetReloadTime(Constants.sniperReloadTime);
         transform.position = normalGunPosition.transform.position;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, defaultPos.rotation, speed);
         sniperEdge.transform.localScale = new Vector2(5.0f, 5.0f);

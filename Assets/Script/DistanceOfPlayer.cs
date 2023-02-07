@@ -92,7 +92,7 @@ public class DistanceOfPlayer : MonoBehaviour
 
         if (playerGunType == 1)
         {
-            rayDistance = Constants.normalBulletRange;
+            rayDistance = Constants.normalGunBulletRange;
         }
         else if (playerGunType == 2)
         {

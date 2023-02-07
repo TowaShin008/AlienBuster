@@ -21,6 +21,15 @@
       "dependencies": {},
       "hash": "0a70db88bfd11f8599d7b787e8e7f52d907befe2"
     },
+    "com.harumak.urpgrabpass": {
+      "version": "https://github.com/Haruma-K/URPGrabPass.git?path=/Assets/URPGrabPass",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "10.2.0"
+      },
+      "hash": "9308f1e3f5f0e12d18e35a07fb1843dd09fd5760"
+    },
     "com.unity.burst": {
       "version": "1.7.3",
       "depth": 1,

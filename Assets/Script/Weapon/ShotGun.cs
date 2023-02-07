@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class ShotGun : MonoBehaviour
 {
@@ -177,8 +178,8 @@ public class ShotGun : MonoBehaviour
         magazineScript = this.gameObject.GetComponent<MagazineScript>();
 
         magazineScript.ReloadEnable(false);
-        magazineScript.SetMagazineSize(2);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetMagazineSize(Constants.shotGunMagazineSize);
+        magazineScript.SetReloadTime(Constants.shotGunReloadTime);
     }
     /// <summary>
     /// ‰Šú‰»ˆ—
@@ -188,8 +189,8 @@ public class ShotGun : MonoBehaviour
         OpaqueRenderingMode();
         ResetRemainigBullet();
         magazineScript.SetRemainingBulletsSize(remainingMaxBullet);
-        magazineScript.SetMagazineSize(2);
-        magazineScript.SetReloadTime(120);
+        magazineScript.SetMagazineSize(Constants.shotGunMagazineSize);
+        magazineScript.SetReloadTime(Constants.shotGunReloadTime);
     }
     /// <summary>
     /// ’Êí•`‰æˆ—

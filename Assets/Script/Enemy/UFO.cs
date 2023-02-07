@@ -24,7 +24,6 @@ public class UFO : MonoBehaviour
     [SerializeField] private Vector3 smallExplosionSize = new Vector3(5.0f, 5.0f, 5.0f);
 
     private bool deadFlag;
-    public bool GetDeadFlag() { return deadFlag; }
 
     [SerializeField] GameObject barrier;
     //バリア発生しているか
@@ -196,7 +195,6 @@ public class UFO : MonoBehaviour
                     mesh_3.material.color = defaultColor3;
                 }
             }
-
         }
     }
     /// <summary>
@@ -211,6 +209,8 @@ public class UFO : MonoBehaviour
 
         if (mesh.material.color.a >= 1.0f)
 		{
+            //通常描画設定
+            OpaqueRenderingMode();
             CautionText.GetComponent<Controll_Var>().ChangeEndFlag();
             entryFlag = false;
             gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(true);
@@ -241,7 +241,7 @@ public class UFO : MonoBehaviour
     /// <summary>
     /// 初期化処理
     /// </summary>
-    /// <param name="arg_weakTextFlag">UFOが三体同時に出た際の出現位置の調整1~3で2がプレイヤーの真上</param>
+    /// <param name="arg_weakTextFlag">UFOのテキストを表示するかどうか</param>
 	public void Initialize(bool arg_weakTextFlag = false,bool arg_focusFlag = false)
 	{
         //var playerPosition = player.transform.position;
@@ -272,8 +272,14 @@ public class UFO : MonoBehaviour
         gameObject.GetComponent<EnemySpawnManager>().SetMoveFlag(false);
         deleteFlag = false;
         rigidbody.isKinematic = true;
+        //透過描画設定
+        FadeRenderingMode();
     }
-	public void SetEntryFlag(bool arg_entryFlag)
+    public bool GetDeadFlag()
+    {
+        return deadFlag;
+    }
+    public void SetEntryFlag(bool arg_entryFlag)
 	{
         entryFlag = arg_entryFlag;
 	}
@@ -312,5 +318,87 @@ public class UFO : MonoBehaviour
         string gameObjectName = other.gameObject.tag;
         if (gameObjectName != Constants.fieldName.ToString() || deadFlag == false) { return; }
         deleteFlag = true;
+    }
+    /// <summary>
+    /// 通常描画処理
+    /// </summary>
+    public void OpaqueRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mesh.material.SetInt("_ZWrite", 1);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.DisableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = -1;
+
+        mesh_2.material.SetOverrideTag("RenderType", "");
+        mesh_2.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mesh_2.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mesh_2.material.SetInt("_ZWrite", 1);
+        mesh_2.material.DisableKeyword("_ALPHATEST_ON");
+        mesh_2.material.DisableKeyword("_ALPHABLEND_ON");
+        mesh_2.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh_2.material.renderQueue = -1;
+
+        mesh_3.material.SetOverrideTag("RenderType", "");
+        mesh_3.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mesh_3.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mesh_3.material.SetInt("_ZWrite", 1);
+        mesh_3.material.DisableKeyword("_ALPHATEST_ON");
+        mesh_3.material.DisableKeyword("_ALPHABLEND_ON");
+        mesh_3.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh_3.material.renderQueue = -1;
+
+        //mesh_barrier.material.SetOverrideTag("RenderType", "");
+        //mesh_barrier.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        //mesh_barrier.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        //mesh_barrier.material.SetInt("_ZWrite", 1);
+        //mesh_barrier.material.DisableKeyword("_ALPHATEST_ON");
+        //mesh_barrier.material.DisableKeyword("_ALPHABLEND_ON");
+        //mesh_barrier.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        //mesh_barrier.material.renderQueue = -1;
+    }
+    /// <summary>
+    /// 透過描画処理
+    /// </summary>
+    public void FadeRenderingMode()
+    {
+        mesh.material.SetOverrideTag("RenderType", "Transparent");
+        mesh.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mesh.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mesh.material.SetInt("_ZWrite", 0);
+        mesh.material.DisableKeyword("_ALPHATEST_ON");
+        mesh.material.EnableKeyword("_ALPHABLEND_ON");
+        mesh.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh.material.renderQueue = 3000;
+
+        mesh_2.material.SetOverrideTag("RenderType", "Transparent");
+        mesh_2.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mesh_2.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mesh_2.material.SetInt("_ZWrite", 0);
+        mesh_2.material.DisableKeyword("_ALPHATEST_ON");
+        mesh_2.material.EnableKeyword("_ALPHABLEND_ON");
+        mesh_2.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh_2.material.renderQueue = 3000;
+
+        mesh_3.material.SetOverrideTag("RenderType", "Transparent");
+        mesh_3.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mesh_3.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mesh_3.material.SetInt("_ZWrite", 0);
+        mesh_3.material.DisableKeyword("_ALPHATEST_ON");
+        mesh_3.material.EnableKeyword("_ALPHABLEND_ON");
+        mesh_3.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mesh_3.material.renderQueue = 3000;
+
+        //mesh_barrier.material.SetOverrideTag("RenderType", "Transparent");
+        //mesh_barrier.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        //mesh_barrier.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        //mesh_barrier.material.SetInt("_ZWrite", 0);
+        //mesh_barrier.material.DisableKeyword("_ALPHATEST_ON");
+        //mesh_barrier.material.EnableKeyword("_ALPHABLEND_ON");
+        //mesh_barrier.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        //mesh_barrier.material.renderQueue = 3000;
     }
 }
