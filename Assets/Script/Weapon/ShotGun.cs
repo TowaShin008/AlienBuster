@@ -16,7 +16,7 @@ public class ShotGun : MonoBehaviour
     private int shotDelayTime = 0;
 
     [SerializeField]
-    float randomDiffusion = 200.0f;
+    float randomDiffusion = 5.0f;
     [SerializeField]
     int bulletCount = 10;
 
@@ -37,6 +37,8 @@ public class ShotGun : MonoBehaviour
     int remainingBullets = remainingMaxBullet;
 
     MagazineScript magazineScript = null;
+
+    public GameObject player;
 
     void Start()
     {
@@ -103,11 +105,11 @@ public class ShotGun : MonoBehaviour
                 float randomZ = Random.Range(randomDiffusion, -randomDiffusion);
 
 
-                var direction = new Vector3(randomX, randomY, randomZ);
+                Vector3 direction = new Vector3(randomX, randomY, randomZ);
                 Rigidbody newbulletRb = newBall.GetComponent<Rigidbody>();
 
                 newbulletRb.AddForce(direction);
-                newbulletRb.AddForce(newBall.transform.forward * bulletSpeed,ForceMode.Impulse);
+                newbulletRb.AddForce(player.transform.forward * bulletSpeed,ForceMode.Impulse);
 
                 newBall.name = bullet.name;
 

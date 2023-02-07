@@ -6,8 +6,8 @@ using Util;
 public class HomingMissile : MonoBehaviour
 {
     public MeshRenderer mesh;
-    public MeshRenderer mesh_2;
-    public MeshRenderer mesh_3;
+    //public MeshRenderer mesh_2;
+    //public MeshRenderer mesh_3;
     //プレイヤーのポジション
     [SerializeField] private GameObject playerObject;
     //爆発エフェクト
@@ -84,8 +84,8 @@ public class HomingMissile : MonoBehaviour
         //var renderer = gameObject.GetComponent<Renderer>();
 
         mesh.enabled = false;
-        mesh_2.enabled = false;
-        mesh_3.enabled = false;
+        //mesh_2.enabled = false;
+        //mesh_3.enabled = false;
         //// 非表示
         //renderer.enabled = false;
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.096462496, g: 0.08347162, b: 0.1734322, a: 1}
+  m_IndirectSpecularColor: {r: 0.09079165, g: 0.078738965, b: 0.1653732, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6261,6 +6261,10 @@ PrefabInstance:
       propertyPath: mesh
       value: 
       objectReference: {fileID: 1484329902}
+    - target: {fileID: 6495265380330694204, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 402056856}
     - target: {fileID: 6495265380330694204, guid: e8fa817d54042f04ca33c9f22eb3e6e8, type: 3}
       propertyPath: gunSound
       value: 

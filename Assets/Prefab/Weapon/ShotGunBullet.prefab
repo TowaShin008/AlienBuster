@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5916105538358857090}
   - component: {fileID: 5916105538358857091}
   - component: {fileID: -4941233617718445228}
-  - component: {fileID: 7025617122988641679}
   - component: {fileID: 9026714655671491557}
+  - component: {fileID: -8781015794579178781}
   m_Layer: 0
   m_Name: ShotGunBullet
   m_TagString: Bullet
@@ -116,18 +116,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7025617122988641679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5916105538358857093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a9f0e7cc22f3c4d8bbc2afcd844684, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9026714655671491557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +133,16 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 5b3011ad08d42624c8045916af579dba, type: 2}
+--- !u!114 &-8781015794579178781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5916105538358857093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dde1331d78680047a7d0d27401d6a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collsionDelayTime: 2
