@@ -60,6 +60,8 @@ public class UFO : MonoBehaviour
 
     private bool weakTextFlag = false;
 
+    private float kuro = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,7 +90,8 @@ public class UFO : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {       
+    {
+
         if (deleteFlag)
         {
             waveManager.WaveChangeFlagOn();
@@ -205,7 +208,7 @@ public class UFO : MonoBehaviour
         mesh.material.color = mesh.material.color + new Color(0, 0, 0, 0.005f);
         mesh_2.material.color = mesh_2.material.color + new Color(0, 0, 0, 0.005f);
         mesh_3.material.color = mesh_3.material.color + new Color(0, 0, 0, 0.005f);
-        mesh_barrier.material.SetFloat("_MyAlpha", mesh.material.color.a);
+        mesh_barrier.material.SetFloat("_MyAlpha", mesh.material.color.a / 2);
 
         if (mesh.material.color.a >= 1.0f)
 		{

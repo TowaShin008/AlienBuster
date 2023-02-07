@@ -22,7 +22,7 @@ Shader "Unlit/Shield"
 			"RenderPipeline"="UniversalPipeline"
 		}
 
-		GrabPass{ "_GrabTexture" }
+		//GrabPass{ "_GrabTexture" }
 		Pass
 		{
 			Tags { "LightMode" = "UniversalForward"}
@@ -37,36 +37,36 @@ Shader "Unlit/Shield"
 			
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 
-			#define COMPUTE_EYEDEPTH(o) o = -TransformWorldToView( v.vertex.xyz ).z
+			#define COMPUTE_EYEDEPTH(o) o = -TransformWorldToView(TransformObjectToWorld(v.vertex.xyz)).z
 
 			struct appdata
 			{
-				float4 vertex : POSITION;
-				float4 normal: NORMAL;
-				float3 uv : TEXCOORD0;
+				half4 vertex : POSITION;
+				half4 normal: NORMAL;
+				half3 uv : TEXCOORD0;
 			};
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
-				float4 vertex : SV_POSITION;
-				float3 rimColor :TEXCOORD1;
-				float4 screenPos: TEXCOORD2;
+				half2 uv : TEXCOORD0;
+				half4 vertex : SV_POSITION;
+				half3 rimColor :TEXCOORD1;
+				half4 screenPos: TEXCOORD2;
 			};
 
 			sampler2D _MainTex, _CameraDepthTexture, _GrabTexture;
 
 			CBUFFER_START(UnityPerMaterial)
 
-			float4 _MainTex_ST,_MainColor,_GrabTexture_ST;
-			float _Fresnel, _FresnelWidth, _Distort, _IntersectionThreshold;
+			half4 _MainTex_ST,_MainColor,_GrabTexture_ST;
+			half _Fresnel, _FresnelWidth, _Distort, _IntersectionThreshold, _ScrollSpeedU, _ScrollSpeedV;
 			float _MyAlpha;
 
 			CBUFFER_END
 
-			float4 _GrabTexture_TexelSize;
-			float2 _ScrollSpeedUV;
+			half4 _GrabTexture_TexelSize;
 
 			v2f vert (appdata v)
 			{
@@ -75,36 +75,39 @@ Shader "Unlit/Shield"
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
 				//scroll uv
-				o.uv += _Time.xy * _ScrollSpeedUV;
+				o.uv.x += _Time.x * _ScrollSpeedU;
+				o.uv.y += _Time.y * _ScrollSpeedV;
 
 				//fresnel 
-				float3 viewDir = normalize(TransformWorldToObject(v.vertex.xyz));
-				float dotProduct = 1 - saturate(dot(v.normal.xyz, viewDir));
+				half3 viewDir = normalize(TransformWorldToObject(GetCameraPositionWS()) - v.vertex.xyz);
+				half dotProduct = 1 - saturate(dot(v.normal.xyz, viewDir));
 				o.rimColor = smoothstep(1 - _FresnelWidth, 1.0, dotProduct) * .5f;
 				o.screenPos = ComputeScreenPos(o.vertex);
 				COMPUTE_EYEDEPTH(o.screenPos.z);//eye space depth of the vertex 
 				return o;
 			}
 			
-			float4 frag (v2f i,float face : VFACE) : SV_Target
+			half4 frag (v2f i,half face : VFACE) : SV_Target
 			{
 				//intersection
-				float intersect = saturate((abs(LinearEyeDepth(tex2Dproj(_CameraDepthTexture,i.screenPos).r, _ZBufferParams) - i.screenPos.z)) / _IntersectionThreshold);
+				half intersect = saturate((abs(LinearEyeDepth(tex2Dproj(_CameraDepthTexture,i.screenPos).r, _ZBufferParams) - i.screenPos.z)) / _IntersectionThreshold);
 
-				float3 main = tex2D(_MainTex, i.uv).xyz;
+				
+				half3 main = tex2D(_MainTex, i.uv).xyz;
 				//distortion
 				i.screenPos.xy += (main.rg * 2 - 1) * _Distort * _GrabTexture_TexelSize.xy;
-				float3 distortColor = tex2Dproj(_GrabTexture, i.screenPos).xyz;
+				half3 distortColor = tex2Dproj(_GrabTexture, i.screenPos).xyz;
 				distortColor *= _MainColor.xyz * _MainColor.a + 1;
+
 
 				//intersect hightlight
 				i.rimColor *= intersect * clamp(0,1,face);
 				main *= _MainColor.xyz * pow(abs(_Fresnel), i.rimColor) ;
-				
+
 				//lerp distort color & fresnel color
 				main = lerp(distortColor, main, i.rimColor.r);
 				main += (1 - intersect) * (face > 0 ? .03:.3) * _MainColor.xyz * _Fresnel;				
-				return float4(main, _MyAlpha);
+				return half4(main, _MyAlpha);
 				//return float4(main,.9);
 			}
 			ENDHLSL
