@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09079165, g: 0.078738965, b: 0.1653732, a: 1}
+  m_IndirectSpecularColor: {r: 0.14296779, g: 0.12801161, b: 0.24374849, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1892,7 +1892,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4753451054794368570, guid: 919da2950abfbc24e80f073fdd4c0a37, type: 3}
       propertyPath: m_Text
-      value: Menu:M or start
+      value: Menu:start
       objectReference: {fileID: 0}
     - target: {fileID: 4753451054794368570, guid: 919da2950abfbc24e80f073fdd4c0a37, type: 3}
       propertyPath: m_FontData.m_Font
@@ -5658,7 +5658,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'skip: R or Y '
+  m_Text: 'skip: Y '
 --- !u!222 &2033372201
 CanvasRenderer:
   m_ObjectHideFlags: 0

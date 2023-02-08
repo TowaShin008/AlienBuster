@@ -33,7 +33,7 @@ namespace Util
 		//通常銃のマガジンサイズ
 		public static int normalGunMagazineSize = 10;
 		//スナイパーライフルのダメージ量
-		public static int sniperBulletDamage = 2;
+		public static int sniperBulletDamage = 3;
 		//スナイパーライフルの射程距離
 		public static float sniperBulletRange = 100;
 		//スナイパーライフルのリロード時間

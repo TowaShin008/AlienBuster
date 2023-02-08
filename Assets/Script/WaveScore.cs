@@ -21,6 +21,10 @@ public class WaveScore : MonoBehaviour
     {
         waveScore = WaveManager.GetWave();
         enemyScore = DestroyEnemyUfoCounter.EnemyreturnCounter();
+        if(enemyScore>99)
+		{
+            enemyScore = 99;
+		}
         ufoScore = DestroyEnemyUfoCounter.UforeturnCounter();
         foreach(var trans in transitions)
         {

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.08989187, g: 0.07829913, b: 0.16424859, a: 1}
+  m_IndirectSpecularColor: {r: 0.14296779, g: 0.12801161, b: 0.24374849, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19992,7 +19992,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Space to Title
+  m_Text: B to Title
 --- !u!222 &335542852
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26191,7 +26191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextText: {fileID: 335542847}
-  maxTime: 60
 --- !u!224 &1664859917
 RectTransform:
   m_ObjectHideFlags: 0
